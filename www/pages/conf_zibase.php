@@ -10,4 +10,5 @@ $base = 'zibase';
 
 $idzibase = "ZiBASE00XXXX";
 $tokenzibase = "YYYYYYYYYY";
+$ipZibase = "X.X.X.X";
 ?>
