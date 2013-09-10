@@ -1,0 +1,289 @@
+<div id="plan">
+<?
+include("./pages/connexion.php");
+$query = "SELECT * FROM plan";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
+$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data3 = mysql_fetch_assoc($req1);
+$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data4 = mysql_fetch_assoc($req2);
+$query3 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
+$req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data5 = mysql_fetch_assoc($req3);
+if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null) {
+?>
+<div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
+<? } else { ?>
+<a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div></a>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#tabs-<? echo $data['id']; ?>").tabs();
+});
+</script>
+<div id="custom<? echo $data['id']; ?>">
+<div id="tabs-<? echo $data['id']; ?>" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<?
+if(!($data3 == null)){
+?>
+<li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-1">Temperature</a></li>
+<?
+}
+if((!($data4 == null)) && isset($_SESSION['auth'])){
+?>
+<li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-2">Actionneur</a></li>
+<? 
+} 
+if(!($data5 == null)){
+?>
+<li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-3">Conso-Elec</a></li>
+<?
+}
+?>
+
+</ul>
+<?
+if(!($data3 == null)){
+?>
+<div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<?
+$liste1 = "";
+$liste2 = "";
+$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
+$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data1 = mysql_fetch_assoc($req1)) {
+$query0 = "SELECT * FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data0 = mysql_fetch_assoc($req0))
+{
+$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['temp'] ."],";
+$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['hygro'] ."],";
+}
+?>
+<script type="text/javascript">
+$(function () {
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+        $('#<? echo $data1['id']; ?>').highcharts({
+            chart: {
+            },
+            title: {
+                text: '<? echo $data1['nom']; ?>'
+            },
+            subtitle: {
+                text: 'Temperature et Hygrometrie'
+            },
+            xAxis: [{
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                }
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    formatter: function() {
+                        return this.value +'°C';
+                    },
+                    style: {
+                    }
+                },
+                title: {
+                    text: 'Temperature',
+                    style: {
+                    }
+                },
+
+            }, { // Tertiary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Hygrometrie',
+                    style: {
+                    }
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value +' %';
+                    },
+                    style: {
+                    }
+                },
+            }],
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                name: 'Hygrometrie',
+                type: 'spline',
+                yAxis: 1,
+                data: [<?php echo $liste2; ?>],
+                marker: {
+                    enabled: false
+                },
+                tooltip: {
+                    valueSuffix: ' %'
+                }
+
+            }, {
+                name: 'Temperature',
+                type: 'spline',
+                data: [<?php echo $liste1; ?>],
+                marker: {
+                    enabled: false
+                },
+                tooltip: {
+                    valueSuffix: ' °C'
+                }
+            }]
+        });
+    });
+</script>
+<div id="<? echo $data1['id']; ?>" style="min-width: 640px; height: 340px; margin: 0 auto"></div>
+<? 
+}
+?>
+</div>
+<?
+}
+if(isset($_SESSION['auth']))
+{
+if(!($data4 == null)){
+$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+?>
+<div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<?
+while($data2 = mysql_fetch_assoc($req2)) {
+?>
+<div id="actionneur">
+<center><h1><? echo $data2['nom']; ?></h1></center>
+<center><a href="./pages/actioneur.php?ordre=1&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button green">ON</a>
+<? if($data2['type'] == 'on_off') { ?><a href="./pages/actioneur.php?ordre=0&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button red close">OFF</a><? }
+?></center></div><?
+}
+?> 
+</div>
+<?
+}
+}
+if(!($data5 == null)){
+?>
+<div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<?
+$liste1 = "";
+$liste2 = "";
+$query1 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
+$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data1 = mysql_fetch_assoc($req1)) {
+$query0 = "SELECT * FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data0 = mysql_fetch_assoc($req0))
+{
+$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['conso'] /1000 ."],";
+$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['conso_total'] / 1000 ."],";
+}
+?>
+<script type="text/javascript">
+$(function () {
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+        $('#<? echo $data1['id']; ?>').highcharts({
+            chart: {
+            },
+            title: {
+                text: '<? echo $data1['nom']; ?>'
+            },
+            subtitle: {
+                text: 'Consomation Electrique'
+            },
+            xAxis: [{
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                }
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    formatter: function() {
+                        return this.value +'kw/h';
+                    },
+                    style: {
+                    }
+                },
+                title: {
+                    text: 'conso',
+                    style: {
+                    }
+                },
+
+            }, { // Tertiary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Total',
+                    style: {
+                    }
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value +' kw/h';
+                    },
+                    style: {
+                    }
+                },
+            }],
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                name: 'Total',
+                type: 'spline',
+                yAxis: 1,
+                data: [<?php echo $liste2; ?>],
+                marker: {
+                    enabled: false
+                },
+                tooltip: {
+                    valueSuffix: ' kw/h'
+                }
+
+            }, {
+                name: 'Conso',
+                type: 'spline',
+                data: [<?php echo $liste1; ?>],
+                marker: {
+                    enabled: false
+                },
+                tooltip: {
+                    valueSuffix: ' kw/h'
+                }
+            }]
+        });
+    });
+</script>
+<div id="<? echo $data1['id']; ?>" style="min-width: 640px; height: 340px; margin: 0 auto"></div>
+<?
+}
+?>
+</div>
+<?
+}
+?>
+</div>
+</div>
+<? 
+}
+} ?>
+</div>
+<script src="./js/highcharts.js"></script>
+
