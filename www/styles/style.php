@@ -63,6 +63,7 @@ $height = mysql_result($res_query,0,"height") + 2;
 position: absolute;
 padding: 15px;
 margin: 15px;
+#margin-left: 50px;
 height: <? echo $height; ?>px;
 width: <? echo $width; ?>px;
 }
@@ -177,11 +178,6 @@ font-size: 14px;
 padding: 0 20px; 
 }
 
-ul li a:hover { 
-background: #ccc; 
-color: #666; 
-}
-
 .ui-tabs .ui-tabs-nav li.ui-state-active { 
 cursor: text; 
 color: #666;
@@ -218,3 +214,215 @@ display: none;
 }
 
 
+
+div.metro_nav{
+		postion:absloute;
+		z-index:100;
+		margin-top: -8px;
+		margin-left: -8px;
+		margin-right: -8px;
+		background-color: black;
+        position : relative;
+        font-size : 16px;
+        overflow: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        cursor : default;
+}
+
+
+div.metro_nav-config{
+		postion:absloute;
+		z-index:99;
+		margin-top: -10px;
+		background-color: black;
+        position : relative;
+        font-size : 16px;
+        overflow: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        cursor : default;
+}
+
+div.metro_nav>ul{
+        position: relative;
+        height: 86px;
+        width: 100%;
+        margin: 0;
+        margin-top : 15px;
+        padding : 0;
+        list-style : none;
+        white-space : nowrap;
+        overflow : hidden;
+        margin: 15px 0 0 5px;
+        border:none;
+}
+
+
+
+div.metro_nav>ul>li{
+		background-color: black;
+		border:none;
+        position: relative;
+        width : 85px;
+        height : 85px;
+        margin: 0;
+        top: 0px;
+        display : inline-block;
+}
+div.metro_nav>ul>li.log{
+width: 150px;
+color: white;
+}
+div.metro_nav>ul>li.plan{
+margin-left: -10px;
+}
+div.metro_nav>ul>li>ul{
+        display : none;
+}
+
+div.metro_nav>ul>li>a{
+        display : block;
+        height : 80px;
+        width : 110px;
+        position:relative;
+        cursor : pointer;
+        text-decoration : none;
+}
+
+div.metro_nav>ul>li>a>span{
+
+        display: block;
+		text-align: center;
+		width: 100px;
+		height: 30px;
+		color: white;
+		font-size: 12px;
+		margin-left: -30px;
+		top: 5px;
+		position: relative;
+		}
+
+div.metro_nav>ul>li>a>span.temp{
+margin-left: 90%
+}
+
+div.metro_nav>ul>li.menu-configuration{
+float:right;
+margin-right: 10px;
+}
+
+div.metro_nav img{
+        border : 0;
+}
+
+div.metro_nav>.scroll_bar{
+        position:absolute;
+        bottom : 0;
+        width: 100%;
+        height : 15px;
+}
+
+div.metro_nav>div.nav_title>span.back_button{
+        height : 30px;
+        background-position : 0px 0px;
+        float : right;
+        position : relative;
+        right : 30px;
+        width : 30px;
+        background-image: url("../images/metro_nav.png"); /* URL should changed to the path of metro_nav.png*/
+}
+
+div.metro_nav>.scroll_bar>span{
+        position : relative;
+        height : 15px;
+        width : 30px;
+        background-image : url("../images/metro_nav.png"); /* URL should changed to the path of metro_nav.png*/
+        display : block;
+        background-position : 0 -90px;
+}
+
+#log-on{
+     position:  fixed;
+     display: none;
+     left: 50%;
+     top: 50%;
+     z-index: 2000;
+     padding: 10px;
+     width: 320px;
+     height:200px;
+     background-color: #EEEEEE;
+     font-size: 12px;
+     line-height: 16px;
+     color: #202020;
+     border : 3px outset #555555;
+     border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#body{
+margin : 0px auto 0px auto;
+width: 980px;
+box-shadow: 0 0 10px #333333;
+min-height: 600px;
+}
+
+#sous-menu{
+margin-left: 10px;
+position :absolute;
+z-index: 100;
+}
+
+#sous-menu li{
+        display : block;
+        width : 200px;
+        height: 20px;
+        padding : 10px;
+        position:relative;
+        cursor : pointer;
+        text-decoration : none;
+        background-color:  #6a6a6a;
+        border: #2F343C;
+        margin-top: 8px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: bold;
+}
+
+#sous-menu li a{
+color: #fff;
+}
+
+
+#action{
+margin-left: 250px;
+width :700px;
+padding: 5px;
+}
+
+#action-tableau td{
+	width: 80px;
+	text-align: center;
+	font-size: 16px;
+}
+
+#action-tableau tr.title{
+	color: white;
+	background-color: #6a6a6a;
+	height: 45px;
+}
+
+#action-tableau tr.contenu{
+	color: white;
+	background-color: #ccc;
+	height: 30px;
+}
+
+#action-tableau tr.contenu:hover{
+	background-color: white;
+	color: black;
+
+}

@@ -15,16 +15,17 @@ $query = "INSERT INTO plan (`libelle`, `width`, `height`, `left`, `top`, `line-h
 mysql_query($query, $link);
 }
 ?>
-<CENTER><TABLE border=1><TR><TD>Id</TD><TD>Nom</TD><TD>Hauteur</TD><TD>Largeur</TD><TD>Gauche</TD><TD>Haut</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<div id="action-tableau">
+<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Gauche</TD><TD>Haut</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
 $query = "SELECT * FROM plan";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-echo "<TR><TD>".$data['id']."</TD><TD>".$data['libelle']."</TD><TD>".$data['width']."</TD><TD>".$data['height']."</TD><TD>".$data['left']."</TD><TD>".$data['top']."</TD><TD>".$data['line-height']."</TD><TD>".$data['text-align']."</TD><TD>".$data['border']."</TD><TD><A HREF=\"./index.php?page=gerer_pieces&piece=".$data['id']."\">Modifier</A></TD><TD><A HREF=\"./index.php?page=gerer_pieces&supprimer=".$data['id']."\">Supprimer</A></TD></TR>";
+echo "<TR class=\"contenu\"><TD>".$data['id']."</TD><TD>".$data['libelle']."</TD><TD>".$data['width']."</TD><TD>".$data['height']."</TD><TD>".$data['left']."</TD><TD>".$data['top']."</TD><TD>".$data['line-height']."</TD><TD>".$data['text-align']."</TD><TD>".$data['border']."</TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&piece=".$data['id']."\">Modifier</A></TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&supprimer=".$data['id']."\">Supprimer</A></TD></TR>";
 }
 ?>
-</TABLE></CENTER>
+</TABLE></CENTER></div>
 <?
 if(isset($_GET['piece'])){
 $query = "SELECT * FROM plan WHERE id = '".$_GET['piece']."'";
@@ -34,11 +35,11 @@ while ($data = mysql_fetch_assoc($req))
 ?>
 <P align=center>
 <TABLE>
-<FORM method="post" action="./index.php?page=gerer_pieces">
+<FORM method="post" action="./index.php?page=administration&detail=gerer_pieces">
 <TR><TD>Id :</TD><TD><INPUT type=text name=id value="<? echo $data['id']; ?>"></INPUT></TD></TR>
 <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle value="<? echo $data['libelle']; ?>"></INPUT></TD></TR>
-<TR><TD>Hauteur :</TD><TD><INPUT type=text name=width value="<? echo $data['width']; ?>"></INPUT></TD></TR>
-<TR><TD>Largeur :</TD><TD><INPUT type=text name=height value="<? echo $data['height']; ?>"></INPUT></TD></TR>
+<TR><TD>Largeur :</TD><TD><INPUT type=text name=width value="<? echo $data['width']; ?>"></INPUT></TD></TR>
+<TR><TD>Hauteur :</TD><TD><INPUT type=text name=height value="<? echo $data['height']; ?>"></INPUT></TD></TR>
 <TR><TD>Position Droite :</TD><TD><INPUT type=text name=left value="<? echo $data['left']; ?>"></INPUT></TD></TR>
 <TR><TD>Position Bas :</TD><TD><INPUT type=text name=top value="<? echo $data['top']; ?>"></INPUT></TD></TR>
 <TR><TD>Taille zone Texte :</TD><TD><INPUT type=text name=line-height value="<? echo $data['line-height']; ?>"></INPUT></TD></TR>
@@ -57,8 +58,8 @@ while ($data = mysql_fetch_assoc($req))
 <TABLE>
 <FORM method="post" action="./index.php?page=gerer_pieces">
 <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle></INPUT></TD></TR>
-<TR><TD>Hauteur :</TD><TD><INPUT type=text name=width></INPUT></TD></TR>
-<TR><TD>Largeur :</TD><TD><INPUT type=text name=height></INPUT></TD></TR>
+<TR><TD>Largeur :</TD><TD><INPUT type=text name=width></INPUT></TD></TR>
+<TR><TD>Hauteur :</TD><TD><INPUT type=text name=height></INPUT></TD></TR>
 <TR><TD>Position Droite :</TD><TD><INPUT type=text name=left></INPUT></TD></TR>
 <TR><TD>Position Bas :</TD><TD><INPUT type=text name=top></INPUT></TD></TR>
 <TR><TD>Taille zone Texte :</TD><TD><INPUT type=text name=line-height></INPUT></TD></TR>

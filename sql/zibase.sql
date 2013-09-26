@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Gérée: Lun 09 Septembre 2013 à2:09
+-- Gérée: Jeu 26 Septembre 2013 à9:52
 -- Version du serveur: 5.5.31
 -- Version de PHP: 5.4.4-14+deb7u2
 
@@ -67,31 +67,6 @@ CREATE TABLE IF NOT EXISTS `detail` (
   PRIMARY KEY (`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `detail`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `elec_cout`
---
-
-CREATE TABLE IF NOT EXISTS `elec_cout` (
-  `date` date NOT NULL,
-  `HC` float NOT NULL,
-  `HP` float NOT NULL,
-  `fixe` float NOT NULL,
-  PRIMARY KEY (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `elec_cout`
---
-
-INSERT INTO `elec_cout` (`date`, `HC`, `HP`, `fixe`) VALUES
-('2013-07-25', 0.0926, 0.1352, 0.5716);
-
 -- --------------------------------------------------------
 
 --
@@ -107,6 +82,19 @@ CREATE TABLE IF NOT EXISTS `journalier` (
   `cout` float NOT NULL,
   PRIMARY KEY (`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `modules`
+--
+
+CREATE TABLE IF NOT EXISTS `modules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `actif` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -141,13 +129,6 @@ CREATE TABLE IF NOT EXISTS `protocol` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Contenu de la table `protocol`
---
-
-INSERT INTO `protocol` (`id`, `nom`, `zcode`) VALUES
-(1, 'ZWAVE', '6');
-
 -- --------------------------------------------------------
 
 --
@@ -166,6 +147,20 @@ CREATE TABLE IF NOT EXISTS `sonde_temperature` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `tarif_elec`
+--
+
+CREATE TABLE IF NOT EXISTS `tarif_elec` (
+  `date` date NOT NULL,
+  `HC` float NOT NULL,
+  `HP` float NOT NULL,
+  `fixe` float NOT NULL,
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -174,7 +169,44 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pseudo` varchar(255) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `pass` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Contenu de la table `modules`
+--
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(1, 'owl', 1),
+(2, 'conso_elec', 1),
+(3, 'temperature', 1),
+(4, 'batterie', 1),
+(5, 'plan', 1),
+(6, 'thermostat', 1),
+(7, 'calendrier', 1);
+
+--
+-- Contenu de la table `protocol`
+--
+
+INSERT INTO `protocol` (`id`, `nom`, `zcode`) VALUES
+(1, 'ZWAVE', '6');
+
+--
+-- Contenu de la table `tarif_elec`
+--
+
+INSERT INTO `tarif_elec` (`date`, `HC`, `HP`, `fixe`) VALUES
+('2013-07-25', 0.0926, 0.1352, 0.5716),
+('2013-08-09', 0.1002, 0.1467, 1.7368);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 --
 -- Contenu de la table `users`
@@ -183,7 +215,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 (1, 'Admin', sha('secret'));
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 

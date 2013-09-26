@@ -1,7 +1,7 @@
 <?php
 include("/var/www/pages/conf_zibase.php");
-include("/var/www/lib/zibase/zibase.php");
-$zibase = new ZiBase($ipZibase);
+include("/var/www/lib/zibase.php");
+$zibase = new ZiBase($ipzibase);
 $actionlist=$zibase->getSensorList($idzibase,$tokenzibase);
 
 $actionnb = count($actionlist);

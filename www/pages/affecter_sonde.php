@@ -12,7 +12,7 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
-<FORM method="post" action="./index.php?page=affecter_sonde">
+<FORM method="post" action="./index.php?page=administration&detail=affecter_sonde">
 <? echo $data['nom']; ?> : <select name="sonde">
 <?
 $query3 = "SELECT * FROM `plan` ORDER BY `libelle`";

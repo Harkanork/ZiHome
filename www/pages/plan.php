@@ -1,6 +1,7 @@
 <div id="plan">
 <?
 include("./pages/connexion.php");
+include("./pages/conf_zibase.php");
 $query = "SELECT * FROM plan";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
@@ -14,6 +15,7 @@ $data4 = mysql_fetch_assoc($req2);
 $query3 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data5 = mysql_fetch_assoc($req3);
+
 if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null) {
 ?>
 <div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
@@ -51,17 +53,19 @@ if(!($data3 == null)){
 ?>
 <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 <?
-$liste1 = "";
-$liste2 = "";
 $query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data1 = mysql_fetch_assoc($req1)) {
+$liste1 = "";
+$liste2 = "";
 $query0 = "SELECT * FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
 {
 $liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['temp'] ."],";
+if(!($data0['hygro'] == 0)) {
 $liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['hygro'] ."],";
+}
 }
 ?>
 <script type="text/javascript">
@@ -100,8 +104,9 @@ Highcharts.setOptions({
                     style: {
                     }
                 },
-
-            }, { // Tertiary yAxis
+<? if(!($liste2 == "")) { ?>
+            },
+		 { // Tertiary yAxis
                 gridLineWidth: 0,
                 title: {
                     text: 'Hygrometrie',
@@ -115,11 +120,15 @@ Highcharts.setOptions({
                     style: {
                     }
                 },
-            }],
+<? } ?>
+            }
+             ],
             tooltip: {
                 shared: true
             },
-            series: [{
+            series: [
+<? if(!($liste2 == "")) { ?>
+		{
                 name: 'Hygrometrie',
                 type: 'spline',
                 yAxis: 1,
@@ -130,8 +139,9 @@ Highcharts.setOptions({
                 tooltip: {
                     valueSuffix: ' %'
                 }
-
-            }, {
+            }, 
+<? } ?>
+		{
                 name: 'Temperature',
                 type: 'spline',
                 data: [<?php echo $liste1; ?>],
@@ -141,7 +151,8 @@ Highcharts.setOptions({
                 tooltip: {
                     valueSuffix: ' °C'
                 }
-            }]
+            }
+	     ]
         });
     });
 </script>
@@ -177,34 +188,37 @@ if(!($data5 == null)){
 ?>
 <div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 <?
-$liste1 = "";
-$liste2 = "";
 $query1 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data1 = mysql_fetch_assoc($req1)) {
-$query0 = "SELECT * FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$liste1 = "";
+$liste2 = "";
 while($data0 = mysql_fetch_assoc($req0))
 {
-$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['conso'] /1000 ."],";
-$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['conso_total'] / 1000 ."],";
+$consoTemp = 0;
+foreach($heuresCreuses as $heureCreuse){
+$query6 = "SELECT min(cumul) as min, max(cumul) as max FROM detail where date >= '".date('Y-m-d', $data0['date'])." ".$heureCreuse['debut']."' and date <= '".date('Y-m-d', $data0['date'])." ".$heureCreuse['fin']."'";
+$res_query6 = mysql_query($query6, $link);
+if(mysql_numrows($res_query6) > 0){
+$consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");
+}
+}
+$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . ($data0['max'] - $data0['min']) ."],";
+$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($data0['max'] - $data0['min'] - $consoTemp)*$coutHP)/1000)*100),2) ."],";
 }
 ?>
-<script type="text/javascript">
+                <script type="text/javascript">
 $(function () {
-Highcharts.setOptions({
-    global: {
-        useUTC: false
-    }
-});
-        $('#<? echo $data1['id']; ?>').highcharts({
+        $('#conso_elec_<? echo $data1['id']; ?>').highcharts({
             chart: {
             },
             title: {
                 text: '<? echo $data1['nom']; ?>'
             },
             subtitle: {
-                text: 'Consomation Electrique'
+                text: 'Quotidienne'
             },
             xAxis: [{
                 type: 'datetime',
@@ -213,65 +227,47 @@ Highcharts.setOptions({
                     year: '%b'
                 }
             }],
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    formatter: function() {
-                        return this.value +'kw/h';
-                    },
-                    style: {
-                    }
-                },
+            yAxis: [{
+                min: 0,
                 title: {
-                    text: 'conso',
-                    style: {
-                    }
-                },
-
-            }, { // Tertiary yAxis
-                gridLineWidth: 0,
+                    text: 'Consomation (Wh)'
+                }
+            }, {
+                min: 0,
                 title: {
-                    text: 'Total',
-                    style: {
-                    }
-                },
-                labels: {
-                    formatter: function() {
-                        return this.value +' kw/h';
-                    },
-                    style: {
-                    }
-                },
+                    text: 'Cout (Cent)'
+                }
             }],
             tooltip: {
-                shared: true
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
             },
             series: [{
-                name: 'Total',
-                type: 'spline',
-                yAxis: 1,
-                data: [<?php echo $liste2; ?>],
-                marker: {
-                    enabled: false
-                },
-                tooltip: {
-                    valueSuffix: ' kw/h'
-                }
+                name: 'Consomation (Wh)',
+                data: [<?php echo $liste1; ?>],
+                type: 'column'
 
             }, {
-                name: 'Conso',
-                type: 'spline',
-                data: [<?php echo $liste1; ?>],
-                marker: {
-                    enabled: false
-                },
-                tooltip: {
-                    valueSuffix: ' kw/h'
-                }
+                name: 'Cout (Cent)',
+                yAxis: 1,
+                data: [<?php echo $liste2; ?>],
+                type: 'column'
             }]
         });
     });
-</script>
-<div id="<? echo $data1['id']; ?>" style="min-width: 640px; height: 340px; margin: 0 auto"></div>
+                </script>
+
+<div id="conso_elec_<? echo $data1['id']; ?>" style="min-width: 640px; height: 340px; margin: 0 auto"></div>
 <?
 }
 ?>
