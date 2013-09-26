@@ -31,23 +31,23 @@ if ($data)
 {
 $_SESSION['auth'] = $data['pseudo'];
 mysql_close();
-echo "<meta http-equiv=\"refresh\" content=\"0; url=".$PHP_SELF."\">";
+echo "<meta http-equiv=\"refresh\" content=\"0; url=".$_SERVER['PHP_SELF']."\">";
 }
 else
 {
 echo "<center>erreur d'identification<br></center>";
-echo "<meta http-equiv=\"refresh\" content=\"4; url=".$PHP_SELF."\">";
+echo "<meta http-equiv=\"refresh\" content=\"4; url=".$_SERVER['PHP_SELF']."\">";
 }
 }
 else
 {
 echo $message;
-echo "<meta http-equiv=\"refresh\" content=\"4; url=".$PHP_SELF."\">";
+echo "<meta http-equiv=\"refresh\" content=\"4; url=".$_SERVER['PHP_SELF']."\">";
 }
 }
 else
 {
-echo "<center> <form method=\"POST\" action=\"".$PHP_SELF."\" style=\"margin:0;padding=0;\">
+echo "<center> <form method=\"POST\" action=\"".$_SERVER['PHP_SELF']."\" style=\"margin:0;padding=0;\">
 Login: <input type=\"text\" name=\"pseudo\" size=\"12\" maxlength=\"40\"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <br>Pass: <input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"20\"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <br><input type=\"submit\" name=\"submit1\" value=\"Valider\" class=\"input\"></input></form></center>";

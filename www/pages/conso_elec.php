@@ -35,7 +35,7 @@ while($data0 = mysql_fetch_assoc($req0))
 {
 $consoTemp = 0;
 foreach($heuresCreuses as $heureCreuse){
-$query6 = "SELECT min(cumul) as min, max(cumul) as max FROM detail where date >= '".date('Y-m-d', $data0['date'])." ".$heureCreuse['debut']."' and date <= '".date('Y-m-d', $data0['date'])." ".$heureCreuse['fin']."'";
+$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `".$data['nom']."` where `date` >= '".substr($data0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($data0['date'], 0, 10)." ".$heureCreuse['fin']."'";
 $res_query6 = mysql_query($query6, $link);
 if(mysql_numrows($res_query6) > 0){
 $consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");
