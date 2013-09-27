@@ -71,30 +71,30 @@ $thermostatnb = count($thermostat);
 $i = 1;
 while($i <= $thermostatnb) {
 
-echo "<p align=center>".$thermostat[$i]['nom']."</p>";
+echo "<p align=center>".$thermostat[$i]['0']."</p>";
 
-echo "<p align=center>Temperature d'entree : ".(($zibase->getVariable($thermostat[$i]['ve']))/10)."&deg;</p>";
+echo "<p align=center>Temperature d'entree : ".(($zibase->getVariable($thermostat[$i]['3']))/10)."&deg;</p>";
 ?> <FORM method="post" action="./index.php?page=thermostat"> <?
-echo "<p align=center>Consigne de jour : ".(($zibase->getVariable($thermostat[$i]['vcj']))/10)."&deg; ";
+echo "<p align=center>Consigne de jour : ".(($zibase->getVariable($thermostat[$i]['4']))/10)."&deg; ";
 ?>
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['vcj']; ?>">
-<INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['vcj']))/10); ?>">
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['4']; ?>">
+<INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['4']))/10); ?>">
 <INPUT TYPE="SUBMIT" NAME="Modifier_vcj" VALUE="Modifier">
 </p></FORM>
 <FORM method="post" action="./index.php?page=thermostat">
 <?
-echo "<p align=center>Consigne de nuit : ".(($zibase->getVariable($thermostat[$i]['vcn']))/10)."&deg; ";
+echo "<p align=center>Consigne de nuit : ".(($zibase->getVariable($thermostat[$i]['6']))/10)."&deg; ";
 ?>
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['vcn']; ?>">
-<INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['vcn']))/10); ?>">
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['6']; ?>">
+<INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['6']))/10); ?>">
 <INPUT TYPE="SUBMIT" NAME="Modifier_vcn" VALUE="Modifier">
 </p></FORM>
 <?
-echo "<p align=center>Hysteresis : ".$thermostat[$i]['h']."</p>";
-echo "<p align=center>Actif : ".(($zibase->getVariable($thermostat[$i]['vs']))/10)."</p>";
+echo "<p align=center>Hysteresis : ".$thermostat[$i]['8']."</p>";
+echo "<p align=center>Actif : ".(($zibase->getVariable($thermostat[$i]['10']))/10)."</p>";
 for ($k = 0; $k < 3; $k++) {
-$calendrier=$zibase->getCalendar($thermostat[$i]['cal']+$k);
-echo "<center>Calendrier Numero ".($thermostat[$i]['cal']+$k)."</center>";
+$calendrier=$zibase->getCalendar($thermostat[$i]['7']+$k);
+echo "<center>Calendrier Numero ".($thermostat[$i]['7']+$k)."</center>";
 ?>
 <center><p align="center"><form method="post" action="./index.php?page=thermostat">
 <?
