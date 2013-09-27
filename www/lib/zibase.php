@@ -621,23 +621,23 @@
                 fclose($handle);
                 $i = 0;
                 $xmlDoc = simplexml_load_string($xmlContent);
-			for ($i = 1; $i <= 10; $i++) {
-				$node = $xmlDoc->xpath('//thermostat'.$i);
-				if($node != null) {
-					$val = explode(":", $node[0]["data"]);
-				        $info[$i]['0'] = $val['0'];
-                                        $info[$i]['1'] = $val['1'];
-                                        $info[$i]['2'] = $val['2'];
-                                        $info[$i]['3'] = $val['3'];
-                                        $info[$i]['4'] = $val['4'];
-                                        $info[$i]['5'] = $val['5'];
-                                        $info[$i]['6'] = $val['6'];
-                                        $info[$i]['7'] = $val['7'];
-                                        $info[$i]['8'] = $val['8'];
-                                        $info[$i]['9'] = $val['9'];
-                                        $info[$i]['10'] = $val['10'];
-                                        $info[$i]['11'] = $val['11'];}
-			}
+                $node = $xmlDoc->xpath('//thermostat1');
+                foreach ($node as $ua) {
+                        $i++;
+                        $val = explode(":", $ua[0]["data"]);
+                        $info[$i]['0'] = $val['0'];
+                        $info[$i]['1'] = $val['1'];
+                        $info[$i]['2'] = $val['2'];
+                        $info[$i]['3'] = $val['3'];
+                        $info[$i]['4'] = $val['4'];
+                        $info[$i]['5'] = $val['5'];
+                        $info[$i]['6'] = $val['6'];
+                        $info[$i]['7'] = $val['7'];
+                        $info[$i]['8'] = $val['8'];
+                        $info[$i]['9'] = $val['9'];
+                        $info[$i]['10'] = $val['10'];
+                        $info[$i]['11'] = $val['11'];
+                }
         return $info;
         }
  	
