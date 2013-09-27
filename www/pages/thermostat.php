@@ -112,7 +112,7 @@ Lundi <input type=checkbox name=lundi<? if($calendrier->day['lundi'] == 1) { ?> 
  | Vendredi <input type=checkbox name=vendredi<? if($calendrier->day['vendredi'] == 1) { ?> Checked<? } ?>>
  | Samedi <input type=checkbox name=samedi<? if($calendrier->day['samedi'] == 1) { ?> Checked<? } ?>>
  | Dimanche <input type=checkbox name=dimanche<? if($calendrier->day['dimanche'] == 1) { ?> Checked<? } ?>>
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['cal']+$k; ?>">
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['7']+$k; ?>">
 <br>
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
 </form></p></center>
