@@ -194,7 +194,21 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 --
 
 INSERT INTO `protocol` (`id`, `nom`, `zcode`) VALUES
-(1, 'ZWAVE', '6');
+(1, 'ZWAVE', '6'),
+(2, 'PRESET', '0'),
+(3, 'VISONIC433', '1'),
+(4, 'VISONIC868', '2'),
+(5, 'CHACON', '3'),
+(6, 'DOMIA', '4'),
+(7, 'X10', '5'),
+(8, 'RFS10', '7'),
+(9, 'X2D433', '8'),
+(10, 'X2D433ALRM', '8'),
+(11, 'X2D868', '9'),
+(12, 'X2D868ALRM', '9'),
+(13, 'X2D868INSH', '10'),
+(14, 'X2D868PIWI', '11'),
+(15, 'X2D868BOAC', '12');
 
 --
 -- Contenu de la table `tarif_elec`
