@@ -17,5 +17,5 @@ Pour pouvoir utilisez notre systè, vous avez besoins d'une zibase et d'un syst�
 Dans le cadre de l'utilisation du module OWL : 
 - copier le fichier init/owl dans le dossier /etc/init.d , ajoutez y les droits d'écution : "chmod a+x /etc/init.d/owl" et activez le au dérrage du systè avec la commande "update-rc.d owl defaults". 
 
-Vous pouvez maintenant vous connecter sur l'interface. les identifiants par déuts sont "admin / secret"
+Vous pouvez maintenant vous connecter sur l'interface. les identifiants par déuts sont "Admin / secret"
 
