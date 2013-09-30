@@ -28,7 +28,7 @@ while($data3 = mysql_fetch_assoc($req3))
 </select> 
 Protocol : <select name="protocol">
 <?
-$query1 = "SELECT * FROM protocol ORDER BY `nom`";
+$query1 = "SELECT * FROM protocol WHERE actif = 1 ORDER BY `nom`";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data1 = mysql_fetch_assoc($req1)) {
 ?>
