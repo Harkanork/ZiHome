@@ -25,6 +25,7 @@ while($data3 = mysql_fetch_assoc($req3))
 <select name="type">
 <option value="on"<? if($data['type'] == "on"){ echo " selected"; } ?>>On</option>
 <option value="on_off"<? if($data['type'] == "on_off"){ echo " selected"; } ?>>On - Off</option>
+<option value="dim"<? if($data['type'] == "dim"){ echo " selected"; } ?>>Dimable</option>
 </select> 
 Protocol : <select name="protocol">
 <?

@@ -175,8 +175,19 @@ while($data2 = mysql_fetch_assoc($req2)) {
 ?>
 <div id="actionneur">
 <center><h1><? echo $data2['nom']; ?></h1></center>
-<center><a href="./pages/actioneur.php?ordre=1&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button green">ON</a>
+<center>
+<? if($data2['type'] == 'dim') {
+?>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=100" class="button green">100%</a>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=80" class="button green">80%</a>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=60" class="button green">60%</a>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=40" class="button green">40%</a>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=20" class="button green">20%</a>
+<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=0" class="button red close">0%</a>
+<? } else { ?>
+<a href="./pages/actioneur.php?ordre=1&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button green">ON</a>
 <? if($data2['type'] == 'on_off') { ?><a href="./pages/actioneur.php?ordre=0&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button red close">OFF</a><? }
+}
 ?></center></div><?
 }
 ?> 
