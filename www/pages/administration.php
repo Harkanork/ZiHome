@@ -8,6 +8,7 @@
 <li><A HREF="./index.php?page=administration&detail=gerer_users">Gerer les utilisarteurs</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_modules">Gerer les modules</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_protocol">Gerer les protocoles</A></li>
+<li><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></li>
 </div>
 <div id="action">
 <?
