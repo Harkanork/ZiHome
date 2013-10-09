@@ -64,7 +64,9 @@ $zibase->setVariable($_POST['id'],$_POST['temperature']*10);
 if(isset($_POST['Modifier_vcn'])) {
 $zibase->setVariable($_POST['id'],$_POST['temperature']*10);
 }
-
+if(isset($_POST['Modifier_mode'])) {
+$zibase->setVariable($_POST['id'],$_POST['mode']);
+}
 
 $thermostat=$zibase->getThermostat($idzibase,$tokenzibase);
 $thermostatnb = count($thermostat);
@@ -92,6 +94,20 @@ echo "<p align=center>Consigne de nuit : ".(($zibase->getVariable($thermostat[$i
 <?
 echo "<p align=center>Hysteresis : ".$thermostat[$i]['8']."</p>";
 echo "<p align=center>Actif : ".(($zibase->getVariable($thermostat[$i]['10']))/10)."</p>";
+echo "<center><p align=center>Mode : <br>";
+?>
+<FORM method="post" action="./index.php?page=thermostat">
+<input type="radio" name="mode" value="0"<? if($zibase->getVariable($thermostat[$i]['5']) == "0") { echo " checked"; } ?>>Auto | 
+<input type="radio" name="mode" value="16"<? if($zibase->getVariable($thermostat[$i]['5']) == "16") { echo " checked"; } ?>>Jour | 
+<input type="radio" name="mode" value="32"<? if($zibase->getVariable($thermostat[$i]['5']) == "32") { echo " checked"; } ?>>Jour temporaire | 
+<input type="radio" name="mode" value="6"<? if($zibase->getVariable($thermostat[$i]['5']) == "6") { echo " checked"; } ?>>Hor gel | 
+<input type="radio" name="mode" value="48"<? if($zibase->getVariable($thermostat[$i]['5']) == "48") { echo " checked"; } ?>>Nuit | 
+<input type="radio" name="mode" value="64"<? if($zibase->getVariable($thermostat[$i]['5']) == "64") { echo " checked"; } ?>>Nuit temporaire | 
+<input type="radio" name="mode" value="5"<? if($zibase->getVariable($thermostat[$i]['5']) == "5") { echo " checked"; } ?>>Stop
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['5']; ?>">
+<INPUT TYPE="SUBMIT" NAME="Modifier_mode" VALUE="Modifier">
+</FORM></p></center>
+<?
 for ($k = 0; $k < 3; $k++) {
 $calendrier=$zibase->getCalendar($thermostat[$i]['7']+$k);
 echo "<center>Calendrier Numero ".($thermostat[$i]['7']+$k)."</center>";
