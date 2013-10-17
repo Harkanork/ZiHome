@@ -24,10 +24,10 @@ $query = "INSERT INTO sonde_vent (nom, id, logo, batterie) VALUES ('".$sensorlis
 mysql_query($query, $link);
 $query = "UPDATE sonde_vent SET id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
 mysql_query($query, $link);
-$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `temp` float NOT NULL, `hygro` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` float NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 mysql_query($query, $link);
 if(!($info == "")) {
-$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, temp, hygro) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[1]/10).",".$info[2].")";
+$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",".$info[2].")";
 mysql_query($query, $link);
 }
 }

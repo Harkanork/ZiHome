@@ -46,6 +46,11 @@ if($data['libelle'] == "calendrier" && $data['actif'] == 1 && isset($_SESSION['a
 <li><a href = "./index.php?page=calendrier"><img src = "./img/icon_calendrier.png"/><span>Calendrier</span></a></li>
 <?
 }
+if($data['libelle'] == "vent" && $data['actif'] == 1) {
+?>
+<li><a href = "./index.php?page=vent"><img src = "./img/icon_calendrier.png"/><span>Vent</span></a></li>
+<?
+}
 }
 if(isset($_SESSION['auth']))
 {
