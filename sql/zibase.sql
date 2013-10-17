@@ -175,6 +175,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `sonde_temperature`
+--
+
+CREATE TABLE IF NOT EXISTS `sonde_vent` (
+  `nom` varchar(255) NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `batterie` int(11) NOT NULL,
+  `id_plan` int(11) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `message_zibase`
 --
 
