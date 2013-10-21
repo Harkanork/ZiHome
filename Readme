@@ -19,3 +19,4 @@ Dans le cadre de l'utilisation du module OWL :
 
 Vous pouvez maintenant vous connecter sur l'interface. les identifiants par déuts sont "Admin / secret"
 
+L'ajout d'image de fond sur chaque pieces du plan se fait a ajoutant des images id.jpg dans le dossier /var/www/img/plan/ en remplacant id par l'id de votre piece.
