@@ -3,7 +3,7 @@ if(isset($_SESSION['auth']))
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
-$query = "UPDATE sonde_temperature SET id_plan = '".$_POST['sonde']."' WHERE nom = '".$_POST['id']."'";
+$query = "UPDATE sonde_temperature SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."' WHERE nom = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
 include("./pages/connexion.php");
@@ -22,6 +22,8 @@ while($data3 = mysql_fetch_assoc($req3))
 <option value="<? echo $data3['id']; ?>"<? if($data3['id'] ==  $data['id_plan']){ echo " selected"; } ?>><? echo $data3['libelle']; ?></option>
 <? } ?>
 </select>
+Droite:<INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5>
+bas:<INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
 </FORM>

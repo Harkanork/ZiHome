@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `actioneurs` (
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
   `protocol` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `left` int(11) NOT NULL DEFAULT '0',
+  `top` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
@@ -142,6 +144,8 @@ CREATE TABLE IF NOT EXISTS `sonde_temperature` (
   `logo` varchar(255) NOT NULL,
   `batterie` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `left` int(11) NOT NULL DEFAULT '0',
+  `top` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -175,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sonde_temperature`
+-- Structure de la table `sonde_vent`
 --
 
 CREATE TABLE IF NOT EXISTS `sonde_vent` (
@@ -186,6 +190,26 @@ CREATE TABLE IF NOT EXISTS `sonde_vent` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `capteurs`
+--
+
+CREATE TABLE IF NOT EXISTS `capteurs` (
+  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `left` int(11) NOT NULL DEFAULT '0',
+  `top` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 -- --------------------------------------------------------
 

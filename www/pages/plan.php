@@ -2,6 +2,8 @@
 <?
 include("./pages/connexion.php");
 include("./pages/conf_zibase.php");
+include("./lib/zibase.php");
+$zibase = new ZiBase($ipzibase);
 $query = "SELECT * FROM plan";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
@@ -15,12 +17,65 @@ $data4 = mysql_fetch_assoc($req2);
 $query3 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data5 = mysql_fetch_assoc($req3);
+$query4 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data6 = mysql_fetch_assoc($req4);
 
 if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null) {
 ?>
 <div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
 <? } else { ?>
-<a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div></a>
+<a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
+<?
+if((!($data4 == null)) && isset($_SESSION['auth'])){
+$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data2 = mysql_fetch_assoc($req2)) {
+if($data2['protocol'] == 6) {
+$protocol = true;
+} else {
+$protocol = false;
+}
+$value = $zibase->getState($data2['id'], protocol);
+if($value = 1) {
+$ic = "g";
+} else {
+$ic = "c";
+}
+echo "<img src=\"./img/icones/".$icone.$ic."_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\">";
+}
+}
+if(!($data3 == null)){
+$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
+$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data2 = mysql_fetch_assoc($req1)) {
+$query0 = "SELECT * FROM `".$data2['nom']."` ORDER BY `date` DESC LIMIT 1";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data0 = mysql_fetch_assoc($req0))
+{
+$temperature=$data0['temp'];
+}
+echo "<div style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\"><img src=\"./img/icones/".$icone."c_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;\"><span style=\"position:absolute;top:4px;left:33px;font-size:10px;\">".$temperature."&deg;C</span></div>";
+}
+}
+if(!($data6 == null)){
+while($data2 = mysql_fetch_assoc($req4)) {
+if($data2['protocol'] == 6) {
+$protocol = true;
+} else {
+$protocol = false;
+}
+$value = $zibase->getState($data2['id'], protocol);
+if($value = 1) {
+$ic = "g";
+} else {
+$ic = "c";
+}
+echo "<div style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\"><img src=\"./img/icones/".$icone.$ic."_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"></div>";
+}
+}
+?>
+</div></a>
 <script type="text/javascript">
 $(document).ready(function() {
   $("#tabs-<? echo $data['id']; ?>").tabs();
