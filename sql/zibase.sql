@@ -214,6 +214,22 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `scenarios`
+--
+
+CREATE TABLE IF NOT EXISTS `scenarios` (
+  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `left` int(11) NOT NULL DEFAULT '0',
+  `top` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `message_zibase`
 --
 

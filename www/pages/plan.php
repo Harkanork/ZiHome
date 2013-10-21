@@ -20,8 +20,11 @@ $data5 = mysql_fetch_assoc($req3);
 $query4 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
 $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data6 = mysql_fetch_assoc($req4);
+$query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
+$req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data7 = mysql_fetch_assoc($req5);
 
-if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null) {
+if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null) {
 ?>
 <div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
 <? } else { ?>
@@ -36,7 +39,7 @@ $protocol = true;
 } else {
 $protocol = false;
 }
-$value = $zibase->getState($data2['id'], protocol);
+$value = $zibase->getState($data2['id'], $protocol);
 if($value = 1) {
 $ic = "g";
 } else {
@@ -65,7 +68,7 @@ $protocol = true;
 } else {
 $protocol = false;
 }
-$value = $zibase->getState($data2['id'], protocol);
+$value = $zibase->getState($data2['id'], $protocol);
 if($value = 1) {
 $ic = "g";
 } else {
@@ -98,6 +101,11 @@ if((!($data4 == null)) && isset($_SESSION['auth'])){
 if(!($data5 == null)){
 ?>
 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-3">Conso-Elec</a></li>
+<?
+}
+if(!($data7 == null)){
+?>
+<li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-4">Scenario</a></li>
 <?
 }
 ?>
@@ -246,6 +254,23 @@ while($data2 = mysql_fetch_assoc($req2)) {
 ?></center></div><?
 }
 ?> 
+</div>
+<?
+}
+}
+if(!($data7 == null)){
+?>
+<div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<?
+$query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
+$req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data2 = mysql_fetch_assoc($req5)) {
+?>
+<div id="actionneur">
+<center><h1><? echo $data2['nom']; ?></h1></center>
+<center>
+<a href="./pages/scenario.php?action=<? echo $data2['id']; ?>" class="button green">RUN</a>
+</center></div>
 </div>
 <?
 }

@@ -640,6 +640,28 @@
                 }
         return $info;
         }
+
+        /**
+        * fonction permettant de recuperer les Scenario
+        */
+        public function getScenarioList($idprincipalzibase,$tokenzibase) {
+                $info = array();
+                $url = "http://zibase.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
+                $handle = fopen($url, "rb");
+                $xmlContent = stream_get_contents($handle);
+                fclose($handle);
+                $i = 0;
+                $xmlDoc = simplexml_load_string($xmlContent);
+                $node = $xmlDoc->xpath('//m');
+                foreach ($node as $ua) {
+                        $attributes = $ua[0]->attributes();
+                        $info[$i]['n'] = $ua->n;
+                        $info[$i]['id'] = $attributes["id"];
+                        $info[$i]['icon'] = $attributes["icon"];
+                        $i = $i + 1;
+                }
+        return $info;
+        }
  	
  }
  
