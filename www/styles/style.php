@@ -14,14 +14,18 @@ width: <? echo $data['width']; ?>px;
 height: <? echo $data['height']; ?>px;
 top: <? echo $data['top']; ?>px;
 left: <? echo $data['left']; ?>px;
-line-height: <? echo $data['line-height']; ?>px;
+//line-height: <? echo $data['line-height']; ?>px;
 border: solid <? echo $data['border']; ?>px #CCC;
 position: absolute;
 z-index: <? echo $data['id']; ?>;
 color: black;
 font-size: 20px;
 text-align: <? echo $data['text-align']; ?>;
-vertical-align: middle;
+//vertical-align: middle;
+}
+
+#texte<? echo $data['id']; ?>{
+line-height: <? echo $data['line-height']; ?>px;
 }
 
 #custom<? echo $data['id']; ?>{
