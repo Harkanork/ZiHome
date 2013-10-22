@@ -10,9 +10,9 @@ function redirect() {
 setTimeout("redirect()",0); // delai en millisecondes
 </SCRIPT>
 <?php
-include("/var/www/pages/conf_zibase.php");
-include("/var/www/lib/zibase.php");
-$zibase = new ZiBase("192.168.245.89");
+include("./conf_zibase.php");
+include("../lib/zibase.php");
+$zibase = new ZiBase($ipzibase);
 $zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], $_GET['dim']);
 }
 ?>

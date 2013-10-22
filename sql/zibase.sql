@@ -244,6 +244,18 @@ CREATE TABLE IF NOT EXISTS `message_zibase` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paramettres`
+--
+
+CREATE TABLE IF NOT EXISTS `paramettres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `modules`
@@ -297,6 +309,13 @@ INSERT INTO `tarif_elec` (`date`, `HC`, `HP`, `fixe`) VALUES
 
 INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 (1, 'Admin', sha('secret'));
+
+--
+-- Contenu de la table `paramettres`
+--
+
+INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
+(1, 'icones', '1');
 
 
 

@@ -273,7 +273,7 @@
 		  $request->param2 = $action;
 		  $request->param2 |= ($protocol & 0xFF) << 0x08;
 		  if ($action == ZbAction::DIM_BRIGHT)
-		  	$request->param2 |= (dimLevel & 0xFF) << 0x10;
+		  	$request->param2 |= ($dimLevel & 0xFF) << 0x10;
 		  if ($nbBurst > 1)
 		  	$request->param2 |= ($nbBurst & 0xFF) << 0x18;
 	        
