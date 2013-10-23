@@ -1,4 +1,26 @@
 <?
+if(!(isset($_SESSION['auth']))) {
+$ipAddress=$_SERVER['REMOTE_ADDR'];
+$macAddr=false;
+exec('/usr/sbin/arp -n '.$ipAddress,$arp);
+foreach($arp as $line)
+{
+   $cols=preg_split('/\s+/', trim($line));
+   if ($cols[0]==$ipAddress)
+   {
+       $macAddr=$cols[2];
+   }
+}
+include("./pages/connexion.php");
+$query = "SELECT * FROM `auto-logon` WHERE macaddress = '".$macAddr."'";
+$req = @mysql_query ($query);
+$data = mysql_fetch_assoc ($req);
+if ($data)
+{
+$_SESSION['auth'] = $data['pseudo'];
+mysql_close();
+}
+}
 if(isset($_SESSION['auth']))
 {
 if(isset($_GET['logout']))

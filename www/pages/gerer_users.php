@@ -1,5 +1,28 @@
 <?
 if(isset($_SESSION['auth'])) {
+if(isset($_GET['supp-auto'])) {
+include("./pages/connexion.php");
+$query = "DELETE FROM `auto-logon` WHERE `id`='".$_GET['supp-auto']."'";
+mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+mysql_close();
+}
+if(isset($_POST['Ajouter'])) {
+$ipAddress=$_SERVER['REMOTE_ADDR'];
+$macAddr=false;
+exec('/usr/sbin/arp -n '.$ipAddress,$arp);
+foreach($arp as $line)
+{
+   $cols=preg_split('/\s+/', trim($line));
+   if ($cols[0]==$ipAddress)
+   {
+       $macAddr=$cols[2];
+   }
+}
+include("./pages/connexion.php");
+$query = "INSERT INTO `auto-logon` (pseudo, macaddress, description) VALUES ('".$_SESSION['auth']."', '".$macAddr."', '".$_POST['description']."')";
+mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+mysql_close();
+}
 if(isset($_POST['submit']))
 {
 $message = NULL;
@@ -29,7 +52,7 @@ echo $message;
 }
 } 
 echo "<BR><center><H1>Veuillez saisir les informations pour creer un compte.</H1><BR><BR>
-<FORM method=\"POST\" action=\"$PHP_SELF\">
+<FORM method=\"POST\" action=\"./index.php?page=administration&detail=gerer_users\">
 <table align=\"center\"><TR><TD>Login: </TD><TD><input type=\"text\" name=\"login\" size=\"12\" maxlength=\"40\"></input></TD></TR>
 <TR><TD>Mot de passe: </TD><TD><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"40\"></input></TD></TR>
 <TR><TD>Confirmation: </TD><TD><input type=\"password\" name=\"pass2\" size=\"12\" maxlength=\"40\"></input></TD></TR>
@@ -90,6 +113,22 @@ echo "<TR><TD>".$data['pseudo']."</TD><TD><A HREF=\"./index.php?page=administrat
 }
 echo "</TABLE></CENTER>";
 mysql_close();
+echo "<br>";
+echo "<br><br><CENTER><TABLE CELLSPACING=\"0\" CELLPADDING=\"5\" BORDER=\"1\"><TR><TD>login</TD><TD>Description</TD><TD>Supprimer</TD></TR>";
+include("./pages/connexion.php");
+$query = "SELECT * FROM `auto-logon`";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_assoc($req))
+{
+echo "<TR><TD>".$data['pseudo']."</TD><TD>".$data['description']."</TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_users&supp-auto=".$data['id']."\">Supprimer</A></TD></TR>";
+}
+echo "</TABLE></CENTER>";
+mysql_close();
+echo "<br>";
+echo "<CENTER>Ajouter une connexion automatique pour ce peripherique. (uniquement sur le reseau local)<br><FORM method=\"POST\" action=\"./index.php?page=administration&detail=gerer_users\">
+Description : <input type=\"text\" name=\"description\" size=\"12\" maxlength=\"40\"></input>
+<input type=\"submit\" name=\"Ajouter\" value=\"Ajouter\"></input>
+</form></center>";
 } else {
 echo "<center>acc&egrave;s non authoris&eacute;</center>";
 }

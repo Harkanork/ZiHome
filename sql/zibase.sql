@@ -257,6 +257,22 @@ CREATE TABLE IF NOT EXISTS `paramettres` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auto-logon`
+--
+
+CREATE TABLE IF NOT EXISTS `auto-logon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(255) NOT NULL,
+  `macaddress` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
 --
 -- Contenu de la table `modules`
 --
@@ -269,6 +285,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (5, 'plan', 1),
 (6, 'thermostat', 1),
 (7, 'calendrier', 1);
+
+-- --------------------------------------------------------
 
 --
 -- Contenu de la table `protocol`
@@ -291,6 +309,8 @@ INSERT INTO `protocol` (`id`, `nom`, `zcode`) VALUES
 (14, 'X2D868PIWI', '11'),
 (15, 'X2D868BOAC', '12');
 
+-- --------------------------------------------------------
+
 --
 -- Contenu de la table `tarif_elec`
 --
@@ -303,12 +323,16 @@ INSERT INTO `tarif_elec` (`date`, `HC`, `HP`, `fixe`) VALUES
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+-- --------------------------------------------------------
+
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 (1, 'Admin', sha('secret'));
+
+-- --------------------------------------------------------
 
 --
 -- Contenu de la table `paramettres`
