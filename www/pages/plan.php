@@ -17,9 +17,6 @@ $data4 = mysql_fetch_assoc($req2);
 $query3 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data5 = mysql_fetch_assoc($req3);
-$query4 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
-$req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-$data6 = mysql_fetch_assoc($req4);
 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
 $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data7 = mysql_fetch_assoc($req5);
@@ -30,52 +27,48 @@ if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5
 <? } else { ?>
 <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
 <?
-if((!($data4 == null)) && isset($_SESSION['auth'])){
-$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
-$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data2 = mysql_fetch_assoc($req2)) {
-if($data2['protocol'] == 6) {
+$query4 = "SELECT * FROM capteurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data6 = mysql_fetch_assoc($req4)) {
+if($data6['protocol'] == 6) {
 $protocol = true;
 } else {
 $protocol = false;
 }
-$value = $zibase->getState($data2['id'], $protocol);
-if($value = 1) {
+$value = $zibase->getState($data6['id'], $protocol);
+if($value == 1) {
 $ic = "g";
 } else {
 $ic = "c";
 }
-echo "<img src=\"./img/icones/".$icone.$ic."_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\">";
+echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"60\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;\">";
 }
+$query6 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data8 = mysql_fetch_assoc($req6)) {
+if($data8['protocol'] == 6) {
+$protocol = true;
+} else {
+$protocol = false;
 }
-if(!($data3 == null)){
-$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
-$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data2 = mysql_fetch_assoc($req1)) {
-$query0 = "SELECT * FROM `".$data2['nom']."` ORDER BY `date` DESC LIMIT 1";
+$value = $zibase->getState($data8['id'], $protocol);
+if($value == 1) {
+$ic = "g";
+} else {
+$ic = "c";
+}
+echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"60\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;\">";
+}
+$query7 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data9 = mysql_fetch_assoc($req7)) {
+$query0 = "SELECT * FROM `".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
 $temperature=$data0['temp'];
 }
-echo "<div style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\"><img src=\"./img/icones/".$icone."c_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;\"><span style=\"position:absolute;top:4px;left:33px;font-size:10px;\">".$temperature."&deg;C</span></div>";
-}
-}
-if(!($data6 == null)){
-while($data2 = mysql_fetch_assoc($req4)) {
-if($data2['protocol'] == 6) {
-$protocol = true;
-} else {
-$protocol = false;
-}
-$value = $zibase->getState($data2['id'], $protocol);
-if($value = 1) {
-$ic = "g";
-} else {
-$ic = "c";
-}
-echo "<div style=\"position:absolute;top:".$data2['top']."px;left:".$data2['left']."px;\"><img src=\"./img/icones/".$icone.$ic."_".$data2['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"></div>";
-}
+echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;\"><span style=\"position:absolute;top:4px;left:33px;font-size:10px;\">".$temperature."&deg;C</span></div>";
 }
 ?>
 </div></a>

@@ -3,7 +3,7 @@ if(isset($_SESSION['auth']))
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
-$query = "UPDATE actioneurs SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."' WHERE nom = '".$_POST['id']."'";
+$query = "UPDATE actioneurs SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."' WHERE nom = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
 include("./pages/connexion.php");
@@ -38,6 +38,7 @@ while($data1 = mysql_fetch_assoc($req1)) {
 </select>
 Droite:<INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5> 
 bas:<INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+Icone <INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
 </FORM></p>

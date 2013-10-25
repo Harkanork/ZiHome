@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `actioneurs` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
@@ -50,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `conso_electrique` (
   `logo` varchar(255) NOT NULL,
   `batterie` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -146,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `sonde_temperature` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -188,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `sonde_vent` (
   `logo` varchar(255) NOT NULL,
   `batterie` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -204,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
@@ -224,6 +229,7 @@ CREATE TABLE IF NOT EXISTS `scenarios` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
+  `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
