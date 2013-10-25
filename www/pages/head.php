@@ -8,4 +8,12 @@
 <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 <script src="./js/modules/exporting.js"></script>
 <script type="text/javascript" src="./js/popup.js"></script>
-
+<?
+include("./pages/connexion.php");
+$query = "SELECT * FROM paramettres WHERE libelle = 'icones'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$icone = $data['value'];
+}
+?>
