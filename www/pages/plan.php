@@ -37,9 +37,9 @@ $protocol = false;
 }
 $value = $zibase->getState($data6['id'], $protocol);
 if($value == 1) {
-$ic = "g";
-} else {
 $ic = "c";
+} else {
+$ic = "g";
 }
 echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"60\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;\">";
 }
@@ -53,9 +53,9 @@ $protocol = false;
 }
 $value = $zibase->getState($data8['id'], $protocol);
 if($value == 1) {
-$ic = "g";
-} else {
 $ic = "c";
+} else {
+$ic = "g";
 }
 echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"60\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;\">";
 }
