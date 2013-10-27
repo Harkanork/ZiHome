@@ -1,4 +1,23 @@
 <?php
+function ventPointCardinaux($deg) {
+if($deg<11.25 || $deg>348.75){ $result="N"; }
+if($deg>=11.25 && $deg<33.75){ $result="NNE"; }
+if($deg>=33.75 && $deg<56.25){ $result="NE"; }
+if($deg>=56.25 && $deg<78.75){ $result="ENE"; }
+if($deg>=78.75 && $deg<101.25){ $result="E"; }
+if($deg>=101.25 && $deg<123.75){ $result="ESE"; }
+if($deg>=123.75 && $deg<146.25){ $result="SE"; }
+if($deg>=146.25 && $deg<168.75){ $result="SSE"; }
+if($deg>=168.75 && $deg<191.25){ $result="S"; }
+if($deg>=191.25 && $deg<213.75){ $result="SSW"; }
+if($deg>=213.75 && $deg<236.25){ $result="SW"; }
+if($deg>=236.25 && $deg<258.75){ $result="WSW"; }
+if($deg>=258.75 && $deg<281.25){ $result="W"; }
+if($deg>=281.25 && $deg<303.75){ $result="WNW"; }
+if($deg>=303.75 && $deg<326.25){ $result="NW"; }
+if($deg>=326.25 && $deg<348.75){ $result="NNW"; }
+return $result;
+}
 include("/var/www/pages/conf_zibase.php");
 include("/var/www/lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
@@ -24,10 +43,10 @@ $query = "INSERT INTO sonde_vent (nom, id, logo, batterie) VALUES ('".$sensorlis
 mysql_query($query, $link);
 $query = "UPDATE sonde_vent SET id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
 mysql_query($query, $link);
-$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` float NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` varchari(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 mysql_query($query, $link);
 if(!($info == "")) {
-$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",".$info[2].")";
+$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",".ventPointCardinaux($info[2]).")";
 mysql_query($query, $link);
 }
 }
