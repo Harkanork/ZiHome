@@ -17,7 +17,7 @@ $query0 = "SELECT * FROM `".$data['nom']."` ORDER BY `date` DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
-echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['direction']."</TD><TD ALIGN=CENTER>".($data0['vitesse']/10)."</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
+echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['direction']."</TD><TD ALIGN=CENTER>".($data0['vitesse']/10)." m/s</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
 }
 }
 echo "</TABLE></CENTER>";
@@ -201,11 +201,11 @@ while($i < count($pc)) {
 $j = 0;
 while($j < (count($vit))) {
 if($j == 0) {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".$vit[$j]."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."'";
 } else if($j == (count($vit))) {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".$vit[($j-1)]."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".($vit[($j-1)]*10)."'";
 } else {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".$vit[$j]."' AND vitesse > '".$vit[($j-1)]."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."' AND vitesse > '".($vit[($j-1)]*10)."'";
 }
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
