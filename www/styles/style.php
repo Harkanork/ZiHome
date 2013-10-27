@@ -10,7 +10,9 @@ while ($data = mysql_fetch_assoc($req))
 ?>
 #piece<? echo $data['id']; ?>{
 background-color: #fff;
-background-image: ./img/plan/<? echo $data['id']; ?>.jpg;
+background:url(../img/plan/<? echo $data['id']; ?>.jpg);
+background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;
+background-repeat:no-repeat;
 width: <? echo $data['width']; ?>px;
 height: <? echo $data['height']; ?>px;
 top: <? echo $data['top']; ?>px;
