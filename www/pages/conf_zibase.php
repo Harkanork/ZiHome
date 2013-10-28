@@ -25,6 +25,7 @@ $heuresCreuses[1]['fin']        = '14:00:00';
 $idzibase = "ZiBASEXXXXXX";
 $tokenzibase = "ZZZZZZZZZZ";
 $ipzibase = "192.168.X.Y";
+$ipserver = "192.168.X.Y";
 
 /*--------------------fin des Paramettres Zibase------------------------*/
 ?>
