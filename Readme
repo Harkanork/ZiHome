@@ -9,14 +9,23 @@ Pour pouvoir utilisez notre systè, vous avez besoins d'une zibase et d'un syst�
 
 - copier le contenu de www dans le dossier de votre serveur web. 
 - modifier les fichier pages/connexion.php et pages/conf_zibase.php en fonction de vos paramèes 
-- copier le fichier du SDK zibase PHP dans le dossier lib/zibase.php de votre site web 
-- utiliser le fichier prént dans le dossier sql pour cré la structure dans mysql néssaire au site. 
-- copier le contenu du dossier bin dans le dossier de votre choix (pour moi, /usr/bin/) 
-- ajouter les taches de cron en respectant les paramèes de votre systè. (fichier cron/zibase a copier dans le dossier /etc/cron.d/ pour les systès linux habituels) 
+- (plus nécessaire, le SDK est inclus dans le package d'origine) copier le fichier du SDK zibase PHP dans le dossier lib/zibase.php de votre site web 
+- utiliser le fichier présent dans le dossier sql pour créer la structure dans mysql nécessaire au site. 
+- copier le contenu du dossier bin dans le dossier de votre choix (pour moi, /usr/bin/) et modifiez les chemins en début de fichier par rapport a votre configuration.
+- ajouter les taches de cron en respectant les paramètres de votre système. (fichier cron/zibase a copier dans le dossier /etc/cron.d/ pour les systèmes linux habituels) (fichier cron/zibase.bat a copier a copier dans le dossier de votre choix pour moi : c:\wamp\bin\zibase\ pour Windows)
 
 Dans le cadre de l'utilisation du module OWL : 
-- copier le fichier init/owl dans le dossier /etc/init.d , ajoutez y les droits d'écution : "chmod a+x /etc/init.d/owl" et activez le au dérrage du systè avec la commande "update-rc.d owl defaults". 
+- copier le fichier init/owl dans le dossier /etc/init.d , ajoutez y les droits d'écution : "chmod a+x /etc/init.d/owl" et activez le au dérrage du systè avec la commande "update-rc.d owl defaults".
 
-Vous pouvez maintenant vous connecter sur l'interface. les identifiants par déuts sont "Admin / secret"
+Dans le cadre de l'utilisation de récupérations des messages de la zibase :
+- copier le fichier init/message_zibase dans le dossier /etc/init.d , ajoutez y les droits d'écution : "chmod a+x /etc/init.d/message_zibase" et activez le au dérrage du systè avec la commande "update-rc.d message_zibase defaults".
+
+Si vous utilisez WampServer :
+- dans php.ini, modifier short_open_tag = on
+- activer l'extension php : php_sockets
+- créer une tache planifiée qui éxécute le fichier zibase.bat chaque minutes et midifier ce fichier avec vos chemins spécifiques.
+- éxécuter owl.bat et message_zibase.bat au démarrage de la machine
+
+Vous pouvez maintenant vous connecter sur l'interface. les identifiants par défauts sont "Admin / secret"
 
 L'ajout d'image de fond sur chaque pieces du plan se fait a ajoutant des images id.jpg dans le dossier /var/www/img/plan/ en remplacant id par l'id de votre piece.
