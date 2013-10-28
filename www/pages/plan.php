@@ -234,12 +234,13 @@ while($data2 = mysql_fetch_assoc($req2)) {
 <center>
 <? if($data2['type'] == 'dim') {
 ?>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=100" class="button green">100%</a>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=80" class="button green">80%</a>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=60" class="button green">60%</a>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=40" class="button green">40%</a>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=20" class="button green">20%</a>
-<a href="./pages/actioneur.php?ordre=2&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>&dim=0" class="button red close">0%</a>
+<form method="get" action="./pages/actioneur.php">
+<input type="range" name="dim" value="0" max="100" min="0" step="5">
+<input type="hidden" name="ordre" value="2">
+<input type="hidden" name="action" value="<? echo $data2['id']; ?>">
+<input type="hidden" name="protocol" value="<? echo $data2['protocol']; ?>">
+<input type="submit" name="Valider" value="Valider">
+</form>
 <? } else { ?>
 <a href="./pages/actioneur.php?ordre=1&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button green">ON</a>
 <? if($data2['type'] == 'on_off') { ?><a href="./pages/actioneur.php?ordre=0&action=<? echo $data2['id']; ?>&protocol=<? echo $data2['protocol']; ?>" class="button red close">OFF</a><? }
