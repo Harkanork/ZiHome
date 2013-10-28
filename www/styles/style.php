@@ -406,7 +406,7 @@ color: #fff;
 
 #action{
 margin-left: 250px;
-width :700px;
+//width :700px;
 padding: 5px;
 }
 
