@@ -23,7 +23,7 @@ $data7 = mysql_fetch_assoc($req5);
 
 if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null) {
 ?>
-<div id ="piece<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
+<div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div></div>
 <? } else { ?>
 <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
 <?

@@ -159,7 +159,14 @@ $(function () {
         });
 });
                 </script>
-
+<?
+$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."`";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data0 = mysql_fetch_assoc($req0))
+{
+$totalresult = $data0['sum'];
+}
+?>
 <div style="display:none">
         <table id="freq" border="0" cellspacing="0" cellpadding="0">
                 <tr nowrap bgcolor="#CCCCFF">
@@ -168,6 +175,7 @@ $(function () {
                 <tr nowrap bgcolor="#CCCCFF">
                         <th class="freq">Direction</th>
 <?
+
 $vit = array(0.5, 2, 4, 6, 8, 10);
 $j = 0;
 while($j < (count($vit)+1)) {
@@ -211,7 +219,7 @@ $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_
 while ($data0 = mysql_fetch_assoc($req0))
 {
 ?>
-                        <td class="data"><? echo $data0['sum']; ?></td>
+                        <td class="data"><? echo ($data0['sum']*100/$totalresult); ?></td>
 <?
 }
 $j++;
