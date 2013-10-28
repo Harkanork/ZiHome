@@ -205,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
   `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `protocol` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
