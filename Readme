@@ -1,10 +1,10 @@
 #Procére d'installation
 
 Introduction
-Préntation de la procére d'installation de cette interface
+Présentation de la procédure d'installation de cette interface
 
 Details
-Préequis : 
+Pré-requis : 
 Pour pouvoir utilisez notre système, vous avez besoins d'une zibase et d'un système hô(actuellement testéous linux Debian avec succès comprenant Apache, MySQL et PHP. Le php doit êe disponible en ligne de commande. Fonctionne également sur WAMP server 
 
 - copier le contenu de www dans le dossier de votre serveur web. 
