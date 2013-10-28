@@ -15,6 +15,7 @@ $heuresCreuses[1]['fin'] 	= '14:00:00';
 
 $port = 22600;
 $addressIP = '224.192.32.19';
+$iplocal = '192.168.1.1';       // adresse ip de la machine qui lance le script
 
 /*--------------------Fin des paramettres OWL---------------------------*/     
 
@@ -29,7 +30,11 @@ $idsonde = '131077';
 
 $socketClient = socket_create(AF_INET, SOCK_DGRAM, 0);
 socket_set_option($socketClient, SOL_SOCKET, SO_REUSEADDR, 1);
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+socket_bind($socketClient, $iplocal, $port);
+} else {
 socket_bind($socketClient, $addressIP, $port);
+}
 $tab_mcast = array("group" => $addressIP, "interface" => 0,);
 socket_set_option($socketClient, IPPROTO_IP, MCAST_JOIN_GROUP, $tab_mcast);
 socket_recvfrom($socketClient, $buf, 800, 0, $from, $fromPort);
