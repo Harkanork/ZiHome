@@ -41,7 +41,7 @@ $ic = "c";
 } else {
 $ic = "g";
 }
-echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"60\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;\">";
+echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"60\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;border-style:none;\">";
 }
 $query6 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
 $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -57,7 +57,7 @@ $ic = "c";
 } else {
 $ic = "g";
 }
-echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"60\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;\">";
+echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"60\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;border-style:none;\">";
 }
 $query7 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."' AND icone ='1'";
 $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -68,7 +68,7 @@ while ($data0 = mysql_fetch_assoc($req0))
 {
 $temperature=$data0['temp'];
 }
-echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;\"><span style=\"position:absolute;top:4px;left:33px;font-size:10px;\">".$temperature."&deg;C</span></div>";
+echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;border-style:none;\"><span style=\"position:absolute;top:4px;left:33px;font-size:10px;border-style:none;\">".$temperature."&deg;C</span></div>";
 }
 ?>
 </div></a>
