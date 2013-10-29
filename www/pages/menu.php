@@ -48,7 +48,7 @@ if($data['libelle'] == "calendrier" && $data['actif'] == 1 && isset($_SESSION['a
 }
 if($data['libelle'] == "vent" && $data['actif'] == 1) {
 ?>
-<li><a href = "./index.php?page=vent"><img src = "./img/icon_calendrier.png"/><span>Vent</span></a></li>
+<li><a href = "./index.php?page=vent"><img src = "./img/icon_vent.png"/><span>Vent</span></a></li>
 <?
 }
 }
