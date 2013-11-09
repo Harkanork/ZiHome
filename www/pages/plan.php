@@ -35,8 +35,12 @@ $protocol = true;
 } else {
 $protocol = false;
 }
+if($protocol == true) {
+$value = $zibase->getState(substr($data6['id'], 1), $protocol);
+} else {
 $value = $zibase->getState($data6['id'], $protocol);
-if($value == 1) {
+}
+if($value == "1") {
 $ic = "c";
 } else {
 $ic = "g";
