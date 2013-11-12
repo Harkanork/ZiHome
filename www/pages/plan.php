@@ -1,10 +1,21 @@
-<div id="plan">
 <?
 include("./pages/connexion.php");
 include("./pages/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
-$query = "SELECT * FROM plan";
+$query = "SELECT max( `width` + `left` ) AS width FROM `plan`";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$width = mysql_result($res_query,0,"width") + 2;
+}
+$query = "SELECT max( `height` + `top` ) AS height FROM `plan`";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$height = mysql_result($res_query,0,"height") + 2;
+}
+?>
+<div id="plan" style="position: absolute;padding: 15px;margin: 15px;height: <? echo $height; ?>px;width: <? echo $width; ?>px;">
+<?$query = "SELECT * FROM plan";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -23,9 +34,11 @@ $data7 = mysql_fetch_assoc($req5);
 
 if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null) {
 ?>
-<div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div></div>
+<div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;">
+<div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div></div>
 <? } else { ?>
-<a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div id ="piece<? echo $data['id']; ?>"><div id="texte<? echo $data['id']; ?>"><? echo $data['libelle']; ?></div>
+<a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;">
+<div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div>
 <?
 $query4 = "SELECT * FROM capteurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
 $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -81,7 +94,7 @@ $(document).ready(function() {
   $("#tabs-<? echo $data['id']; ?>").tabs();
 });
 </script>
-<div id="custom<? echo $data['id']; ?>">
+<div id="custom<? echo $data['id']; ?>" style="position: fixed;display: none;left: 50%;top: 50%;z-index: 2000;padding: 10px;width: 640px;background-color: #EEEEEE;font-size: 12px;line-height: 16px;color: #202020;border : 3px outset #555555;">
 <div id="tabs-<? echo $data['id']; ?>" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 <?
@@ -100,7 +113,7 @@ if(!($data5 == null)){
 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-3">Conso-Elec</a></li>
 <?
 }
-if(!($data7 == null)){
+if((!($data7 == null)) && (isset($_SESSION['auth']))){
 ?>
 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-4">Scenario</a></li>
 <?
@@ -258,7 +271,7 @@ while($data2 = mysql_fetch_assoc($req2)) {
 <?
 }
 }
-if(!($data7 == null)){
+if((!($data7 == null)) && (isset($_SESSION['auth']))){
 ?>
 <div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 <?
