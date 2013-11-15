@@ -1,5 +1,5 @@
 <?
-if(isset($_SESSION['auth']))
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 include("./pages/connexion.php");
 if(isset($_GET['supprimer'])){

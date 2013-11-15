@@ -1,5 +1,5 @@
 <?
-if(isset($_SESSION['auth'])) {
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
 ?>
 <h1>Gestion des protocoles</h1>
 <table>

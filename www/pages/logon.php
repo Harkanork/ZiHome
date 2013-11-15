@@ -17,7 +17,13 @@ $req = @mysql_query ($query);
 $data = mysql_fetch_assoc ($req);
 if ($data)
 {
+$query = "SELECT * FROM `users` WHERE pseudo = '".$data['pseudo']."'";
+$req = @mysql_query ($query);
+$data = mysql_fetch_assoc ($req);
+if($data) {
 $_SESSION['auth'] = $data['pseudo'];
+$_SESSION['niveau'] = $data['niveau'];
+}
 mysql_close();
 }
 }
@@ -26,6 +32,7 @@ if(isset($_SESSION['auth']))
 if(isset($_GET['logout']))
 {
 unset($_SESSION['auth']);
+unset($_SESSION['niveau']);
 echo "<meta http-equiv=\"refresh\" content=\"0; url=./index.php\">";
 }
 else
@@ -52,6 +59,7 @@ $data = mysql_fetch_assoc ($req);
 if ($data)
 {
 $_SESSION['auth'] = $data['pseudo'];
+$_SESSION['niveau'] = $data['niveau'];
 mysql_close();
 echo "<meta http-equiv=\"refresh\" content=\"0; url=".$_SERVER['PHP_SELF']."\">";
 }

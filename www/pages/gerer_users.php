@@ -1,5 +1,5 @@
 <?
-if(isset($_SESSION['auth'])) {
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
 if(isset($_GET['supp-auto'])) {
 include("./pages/connexion.php");
 $query = "DELETE FROM `auto-logon` WHERE `id`='".$_GET['supp-auto']."'";
@@ -43,7 +43,7 @@ mysql_close();
 if ($message == NULL)
 {
 include("./pages/connexion.php");
-$query = "INSERT INTO users (pseudo, pass) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'))";
+$query = "INSERT INTO users (pseudo, pass, niveau) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'), '".$_POST['droit']."')";
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
 } else {
@@ -56,6 +56,12 @@ echo "<BR><center><H1>Veuillez saisir les informations pour creer un compte.</H1
 <table align=\"center\"><TR><TD>Login: </TD><TD><input type=\"text\" name=\"login\" size=\"12\" maxlength=\"40\"></input></TD></TR>
 <TR><TD>Mot de passe: </TD><TD><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"40\"></input></TD></TR>
 <TR><TD>Confirmation: </TD><TD><input type=\"password\" name=\"pass2\" size=\"12\" maxlength=\"40\"></input></TD></TR>
+<TR><TD>Droits: </TD><TD>
+<select name=\"droit\">
+<option value=\"admin\" selected>Administrateur</option>
+<option value=\"utilisateur\">Utilisateur</option>
+</select>
+</TD></TR>
 <TR><TD>&nbsp;</TD></TR>
 <TR><TD><input type=\"submit\" name=\"submit\" value=\"Valider\" class=\"input\"></input></TD></TR></table>
 </FORM></center><BR><BR>";
@@ -70,13 +76,10 @@ if(!(empty($_POST['login'])))
 { $query .= "`pseudo`= '".$_POST['login']."', "; }
 if(!(empty($_POST['password'])) && !(empty($_POST['confirmpassword'])) && $_POST['password'] == $_POST['confirmpassword'])
 { $query .= "`pass` = SHA1('".$_POST['password']."'), "; }
-if(!(empty($query)))
-{
-$query = "UPDATE `users` SET ".substr($query,0,-2)." WHERE `id`='".$id."'";
+$query = "UPDATE `users` SET ".$query."`niveau`= '".$_POST['droit']."' WHERE `id`='".$id."'";
 include("./pages/connexion.php");
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
-}
 }
 if(isset($_POST['supprimer']))
 {
@@ -98,7 +101,16 @@ echo "<input type=\"text\" name=\"login\" size=\"12\" maxlength=\"40\"></input>"
 echo "</TD></TR>
 <TR><TD colspan=2>Nouveau mot de passe</TD><TD><input type=\"password\" name=\"password\" size=\"12\" maxlength=\"40\"></input></TD></TR>
 <TR><TD colspan=2>Confirmer le mot de passe</TD><TD><input type=\"password\" name=\"confirmpassword\" size=\"12\" maxlength=\"40\"></input></TD></TR>
-</TABLE>
+<TR><TD colspan=2>Droits</TD><TD>
+<select name=\"droit\">
+<option value=\"admin\"";
+if($data['niveau'] == "admin") { echo " selected"; }
+echo ">Administrateur</option>
+<option value=\"utilisateur\"";
+if($data['niveau'] == "utilisateur") { echo " selected"; }
+echo ">Utilisateur</option>
+</select>
+</TD></TR></TABLE>
 <input type=\"submit\" name=\"valider\" value=\"Valider\" class=\"input\"></input>";
 echo "<input type=\"submit\" name=\"supprimer\" value=\"Supprimer\" class=\"input\"></input></br>";
 echo "</FORM></CENTER>";

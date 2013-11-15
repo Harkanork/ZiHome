@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(255) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `pass` varchar(255) NOT NULL,
+  `niveau` varchar(255) NOT NULL DEFAULT 'admin', 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

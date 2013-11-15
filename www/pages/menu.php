@@ -52,7 +52,7 @@ if($data['libelle'] == "vent" && $data['actif'] == 1) {
 <?
 }
 }
-if(isset($_SESSION['auth']))
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>
 <li class="menu-configuration"><A HREF="./index.php?page=administration"><img src="./img/icon_config.png"><span>Administration</span></a></li>

@@ -1,5 +1,5 @@
 <?
-if(isset($_SESSION['auth']))
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
