@@ -116,11 +116,15 @@ padding: 0 20px;
 cursor: text; 
 color: #666;
 border-bottom: 1px solid #fff; 
+max-height:600px;
+overflow:auto;
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a { 
 position: relative;
 background: #fff; 
+max-height:600px;
+overflow:auto;
 }
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
@@ -137,10 +141,12 @@ float: left;
 background: #fff; 
 margin: 0; 
 width:100%
-height:100%
+height:10%
 padding-bottom: 10px
 font-family: "Trebuchet MS"; 
 font-size: 14px; 
+max-height:600px;
+overflow:auto;
 }
 
 .ui-tabs .ui-tabs-hide { 
