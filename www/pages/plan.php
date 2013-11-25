@@ -96,7 +96,7 @@ $(document).ready(function() {
 </script>
 <div id="custom<? echo $data['id']; ?>" style="position: fixed;display: none;left: 50%;top: 50%;z-index: 2000;padding: 10px;width:640px;max-height:90%;background-color: #EEEEEE;font-size: 12px;line-height: 16px;color: #202020;border : 3px outset #555555;">
 <div id="tabs-<? echo $data['id']; ?>" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
-<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" style="width: 640px;">
 <?
 if(!($data3 == null)){
 ?>
@@ -124,7 +124,7 @@ if((!($data7 == null)) && (isset($_SESSION['auth']))){
 <?
 if(!($data3 == null)){
 ?>
-<div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+<div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
 <?
 $query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -242,7 +242,7 @@ if(!($data4 == null)){
 $query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
 $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
-<div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
 <?
 while($data2 = mysql_fetch_assoc($req2)) {
 ?>
@@ -273,7 +273,7 @@ while($data2 = mysql_fetch_assoc($req2)) {
 }
 if((!($data7 == null)) && (isset($_SESSION['auth']))){
 ?>
-<div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
 <?
 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
 $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -290,7 +290,7 @@ while($data2 = mysql_fetch_assoc($req5)) {
 }
 if(!($data5 == null)){
 ?>
-<div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+<div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
 <?
 $query1 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

@@ -80,22 +80,21 @@ margin: 0;
 padding: 0; 
 float: left; 
 list-style: none; 
-height: 30px;
+//height: 30px;
 border-bottom: 
 1px solid #666; 
 border-left: 
 1px solid #666; 
-width: 640px; 
+//width: 640px; 
 }
 
 ul li { 
 float: left; 
 margin: 0; 
 padding: 0; 
-height: 29px; 
+//height: 29px; 
 line-height: 29px;
-border: 
-1px solid #666; 
+border: 1px solid #666; 
 border-left: none; 
 margin-bottom: -1px;
 overflow: hidden; 
@@ -116,15 +115,15 @@ padding: 0 20px;
 cursor: text; 
 color: #666;
 border-bottom: 1px solid #fff; 
-max-height:600px;
-overflow:auto;
+//max-height:600px;
+//overflow:auto;
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a { 
 position: relative;
 background: #fff; 
-max-height:600px;
-overflow:auto;
+//max-height:600px;
+//overflow:auto;
 }
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
@@ -145,8 +144,8 @@ height:10%
 padding-bottom: 10px
 font-family: "Trebuchet MS"; 
 font-size: 14px; 
-max-height:600px;
-overflow:auto;
+#max-height:600px;
+#overflow:auto;
 }
 
 .ui-tabs .ui-tabs-hide { 
@@ -305,7 +304,7 @@ div.metro_nav>.scroll_bar>span{
 
 #body{
 margin : 0px auto 0px auto;
-width: 980px;
+//width: 980px;
 box-shadow: 0 0 10px #333333;
 min-height: 600px;
 }
