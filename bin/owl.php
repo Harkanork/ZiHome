@@ -15,7 +15,6 @@ $heuresCreuses[1]['fin'] 	= '14:00:00';
 
 $port = 22600;
 $addressIP = '224.192.32.19';
-$iplocal = '192.168.1.1';       // adresse ip de la machine qui lance le script
 
 /*--------------------Fin des paramettres OWL---------------------------*/     
 
@@ -30,11 +29,7 @@ $idsonde = '131077';
 
 $socketClient = socket_create(AF_INET, SOCK_DGRAM, 0);
 socket_set_option($socketClient, SOL_SOCKET, SO_REUSEADDR, 1);
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-socket_bind($socketClient, $iplocal, $port);
-} else {
 socket_bind($socketClient, $addressIP, $port);
-}
 $tab_mcast = array("group" => $addressIP, "interface" => 0,);
 socket_set_option($socketClient, IPPROTO_IP, MCAST_JOIN_GROUP, $tab_mcast);
 socket_recvfrom($socketClient, $buf, 800, 0, $from, $fromPort);
@@ -81,10 +76,17 @@ if(mysql_numrows($res_query) > 0){
 $consoTemp += mysql_result($res_query,0,"max") - mysql_result($res_query,0,"min");
 }
 }
+$query = "SELECT * FROM journalier ORDER BY date DESC LIMIT 1";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$control = mysql_result($res_query,0,"chan1");
+if($control < $chan1['day']) {
 $query = "INSERT INTO journalier (date, chan1, chan2, chan3, HC, cout) VALUES (curdate(), '".$chan1['day']."',  '".$chan2['day']."',  '".$chan3['day']."', '".$consoTemp."', '".($coutfixe+($consoTemp*$coutHC/1000)+(($chan1['day']+$chan2['day']+$chan3['day']-$consoTemp)*$coutHP)/1000)."')";
 mysql_query($query, $link);
 $query = "UPDATE journalier SET chan1 = '".$chan1['day']."',  chan2 = '".$chan2['day']."',  chan3 = '".$chan3['day']."', HC = '".$consoTemp."', cout = '".($coutfixe+($consoTemp*$coutHC/1000)+(($chan1['day']+$chan2['day']+$chan3['day']-$consoTemp)*$coutHP)/1000)."' WHERE date = curdate()";
 mysql_query($query, $link);
+}
+}
 mysql_close();
 }
 ?>
