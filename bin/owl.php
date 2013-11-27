@@ -35,7 +35,6 @@ socket_bind($socketClient, $iplocal, $port);
 } else {
 socket_bind($socketClient, $addressIP, $port);
 }
-socket_bind($socketClient, $addressIP, $port);
 $tab_mcast = array("group" => $addressIP, "interface" => 0,);
 socket_set_option($socketClient, IPPROTO_IP, MCAST_JOIN_GROUP, $tab_mcast);
 socket_recvfrom($socketClient, $buf, 800, 0, $from, $fromPort);
