@@ -1,4 +1,5 @@
 <title>Temperature</title>
+<!--
 <?php
 echo "<CENTER><TABLE>";
 echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD></TR>";
@@ -22,6 +23,8 @@ echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['temp']."</TD><TD A
 }
 echo "</TABLE></CENTER>";
 ?>
+-->
+<br>
 <script type="text/javascript">
 $(document).ready(function() {
   $("#global").tabs();
@@ -282,5 +285,4 @@ $(function () {
 </div>
 <script src="./js/highcharts.js"></script>
 <script src="./js/highcharts-more.js"></script>
-
 
