@@ -4,7 +4,11 @@ include("/var/www/lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 $zibase->registerListener($ipserver);
 $socket = socket_create(AF_INET, SOCK_DGRAM, 0);
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+socket_bind($socket, $ipserver, 49999);
+} else {
 socket_bind($socket, "0.0.0.0" , 49999);
+}
 $link = mysql_connect($hote,$login,$plogin);
 if (!$link) {
    die('Non connect&eacute; : ' . mysql_error());
