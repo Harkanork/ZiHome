@@ -15,13 +15,12 @@ $heuresCreuses[1]['fin'] 	= '14:00:00';
 
 $port = 22600;
 $addressIP = '224.192.32.19';
-$iplocal = '192.168.1.1';
 
 /*--------------------Fin des paramettres OWL---------------------------*/     
 
 /*--------------------Paramettres Zibase--------------------------------*/
 
-include("/etc/zibase/conf_zibase.php");
+include("/var/www/pages/conf_zibase.php");
 //include("/var/lib/zibase/zibase.php");
 //$zibase = new ZiBase("192.168.245.89");
 $idsonde = '131077';
@@ -31,7 +30,7 @@ $idsonde = '131077';
 $socketClient = socket_create(AF_INET, SOCK_DGRAM, 0);
 socket_set_option($socketClient, SOL_SOCKET, SO_REUSEADDR, 1);
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-socket_bind($socketClient, $iplocal, $port);
+socket_bind($socketClient, $ipserver, $port);
 } else {
 socket_bind($socketClient, $addressIP, $port);
 }
