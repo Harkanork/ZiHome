@@ -80,16 +80,17 @@ if(mysql_numrows($res_query) > 0){
 $consoTemp += mysql_result($res_query,0,"max") - mysql_result($res_query,0,"min");
 }
 }
-$query = "SELECT * FROM journalier ORDER BY date DESC LIMIT 1";
+$control = 0;
+$query = "SELECT * FROM journalier WHERE date = curdate() ORDER BY date DESC LIMIT 1";
 $res_query = mysql_query($query, $link);
 if(mysql_numrows($res_query) > 0){
-$control = mysql_result($res_query,0,"chan1");
-if($control < $chan1['day']) {
+$control = mysql_result($res_query,0,"chan1")+mysql_result($res_query,0,"chan2")+mysql_result($res_query,0,"chan3");
+}
+if($control < ($chan1['day']+$chan2['day']+$chan3['day'])) {
 $query = "INSERT INTO journalier (date, chan1, chan2, chan3, HC, cout) VALUES (curdate(), '".$chan1['day']."',  '".$chan2['day']."',  '".$chan3['day']."', '".$consoTemp."', '".($coutfixe+($consoTemp*$coutHC/1000)+(($chan1['day']+$chan2['day']+$chan3['day']-$consoTemp)*$coutHP)/1000)."')";
 mysql_query($query, $link);
 $query = "UPDATE journalier SET chan1 = '".$chan1['day']."',  chan2 = '".$chan2['day']."',  chan3 = '".$chan3['day']."', HC = '".$consoTemp."', cout = '".($coutfixe+($consoTemp*$coutHC/1000)+(($chan1['day']+$chan2['day']+$chan3['day']-$consoTemp)*$coutHP)/1000)."' WHERE date = curdate()";
 mysql_query($query, $link);
-}
 }
 mysql_close();
 }
