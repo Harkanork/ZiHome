@@ -1,7 +1,7 @@
 <?php
 echo "<CENTER><TABLE><TR><TD>Sonde</TD><TD>Batterie</TD></TR>";
 include("./pages/connexion.php");
-$query = "SELECT * FROM detail ORDER BY `date` DESC LIMIT 1";
+$query = "SELECT * FROM owl_detail ORDER BY `date` DESC LIMIT 1";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -12,7 +12,7 @@ $batterie = "<FONT COLOR='red'>".$data['battery']."</FONT>";
 }
 echo "<TR><TD>OWL CM180</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
 }
-$query = "SELECT * FROM sonde_temperature";
+$query = "SELECT * FROM peripheriques";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {

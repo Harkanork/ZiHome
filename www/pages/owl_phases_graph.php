@@ -6,16 +6,16 @@ $liste4 = "";
 include("./pages/connexion.php");
 if(isset($_GET['delai'])) {
 if($_GET['delai'] == "heure") {
-$query = "SELECT * FROM detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+$query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 } else if($_GET['delai'] == "jour") {
-$query = "SELECT * FROM detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 } else if($_GET['delai'] == "mois") {
-$query = "SELECT * FROM detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+$query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH)";
 } else {
-$query = "SELECT * FROM detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+$query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 }
 } else {
-$query = "SELECT * FROM detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+$query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 }
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))

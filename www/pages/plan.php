@@ -19,13 +19,13 @@ $height = mysql_result($res_query,0,"height") + 2;
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
+$query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data3 = mysql_fetch_assoc($req1);
-$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
 $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data4 = mysql_fetch_assoc($req2);
-$query3 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
+$query3 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data5 = mysql_fetch_assoc($req3);
 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
@@ -40,7 +40,7 @@ if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5
 <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;">
 <div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div>
 <?
-$query4 = "SELECT * FROM capteurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
 $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data6 = mysql_fetch_assoc($req4)) {
 if($data6['protocol'] == 6) {
@@ -60,7 +60,7 @@ $ic = "g";
 }
 echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"60\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;border-style:none;\">";
 }
-$query6 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
 $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data8 = mysql_fetch_assoc($req6)) {
 if($data8['protocol'] == 6) {
@@ -76,10 +76,10 @@ $ic = "g";
 }
 echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"60\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;border-style:none;\">";
 }
-$query7 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."' AND icone ='1'";
+$query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
 $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data9 = mysql_fetch_assoc($req7)) {
-$query0 = "SELECT * FROM `".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+$query0 = "SELECT * FROM `temperature_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
@@ -126,12 +126,12 @@ if(!($data3 == null)){
 ?>
 <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
 <?
-$query1 = "SELECT * FROM sonde_temperature WHERE id_plan = '".$data['id']."'";
+$query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data1 = mysql_fetch_assoc($req1)) {
 $liste1 = "";
 $liste2 = "";
-$query0 = "SELECT * FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT * FROM `temperature_".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
 {
@@ -239,7 +239,7 @@ Highcharts.setOptions({
 if(isset($_SESSION['auth']))
 {
 if(!($data4 == null)){
-$query2 = "SELECT * FROM actioneurs WHERE id_plan = '".$data['id']."'";
+$query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
 $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 ?>
 <div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
@@ -292,10 +292,10 @@ if(!($data5 == null)){
 ?>
 <div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
 <?
-$query1 = "SELECT * FROM conso_electrique WHERE id_plan = '".$data['id']."'";
+$query1 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data1 = mysql_fetch_assoc($req1)) {
-$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
+$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$data1['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $liste1 = "";
 $liste2 = "";
@@ -303,7 +303,7 @@ while($data0 = mysql_fetch_assoc($req0))
 {
 $consoTemp = 0;
 foreach($heuresCreuses as $heureCreuse){
-$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `".$data1['nom']."` where `date` >= '".substr($data0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($data0['date'], 0, 10)." ".$heureCreuse['fin']."'";
+$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$data1['nom']."` where `date` >= '".substr($data0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($data0['date'], 0, 10)." ".$heureCreuse['fin']."'";
 $res_query6 = mysql_query($query6, $link);
 if(mysql_numrows($res_query6) > 0){
 $consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");

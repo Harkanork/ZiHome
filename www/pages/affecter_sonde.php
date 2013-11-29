@@ -3,11 +3,11 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
-$query = "UPDATE sonde_temperature SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."' WHERE nom = '".$_POST['id']."'";
+$query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."' WHERE nom = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
 include("./pages/connexion.php");
-$query = "SELECT * FROM sonde_temperature";
+$query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {

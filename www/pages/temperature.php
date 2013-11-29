@@ -3,7 +3,7 @@
 echo "<CENTER><TABLE>";
 echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD></TR>";
 include("./pages/connexion.php");
-$query = "SELECT * FROM sonde_temperature";
+$query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -13,7 +13,7 @@ $batterie = "Non";
 } else {
 $batterie = "<FONT COLOR='red'>Oui</FONT>";
 }
-$query0 = "SELECT * FROM `".$data['nom']."` ORDER BY `date` DESC LIMIT 1";
+$query0 = "SELECT * FROM `temperature_".$data['nom']."` ORDER BY `date` DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
@@ -31,7 +31,7 @@ $(document).ready(function() {
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM sonde_temperature";
+$query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -50,7 +50,7 @@ while ($data = mysql_fetch_assoc($req))
 <?
 $liste1 = "";
 $liste2 = "";
-$query0 = "SELECT * FROM `".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT * FROM `temperature_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
@@ -148,7 +148,7 @@ Highcharts.setOptions({
 <div id="jour-<? echo $data['id']; ?>" style="min-width: 400px; width:100%; height: 400px; margin: 0 auto"></div>
 <?
 $liste1 = "";
-$query0 = "SELECT date, max(temp) AS max, min(temp) as min FROM `".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
+$query0 = "SELECT date, max(temp) AS max, min(temp) as min FROM `temperature_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
 {
@@ -214,7 +214,7 @@ $(function () {
 <div id="mois-<? echo $data['id']; ?>" style="min-width: 400px; width:100%; height: 400px; margin: 0 auto"></div>
 <?
 $liste1 = "";
-$query0 = "SELECT date, max(temp) AS max, min(temp) as min FROM `".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
+$query0 = "SELECT date, max(temp) AS max, min(temp) as min FROM `temperature_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
 {

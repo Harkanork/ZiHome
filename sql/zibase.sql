@@ -23,45 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `actioneurs`
+-- Structure de la table `owl_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `actioneurs` (
-  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
-  `id` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `type` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT 'on_off',
-  `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `protocol` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `id_plan` int(11) NOT NULL DEFAULT '-1',
-  `left` int(11) NOT NULL DEFAULT '0',
-  `top` int(11) NOT NULL DEFAULT '0',
-  `icone` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `conso_electrique`
---
-
-CREATE TABLE IF NOT EXISTS `conso_electrique` (
-  `nom` varchar(255) NOT NULL,
-  `id` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `batterie` int(11) NOT NULL,
-  `id_plan` int(11) NOT NULL DEFAULT '-1',
-  `icone` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `detail`
---
-
-CREATE TABLE IF NOT EXISTS `detail` (
+CREATE TABLE IF NOT EXISTS `owl_detail` (
   `date` datetime NOT NULL,
   `chan1` float NOT NULL,
   `chan2` float NOT NULL,
@@ -74,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `detail` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `journalier`
+-- Structure de la table `owl_journalier`
 --
 
-CREATE TABLE IF NOT EXISTS `journalier` (
+CREATE TABLE IF NOT EXISTS `owl_journalier` (
   `date` date NOT NULL,
   `chan1` float NOT NULL,
   `chan2` float NOT NULL,
@@ -137,24 +102,6 @@ CREATE TABLE IF NOT EXISTS `protocol` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sonde_temperature`
---
-
-CREATE TABLE IF NOT EXISTS `sonde_temperature` (
-  `nom` varchar(255) NOT NULL,
-  `id` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `batterie` int(11) NOT NULL,
-  `id_plan` int(11) NOT NULL DEFAULT '-1',
-  `left` int(11) NOT NULL DEFAULT '0',
-  `top` int(11) NOT NULL DEFAULT '0',
-  `icone` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `tarif_elec`
 --
 
@@ -183,44 +130,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sonde_vent`
---
-
-CREATE TABLE IF NOT EXISTS `sonde_vent` (
-  `nom` varchar(255) NOT NULL,
-  `id` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `batterie` int(11) NOT NULL,
-  `id_plan` int(11) NOT NULL DEFAULT '-1',
-  `icone` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `capteurs`
---
-
-CREATE TABLE IF NOT EXISTS `capteurs` (
-  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
-  `id` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `protocol` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `id_plan` int(11) NOT NULL DEFAULT '-1',
-  `left` int(11) NOT NULL DEFAULT '0',
-  `top` int(11) NOT NULL DEFAULT '0',
-  `icone` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `scenarios`
 --
 
@@ -228,6 +137,27 @@ CREATE TABLE IF NOT EXISTS `scenarios` (
   `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `id_plan` int(11) NOT NULL DEFAULT '-1',
+  `left` int(11) NOT NULL DEFAULT '0',
+  `top` int(11) NOT NULL DEFAULT '0',
+  `icone` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `peripheriques`
+--
+
+CREATE TABLE IF NOT EXISTS `peripheriques` (
+  `periph` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `type` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT 'on_off',
+  `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `protocol` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `batterie` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',

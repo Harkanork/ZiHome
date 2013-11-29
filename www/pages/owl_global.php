@@ -2,7 +2,7 @@
 $liste1 = "";
 $liste2 = "";
 include("./pages/connexion.php");
-$query = "SELECT * FROM journalier WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+$query = "SELECT * FROM owl_journalier WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH)";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))
 {

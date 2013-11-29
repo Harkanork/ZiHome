@@ -19,14 +19,14 @@ while($i < $sensornb) {
 if($sensorlist[$i]['t'] == 'power') {
 $info = "";
 $info = $zibase->getSensorInfo($sensorlist[$i]['c']);
-$query = "INSERT INTO conso_electrique (nom, id, logo, batterie) VALUES ('".$sensorlist[$i]['n']."', '".$sensorlist[$i]['c']."',  '".$sensorlist[$i]['i']."', '".$info[3]."')";
+$query = "INSERT INTO peripheriques (periph, nom, id, logo, batterie) VALUES ('conso', '".$sensorlist[$i]['n']."', '".$sensorlist[$i]['c']."',  '".$sensorlist[$i]['i']."', '".$info[3]."')";
 mysql_query($query, $link);
-$query = "UPDATE conso_electrique SET id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
+$query = "UPDATE peripheriques SET periph = 'conso',  id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
 mysql_query($query, $link);
-$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `conso` float NOT NULL, `conso_total` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+$query = "CREATE TABLE IF NOT EXISTS `conso_".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `conso` float NOT NULL, `conso_total` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 mysql_query($query, $link);
 if(!($info == "")) {
-$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*10).",".($info[1]*100).")";
+$query = "INSERT INTO `conso_".$sensorlist[$i]['n']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*10).",".($info[1]*100).")";
 mysql_query($query, $link);
 }
 }

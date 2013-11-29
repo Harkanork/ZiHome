@@ -2,7 +2,7 @@
 $liste1 = "";
 $liste2 = "";
 include("./pages/connexion.php");
-$query = "SELECT SUM(chan1) AS chan1, SUM(chan2) AS chan2, SUM(chan3) AS chan3, SUM(cout) AS cout, SUBSTRING(`date`,1,7) AS mdate FROM `journalier` GROUP BY mdate";
+$query = "SELECT SUM(chan1) AS chan1, SUM(chan2) AS chan2, SUM(chan3) AS chan3, SUM(cout) AS cout, SUBSTRING(`date`,1,7) AS mdate FROM `owl_journalier` GROUP BY mdate";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))
 {

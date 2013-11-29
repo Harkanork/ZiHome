@@ -3,7 +3,7 @@
 echo "<CENTER><TABLE>";
 echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Direction&nbsp;</TD><TD>&nbsp;Vitesse&nbsp;</TD><TD>Pile Faible</TD></TR>";
 include("./pages/connexion.php");
-$query = "SELECT * FROM sonde_vent";
+$query = "SELECT * FROM peripheriques WHERE periph = 'vent'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -13,7 +13,7 @@ $batterie = "Non";
 } else {
 $batterie = "<FONT COLOR='red'>Oui</FONT>";
 }
-$query0 = "SELECT * FROM `".$data['nom']."` ORDER BY `date` DESC LIMIT 1";
+$query0 = "SELECT * FROM `vent_".$data['nom']."` ORDER BY `date` DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
@@ -22,14 +22,14 @@ echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['direction']."</TD>
 }
 echo "</TABLE></CENTER>";
 
-$query = "SELECT * FROM sonde_vent";
+$query = "SELECT * FROM peripheriques WHERE periph = 'vent'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
 
 
 $liste1 = "";
-$query0 = "SELECT * FROM `".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT * FROM `vent_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data0 = mysql_fetch_assoc($req0))
@@ -160,7 +160,7 @@ $(function () {
 });
                 </script>
 <?
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."`";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."`";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
@@ -209,11 +209,11 @@ while($i < count($pc)) {
 $j = 0;
 while($j < (count($vit))) {
 if($j == 0) {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."'";
 } else if($j == (count($vit))) {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".($vit[($j-1)]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".($vit[($j-1)]*10)."'";
 } else {
-$query0 = "SELECT count(vitesse) AS sum FROM `".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."' AND vitesse > '".($vit[($j-1)]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."' AND vitesse > '".($vit[($j-1)]*10)."'";
 }
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))

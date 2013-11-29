@@ -39,14 +39,14 @@ while($i < $sensornb) {
 if($sensorlist[$i]['t'] == 'wind') {
 $info = "";
 $info = $zibase->getSensorInfo($sensorlist[$i]['c']);
-$query = "INSERT INTO sonde_vent (nom, id, logo, batterie) VALUES ('".$sensorlist[$i]['n']."', '".$sensorlist[$i]['c']."',  '".$sensorlist[$i]['i']."', '".$info[3]."')";
+$query = "INSERT INTO peripheriques (periph, nom, id, logo, batterie) VALUES ('vent', '".$sensorlist[$i]['n']."', '".$sensorlist[$i]['c']."',  '".$sensorlist[$i]['i']."', '".$info[3]."')";
 mysql_query($query, $link);
-$query = "UPDATE sonde_vent SET id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
+$query = "UPDATE peripheriques SET periph = 'vent', id = '".$sensorlist[$i]['c']."',  logo = '".$sensorlist[$i]['i']."', batterie = '".$info[3]."' WHERE nom = '".$sensorlist[$i]['n']."'";
 mysql_query($query, $link);
-$query = "CREATE TABLE IF NOT EXISTS `".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+$query = "CREATE TABLE IF NOT EXISTS `vent_".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 mysql_query($query, $link);
 if(!($info == "")) {
-$query = "INSERT INTO `".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",'". ventPointCardinaux($info[2])."')";
+$query = "INSERT INTO `vent_".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",'". ventPointCardinaux($info[2])."')";
 mysql_query($query, $link);
 }
 }

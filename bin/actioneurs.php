@@ -18,11 +18,11 @@ if (!$db_selected) {
 $i = 0;
 while($i < $actionnb) {
 if($actionlist[$i]['t'] == 'transmitter') {
-$query = "INSERT INTO capteurs (nom, id, logo) VALUES ('".$actionlist[$i]['n']."', '".$actionlist[$i]['c']."',  '".$actionlist[$i]['i']."')";
+$query = "INSERT INTO peripheriques (periph, nom, id, logo) VALUES ('capteur', '".$actionlist[$i]['n']."', '".$actionlist[$i]['c']."',  '".$actionlist[$i]['i']."')";
 mysql_query($query, $link);
 }
 if($actionlist[$i]['t'] == 'receiverXDom') {
-$query = "INSERT INTO actioneurs (nom, id, logo) VALUES ('".$actionlist[$i]['n']."', '".$actionlist[$i]['c']."',  '".$actionlist[$i]['i']."')";
+$query = "INSERT INTO peripheriques (periph, nom, id, logo) VALUES ('actioneur', '".$actionlist[$i]['n']."', '".$actionlist[$i]['c']."',  '".$actionlist[$i]['i']."')";
 mysql_query($query, $link);
 }
 $i++;
