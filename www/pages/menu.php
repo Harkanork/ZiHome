@@ -52,6 +52,13 @@ if($data['libelle'] == "vent" && $data['actif'] == 1) {
 <?
 }
 }
+include("./pages/connexion.php");
+$query = "SELECT * FROM `insertion`";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_assoc($req))
+{
+?><li><a href = "./index.php?include=<? echo $data['id']; ?>"><img src = "./img/<? echo $data['icone']; ?>"/><span></span></a></li><?
+}
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>

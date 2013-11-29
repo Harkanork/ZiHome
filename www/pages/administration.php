@@ -16,6 +16,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <li><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></li>
 <li><A HREF="./index.php?page=administration&detail=variables">Variables</A></li>
 <li><A HREF="./index.php?page=administration&detail=icones">Icones</A></li>
+<li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
 </div>
 <div id="action">
 <?
