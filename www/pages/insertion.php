@@ -51,7 +51,6 @@ $query = null;
 if(!(empty($_POST['url'])))
 { $query .= "`url`= '".$_POST['url']."', "; }
 $query = "UPDATE `insertion` SET ".$query."`icone`= '".$_POST['icone']."' WHERE `id`='".$_GET['id']."'";
-echo $query;
 include("./pages/connexion.php");
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
