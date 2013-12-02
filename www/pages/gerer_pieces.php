@@ -16,7 +16,7 @@ mysql_query($query, $link);
 }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Gauche</TD><TD>Haut</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Haut</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
 $query = "SELECT * FROM plan";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -40,7 +40,7 @@ while ($data = mysql_fetch_assoc($req))
 <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle value="<? echo $data['libelle']; ?>"></INPUT></TD></TR>
 <TR><TD>Largeur :</TD><TD><INPUT type=text name=width value="<? echo $data['width']; ?>"></INPUT></TD></TR>
 <TR><TD>Hauteur :</TD><TD><INPUT type=text name=height value="<? echo $data['height']; ?>"></INPUT></TD></TR>
-<TR><TD>Position Gauche :</TD><TD><INPUT type=text name=left value="<? echo $data['left']; ?>"></INPUT></TD></TR>
+<TR><TD>Position Droite :</TD><TD><INPUT type=text name=left value="<? echo $data['left']; ?>"></INPUT></TD></TR>
 <TR><TD>Position Bas :</TD><TD><INPUT type=text name=top value="<? echo $data['top']; ?>"></INPUT></TD></TR>
 <TR><TD>Taille zone Texte :</TD><TD><INPUT type=text name=line-height value="<? echo $data['line-height']; ?>"></INPUT></TD></TR>
 <TR><TD>Alignement :</TD><TD><INPUT type=text name=text-align value="<? echo $data['text-align']; ?>"></INPUT></TD></TR>
