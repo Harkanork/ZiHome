@@ -10,7 +10,7 @@ mysql_close();
 }
 echo "<BR><center><H1>URL a inclure</H1><BR><BR>
 <FORM method=\"POST\" action=\"./index.php?page=administration&detail=insertion\">
-<table align=\"center\"><TR><TD>url: </TD><TD><input type=\"text\" name=\"url\" size=\"12\" maxlength=\"40\"></input></TD></TR>
+<table align=\"center\"><TR><TD>url: </TD><TD><input type=\"text\" name=\"url\" size=\"12\"></input></TD></TR>
 <TR><TD>Icone: </TD><TD>
 <select name=\"icone\">
 <option value=\"icon_account.png\" selected>Compte</option>
@@ -63,7 +63,7 @@ $data = mysql_fetch_assoc($req);
 echo "<CENTER><FORM method=\"POST\" action=\"./index.php?page=administration&detail=insertion&id=".$_GET['id']."\">
 <TABLE CELLSPACING=\"0\" CELLPADDING=\"5\" BORDER=\"1\">
 <TR><TD>URL</TD><TD>".$data['url']."</TD><TD>";
-echo "<input type=\"text\" name=\"url\" size=\"12\" maxlength=\"40\"></input>";
+echo "<input type=\"text\" name=\"url\" size=\"12\"></input>";
 echo "</TD></TR>
 <TR><TD colspan=2>Icone</TD><TD>
 <select name=\"icone\">
