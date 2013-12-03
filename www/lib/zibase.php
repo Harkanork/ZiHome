@@ -452,8 +452,8 @@
 		setlocale(LC_TIME, 'fr_FR', 'fra');
 		$type = substr($idSensor, 0, 2);
 		if(preg_match('#^[A-Z]#',substr($idSensor, 2, 1))){
-			$lettre = array("A", "B", "C");
-			$chiffre   = array("0", "1", "2");
+			$lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+			$chiffre   = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26");
 			$number = str_replace($lettre, $chiffre, substr($idSensor, 2, 1)) * 16 + substr($idSensor, 3) -1;
 		} else {
 			$number = substr($idSensor, 2);
@@ -507,9 +507,10 @@
 		$request->command = 11;		  
 		$request->param1 = 6;
 		$request->param2 = $idProbe;
-		$request->param3 = $value1;
-		$request->param3 |= ($value2 & 0xFF) << 0x10;
-		$request->param3 |= ($lowBattery & 0xFF) << 0x1A;
+		//$request->param3 = $value1;
+		//$request->param3 |= ($value2 & 0xFF) << 0x10;
+		//$request->param3 |= ($lowBattery & 0xFF) << 0x1A;
+		$request->param3 = bindec("0000".$lowBattery."00".substr("00000000".decbin($value2),-8).substr("0000000000000000".decbin($value1),-16));
 		$request->param4 = $probeType;		
 		$this->sendRequest($request); 		
  	}
@@ -562,8 +563,8 @@
  		
  		$type = substr($idSensor, 0, 2);
                 if(preg_match('#^[A-Z]#',substr($idSensor, 2, 1))){
-                        $lettre = array("A", "B", "C");
-                        $chiffre   = array("0", "1", "2");
+                        $lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+                        $chiffre   = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26");
                         $number = str_replace($lettre, $chiffre, substr($idSensor, 2, 1)) * 16 + substr($idSensor, 3) -1;
                 } else {
                         $number = substr($dSensor, 2);
