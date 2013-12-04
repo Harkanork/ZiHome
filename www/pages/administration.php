@@ -5,7 +5,20 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <center><div id="sous-menu">
 <li><A HREF="./index.php?page=administration&detail=gerer_pieces">Gerer les pieces</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temperature</A></li>
+<?
+include("./pages/connexion.php");
+$query = "SELECT * FROM modules";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+
+if($data['libelle'] == "vent" && $data['actif'] == 1) {
+?>
 <li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un anemometre</A></li>
+<?
+}
+}
+?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_conso_elec">Affecter une conso-elec</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un Capteur</A></li>
