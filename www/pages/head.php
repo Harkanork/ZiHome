@@ -1,5 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" href="./styles/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="./styles/administration.css" type="text/css" media="all">
 <link rel="apple-touch-icon-precomposed" href="img/icon-iphone.jpg" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
