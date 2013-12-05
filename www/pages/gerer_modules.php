@@ -30,7 +30,7 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
-<FORM method="post" action="./index.php?page=gerer_modules">
+<FORM method="post" action="./index.php?page=administration&detail=gerer_modules">
 <td width="190px" align="center">
 <? echo $data['libelle']; ?>
 </td>

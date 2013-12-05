@@ -32,7 +32,7 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
-<FORM method="post" action="./index.php?page=affecter_scenario">
+<FORM method="post" action="./index.php?page=administration&detail=affecter_scenario">
 <tr><td class="name">
 <? echo $data['nom']; ?> : <select name="sonde">
 <option value="-1">ne pas afficher</option>
