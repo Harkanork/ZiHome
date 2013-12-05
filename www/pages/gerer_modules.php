@@ -1,26 +1,24 @@
+<?
+if(isset($_SESSION['auth']))
+{
+?>
 <div id="body-action">
 <br>
 <div id="action-actionneur">
 <center>
-<table border="0">
+<table border="0" align="center">
 <tr class="nom">
 <td>
-<center>
 Nom
-</center>
 </td>
 <td>
-<center>
 Action
-</center>
 </td>
 <td>
 </td>
 </tr>
 <tr>
 <?
-if(isset($_SESSION['auth']))
-{
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
 $query = "UPDATE modules SET actif = '".$_POST['actif']."' WHERE id = '".$_POST['id']."'";
@@ -33,10 +31,8 @@ while ($data = mysql_fetch_assoc($req))
 {
 ?>
 <FORM method="post" action="./index.php?page=gerer_modules">
-<td width="190px">
-<center>
+<td width="190px" align="center">
 <? echo $data['libelle']; ?>
-</center>
 </td>
 <td>
 <select name="actif">
@@ -52,8 +48,10 @@ while ($data = mysql_fetch_assoc($req))
 </tr>
 <?
 }
-}
 ?>
 </table>
 </center>
-<br>
+<br></div></div>
+<?
+}
+?>

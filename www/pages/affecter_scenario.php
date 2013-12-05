@@ -1,13 +1,15 @@
+<?
+if(isset($_SESSION['auth']))
+{
+?>
 <div id="body-action">
 <br>
 <div id="action-actionneur">
 <center>
-<table border="0" width="700px">
+<table border="0" width="700px" align="center">
 <tr class="nom">
 <td>
-<center>
 Nom
-</center>
 </td>
 <td>
 Droite
@@ -18,10 +20,7 @@ Bas
 <td>
 </td>
 </tr>
-<tr>
 <?
-if(isset($_SESSION['auth']))
-{
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
 $query = "UPDATE scenarios SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."' WHERE nom = '".$_POST['id']."'";
@@ -34,7 +33,7 @@ while ($data = mysql_fetch_assoc($req))
 {
 ?>
 <FORM method="post" action="./index.php?page=affecter_scenario">
-<td class="name">
+<tr><td class="name">
 <? echo $data['nom']; ?> : <select name="sonde">
 <option value="-1">ne pas afficher</option>
 <?
@@ -54,15 +53,14 @@ while($data3 = mysql_fetch_assoc($req3))
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
 <td class="input">
-<center>
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
-</center>
 </td>
-</FORM>
-</tr>
+</tr></FORM>
 <?
-}
 }
 ?>
 </table>
-</div>
+</center></div></div>
+<?
+}
+?>

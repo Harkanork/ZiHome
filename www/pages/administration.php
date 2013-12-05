@@ -1,4 +1,4 @@
-<? //<div id ="body">
+<? 
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>
@@ -7,16 +7,13 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temperature</A></li>
 <?
 include("./pages/connexion.php");
-$query = "SELECT * FROM modules";
+$query = "SELECT * FROM modules WHERE libelle = 'vent' AND actif = '1'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-
-if($data['libelle'] == "vent" && $data['actif'] == 1) {
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un anemometre</A></li>
 <?
-}
 }
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
@@ -41,6 +38,6 @@ include("./pages/gerer_pieces.php");
 ?>
 </div>
 </center>
-<? //</div>
+<?
 }
 ?>
