@@ -1,0 +1,67 @@
+#body-action{
+width: 980px;
+margin: -5px auto -5px auto;
+}
+
+#action-actionneur{
+text-align:center;
+width: 900px;
+}
+#action-actionneur tr{
+background-color: #ccc;
+}
+#action-actionneur td.name{
+	width: 38%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.action-select{
+	width: 8%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.protocol-name{
+	width: 7%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.droite{
+	width: 6%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.bas{
+	width: 6%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.icone{
+	width: 5%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.input{
+	width: 12%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur td.protocol-select{
+	width: 8%;
+	height: 25px;
+	text-align: right;
+	font-size: 16px;
+}
+#action-actionneur tr.nom{
+	background-color: #6a6a6a;
+	color: white;
+	text-align: center;
+	height: 30px;
+	font-size: 18px;
+}

@@ -1,5 +1,26 @@
+<div id="body-action">
+<br>
+<div id="action-actionneur">
+<center>
+<table border="0" width="700px">
+<tr class="nom">
+<td>
+<center>
+Nom
+</center>
+</td>
+<td>
+Droite
+</td>
+<td>
+Bas
+</td>
+<td>
+</td>
+</tr>
+<tr>
 <?
-if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
+if(isset($_SESSION['auth']))
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
@@ -12,7 +33,8 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
-<p><FORM method="post" action="./index.php?page=administration&detail=affecter_scenario">
+<FORM method="post" action="./index.php?page=affecter_scenario">
+<td class="name">
 <? echo $data['nom']; ?> : <select name="sonde">
 <option value="-1">ne pas afficher</option>
 <?
@@ -23,12 +45,24 @@ while($data3 = mysql_fetch_assoc($req3))
 <option value="<? echo $data3['id']; ?>"<? if($data3['id'] ==  $data['id_plan']){ echo " selected"; } ?>><? echo $data3['libelle']; ?></option>
 <? } ?>
 </select>
-Droite:<INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5> 
-bas:<INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+</td>
+<td class="droite">
+<INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5>
+</td>
+<td class="bas">
+<INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+</td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
+<td class="input">
+<center>
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
-</FORM></p>
+</center>
+</td>
+</FORM>
+</tr>
 <?
 }
 }
 ?>
+</table>
+</div>
