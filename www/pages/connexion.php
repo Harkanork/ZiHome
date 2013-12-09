@@ -1,8 +1,5 @@
 <?
-$login = 'user';
-$plogin = 'password';
-$hote = 'localhost';
-$base = 'zibase';
+include("./pages/conf_zibase.php");
 
 $link = mysql_connect($hote,$login,$plogin);
 if (!$link) {
