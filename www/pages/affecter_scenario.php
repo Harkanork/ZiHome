@@ -45,16 +45,21 @@ while($data3 = mysql_fetch_assoc($req3))
 <? } ?>
 </select>
 </td>
-<td class="droite">
+<td class="droite"><center>
 <INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5>
+</center>
 </td>
 <td class="bas">
+<center>
 <INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+</center>
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
 <td class="input">
+<center>
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
-</td>
+</center>
+</td></center>
 </tr></FORM>
 <?
 }
