@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 CREATE TABLE IF NOT EXISTS `scenarios` (
-  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `scenarios` (
   `top` int(11) NOT NULL DEFAULT '0',
   `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `scenarios` (
 
 CREATE TABLE IF NOT EXISTS `peripheriques` (
   `periph` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `nom` varchar(255) COLLATE utf8_general_mysql500_ci NOT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `type` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT 'on_off',
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `top` int(11) NOT NULL DEFAULT '0',
   `icone` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
