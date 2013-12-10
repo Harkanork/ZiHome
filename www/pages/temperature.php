@@ -1,7 +1,7 @@
 <title>Temperature</title>
 <?php
 echo "<CENTER><TABLE>";
-echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD></TR>";
+echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD><TD>Date - Heure</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -17,7 +17,7 @@ $query0 = "SELECT * FROM `temperature_".$data['nom']."` ORDER BY `date` DESC LIM
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
-echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['temp']."</TD><TD ALIGN=CENTER>".$data0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
+echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['temp']."</TD><TD ALIGN=CENTER>".$data0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$data0['date']."</TD></TR>";
 }
 }
 echo "</TABLE></CENTER>";
