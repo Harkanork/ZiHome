@@ -1,36 +1,27 @@
-<div id="action-actionneur">
+<?
+if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
+{
+?><div id="action-actionneur">
 <center>
 <br>
 <table border="0" width="700px" align="center">
 <tr class="nom">
 <td>
-<center>
 Nom
-</center>
 </td>
 <td>
-<center>
 Droite
-</center>
 </td>
 <td>
-<center>
 Bas
-</center>
 </td>
 <td>
-<center>
 Icone
-</center>
 </td>
 <td></td>
 </tr>
 <tr>
-
-
 <?
-if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
-{
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
 $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."' WHERE nom = '".$_POST['id']."'";
@@ -66,6 +57,6 @@ while($data3 = mysql_fetch_assoc($req3))
 </tr>
 <?
 }
-}
 ?>
-</table>
+</table></center></div>
+<? } ?>
