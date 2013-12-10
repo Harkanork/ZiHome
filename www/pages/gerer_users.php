@@ -70,7 +70,6 @@ if(isset($_GET['id']))
 $id = $_GET['id'];
 if(isset($_POST['valider']))
 {
-include("./pages/functions.php");
 $query = null;
 if(!(empty($_POST['login'])))
 { $query .= "`pseudo`= '".$_POST['login']."', "; }
