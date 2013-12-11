@@ -140,6 +140,11 @@ if(!($data0['hygro'] == 0)) {
 $liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['hygro'] ."],";
 }
 }
+if($data1['libelle'] == ""){
+$nom = $data1['nom'];
+} else {
+$nom = $data1['libelle'];
+}
 ?>
 <script type="text/javascript">
 $(function () {
@@ -152,7 +157,7 @@ Highcharts.setOptions({
             chart: {
             },
             title: {
-                text: '<? echo $data1['nom']; ?>'
+                text: '<? echo $nom; ?>'
             },
             subtitle: {
                 text: 'Temperature et Hygrometrie'
@@ -245,9 +250,14 @@ $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_
 <div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
 <?
 while($data2 = mysql_fetch_assoc($req2)) {
+if($data2['libelle'] == ""){
+$nom = $data2['nom'];
+} else {
+$nom = $data2['libelle'];
+}
 ?>
 <div id="actionneur">
-<center><h1><? echo $data2['nom']; ?></h1></center>
+<center><h1><? echo $nom; ?></h1></center>
 <center>
 <? if($data2['type'] == 'dim') {
 ?>
@@ -312,6 +322,11 @@ $consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"mi
 $liste1 .= "[".strtotime($data0['date']) * 1000 . "," . ($data0['max'] - $data0['min']) ."],";
 $liste2 .= "[".strtotime($data0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($data0['max'] - $data0['min'] - $consoTemp)*$coutHP)/1000)*100),2) ."],";
 }
+if($data1['libelle'] == ""){
+$nom = $data1['nom'];
+} else {
+$nom = $data1['libelle'];
+}
 ?>
                 <script type="text/javascript">
 $(function () {
@@ -319,7 +334,7 @@ $(function () {
             chart: {
             },
             title: {
-                text: '<? echo $data1['nom']; ?>'
+                text: '<? echo $nom; ?>'
             },
             subtitle: {
                 text: 'Quotidienne'

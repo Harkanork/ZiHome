@@ -22,6 +22,11 @@ $batterie = "Ok";
 } else {
 $batterie = "<FONT COLOR='red'>Remplacer</FONT>";
 }
-echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$data['date_chgt_batterie']."</TD></TR>";
+if($data['libelle'] == ""){
+$nom = $data['nom'];
+} else {
+$nom = $data['libelle'];
+}
+echo "<TR><TD>".$nom."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$data['date_chgt_batterie']."</TD></TR>";
 }
 ?>

@@ -17,7 +17,12 @@ $query0 = "SELECT * FROM `temperature_".$data['nom']."` ORDER BY `date` DESC LIM
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {
-echo "<TR><TD>".$data['nom']."</TD><TD ALIGN=CENTER>".$data0['temp']."</TD><TD ALIGN=CENTER>".$data0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$data0['date']."</TD></TR>";
+if($data['libelle'] == ""){
+$nom = $data['nom'];
+} else {
+$nom = $data['libelle'];
+}
+echo "<TR><TD>".$nom."</TD><TD ALIGN=CENTER>".$data0['temp']."</TD><TD ALIGN=CENTER>".$data0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$data0['date']."</TD></TR>";
 }
 }
 echo "</TABLE></CENTER>";
@@ -60,7 +65,11 @@ if(!($data0['hygro'] == 0)) {
 $liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['hygro'] ."],";
 }
 }
-
+if($data['libelle'] == ""){
+$nom = $data['nom'];
+} else {
+$nom = $data['libelle'];
+}
 ?>
 <script type="text/javascript">
 $(function () {
@@ -73,7 +82,7 @@ Highcharts.setOptions({
             chart: {
             },
             title: {
-                text: '<? echo $data['nom']; ?>'
+                text: '<? echo $nom; ?>'
             },
             subtitle: {
                 text: 'Temperature et Hygrometrie'
