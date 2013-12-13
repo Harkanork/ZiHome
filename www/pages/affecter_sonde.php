@@ -1,7 +1,8 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
-?><div id="action-actionneur">
+?>
+<div id="action-actionneur">
 <center>
 <br>
 <table border="0" align="center">
@@ -18,9 +19,9 @@ Bas
 <td>
 Icone
 </td>
-<td>Batterie</td><td>Libelle</td><td></td>
+<td>Batterie</td><td>date</td>
+<td>Libelle</td><td></td>
 </tr>
-<tr>
 <?
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
@@ -33,7 +34,6 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
-
 <tr>
 <FORM method="post" action="./index.php?page=administration&detail=affecter_sonde">
 <td class="name">
@@ -51,7 +51,7 @@ while($data3 = mysql_fetch_assoc($req3))
 <td class="droite"><center><INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5></center></td>
 <td class="bas"><center><INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5></center></td>
 <td class="icone"><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
-<td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>><INPUT type="date" name="date_chgt_batterie" size="10" value="<? echo $data['date_chgt_batterie']; ?>"></center></td>
+<td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></td><td><INPUT type="date" name="date_chgt_batterie" size="10" value="<? echo $data['date_chgt_batterie']; ?>"></center></td>
 <td><center><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></center></td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
 <td class="input"><center><INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER"></center></td>
