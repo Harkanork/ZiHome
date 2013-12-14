@@ -13,6 +13,9 @@ setTimeout("redirect()",0); // delai en millisecondes
 include("./conf_zibase.php");
 include("../lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
+if(isset($_GET['dim'])) {
 $zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], $_GET['dim']);
+} else {
+$zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], );
 }
 ?>

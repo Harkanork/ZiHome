@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `icone` int(11) NOT NULL DEFAULT '0',
   `gerer_batterie` VARCHAR( 255 ) NOT NULL ,
   `date_chgt_batterie` DATE NOT NULL ,
-  `libelle` VARCHAR( 255 ) NOT NULL
+  `libelle` VARCHAR( 255 ) NOT NULL ,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
