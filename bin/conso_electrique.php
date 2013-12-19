@@ -26,7 +26,11 @@ mysql_query($query, $link);
 $query = "CREATE TABLE IF NOT EXISTS `conso_".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `conso` float NOT NULL, `conso_total` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 mysql_query($query, $link);
 if(!($info == "")) {
+if(strlen($sensorlist[$i]['c']) < 6) {
 $query = "INSERT INTO `conso_".$sensorlist[$i]['n']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*10).",".($info[1]*100).")";
+} else {
+$query = "INSERT INTO `conso_".$sensorlist[$i]['n']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*100).",".($info[1]*100).")";
+}
 mysql_query($query, $link);
 }
 }
