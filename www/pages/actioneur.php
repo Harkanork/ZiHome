@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 if(isset($_SESSION['auth']))
 {
@@ -16,6 +16,7 @@ $zibase = new ZiBase($ipzibase);
 if(isset($_GET['dim'])) {
 $zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], $_GET['dim']);
 } else {
-$zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], );
+$zibase->sendCommand($_GET['action'], $_GET['ordre'], $_GET['protocol'], "");
+}
 }
 ?>
