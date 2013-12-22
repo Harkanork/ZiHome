@@ -1,5 +1,6 @@
 <?
 session_start();
+//include("./head.php");
 if(isset($_SESSION['auth']))
 {
 ?>
