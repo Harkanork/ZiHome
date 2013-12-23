@@ -1,7 +1,7 @@
 <?php
 if(isset($_SESSION['auth']))
 {
-include("./pages/conf_zibase.php");
+include("./config/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 if(isset($_POST['VALIDER'])) {
@@ -77,7 +77,7 @@ Lundi <input type=checkbox name=lundi<? if($calendrier->day['lundi'] == 1) { ?> 
  | Jeudi <input type=checkbox name=jeudi<? if($calendrier->day['jeudi'] == 1) { ?> Checked<? } ?>>
  | Vendredi <input type=checkbox name=vendredi<? if($calendrier->day['vendredi'] == 1) { ?> Checked<? } ?>>
  | Samedi <input type=checkbox name=samedi<? if($calendrier->day['samedi'] == 1) { ?> Checked<? } ?>>
-Dimanche <input type=checkbox name=dimanche<? if($calendrier->day['dimanche'] == 1) { ?> Checked<? } ?>>
+ | Dimanche <input type=checkbox name=dimanche<? if($calendrier->day['dimanche'] == 1) { ?> Checked<? } ?>>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $i; ?>">
 <br>
 <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">

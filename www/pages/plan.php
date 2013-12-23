@@ -1,6 +1,6 @@
 <?
 include("./pages/connexion.php");
-include("./pages/conf_zibase.php");
+include("./config/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 $query = "SELECT max( `width` + `left` ) AS width FROM `plan`";

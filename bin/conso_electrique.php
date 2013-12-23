@@ -1,5 +1,5 @@
 <?php
-include("/var/www/pages/conf_zibase.php");
+include("/var/www/config/conf_zibase.php");
 include("/var/www/lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 $sensorlist=$zibase->getSensorList($idzibase,$tokenzibase);

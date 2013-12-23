@@ -1,5 +1,5 @@
 <?
-include("./pages/conf_zibase.php");
+include("./config/conf_zibase.php");
 
 $link = mysql_connect($hote,$login,$plogin);
 if (!$link) {

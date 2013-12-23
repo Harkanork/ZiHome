@@ -20,7 +20,7 @@ $addressIP = '224.192.32.19';
 
 /*--------------------Paramettres Zibase--------------------------------*/
 
-include("/var/www/pages/conf_zibase.php");
+include("/var/www/config/conf_zibase.php");
 //include("/var/lib/zibase/zibase.php");
 //$zibase = new ZiBase("192.168.245.89");
 $idsonde = '131077';

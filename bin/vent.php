@@ -18,7 +18,7 @@ if($deg>=303.75 && $deg<326.25){ $result="NW"; }
 if($deg>=326.25 && $deg<348.75){ $result="NNW"; }
 return $result;
 }
-include("/var/www/pages/conf_zibase.php");
+include("/var/www/config/conf_zibase.php");
 include("/var/www/lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 $sensorlist=$zibase->getSensorList($idzibase,$tokenzibase);

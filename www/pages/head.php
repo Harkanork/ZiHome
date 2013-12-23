@@ -1,5 +1,4 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" href="./styles/style.css" type="text/css" media="all">
 <link rel="stylesheet" href="./styles/administration.css" type="text/css" media="all">
 <link rel="apple-touch-icon-precomposed" href="img/icon-iphone.jpg" />
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,5 +37,11 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 $icone = $data['value'];
+}
+$query = "SELECT * FROM paramettres WHERE libelle = 'css'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
 }
 ?>

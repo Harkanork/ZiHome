@@ -27,13 +27,14 @@ while ($data = mysql_fetch_assoc($req))
 <li><A HREF="./index.php?page=administration&detail=variables">Variables</A></li>
 <li><A HREF="./index.php?page=administration&detail=icones">Icones</A></li>
 <li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
+<li><A HREF="./index.php?page=administration&detail=paramettres">Paramettres</A></li>
 </div>
 <div id="action">
 <?
 if(isset($_GET['detail'])){
-include("./pages/".$_GET['detail'].".php");
+include("./pages/admin/".$_GET['detail'].".php");
 } else {
-include("./pages/gerer_pieces.php");
+include("./pages/admin/gerer_pieces.php");
 }
 ?>
 </div>

@@ -1,6 +1,6 @@
 <title>Consomation Electrique</title>
 <?php
-include("./pages/conf_zibase.php");
+include("./config/conf_zibase.php");
 echo "<CENTER><TABLE>";
 echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Consomation&nbsp;</TD><TD>Pile Faible</TD></TR>";
 include("./pages/connexion.php");
