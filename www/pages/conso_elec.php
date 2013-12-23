@@ -169,14 +169,14 @@ Highcharts.setOptions({
              },
             yAxis: {
                 title: {
-                    text: 'Consomation kWh'
+                    text: 'Consomation Wh'
                 },
                 min: 0
             },
             tooltip: {
                 formatter: function() {
                         return '<b>'+ this.series.name +'</b><br/>'+
-                        Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' kWh';
+                        Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' Wh';
                 }
              },
             plotOptions: {
