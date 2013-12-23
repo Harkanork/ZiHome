@@ -43,7 +43,7 @@ mysql_close();
 if ($message == NULL)
 {
 include("./pages/connexion.php");
-$query = "INSERT INTO users (pseudo, pass, niveau) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'), '".$_POST['droit']."')";
+$query = "INSERT INTO users (pseudo, pass, niveau, css) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'), '".$_POST['droit']."', '".$_POST['style']."')";
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
 } else {
@@ -62,6 +62,17 @@ echo "<BR><center><H1>Veuillez saisir les informations pour creer un compte.</H1
 <option value=\"utilisateur\">Utilisateur</option>
 </select>
 </TD></TR>
+<TR><TD>Style CSS</TD><TD>
+<select name=\"style\">
+<option value=\"\" selected>Default</option>";
+include("./pages/connexion.php");
+$query = "SELECT * FROM `css`";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_assoc($req))
+{
+echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
+}
+echo "</TD></TR>
 <TR><TD>&nbsp;</TD></TR>
 <TR><TD><input type=\"submit\" name=\"submit\" value=\"Valider\" class=\"input\"></input></TD></TR></table>
 </FORM></center><BR><BR>";
@@ -75,7 +86,7 @@ if(!(empty($_POST['login'])))
 { $query .= "`pseudo`= '".$_POST['login']."', "; }
 if(!(empty($_POST['password'])) && !(empty($_POST['confirmpassword'])) && $_POST['password'] == $_POST['confirmpassword'])
 { $query .= "`pass` = SHA1('".$_POST['password']."'), "; }
-$query = "UPDATE `users` SET ".$query."`niveau`= '".$_POST['droit']."' WHERE `id`='".$id."'";
+$query = "UPDATE `users` SET ".$query."`niveau`= '".$_POST['droit']."', `css` = '".$_POST['style']."' WHERE `id`='".$id."'";
 include("./pages/connexion.php");
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
@@ -109,7 +120,22 @@ echo ">Administrateur</option>
 if($data['niveau'] == "utilisateur") { echo " selected"; }
 echo ">Utilisateur</option>
 </select>
-</TD></TR></TABLE>
+</TD></TR>
+<TR><TD>Style CSS</TD><TD>
+<select name=\"style\">
+<option value=\"\"";
+if($data['css'] == "") { echo " selected"; }
+echo ">Default</option>";
+$query2 = "SELECT * FROM `css`";
+$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data2 = mysql_fetch_assoc($req2))
+{
+echo "<option value=\"".$data2['value']."\"";
+if($data['css'] == $data2['value']) { echo " selected"; }
+echo ">".$data2['value']."</option>";
+}
+echo "</TD></TR>
+</TABLE>
 <input type=\"submit\" name=\"valider\" value=\"Valider\" class=\"input\"></input>";
 echo "<input type=\"submit\" name=\"supprimer\" value=\"Supprimer\" class=\"input\"></input></br>";
 echo "</FORM></CENTER>";

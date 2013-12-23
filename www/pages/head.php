@@ -38,10 +38,15 @@ while ($data = mysql_fetch_assoc($req))
 {
 $icone = $data['value'];
 }
+if(isset($_SESSION['css']) && $_SESSION['css'] != "")
+{
+echo "<link rel=\"stylesheet\" href=\"./styles/".$_SESSION['css'].".css\" type=\"text/css\" media=\"all\">";
+} else {
 $query = "SELECT * FROM paramettres WHERE libelle = 'css'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
 echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
+}
 }
 ?>

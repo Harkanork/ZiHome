@@ -26,4 +26,5 @@ INSERT INTO `css` (`id`, `value`) VALUES
 INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
 (2, 'css', 'style');
 
+ALTER TABLE `users` ADD `css` VARCHAR( 255 ) NOT NULL ;
 

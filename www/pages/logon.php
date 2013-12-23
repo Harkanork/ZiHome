@@ -23,6 +23,7 @@ $data = mysql_fetch_assoc ($req);
 if($data) {
 $_SESSION['auth'] = $data['pseudo'];
 $_SESSION['niveau'] = $data['niveau'];
+$_SESSION['css'] = $data['css'];
 }
 mysql_close();
 }
@@ -33,6 +34,7 @@ if(isset($_GET['logout']))
 {
 unset($_SESSION['auth']);
 unset($_SESSION['niveau']);
+unset($_SESSION['css']);
 echo "<meta http-equiv=\"refresh\" content=\"0; url=./index.php\">";
 }
 else
@@ -60,6 +62,7 @@ if ($data)
 {
 $_SESSION['auth'] = $data['pseudo'];
 $_SESSION['niveau'] = $data['niveau'];
+$_SESSION['css'] = $data['css'];
 mysql_close();
 echo "<meta http-equiv=\"refresh\" content=\"0; url=".$_SERVER['PHP_SELF']."\">";
 }
