@@ -17,7 +17,7 @@ $(function () {
             chart: {
             },
             title: {
-                text: 'Consomation Electrique'
+                text: 'Consommation Electrique'
             },
             subtitle: {
                 text: 'Mensuelle'
@@ -32,7 +32,7 @@ $(function () {
             yAxis: [{
                 min: 0,
                 title: {
-                    text: 'Consomation (kWh)'
+                    text: 'Consommation (kWh)'
                 }
             }, {
                 min: 0,
@@ -55,7 +55,7 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Consomation (kWh)',
+                name: 'Consommation (kWh)',
                 data: [<?php echo $liste1; ?>],
 		type: 'column'
             }, {

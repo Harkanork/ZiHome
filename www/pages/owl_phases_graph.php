@@ -39,7 +39,7 @@ Highcharts.setOptions({
                 type: 'spline'
             },
             title: {
-                text: 'Consomation Electrique'
+                text: 'Consommation Electrique'
             },
             subtitle: {
                 text: 'Detaille par phase'
@@ -53,7 +53,7 @@ Highcharts.setOptions({
              },
             yAxis: {
                 title: {
-                    text: 'Consomation kWh'
+                    text: 'Consommation kWh'
                 },
                 min: 0
             },

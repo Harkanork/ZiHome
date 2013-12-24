@@ -1,8 +1,8 @@
-<title>Consomation Electrique</title>
+<title>Consommation Electrique</title>
 <?php
 include("./config/conf_zibase.php");
 echo "<CENTER><TABLE>";
-echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Consomation&nbsp;</TD><TD>Pile Faible</TD></TR>";
+echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Consommation&nbsp;</TD><TD>Pile Faible</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -54,7 +54,7 @@ while ($data = mysql_fetch_assoc($req))
 <div id="onglet-<? echo $data['id']; ?>" style="width:100%;">
 <?
 echo "<CENTER><TABLE CELLSPACING='9'>";
-echo "<TR><TD>(kWh)</TD><TD>&nbsp;Consomation&nbsp;</TD><TD>&nbsp;Cout&nbsp;</TD></TR>";
+echo "<TR><TD>(kWh)</TD><TD>&nbsp;Consommation&nbsp;</TD><TD>&nbsp;Cout&nbsp;</TD></TR>";
 $query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 3 DAY) GROUP BY DATE_FORMAT(`date`, '%Y%m%d') LIMIT 2";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $i=1;
@@ -155,7 +155,7 @@ Highcharts.setOptions({
                 type: 'spline'
             },
             title: {
-                text: 'Consomation Electrique'
+                text: 'Consommation Electrique'
             },
             subtitle: {
                 text: 'Detail sur 1 journee'
@@ -169,7 +169,7 @@ Highcharts.setOptions({
              },
             yAxis: {
                 title: {
-                    text: 'Consomation Wh'
+                    text: 'Consommation Wh'
                 },
                 min: 0
             },
@@ -246,7 +246,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
                 title: {
-                    text: 'Consomation (Wh)'
+                    text: 'Consommation (Wh)'
                 }
             }, {
                 min: 0,
@@ -269,7 +269,7 @@ Highcharts.setOptions({
                 }
             },
             series: [{
-                name: 'Consomation (Wh)',
+                name: 'Consommation (Wh)',
                 data: [<?php echo $liste1; ?>],
                 type: 'column'
 
@@ -341,7 +341,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
                 title: {
-                    text: 'Consomation (kWh)'
+                    text: 'Consommation (kWh)'
                 }
             }, {
                 min: 0,
@@ -364,7 +364,7 @@ Highcharts.setOptions({
                 }
             },
             series: [{
-                name: 'Consomation (kWh)',
+                name: 'Consommation (kWh)',
                 data: [<?php echo $liste1; ?>],
                 type: 'column'
 

@@ -1,4 +1,4 @@
-<title>Consomation Electrique</title>
+<title>Consommation Electrique</title>
 
 <?php
 echo "<CENTER><TABLE>";
