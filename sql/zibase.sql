@@ -338,7 +338,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (4, 'batterie', 1),
 (5, 'plan', 1),
 (6, 'thermostat', 1),
-(7, 'calendrier', 1);
+(7, 'calendrier', 1),
+(8, 'vent', 1);
 
 -- --------------------------------------------------------
 
