@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
   `text-align` varchar(255) NOT NULL DEFAULT 'center',
   `border` varchar(255) NOT NULL DEFAULT '2',
   `popup` text NOT NULL,
+  `supplementaire` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
