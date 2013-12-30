@@ -138,6 +138,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pseudo` varchar(255) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `pass` varchar(255) NOT NULL,
   `niveau` varchar(255) NOT NULL DEFAULT 'admin', 
+  `css` varchar(255) NOT NULL,
+  `accueil` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -396,7 +398,10 @@ INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 
 INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
 (1, 'icones', '1'),
-(2, 'css', 'style');
+(2, 'css', 'style'),
+(3, 'accueil', 'plan');
 
+
+CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
 
 

@@ -24,8 +24,11 @@ INSERT INTO `css` (`id`, `value`) VALUES
 --
 
 INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
-(2, 'css', 'style');
+(2, 'css', 'style'),
+(3, 'accueil', 'plan');
 
 ALTER TABLE `users` ADD `css` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE `plan` ADD `supplementaire` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE `users` ADD `accueil` VARCHAR( 255 ) NOT NULL ; 
+CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
 

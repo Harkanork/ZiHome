@@ -43,7 +43,7 @@ mysql_close();
 if ($message == NULL)
 {
 include("./pages/connexion.php");
-$query = "INSERT INTO users (pseudo, pass, niveau, css) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'), '".$_POST['droit']."', '".$_POST['style']."')";
+$query = "INSERT INTO users (pseudo, pass, niveau, css, accueil) VALUES ('".$_POST['login']."', SHA1('".$_POST['pass']."'), '".$_POST['droit']."', '".$_POST['style']."', '".$_POST['accueil']."')";
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
 } else {
@@ -73,6 +73,17 @@ while($data = mysql_fetch_assoc($req))
 echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
 }
 echo "</TD></TR>
+<TR><TD>Page d accueil</TD><TD>
+<select name=\"accueil\">
+<option value=\"\" selected>Default</option>";
+include("./pages/connexion.php");
+$query = "SELECT * FROM `accueil`";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data = mysql_fetch_assoc($req))
+{
+echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
+}
+echo "</TD></TR>
 <TR><TD>&nbsp;</TD></TR>
 <TR><TD><input type=\"submit\" name=\"submit\" value=\"Valider\" class=\"input\"></input></TD></TR></table>
 </FORM></center><BR><BR>";
@@ -86,7 +97,7 @@ if(!(empty($_POST['login'])))
 { $query .= "`pseudo`= '".$_POST['login']."', "; }
 if(!(empty($_POST['password'])) && !(empty($_POST['confirmpassword'])) && $_POST['password'] == $_POST['confirmpassword'])
 { $query .= "`pass` = SHA1('".$_POST['password']."'), "; }
-$query = "UPDATE `users` SET ".$query."`niveau`= '".$_POST['droit']."', `css` = '".$_POST['style']."' WHERE `id`='".$id."'";
+$query = "UPDATE `users` SET ".$query."`niveau`= '".$_POST['droit']."', `css` = '".$_POST['style']."', `accueil` = '".$_POST['accueil']."' WHERE `id`='".$id."'";
 include("./pages/connexion.php");
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
@@ -132,6 +143,20 @@ while($data2 = mysql_fetch_assoc($req2))
 {
 echo "<option value=\"".$data2['value']."\"";
 if($data['css'] == $data2['value']) { echo " selected"; }
+echo ">".$data2['value']."</option>";
+}
+echo "</TD></TR>
+<TR><TD>Page d Accueil</TD><TD>
+<select name=\"accueil\">
+<option value=\"\"";
+if($data['accueil'] == "") { echo " selected"; }
+echo ">Default</option>";
+$query2 = "SELECT * FROM `accueil`";
+$req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data2 = mysql_fetch_assoc($req2))
+{
+echo "<option value=\"".$data2['value']."\"";
+if($data['accueil'] == $data2['value']) { echo " selected"; }
 echo ">".$data2['value']."</option>";
 }
 echo "</TD></TR>

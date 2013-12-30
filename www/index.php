@@ -12,7 +12,28 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 $data = mysql_fetch_assoc($req);
 include($data['url']);
 } else {
-include("./pages/plan.php");
+if(isset($_SESSION['auth'])) {
+include("./pages/connexion.php");
+$query = "SELECT * FROM users WHERE pseudo = '".$_SESSION['auth']."'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$accueil = $data['accueil'];
+}
+}
+if(!(isset($accueil)) || (isset($accueil) && $accueil == "")) {
+include("./pages/connexion.php");
+$query = "SELECT * FROM paramettres WHERE libelle = 'accueil'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$accueil = $data['value'];
+}
+if(!(isset($accueil))) {
+$accueil = 'plan';
+}
+}
+include("./pages/".$accueil.".php");
 }
 }
 ?>
