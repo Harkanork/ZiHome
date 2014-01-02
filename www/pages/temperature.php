@@ -23,11 +23,13 @@ while ($data = mysql_fetch_assoc($req))
 </ul>
 <?
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
+while ($periph = mysql_fetch_assoc($req))
 {
 ?>
-<div id="onglet-<? echo $data['id']; ?>" style="width:100%;">
+<div id="onglet-<? echo $periph['id']; ?>" style="width:100%;">
 <?
+$width = "98%";
+$height = "400px";
 include("./fonctions/temperature_graph_jour.php");
 include("./fonctions/temperature_graph_mois.php");
 include("./fonctions/temperature_graph_annee.php");

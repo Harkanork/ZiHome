@@ -1,30 +1,30 @@
 <?
 $liste1 = "";
 $liste2 = "";
-$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date, DATE_FORMAT(`date`, '%Y-%m') AS mois FROM `conso_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
+$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date, DATE_FORMAT(`date`, '%Y-%m') AS mois FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data0 = mysql_fetch_assoc($req0))
+while($value0 = mysql_fetch_assoc($req0))
 {
 $consoTemp = 0;
-$query1 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$data['nom']."` WHERE date > DATE_SUB('".$data0['mois']."-1', INTERVAL 0 MONTH) AND date < DATE_SUB('".$data0['mois']."-1', INTERVAL -1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
+$query1 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB('".$value0['mois']."-1', INTERVAL 0 MONTH) AND date < DATE_SUB('".$value0['mois']."-1', INTERVAL -1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data1 = mysql_fetch_assoc($req1))
+while($value1 = mysql_fetch_assoc($req1))
 {
 foreach($heuresCreuses as $heureCreuse){
-$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$data['nom']."` where `date` >= '".substr($data0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($data0['date'], 0, 10)." ".$heureCreuse['fin']."'";
+$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$periph['nom']."` where `date` >= '".substr($value0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($value0['date'], 0, 10)." ".$heureCreuse['fin']."'";
 $res_query6 = mysql_query($query6, $link);
 if(mysql_numrows($res_query6) > 0){
 $consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");
 }
 }
 }
-$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . (($data0['max'] - $data0['min'])/1000) ."],";
-$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($data0['max'] - $data0['min'] - $consoTemp)*$coutHP)/1000)),2) ."],";
+$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . (($value0['max'] - $value0['min'])/1000) ."],";
+$liste2 .= "[".strtotime($value0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2) ."],";
 }
-if($data['libelle'] == ""){
-$nom = $data['nom'];
+if($periph['libelle'] == ""){
+$nom = $periph['nom'];
 } else {
-$nom = $data['libelle'];
+$nom = $periph['libelle'];
 }
 ?>
                 <script type="text/javascript">
@@ -34,7 +34,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#conso_elec_annuel_<? echo $data['id']; ?>').highcharts({
+        $('#conso_elec_annuel_<? echo $periph['id']; ?>').highcharts({
             chart: {
             },
             title: {
@@ -90,4 +90,4 @@ Highcharts.setOptions({
     });
                 </script>
 
-<div id="conso_elec_annuel_<? echo $data['id']; ?>" style="min-width: 400px; width:100%; height: 400px; margin: 0 auto"></div>
+<div id="conso_elec_annuel_<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>

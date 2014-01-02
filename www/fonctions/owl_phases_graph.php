@@ -18,12 +18,12 @@ $query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)
 $query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 }
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_assoc($req))
+while($periph = mysql_fetch_assoc($req))
 {
-$liste1 .= "[".strtotime($data['date']) * 1000 . "," . $data['chan1'] /1000 ."],";
-$liste2 .= "[".strtotime($data['date']) * 1000 . "," . $data['chan2'] /1000 ."],";
-$liste3 .= "[".strtotime($data['date']) * 1000 . "," . $data['chan3'] /1000 ."],";
-$liste4 .= "[".strtotime($data['date']) * 1000 . "," . ($data['chan1'] + $data['chan2'] + $data['chan3']) /1000 ."],";
+$liste1 .= "[".strtotime($periph['date']) * 1000 . "," . $periph['chan1'] /1000 ."],";
+$liste2 .= "[".strtotime($periph['date']) * 1000 . "," . $periph['chan2'] /1000 ."],";
+$liste3 .= "[".strtotime($periph['date']) * 1000 . "," . $periph['chan3'] /1000 ."],";
+$liste4 .= "[".strtotime($periph['date']) * 1000 . "," . ($periph['chan1'] + $periph['chan2'] + $periph['chan3']) /1000 ."],";
 }
 
 ?>

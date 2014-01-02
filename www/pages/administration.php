@@ -28,6 +28,7 @@ while ($data = mysql_fetch_assoc($req))
 <li><A HREF="./index.php?page=administration&detail=icones">Icones</A></li>
 <li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
 <li><A HREF="./index.php?page=administration&detail=paramettres">Paramettres</A></li>
+<li><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></li>
 </div>
 <div id="action">
 <?

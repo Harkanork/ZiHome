@@ -1,20 +1,20 @@
 <?
 $liste1 = "";
 $liste2 = "";
-$query0 = "SELECT * FROM `temperature_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT * FROM `temperature_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data0 = mysql_fetch_assoc($req0))
+while($value0 = mysql_fetch_assoc($req0))
 {
-$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['temp'] ."],";
-if(!($data0['hygro'] == 0)) {
-$liste2 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['hygro'] ."],";
+$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . $value0['temp'] ."],";
+if(!($value0['hygro'] == 0)) {
+$liste2 .= "[".strtotime($value0['date']) * 1000 . "," . $value0['hygro'] ."],";
 }
 }
-if($data['libelle'] == ""){
-$nom = $data['nom'];
+if($periph['libelle'] == ""){
+$nom = $periph['nom'];
 } else {
-$nom = $data['libelle'];
+$nom = $periph['libelle'];
 }
 ?>
 <script type="text/javascript">
@@ -24,7 +24,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#jour-<? echo $data['id']; ?>').highcharts({
+        $('#jour-<? echo $periph['id']; ?>').highcharts({
             chart: {
             },
             title: {
@@ -100,4 +100,4 @@ Highcharts.setOptions({
         });
     });
 </script>
-<div id="jour-<? echo $data['id']; ?>" style="min-width: 400px; width:100%; height: 400px; margin: 0 auto"></div>
+<div id="jour-<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>

@@ -10,7 +10,7 @@ function redirect() {
 setTimeout("redirect()",0); // delai en millisecondes
 </SCRIPT>
 <?php
-include("./conf_zibase.php");
+include("../config/conf_zibase.php");
 include("../lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 $zibase->runScenario($_GET['action']);

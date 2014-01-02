@@ -4,10 +4,10 @@ $liste2 = "";
 include("./pages/connexion.php");
 $query = "SELECT SUM(chan1) AS chan1, SUM(chan2) AS chan2, SUM(chan3) AS chan3, SUM(cout) AS cout, SUBSTRING(`date`,1,7) AS mdate FROM `owl_journalier` GROUP BY mdate";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_assoc($req))
+while($periph = mysql_fetch_assoc($req))
 {
-$liste1 .= "[".strtotime($data['mdate']) * 1000 . "," . ($data['chan1']+$data['chan2']+$data['chan3']) /1000 ."],";
-$liste2 .= "[".strtotime($data['mdate']) * 1000 . "," .$data['cout']."],";
+$liste1 .= "[".strtotime($periph['mdate']) * 1000 . "," . ($periph['chan1']+$periph['chan2']+$periph['chan3']) /1000 ."],";
+$liste2 .= "[".strtotime($periph['mdate']) * 1000 . "," .$periph['cout']."],";
 }
 ?>
 

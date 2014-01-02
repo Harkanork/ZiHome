@@ -1,11 +1,11 @@
 <?php
 $liste1 = "";
 include("./pages/connexion.php");
-$query0 = "SELECT * FROM `conso_".$data['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$query0 = "SELECT * FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data0 = mysql_fetch_assoc($req0))
+while($value0 = mysql_fetch_assoc($req0))
 {
-$liste1 .= "[".strtotime($data0['date']) * 1000 . "," . $data0['conso'] ."],";
+$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . $value0['conso'] ."],";
 }
 
 ?>
@@ -16,7 +16,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#conso_elec_heure_<? echo $data['id']; ?>').highcharts({
+        $('#conso_elec_heure_<? echo $periph['id']; ?>').highcharts({
             chart: {
                 type: 'spline'
             },
@@ -60,4 +60,4 @@ Highcharts.setOptions({
         });
     });
                 </script>
-<div id="conso_elec_heure_<? echo $data['id']; ?>" style="min-width: 400px; width:100%; height: 400px; margin: 0 auto"></div>
+<div id="conso_elec_heure_<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>

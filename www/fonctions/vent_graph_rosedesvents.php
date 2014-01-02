@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(function () {
 
-    $('#<? echo $data['id']; ?>-r').highcharts({
+    $('#<? echo $periph['id']; ?>-r').highcharts({
         data: {
                 table: 'freq',
                 startRow: 1,
@@ -65,11 +65,11 @@ $(function () {
 });
                 </script>
 <?
-$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."`";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$periph['nom']."`";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data0 = mysql_fetch_assoc($req0))
+while ($value0 = mysql_fetch_assoc($req0))
 {
-$totalresult = $data0['sum'];
+$totalresult = $value0['sum'];
 }
 ?>
 <div style="display:none">
@@ -114,17 +114,17 @@ while($i < count($pc)) {
 $j = 0;
 while($j < (count($vit))) {
 if($j == 0) {
-$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$periph['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."'";
 } else if($j == (count($vit))) {
-$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".($vit[($j-1)]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$periph['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse > '".($vit[($j-1)]*10)."'";
 } else {
-$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$data['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."' AND vitesse > '".($vit[($j-1)]*10)."'";
+$query0 = "SELECT count(vitesse) AS sum FROM `vent_".$periph['nom']."` WHERE direction = '".$pc[$i]."' AND vitesse < '".($vit[$j]*10)."' AND vitesse > '".($vit[($j-1)]*10)."'";
 }
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data0 = mysql_fetch_assoc($req0))
+while ($value0 = mysql_fetch_assoc($req0))
 {
 ?>
-                        <td class="data"><? echo ($data0['sum']*100/$totalresult); ?></td>
+                        <td class="data"><? echo ($value0['sum']*100/$totalresult); ?></td>
 <?
 }
 $j++;
@@ -137,4 +137,4 @@ $i++;
 ?>
         </table>
 </div>
-<div id="<? echo $data['id']; ?>-r" style="width: 1200px; height: 800px; margin: 0 auto"></div>
+<div id="<? echo $periph['id']; ?>-r" style="width:<? echo $width; ?>;height:<? echo $height; ?>;margin: 0 auto"></div>

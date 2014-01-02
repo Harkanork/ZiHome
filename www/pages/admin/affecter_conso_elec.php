@@ -35,7 +35,7 @@ while ($data = mysql_fetch_assoc($req))
 <FORM method="post" action="./index.php?page=administration&detail=affecter_conso_elec">
 <td>
 <? echo $data['nom']; ?> : <select name="sonde">
-<option value="-1">ne pas afficher</option></td>
+<option value="-1">ne pas afficher</option>
 <?
 $query3 = "SELECT * FROM `plan` ORDER BY `libelle`";
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -44,7 +44,7 @@ while($data3 = mysql_fetch_assoc($req3))
 <option value="<? echo $data3['id']; ?>"<? if($data3['id'] ==  $data['id_plan']){ echo " selected"; } ?>><? echo $data3['libelle']; ?></option>
 <? } ?>
 </select>
-<td>
+</td><td>
 <center>
 <INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>>
 </center>
@@ -67,11 +67,13 @@ while($data3 = mysql_fetch_assoc($req3))
 </td>
 </tr>
 </FORM>
-</table>
 <?
 }
-}
 ?>
-
+</table>
 </center>
 </div>
+
+<?
+}
+?>
