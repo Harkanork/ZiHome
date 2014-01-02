@@ -1,4 +1,7 @@
 <?
+if(!(file_exists("./config/conf_zibase.php"))) {
+include("./config/configuration.php");
+} else {
 session_start();
 include("./pages/head.php");
 include("./pages/menu.php");
@@ -34,6 +37,7 @@ $accueil = 'plan';
 }
 }
 include("./pages/".$accueil.".php");
+}
 }
 }
 ?>
