@@ -7,6 +7,12 @@ $query3 = "SELECT * FROM page_accueil WHERE user = '".$_SESSION['auth']."'";
 $query3 = "SELECT * FROM page_accueil WHERE user = 'default'";
 }
 $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data = mysql_fetch_array($req3);
+if(empty($data)){
+$query3 = "SELECT * FROM page_accueil WHERE user = 'default'";
+$req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data = mysql_fetch_array($req3);
+}
 while ($data3 = mysql_fetch_assoc($req3))
 {
 $width = $data3['width'];
