@@ -35,6 +35,12 @@ if(!$req)
 echo "<BR>erreur lors de la creation de la base";
 } else {
 echo "<BR>La base ".$_POST['base']." a ete cree avec succes";
+$db_selected = mysql_select_db($_POST['base'],$link);
+$sql = file_get_contents("./sql/zibase.sql");
+$sql_array = explode (";",$sql);
+foreach ($sql_array as $val) {
+mysql_query($val,$link);
+}
 }
 mysql_close($link);
 }
