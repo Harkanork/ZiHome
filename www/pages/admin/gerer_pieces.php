@@ -63,7 +63,7 @@ while ($data = mysql_fetch_assoc($req))
 ?>
 <P align=center>
 <TABLE>
-<FORM method="post" action="./index.php?page=gerer_pieces">
+<FORM method="post" action="./index.php?page=administration&detail=gerer_pieces">
 <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle></INPUT></TD></TR>
 <TR><TD>Largeur :</TD><TD><INPUT type=text name=width></INPUT></TD></TR>
 <TR><TD>Hauteur :</TD><TD><INPUT type=text name=height></INPUT></TD></TR>
