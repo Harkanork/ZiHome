@@ -6,4 +6,5 @@
 * * * * *     root    /usr/bin/php /usr/bin/vent.php > /dev/null
 0 * * * *	root	/usr/bin/php /usr/bin/actioneurs.php > /dev/null
 0 * * * *       root    /usr/bin/php /usr/bin/scenario.php > /dev/null
+* * * * *     root    /usr/bin/php /usr/bin/precipitation.php > /dev/null
 * * * * *     root    /usr/bin/php /usr/bin/conso_electrique.php > /dev/null
