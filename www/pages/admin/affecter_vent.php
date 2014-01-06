@@ -3,7 +3,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
-$query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."' WHERE nom = '".$_POST['id']."'";
+$query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."' WHERE nom = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
 include("./pages/connexion.php");
@@ -23,6 +23,9 @@ while($data3 = mysql_fetch_assoc($req3))
 <option value="<? echo $data3['id']; ?>"<? if($data3['id'] ==  $data['id_plan']){ echo " selected"; } ?>><? echo $data3['libelle']; ?></option>
 <? } ?>
 </select>
+droite : <INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5>
+haut : <INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+icone : <INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>>
 Gerer Batterie :  <INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>>
 Date changement Batterie : <INPUT type="date" name="date_chgt_batterie" value="<? echo $data['date_chgt_batterie']; ?>">
 Libelle : <INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>">

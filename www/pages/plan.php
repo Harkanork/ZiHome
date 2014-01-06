@@ -87,6 +87,28 @@ $temperature=$data0['temp'];
 }
 echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;border-style:none;\"><span style=\"position:absolute;top:3px;left:36px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span></div>";
 }
+$query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
+$req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data9 = mysql_fetch_assoc($req7)) {
+$query0 = "SELECT * FROM `conso_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data0 = mysql_fetch_assoc($req0))
+{
+$temperature=$data0['conso'];
+}
+echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;border-style:none;\"><span style=\"position:absolute;top:3px;left:36px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+}
+$query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
+$req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($data9 = mysql_fetch_assoc($req7)) {
+$query0 = "SELECT * FROM `vent_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+$req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data0 = mysql_fetch_assoc($req0))
+{
+$temperature=$data0['vitesse']/10;
+}
+echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"60\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:30px;border-style:none;\"><span style=\"position:absolute;top:3px;left:36px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+}
 ?>
 </div></a>
 <script type="text/javascript">
