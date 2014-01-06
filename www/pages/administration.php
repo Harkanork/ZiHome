@@ -19,6 +19,7 @@ while ($data = mysql_fetch_assoc($req))
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_conso_elec">Affecter une conso-elec</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un Capteur</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une Precipitation</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un Scenario</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_users">Gerer les utilisateurs</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_modules">Gerer les modules</A></li>

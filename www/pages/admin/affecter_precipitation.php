@@ -35,13 +35,13 @@ $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$
 mysql_query($query, $link);
 }
 include("./pages/connexion.php");
-$query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'pluie'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
 <tr>
-<FORM method="post" action="./index.php?page=administration&detail=affecter_conso_elec">
+<FORM method="post" action="./index.php?page=administration&detail=affecter_precipitation">
 <td>
 <? echo $data['nom']; ?> : <select name="sonde">
 <option value="-1">ne pas afficher</option>

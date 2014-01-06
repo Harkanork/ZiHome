@@ -56,6 +56,11 @@ if($data['libelle'] == "accueil" && $data['actif'] == 1) {
 <li><a href = "./index.php?page=accueil"><img src = "./img/icon_home.png"/><span>Accueil</span></a></li>
 <?
 }
+if($data['libelle'] == "pluie" && $data['actif'] == 1) {
+?>
+<li><a href = "./index.php?page=pluie"><img src = "./img/icon_pluie.png"/><span>Pluie</span></a></li>
+<?
+}
 }
 include("./pages/connexion.php");
 $query = "SELECT * FROM `insertion`";

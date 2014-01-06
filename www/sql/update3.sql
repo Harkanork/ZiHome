@@ -61,3 +61,8 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (19, 'actioneur', 'Actioneur', 'actioneur'),
 (20, 'scenario', 'Scenario', 'scenario');
 
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(9, 'accueil', 1),
+(10, 'pluie', 1);
+
