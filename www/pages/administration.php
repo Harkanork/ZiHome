@@ -3,23 +3,46 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>
 <center><div id="sous-menu">
-<li><A HREF="./index.php?page=administration&detail=gerer_pieces">Gerer les pieces</A></li>
-<li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temperature</A></li>
 <?
 include("./pages/connexion.php");
-$query = "SELECT * FROM modules WHERE libelle = 'vent' AND actif = '1'";
+$query = "SELECT * FROM modules WHERE actif = '1'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
+if($data['libelle'] == 'vent') {
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un anemometre</A></li>
 <?
 }
+if($data['libelle'] == 'pluie') {
+?>
+<li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une Precipitation</A></li>
+<?
+}
+if($data['libelle'] == 'conso_elec') {
+?>
+<li><A HREF="./index.php?page=administration&detail=affecter_conso_elec">Affecter une conso-elec</A></li>
+<?
+}
+if($data['libelle'] == 'temperature') {
+?>
+<li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temperature</A></li>
+<?
+}
+if($data['libelle'] == 'plan') {
+?>
+<li><A HREF="./index.php?page=administration&detail=gerer_pieces">Gerer les pieces</A></li>
+<?
+}
+if($data['libelle'] == 'accueil') {
+?>
+<li><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></li>
+<?
+}
+}
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
-<li><A HREF="./index.php?page=administration&detail=affecter_conso_elec">Affecter une conso-elec</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un Capteur</A></li>
-<li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une Precipitation</A></li>
 <li><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un Scenario</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_users">Gerer les utilisateurs</A></li>
 <li><A HREF="./index.php?page=administration&detail=gerer_modules">Gerer les modules</A></li>
@@ -29,7 +52,6 @@ while ($data = mysql_fetch_assoc($req))
 <li><A HREF="./index.php?page=administration&detail=icones">Icones</A></li>
 <li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
 <li><A HREF="./index.php?page=administration&detail=paramettres">Paramettres</A></li>
-<li><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></li>
 </div>
 <div id="action">
 <?
