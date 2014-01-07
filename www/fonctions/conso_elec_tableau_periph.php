@@ -1,7 +1,7 @@
 <?php
 echo "<CENTER><TABLE CELLSPACING='9'>";
 echo "<TR><TD>(kWh)</TD><TD>&nbsp;Consommation&nbsp;</TD><TD>&nbsp;Cout&nbsp;</TD></TR>";
-$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 3 DAY) GROUP BY DATE_FORMAT(`date`, '%Y%m%d') LIMIT 2";
+$query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 3 DAY) GROUP BY DATE_FORMAT(`date`, '%Y%m%d') ORDER BY DATE_FORMAT(`date`, '%Y%m%d') DESC LIMIT 2";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $i=1;
 while ($value0 = mysql_fetch_assoc($req0))
