@@ -39,6 +39,11 @@ if($data['libelle'] == 'accueil') {
 <li><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></li>
 <?
 }
+if($data['libelle'] == 'video') {
+?>
+<li><A HREF="./index.php?page=administration&detail=video">Cameras</A></li>
+<?
+}
 }
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>

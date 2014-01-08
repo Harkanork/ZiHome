@@ -63,6 +63,26 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 
 
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
-(9, 'accueil', 1),
+(9, 'accueil', 1);
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (10, 'pluie', 1);
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(11, 'video', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `video`
+--
+
+CREATE TABLE IF NOT EXISTS `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adresse` varchar(255) NOT NULL,
+  `id_plan` int(11) NOT NULL,
+  `option` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 

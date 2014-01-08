@@ -31,8 +31,11 @@ $data5 = mysql_fetch_assoc($req3);
 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
 $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $data7 = mysql_fetch_assoc($req5);
+$query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
+$req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$data11 = mysql_fetch_assoc($req11);
 
-if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null) {
+if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null) {
 ?>
 <div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
 <div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div></div>
@@ -140,6 +143,11 @@ if((!($data7 == null)) && (isset($_SESSION['auth']))){
 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-4">Scenario</a></li>
 <?
 }
+if((!($data11 == null)) && (isset($_SESSION['auth']))){
+?>
+<li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-5">Video</a></li>
+<?
+}
 ?>
 
 </ul>
@@ -188,6 +196,19 @@ echo "<div id=\"actionneur\">";
 include("./fonctions/scenario.php");
 echo "</div>";
 }
+}
+if((!($data11 == null)) && (isset($_SESSION['auth']))){
+?>
+<div id="tabs-<? echo $data['id']; ?>-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+<?
+$query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
+$req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while($periph = mysql_fetch_assoc($req11)) {
+$width="640";
+$height="340";
+include("./fonctions/video.php");
+}
+echo "</div>";
 }
 if(!($data5 == null)){
 ?>

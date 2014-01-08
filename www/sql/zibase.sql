@@ -290,6 +290,20 @@ CREATE TABLE IF NOT EXISTS `modules_accueil` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `video`
+--
+
+CREATE TABLE IF NOT EXISTS `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adresse` varchar(255) NOT NULL,
+  `id_plan` int(11) NOT NULL,
+  `option` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Contenu de la table `modules_accueil`
 --
 
@@ -406,8 +420,9 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (6, 'thermostat', 1),
 (7, 'calendrier', 1),
 (8, 'vent', 1),
-(9, 'accueil', 1)
-(10, 'pluie', 1);
+(9, 'accueil', 1),
+(10, 'pluie', 1),
+(11, 'video', 1);
 
 -- --------------------------------------------------------
 
