@@ -14,10 +14,10 @@ Nom
 Protocol
 </td>
 <td>
-Bas
+Droite
 </td>
 <td>
-Droite
+Bas
 </td>
 <td>
 Icone
