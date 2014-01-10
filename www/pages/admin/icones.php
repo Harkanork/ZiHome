@@ -13,12 +13,22 @@ while ($data = mysql_fetch_assoc($req))
 $icones1 = $data['value'];
 }
 $array = array( 1, 2, 4, 5, 6, 7, 8, 9 ); 
-echo "<p align=center><form method=\"post\" action=\"./index.php?page=administration&detail=icones\">";
+  echo '<p align=center><form method="post" action="./index.php?page=administration&detail=icones">';
+  echo '<table border="0" cellpadding="0" cellspacing="2">';
 foreach($array as $icones) {
-?><input type="radio" name="icones" value="<? echo $icones ?>"<? if($icones1 == $icones) { echo " checked"; } ?>><?
-echo "<img src=./img/icones/StyleIconPreview".$icones.".png><BR>";
-
+    echo '<tr>';
+    echo '<td><input type="radio" name="icones" value="'.$icones.'"';
+    if($icones1 == $icones) { 
+      echo " checked"; 
 }
-echo "<INPUT TYPE=\"SUBMIT\" NAME=\"VALIDER\" VALUE=\"VALIDER\"></form></p>";
+    echo '/></td>';
+    echo '<td><img width="100" height="100" src="./img/icones/StyleIconPreview'.$icones.'.png"/></td>';
+    echo '</tr>';
+  }
+  // Le bouton Valider est dans le tableau pour le centrer sous les images
+  echo '<tr>';
+  echo '<td></td><td align="center"><INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER"/></form></td>';
+  echo '</tr>';
+  echo '</table></p>';
 }
 ?>
