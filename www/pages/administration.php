@@ -44,6 +44,11 @@ if($data['libelle'] == 'video') {
 <li><A HREF="./index.php?page=administration&detail=video">Cameras</A></li>
 <?
 }
+if($data['libelle'] == 'iphone') {
+?>
+<li><A HREF="./index.php?page=administration&detail=iphone">iPhone</A></li>
+<?
+}
 }
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
