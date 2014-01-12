@@ -509,7 +509,9 @@ INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
 (1, 'icones', '1'),
 (2, 'css', 'style'),
-(3, 'accueil', 'plan');
+(3, 'accueil', 'plan'),
+(4, 'largeur icones', '60'),
+(5, 'hauteur icones', '60');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

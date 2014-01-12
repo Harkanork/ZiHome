@@ -1,55 +1,111 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
-if(isset($_POST['valider'])){
-include("./pages/connexion.php");
-$query = "UPDATE paramettres SET value = '".$_POST['value']."' WHERE id = '".$_POST['id']."'";
-mysql_query($query, $link);
-}
+  if(isset($_POST['valider'])){
+    include("./pages/connexion.php");
+    $query = "UPDATE paramettres SET value = '".$_POST['value']."' WHERE id = '".$_POST['id']."'";
+    mysql_query($query, $link);
+  }
 ?>
 <div id="action-actionneur">
 <center>
 <br>
 <table border="0" align="center">
-<tr class="nom">
-<td>
-Nom
-</td>
-<td>
-Valeur
-</td>
-<td></td></tr>
+  <tr class="nom">
+    <td>Nom</td>
+    <td>Valeur</td>
+    <td>Action</td>
+  </tr>
 <?
-include("./pages/connexion.php");
-$query = "SELECT * FROM paramettres WHERE libelle != 'icones'";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
+  include("./pages/connexion.php");
+  $query = "SELECT * FROM paramettres WHERE libelle != 'icones'";
+  $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+  while ($data = mysql_fetch_assoc($req))
+  {
+?>
+  <tr>
+    <FORM method="post" action="./index.php?page=administration&detail=paramettres">
+    <input type="hidden" name="id" value="<? echo $data['id']; ?>">
+    <td class="name">
+      <? echo $data['libelle']; ?></td><td>
+<?
+    $query1 = "SELECT * FROM ".$data['libelle'];
+    // est-ce qu'il y a une table associee au parametre
+    $req1 = mysql_query($query1, $link);
+    if ($req1)
+    {
+      echo "<select name=\"value\">";    
+      while ($data1 = mysql_fetch_assoc($req1))
+      {
+        if($data1['value'] == $data['value'])
+        {
+          echo "<option value=\"".$data1['value']."\" selected>".$data1['value']."</option>";
+        } else {
+          echo "<option value=\"".$data1['value']."\">".$data1['value']."</option>";
+        }
+      }
+      echo "</select>";
+    }
+    else
+    {
+      // Echec, donc, on affiche juste une zone de texte  
+      echo "<INPUT size=\"10\" type=\"text\" name=\"value\" value=\"".$data['value']."\"/>";      
+    }   
+?>
+    </td>
+    <td>
+      <input type="submit" name="valider" value="Valider">
+    </td>
+    </FORM>
+  </tr>
+<?
+  }
+?>
+</table>
+</center>
+</div>
 
-?>
-<tr>
-<FORM method="post" action="./index.php?page=administration&detail=paramettres">
-<input type="hidden" name="id" value="<? echo $data['id']; ?>">
-<td class="name">
-<? echo $data['libelle']; ?></td><td>
-<select name="value"><?
-$query1 = "SELECT * FROM ".$data['libelle'];
-$req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data1 = mysql_fetch_assoc($req1))
-{
-if($data1['value'] == $data['value'])
-{
-echo "<option value=\"".$data1['value']."\" selected>".$data1['value']."</option>";
-} else {
-echo "<option value=\"".$data1['value']."\">".$data1['value']."</option>";
-}
-}
-?>
-</select></td><td><input type="submit" name="valider" value="Valider"></td></FORM></tr>
+<div id="action-actionneur">
+<center>
+<br>
 <?
-}
+  $query = "SELECT * FROM paramettres WHERE libelle = 'icones'";
+  $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+  while ($data = mysql_fetch_assoc($req))
+  {
+    $icones1 = $data['value'];
+    $iconesId = $data['id'];
+  }
+  $array = array( 1, 4, 2, 5, 6, 8, 7, 9 ); 
+  echo '<p align=center><form method="post" action="./index.php?page=administration&detail=paramettres">';
+  echo '<input type="hidden" name="id" value="'.$iconesId.'"/>';
+  echo '<table border="0" cellpadding="0" cellspacing="2">';
+  echo '<tr class="nom">';
+  echo '<td colspan="4">Icones</td>';
+  echo '</tr>';  
+  $i = 0;
+  foreach($array as $icones) {
+    if ($i % 2 == 0) {
+      echo '<tr>';
+    }
+    echo '<td><input type="radio" name="value" value="'.$icones.'"';
+    if($icones1 == $icones) { 
+      echo " checked"; 
+    }
+    echo '/></td>';
+    echo '<td><img width="100" height="100" src="./img/icones/StyleIconPreview'.$icones.'.png"/></td>';
+    if ($i % 2 == 1) {
+      echo '</tr>';
+    }
+    $i = $i + 1;
+  }
+  echo '<tr>';
+  echo '<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></form></td>';
+  echo '</tr>';
+  echo '</table></p>';
 ?>
-</table></center></div>
+</center>
+</div>
 <?
 }
 ?>

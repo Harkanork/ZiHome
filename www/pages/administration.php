@@ -11,12 +11,12 @@ while ($data = mysql_fetch_assoc($req))
 {
 if($data['libelle'] == 'vent') {
 ?>
-<li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un anemometre</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un an&eacute;mom&egrave;tre</A></li>
 <?
 }
 if($data['libelle'] == 'pluie') {
 ?>
-<li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une Precipitation</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une pr&eacute;cipitation</A></li>
 <?
 }
 if($data['libelle'] == 'conso_elec') {
@@ -26,12 +26,12 @@ if($data['libelle'] == 'conso_elec') {
 }
 if($data['libelle'] == 'temperature') {
 ?>
-<li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temperature</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temp&eacute;rature</A></li>
 <?
 }
 if($data['libelle'] == 'plan') {
 ?>
-<li><A HREF="./index.php?page=administration&detail=gerer_pieces">Gerer les pieces</A></li>
+<li><A HREF="./index.php?page=administration&detail=gerer_pieces">G&eacute;rer les pi&egrave;ces</A></li>
 <?
 }
 if($data['libelle'] == 'accueil') {
@@ -41,7 +41,7 @@ if($data['libelle'] == 'accueil') {
 }
 if($data['libelle'] == 'video') {
 ?>
-<li><A HREF="./index.php?page=administration&detail=video">Cameras</A></li>
+<li><A HREF="./index.php?page=administration&detail=video">Cam&eacute;ras</A></li>
 <?
 }
 if($data['libelle'] == 'iphone') {
@@ -51,17 +51,16 @@ if($data['libelle'] == 'iphone') {
 }
 }
 ?>
-<li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un Actioneur</A></li>
-<li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un Capteur</A></li>
-<li><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un Scenario</A></li>
-<li><A HREF="./index.php?page=administration&detail=gerer_users">Gerer les utilisateurs</A></li>
-<li><A HREF="./index.php?page=administration&detail=gerer_modules">Gerer les modules</A></li>
-<li><A HREF="./index.php?page=administration&detail=gerer_protocol">Gerer les protocoles</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un actioneur</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un capteur</A></li>
+<li><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un sc&eacute;nario</A></li>
+<li><A HREF="./index.php?page=administration&detail=gerer_users">G&eacute;rer les utilisateurs</A></li>
+<li><A HREF="./index.php?page=administration&detail=gerer_modules">G&eacute;rer les modules</A></li>
+<li><A HREF="./index.php?page=administration&detail=gerer_protocol">G&eacute;rer les protocoles</A></li>
 <li><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></li>
 <li><A HREF="./index.php?page=administration&detail=variables">Variables</A></li>
-<li><A HREF="./index.php?page=administration&detail=icones">Icones</A></li>
 <li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
-<li><A HREF="./index.php?page=administration&detail=paramettres">Paramettres</A></li>
+<li><A HREF="./index.php?page=administration&detail=paramettres">Param&egrave;tres</A></li>
 </div>
 <div id="action">
 <?
