@@ -221,7 +221,7 @@ margin-left: -10px;
 div.metro_nav>ul>li>ul{
         display : none;
 }
-
+/*
 div.metro_nav>ul>li>a{
         display : block;
         height : 80px;
@@ -230,10 +230,9 @@ div.metro_nav>ul>li>a{
         cursor : pointer;
         text-decoration : none;
 }
-
+*/
 div.metro_nav>ul>li>a>span{
-
-        display: block;
+    display: block;
 		text-align: center;
 		width: 100px;
 		height: 30px;
@@ -300,6 +299,23 @@ div.metro_nav>.scroll_bar>span{
      border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+}
+
+#logout{
+margin-top:3px;
+margin-left: 5px;
+color: white;
+text-align: center;
+}
+
+#logout img{
+ margin-left: 13px;
+}
+
+#logout a{
+color: white;
+font-size: 12px;
+font-weight: bolder;
 }
 
 #body{
