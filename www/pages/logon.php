@@ -23,6 +23,7 @@ $data = mysql_fetch_assoc ($req);
 if($data) {
 $_SESSION['auth'] = $data['pseudo'];
 $_SESSION['niveau'] = $data['niveau'];
+echo "<meta http-equiv=\"refresh\" content=\"0; url=".$_SERVER['PHP_SELF']."\">";
 }
 mysql_close();
 }
@@ -37,7 +38,7 @@ echo "<meta http-equiv=\"refresh\" content=\"0; url=./index.php\">";
 }
 else
 {
-echo "<div id=\"logout\"><center><a href=./index.php?logout=logout><img src=\"./img/icon_logout.png\"><br>Déconnexion</font></a></center></div>";
+echo "<div id=\"logout\"><center><a href=./index.php?logout=logout><img src=\"./img/icon_logout.png\"><br>D&eacute;connexion</font></a></center></div>";
 }
 }
 else
@@ -78,8 +79,8 @@ echo "<meta http-equiv=\"refresh\" content=\"4; url=".$_SERVER['PHP_SELF']."\">"
 else
 {
 echo "<center> <form method=\"POST\" action=\"".$_SERVER['PHP_SELF']."\" style=\"margin:0;padding=0;\">
-<img src=\"./img/user.png\" width=\"14px\"> <input type=\"text\" name=\"pseudo\" size=\"12\" maxlength=\"40\"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<br><img src=\"./img/mdp.png\" width=\"14px\"><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"20\"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src=\"./img/user.png\" width=\"14px\"> <input type=\"text\" name=\"pseudo\" size=\"12\" maxlength=\"40\"></input>
+<br><img src=\"./img/mdp.png\" width=\"14px\"><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"20\"></input>
 <br><input type=\"submit\" name=\"submit1\" value=\"Valider\" class=\"input\"></input></form></center>";
 }
 }
