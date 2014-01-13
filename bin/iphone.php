@@ -5,25 +5,6 @@ include("/var/www/lib/zibase.php");
 
 /*-------------ne rien changer apres ici---------*/
 
-$link = mysql_connect($hote,$login,$plogin);
-if (!$link) {
-   die('Non connect&eacute; : ' . mysql_error());
-}
-$db_selected = mysql_select_db($base,$link);
-if (!$db_selected) {
-   die ('Impossible d\'utiliser la base : ' . mysql_error());
-}
-
-$query = "SELECT * FROM iphone";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
-$periphname = $data['periph_name'];
-$user = $data['user'];
-$pass = $data['pass'];
-
-$zibase = new ZiBase($ipzibase);
-
 function get_distance_m($lat1, $lng1, $lat2, $lng2) {
   $earth_radius = 6378137;   // Terre = sphere de 6378km de rayon
   $rlo1 = deg2rad($lng1);
@@ -37,6 +18,26 @@ function get_distance_m($lat1, $lng1, $lat2, $lng2) {
   $d = 2 * atan2(sqrt($a), sqrt(1 - $a));
   return ($earth_radius * $d);
 }
+
+$link = mysql_connect($hote,$login,$plogin);
+if (!$link) {
+   die('Non connect&eacute; : ' . mysql_error());
+}
+$db_selected = mysql_select_db($base,$link);
+if (!$db_selected) {
+   die ('Impossible d\'utiliser la base : ' . mysql_error());
+}
+while (true) {
+$i = 0;
+$query = "SELECT * FROM iphone";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$periphname = $data['periph_name'];
+$user = $data['user'];
+$pass = $data['pass'];
+
+$zibase = new ZiBase($ipzibase);
 
 // Créion d'une nouvelle ressource cURL
 $ch = curl_init();
@@ -114,8 +115,12 @@ while ($data0 = mysql_fetch_assoc($req0))
 $distancem = intval(round(get_distance_m($data0['latitude'], $data0['longitude'], $latitude, $longitude), 0));
 $distancekm = intval(round(get_distance_m($data0['latitude'], $data0['longitude'], $latitude, $longitude)/1000, 0));
 $zibase->sendVirtualProbeValues($data0['sonde'], $distancem, $distancekm, 0, ZbVirtualProbe::OREGON);
+$dist[$i] = $distancem;
+$i++;
 }
 }
+}
+sleep(intval((min($dist)/10)+60));
 }
 }
 ?>

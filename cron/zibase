@@ -8,4 +8,3 @@
 0 * * * *       root    /usr/bin/php /usr/bin/scenario.php > /dev/null
 * * * * *     root    /usr/bin/php /usr/bin/precipitation.php > /dev/null
 * * * * *     root    /usr/bin/php /usr/bin/conso_electrique.php > /dev/null
-* * * * *     root    /usr/bin/php /usr/bin/iphone.php > /dev/null
