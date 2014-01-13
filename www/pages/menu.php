@@ -61,7 +61,7 @@ if($data['libelle'] == "pluie" && $data['actif'] == 1) {
 <li><a href = "./index.php?page=pluie"><img src = "./img/icon_pluie.png"/><span>Pluie</span></a></li>
 <?
 }
-if($data['libelle'] == "video" && $data['actif'] == 1) {
+if($data['libelle'] == "video" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
 ?>
 <li><a href = "./index.php?page=video"><img src = "./img/icon_video.png"/><span>Camera</span></a></li>
 <?
