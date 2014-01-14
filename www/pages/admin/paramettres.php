@@ -29,11 +29,11 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <td class="name">
       <? echo $data['libelle']; ?></td><td>
 <?
-    $query1 = "SELECT * FROM ".$data['libelle'];
-    // est-ce qu'il y a une table associee au parametre
-    $req1 = mysql_query($query1, $link);
-    if ($req1)
+    if ($data['type'] == 'selectbox')
     {
+      $query1 = "SELECT * FROM ".$data['libelle'];
+      // est-ce qu'il y a une table associee au parametre
+      $req1 = mysql_query($query1, $link);
       echo "<select name=\"value\">";    
       while ($data1 = mysql_fetch_assoc($req1))
       {
@@ -46,11 +46,20 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       }
       echo "</select>";
     }
-    else
+    else if($data['type'] == 'checkbox')
     {
-      // Echec, donc, on affiche juste une zone de texte  
-      echo "<INPUT size=\"10\" type=\"text\" name=\"value\" value=\"".$data['value']."\"/>";      
+      echo "<INPUT type=\"".$data['type']."\" name=\"value\" value=\"true\"";
+      if ($data['value'] == "true")
+      {
+        echo " checked ";
+      }
+      echo "/>";      
+    }    
+    else 
+    {
+      echo "<INPUT size=\"10\" type=\"".$data['type']."\" name=\"value\" value=\"".$data['value']."\"/>";      
     }   
+       
 ?>
     </td>
     <td>
