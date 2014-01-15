@@ -39,9 +39,18 @@ $res_query = mysql_query($query, $link);
 $data = mysql_fetch_assoc($res_query);
 $heightIcones = $data['value'];
 
+$weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
+if(file_exists("img/plan/nuit.png")) {
+$soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
+$soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
+$now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
+if($now<$soleil_nuit && $now>$soleil_jour) { $soleil = "jour";} else { $soleil = "nuit"; }
+} else {
+$soleil = "jour";
+}
 ?>
 <div id="centerplan" style="text-align: center;margin: 15px;">
-<div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(img/plan/jour.png);">
+<div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(img/plan/<? echo $soleil; ?>.png);">
     <?
     $query = "SELECT * FROM plan";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -65,10 +74,10 @@ $heightIcones = $data['value'];
 
         if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null) {
         ?>
-            <div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
+            <div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
                 <div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div></div>
         <? } else { ?>
-            <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #CCC;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
+            <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
             <div style="line-height: <? echo $data['line-height']; ?>px;"><? echo $data['libelle']; ?></div>
             <?
             $query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
