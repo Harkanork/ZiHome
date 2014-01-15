@@ -8,3 +8,4 @@
 0 * * * *       root    /usr/bin/php /usr/bin/scenario.php > /dev/null
 * * * * *     root    /usr/bin/php /usr/bin/precipitation.php > /dev/null
 * * * * *     root    /usr/bin/php /usr/bin/conso_electrique.php > /dev/null
+30 * * * *     root    /usr/bin/php /usr/bin/meteo.php > /dev/null

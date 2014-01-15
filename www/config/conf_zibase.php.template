@@ -28,4 +28,13 @@ $ipzibase = "192.168.X.Y";
 $ipserver = "192.168.X.Y";
 
 /*--------------------fin des Paramettres Zibase------------------------*/
+
+/*--------------------Paramettres Meteo---------------------------------*/
+
+$meteo_sonde_temperature = "120001";
+$meteo_sonde_vent = "120002";
+//Rechercher sa ville sur weather.com et relever la valeur de l'adresse
+$meteo_ville = "FRXX1879:1:FR";
+
+/*--------------------fin des Paramettres Meteo-------------------------*/
 ?>
