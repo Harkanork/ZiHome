@@ -19,29 +19,6 @@ function get_distance_m($lat1, $lng1, $lat2, $lng2) {
   return ($earth_radius * $d);
 }
 
-$link = mysql_connect($hote,$login,$plogin);
-if (!$link) {
-   die('Non connect&eacute; : ' . mysql_error());
-}
-$db_selected = mysql_select_db($base,$link);
-if (!$db_selected) {
-   die ('Impossible d\'utiliser la base : ' . mysql_error());
-}
-while (true) {
-$i = 0;
-$query = "SELECT * FROM iphone";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
-$periphname = $data['periph_name'];
-$user = $data['user'];
-$pass = $data['pass'];
-
-$zibase = new ZiBase($ipzibase);
-
-// Créion d'une nouvelle ressource cURL
-$ch = curl_init();
-
 $header[] = 'Content-Type: application/json; charset=utf-8';
 $header[] = 'X-Apple-Find-Api-Ver: 2.0';
 $header[] = 'X-Apple-Authscheme: UserIdGuest';
@@ -51,6 +28,31 @@ $header[] = 'X-Client-Name: iPad';
 $header[] = 'X-Client-UUID: 0cf3dc501ff812adb0b202baed4f37274b210853';
 $header[] = 'Accept-Language: en-us';
 $header[] = 'Connection: keep-alive';
+
+while (true) {
+$link = mysql_connect($hote,$login,$plogin);
+if (!$link) {
+   die('Non connect&eacute; : ' . mysql_error());
+}
+$db_selected = mysql_select_db($base,$link);
+if (!$db_selected) {
+   die ('Impossible d\'utiliser la base : ' . mysql_error());
+}
+
+$zibase = new ZiBase($ipzibase);
+$i = 0;
+$dist = null;
+$dist = array();
+$query = "SELECT * FROM iphone";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+$periphname = $data['periph_name'];
+$user = $data['user'];
+$pass = $data['pass'];
+
+// Créion d'une nouvelle ressource cURL
+$ch = curl_init();
 
 // Configuration de l'URL et d'autres options
 curl_setopt($ch, CURLOPT_URL, 'https://fmipmobile.icloud.com/fmipservice/device/'.$user.'/initClient');
@@ -120,7 +122,11 @@ $i++;
 }
 }
 }
-sleep(intval((min($dist)/10)+60));
 }
+$today = getdate();
+$now = $today['year']."-".$today['mon']."-".$today['mday']." ".$today['hours'].":".$today['minutes'].":".$today['seconds'];
+echo $now." - distance : ".min($dist)."m - sleep : ".(intval((min($dist)/20)+60)/60)."min\n";
+sleep(intval((min($dist)/20)+60));
+mysql_close();
 }
 ?>
