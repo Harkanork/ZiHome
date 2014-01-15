@@ -44,7 +44,7 @@ mysql_query($val,$link);
 }
 mysql_close($link);
 }
-$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n\n/*--------------------Paramettres Cout Electrique-----------------------*/\n\n\$coutfixe                   = '".$_POST['coutfixe']."';\n\$coutHC                     = '".$_POST['HC']."';\n\$coutHP                     = '".$_POST['HP']."';\n\$heuresCreuses[0]['debut']      = '".$_POST['heurescreusesdebut1'].":00';\n\$heuresCreuses[0]['fin']        = '".$_POST['heurescreusesfin1'].":00';\n\$heuresCreuses[1]['debut']      = '".$_POST['heurescreusesdebut2'].":00';\n\$heuresCreuses[1]['fin']        = '".$_POST['heurescreusesfin2'].":00';\n\n/*--------------------fin des Paramettres Cout Electrique---------------*/\n\n/*--------------------Paramettres\nZibase--------------------------------*/\n\n\$idzibase = '".$_POST['idzibase']."';\n\$tokenzibase = '".$_POST['tokenzibase']."';\n\$ipzibase = '".$_POST['ipzibase']."';\n\$ipserver = '".$_POST['ipserver']."';\n\n/*--------------------fin des Paramettres Zibase------------------------*/\n?>";
+$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n\n/*--------------------Paramettres Cout Electrique-----------------------*/\n\n\$coutfixe                   = '".$_POST['coutfixe']."';\n\$coutHC                     = '".$_POST['HC']."';\n\$coutHP                     = '".$_POST['HP']."';\n\$heuresCreuses[0]['debut']      = '".$_POST['heurescreusesdebut1'].":00';\n\$heuresCreuses[0]['fin']        = '".$_POST['heurescreusesfin1'].":00';\n\$heuresCreuses[1]['debut']      = '".$_POST['heurescreusesdebut2'].":00';\n\$heuresCreuses[1]['fin']        = '".$_POST['heurescreusesfin2'].":00';\n\n/*--------------------fin des Paramettres Cout Electrique---------------*/\n\n/*--------------------Paramettres\nZibase--------------------------------*/\n\n\$idzibase = '".$_POST['idzibase']."';\n\$tokenzibase = '".$_POST['tokenzibase']."';\n\$ipzibase = '".$_POST['ipzibase']."';\n\$ipserver = '".$_POST['ipserver']."';\n\n/*--------------------fin des Paramettres Zibase------------------------*/\n\n/*--------------------Paramettres Meteo---------------------------------*/\n\n$meteo_sonde_temperature = '".$_POST['meteo_temperature']."';\n$meteo_sonde_vent = '".$_POST['meteo_vent']."';\n//Rechercher sa ville sur weather.com et relever la valeur de l'adresse\n$meteo_ville = '".$_POST['meteo_ville']."';\n\n/*--------------------fin des Paramettres Meteo-------------------------*/\n?>";
 $fichier = fopen("./config/conf_zibase.php","w");
 if (fwrite($fichier,$file)) {
 echo "<br>Fichier de configuration correctement cree";
@@ -71,6 +71,10 @@ echo $message;
 <BR>Electricite plage Heure Creuse 2 debut : <INPUT type=time name=heurescreusesdebut2 value="<? echo $_POST['heurescreusesdebut2']; ?>"></INPUT>
 <BR>Electricite plage Heure Creuse 2 fin : <INPUT type=time name=heurescreusesfin2 value="<? echo $_POST['heurescreusesfin2']; ?>"></INPUT>
 <BR><BR>
+<BR>Meteo Ville :<INPUT type=text name=meteo_ville value="<? echo $_POST['meteo_ville']; ?>"></INPUT>
+<BR>Meteo sonde temperature :<INPUT type=text name=meteo_temperature value="<? echo $_POST['meteo_temperature']; ?>"></INPUT>
+<BR>Meteo sonde vent :<INPUT type=text name=meteo_vent value="<? echo $_POST['meteo_vent']; ?>"></INPUT>
+<BR><BR>
 <BR>ID ZiBase : <INPUT type=text name=idzibase value="<? echo $_POST['idzibase']; ?>"></INPUT>
 <BR>Token Zibase : <INPUT type=text name=tokenzibase value="<? echo $_POST['tokenzibase']; ?>"></INPUT>
 <BR>Adresse IP ZiBase : <INPUT type=text name=ipzibase value="<? echo $_POST['ipzibase']; ?>"></INPUT>
@@ -96,6 +100,10 @@ echo $message;
 <BR>Electricite plage Heure Creuse 1 fin : <INPUT type=time name=heurescreusesfin1 value="00:00"></INPUT>
 <BR>Electricite plage Heure Creuse 2 debut : <INPUT type=time name=heurescreusesdebut2 value="00:00"></INPUT>
 <BR>Electricite plage Heure Creuse 2 fin : <INPUT type=time name=heurescreusesfin2 value="00:00"></INPUT>
+<BR><BR>
+<BR>Meteo Ville :<INPUT type=text name=meteo_ville></INPUT>
+<BR>Meteo sonde temperature :<INPUT type=text name=meteo_temperature></INPUT>
+<BR>Meteo sonde vent :<INPUT type=text name=meteo_vent></INPUT>
 <BR><BR>
 <BR>ID ZiBase : <INPUT type=text name=idzibase></INPUT>
 <BR>Token Zibase : <INPUT type=text name=tokenzibase></INPUT>
