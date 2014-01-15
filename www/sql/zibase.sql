@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
   `border` varchar(255) NOT NULL DEFAULT '2',
   `popup` text NOT NULL,
   `supplementaire` varchar(255) NOT NULL,
+  `show-libelle` boolean default true,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -240,6 +241,7 @@ CREATE TABLE IF NOT EXISTS `paramettres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -506,12 +508,13 @@ INSERT INTO `users` (`id`, `pseudo`, `pass`) VALUES
 -- Contenu de la table `paramettres`
 --
 
-INSERT INTO `paramettres` (`id`, `libelle`, `value`) VALUES
-(1, 'icones', '1'),
-(2, 'css', 'style'),
-(3, 'accueil', 'plan'),
-(4, 'largeur icones', '60'),
-(5, 'hauteur icones', '60');
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(1, 'icones', '1', 'selectbox'),
+(2, 'css', 'style', 'selectbox'),
+(3, 'accueil', 'plan', 'selectbox'),
+(4, 'largeur icones', '60', 'number'),
+(5, 'hauteur icones', '60', 'number'),
+(6, 'afficher le nom des pi&egrave;ces', 'true', 'checkbox');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

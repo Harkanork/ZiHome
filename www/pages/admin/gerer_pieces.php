@@ -1,37 +1,48 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
-include("./pages/connexion.php");
-if(isset($_GET['supprimer'])){
-$query = "DELETE FROM `plan` WHERE `id` = ".$_GET['supprimer'];
-mysql_query($query, $link);
-}
-if(isset($_POST['Modifier'])){
-$query = "UPDATE plan SET `id` = '".$_POST['id']."',  `libelle` = '".$_POST['libelle']."',  `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `line-height` = '".$_POST['line-height']."', `text-align` = '".$_POST['text-align']."', `border` = '".$_POST['border']."', `supplementaire` = '".$_POST['supplementaire']."' WHERE `id` = '".$_POST['idsource']."'";
-mysql_query($query, $link);
-}
-if(isset($_POST['Valider'])) {
-$query = "INSERT INTO plan (`libelle`, `width`, `height`, `left`, `top`, `line-height`, `text-align`, `border`, `supplementaire`) VALUES ('".$_POST['libelle']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['line-height']."', '".$_POST['text-align']."', '".$_POST['border']."', '".$_POST['supplementaire']."')";
-mysql_query($query, $link);
-}
+  include("./pages/connexion.php");
+  if(isset($_GET['supprimer'])){
+    $query = "DELETE FROM `plan` WHERE `id` = ".$_GET['supprimer'];
+    mysql_query($query, $link);
+  }
+  if(isset($_POST['Modifier'])){
+    $query = "UPDATE plan SET `id` = '".$_POST['id']."',  `libelle` = '".$_POST['libelle']."',  `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `line-height` = '".$_POST['line-height']."', `text-align` = '".$_POST['text-align']."', `border` = '".$_POST['border']."', `supplementaire` = '".$_POST['supplementaire']."', `show-libelle` = '".$_POST['show-libelle']."' WHERE `id` = '".$_POST['idsource']."'";
+    mysql_query($query, $link);
+  }
+  if(isset($_POST['Valider'])) {
+    $query = "INSERT INTO plan (`libelle`, `width`, `height`, `left`, `top`, `line-height`, `text-align`, `border`, `supplementaire`, `show-libelle`) VALUES ('".$_POST['libelle']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['line-height']."', '".$_POST['text-align']."', '".$_POST['border']."', '".$_POST['supplementaire']."', '".$_POST['show-libelle']."')";
+    mysql_query($query, $link);
+  }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Bas</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>supplementaire</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Bas</TD><TD>Afficher<br>nom</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>supplementaire</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
-$query = "SELECT * FROM plan";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
-echo "<TR class=\"contenu\"><TD>".$data['id']."</TD><TD>".$data['libelle']."</TD><TD>".$data['width']."</TD><TD>".$data['height']."</TD><TD>".$data['left']."</TD><TD>".$data['top']."</TD><TD>".$data['line-height']."</TD><TD>".$data['text-align']."</TD><TD>".$data['border']."</TD><TD>".$data['supplementaire']."</TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&piece=".$data['id']."\">Modifier</A></TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&supprimer=".$data['id']."\">Supprimer</A></TD></TR>";
-}
+  $query = "SELECT * FROM plan";
+  $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+  while ($data = mysql_fetch_assoc($req))
+  {
+    echo "<TR class=\"contenu\"><TD>".$data['id']."</TD><TD>".$data['libelle']."</TD><TD>".$data['width']."</TD><TD>".$data['height']."</TD><TD>".$data['left']."</TD><TD>".$data['top']."</TD>";
+    if ($data['show-libelle'])
+    {
+      echo "<TD><INPUT type=\"checkbox\" checked disabled=\"true\"/></TD>";
+      echo "<TD>".$data['line-height']."</TD><TD>".$data['text-align']."</TD>";
+    }
+    else
+    {
+      echo "<TD><INPUT type=\"checkbox\" disabled=\"true\" /></TD>";
+      echo "<TD>-</TD><TD>-</TD>";
+    }
+    echo "<TD>".$data['border']."</TD><TD>".$data['supplementaire']."</TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&piece=".$data['id']."\">Modifier</A></TD><TD><A HREF=\"./index.php?page=administration&detail=gerer_pieces&supprimer=".$data['id']."\">Supprimer</A></TD></TR>";
+  }
 ?>
 </TABLE></CENTER></div>
 <?
-if(isset($_GET['piece'])){
-$query = "SELECT * FROM plan WHERE id = '".$_GET['piece']."'";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
+  if(isset($_GET['piece'])){
+    $query = "SELECT * FROM plan WHERE id = '".$_GET['piece']."'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($data = mysql_fetch_assoc($req))
+    {
 ?>
 <P align=center>
 <TABLE>
@@ -42,6 +53,7 @@ while ($data = mysql_fetch_assoc($req))
 <TR><TD>Hauteur :</TD><TD><INPUT type=text name=height value="<? echo $data['height']; ?>"></INPUT></TD></TR>
 <TR><TD>Position Droite :</TD><TD><INPUT type=text name=left value="<? echo $data['left']; ?>"></INPUT></TD></TR>
 <TR><TD>Position Bas :</TD><TD><INPUT type=text name=top value="<? echo $data['top']; ?>"></INPUT></TD></TR>
+<TR><TD>Afficher le nom :</TD><TD><INPUT type="checkbox" name="show-libelle" value="1" <? if ($data['show-libelle']) echo "checked"; ?>></INPUT></TD></TR>
 <TR><TD>Taille zone Texte :</TD><TD><INPUT type=text name=line-height value="<? echo $data['line-height']; ?>"></INPUT></TD></TR>
 <TR><TD>Alignement :</TD><TD>
 <select name=text-align>
@@ -58,8 +70,8 @@ while ($data = mysql_fetch_assoc($req))
 </TABLE>
 </P>
 <?
-}
-} else {
+    }
+  } else {
 ?>
 <P align=center>
 <TABLE>
@@ -69,6 +81,7 @@ while ($data = mysql_fetch_assoc($req))
 <TR><TD>Hauteur :</TD><TD><INPUT type=text name=height></INPUT></TD></TR>
 <TR><TD>Position Droite :</TD><TD><INPUT type=text name=left></INPUT></TD></TR>
 <TR><TD>Position Bas :</TD><TD><INPUT type=text name=top></INPUT></TD></TR>
+<TR><TD>Afficher le nom :</TD><TD><INPUT type="checkbox" name="show-libelle" value="1" checked></INPUT></TD></TR>
 <TR><TD>Taille zone Texte :</TD><TD><INPUT type=text name=line-height></INPUT></TD></TR>
 <TR><TD>Alignement :</TD><TD>
 <select name=text-align>
@@ -83,4 +96,7 @@ while ($data = mysql_fetch_assoc($req))
 </FORM>
 </TABLE>
 </P>
-<? }} ?>
+<? 
+  }
+} 
+?>
