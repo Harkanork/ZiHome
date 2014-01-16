@@ -22,3 +22,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 -- --------------------------------------------------------
 
 ALTER TABLE `plan` ADD `show-libelle` boolean default true ;
+
+-- --------------------------------------------------------
+
+ALTER TABLE `peripheriques` ADD `alerte_batterie` DATETIME NOT NULL; 
+
