@@ -1,6 +1,6 @@
 <?php
 echo "<CENTER><TABLE>";
-echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD><TD>Date - Heure</TD></TR>";
+echo "<TR><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Temperature&nbsp;</TD><TD>&nbsp;Hygrometrie&nbsp;</TD><TD>Pile Faible</TD><TD>Date Pile Faible</TD><TD>Date - Heure</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -21,7 +21,7 @@ $nom = $periph['nom'];
 } else {
 $nom = $periph['libelle'];
 }
-echo "<TR><TD>".$nom."</TD><TD ALIGN=CENTER>".$value0['temp']."</TD><TD ALIGN=CENTER>".$value0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$value0['date']."</TD></TR>";
+echo "<TR><TD>".$nom."</TD><TD ALIGN=CENTER>".$value0['temp']."</TD><TD ALIGN=CENTER>".$value0['hygro']."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$periph['alerte_batterie']."</TD><TD>".$value0['date']."</TD></TR>";
 }
 }
 echo "</TABLE></CENTER>";
