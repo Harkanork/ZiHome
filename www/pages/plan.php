@@ -82,8 +82,11 @@ $soleil = "jour";
         $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
         $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data11 = mysql_fetch_assoc($req11);
+        $query12 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
+        $req12 = mysql_query($query12, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data12 = mysql_fetch_assoc($req12);
 
-        if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null) {
+        if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
         ?>
             <div style="background-color: #fff;background:url(../img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
@@ -140,9 +143,14 @@ $soleil = "jour";
             while($data9 = mysql_fetch_assoc($req7)) {
                 $query0 = "SELECT * FROM `temperature_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
                 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-                while ($data0 = mysql_fetch_assoc($req0))
+                if ($req0 && mysql_numrows($req0) > 0)
                 {
+                  $data0 = mysql_fetch_assoc($req0);
                     $temperature=$data0['temp'];
+                }
+                else
+                {
+                  $temperature = "";  
                 }
                 echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span></div>";
             }
@@ -151,9 +159,14 @@ $soleil = "jour";
             while($data9 = mysql_fetch_assoc($req7)) {
               $query0 = "SELECT * FROM `conso_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
               $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-              while ($data0 = mysql_fetch_assoc($req0))
+              if ($req0 && mysql_numrows($req0) > 0)
               {
+                $data0 = mysql_fetch_assoc($req0);            
                 $temperature=$data0['conso'];
+              }
+              else
+              {
+                $temperature = "";
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
             }
@@ -162,9 +175,14 @@ $soleil = "jour";
             while($data9 = mysql_fetch_assoc($req7)) {
               $query0 = "SELECT * FROM `vent_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
               $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-              while ($data0 = mysql_fetch_assoc($req0))
+              if ($req0 && mysql_numrows($req0) > 0)
               {
+                $data0 = mysql_fetch_assoc($req0);
                 $temperature=$data0['vitesse']/10;
+              }
+              else
+              {
+                $temperature = "";
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
             }
