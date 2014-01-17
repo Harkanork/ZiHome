@@ -25,5 +25,9 @@ ALTER TABLE `plan` ADD `show-libelle` boolean default true ;
 
 -- --------------------------------------------------------
 
-ALTER TABLE `peripheriques` ADD `alerte_batterie` DATETIME NOT NULL; 
+ALTER TABLE `peripheriques` ADD `alerte_batterie` DATETIME NOT NULL;
+
+-- --------------------------------------------------------
+
+ALTER TABLE `peripheriques` ADD `show_value2` boolean NOT NULL default false; 
 

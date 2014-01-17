@@ -146,13 +146,21 @@ $soleil = "jour";
                 if ($req0 && mysql_numrows($req0) > 0)
                 {
                   $data0 = mysql_fetch_assoc($req0);
-                    $temperature=$data0['temp'];
+                  $temperature=$data0['temp'];
+                  $hygro=$data0['hygro'];
                 }
                 else
                 {
-                  $temperature = "";  
+                  $temperature = ""; 
+                  $hygro = ""; 
                 }
-                echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span></div>";
+                echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
+                echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span>";
+                if ($data9[show_value2])
+                {
+                  echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"50\" style=\"position:absolute;top:".($heightIcones - 22)."px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:".($heightIcones - 19)."px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
+                }
+                echo "</div>";
             }
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
