@@ -212,6 +212,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `date_chgt_batterie` DATE NOT NULL ,
   `libelle` VARCHAR( 255 ) NOT NULL ,
   `alerte_batterie` DATE NOT NULL ,
+  `show_value2` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
