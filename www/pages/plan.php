@@ -25,19 +25,43 @@ if (mysql_numrows($res_query) > 0)
 {
   $data = mysql_fetch_assoc($res_query);
   $widthIcones = $data['value'];
-  $labelOffset = max($widthIcones - 30, $widthIcones / 2);
+  $labelOffsetLeft = max($widthIcones - 30, $widthIcones / 2);
 }
 else
 {
   $widthIcones = 60;
-  $labelOffset = 30;
+  $labelOffsetLeft = 30;
 }
 
 // Recuperation de la hauteur des icones
 $query = "SELECT * FROM paramettres WHERE libelle = 'hauteur icones'";
 $res_query = mysql_query($query, $link);
 $data = mysql_fetch_assoc($res_query);
+if (mysql_numrows($res_query) > 0)
+{
 $heightIcones = $data['value'];
+}
+else
+{
+  $heightIcones = 60;
+}
+
+if ($heightIcones < 40)
+{
+  $labelWidth = 30;
+  $labelOffsetTop = $heightIcones - 13;
+  $labelFontSize = 8;
+  $labelFontOffsetTop = 1;
+  $labelFontOffsetLeft = 3; 
+}
+else
+{
+  $labelWidth = 50;
+  $labelOffsetTop = $heightIcones - 22; 
+  $labelFontSize = 12;
+  $labelFontOffsetTop = 3;
+  $labelFontOffsetLeft = 6;
+}
 
 // Recuperation de la hauteur des icones
 $query = "SELECT * FROM paramettres WHERE id = 6";
@@ -155,10 +179,10 @@ $soleil = "jour";
                   $hygro = ""; 
                 }
                 echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
-                echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span>";
+                echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span>";
                 if ($data9[show_value2])
                 {
-                  echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"50\" style=\"position:absolute;top:".($heightIcones - 22)."px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:".($heightIcones - 19)."px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
+                  echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
                 }
                 echo "</div>";
             }
@@ -176,7 +200,8 @@ $soleil = "jour";
               {
                 $temperature = "";
               }
-              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
+              echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
             }
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -192,7 +217,8 @@ $soleil = "jour";
               {
                 $temperature = "";
               }
-              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\"><img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"50\" style=\"position:absolute;top:0px;left:".$labelOffset."px;border-style:none;\"><span style=\"position:absolute;top:3px;left:".($labelOffset+6)."px;font-size:12px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
+              echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
             }
             ?>
         </div></a>
