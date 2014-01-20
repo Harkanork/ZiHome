@@ -117,7 +117,7 @@ $soleil = "jour";
         $img = "./img/plan/".$data['id'].".jpg";
         }
 
-        if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
+        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
 	?>
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
