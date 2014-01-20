@@ -32,6 +32,7 @@ if($data['libelle'] == 'temperature') {
 if($data['libelle'] == 'plan') {
 ?>
 <li><A HREF="./index.php?page=administration&detail=gerer_pieces">G&eacute;rer les pi&egrave;ces</A></li>
+<li><A HREF="./index.php?page=administration&detail=gerer_stickers">G&eacute;rer les stickers</A></li>
 <?
 }
 if($data['libelle'] == 'accueil') {

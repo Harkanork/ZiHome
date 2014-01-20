@@ -39,7 +39,7 @@ $res_query = mysql_query($query, $link);
 $data = mysql_fetch_assoc($res_query);
 if (mysql_numrows($res_query) > 0)
 {
-$heightIcones = $data['value'];
+  $heightIcones = $data['value'];
 }
 else
 {
@@ -118,7 +118,7 @@ $soleil = "jour";
         }
 
         if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
-	?>
+        ?>
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
             if ($showAllNames and $data['show-libelle'])
@@ -345,8 +345,131 @@ $soleil = "jour";
         </div>
         <? 
         }
-        } ?>
-    </div>
-    </div>
-    <script src="./js/highcharts.js"></script>
+      }
 
+      ?>
+    </div>
+  </div>      
+  <script>
+    // Fonctions utilitaires
+    var gTemperature = new Object();
+    function temperature(nom)
+    {
+      return gTemperature[nom]; 
+    }
+    
+    var gHygrometrie = new Object();
+    function hygrometrie(nom)
+    {
+      return gHygrometrie[nom]; 
+    }
+
+    var gVitesseVent = new Object();
+    function vitesseVent(nom)
+    {
+      return gVitesseVent[nom]; 
+    }
+
+    var gDirectionVent = new Object();
+    function directionVent(nom)
+    {
+      return gDirectionVent[nom]; 
+    }
+    
+    var gActionneur = new Object();
+    function actionneur(nom)
+    {
+      return gActionneur[nom]; 
+    }
+          
+    function nuit()
+    {
+      return <? 
+      if ($soleil == "nuit") 
+      {
+        echo "true";
+      } 
+      else 
+      {
+        echo "false";
+      } 
+      ?>;
+    }    
+
+    function jour()
+    {
+      return <? 
+      if ($soleil == "jour") 
+      {
+        echo "true";
+      } 
+      else 
+      {
+        echo "false";
+      } 
+      ?>;
+    } 
+    
+    <?
+    // Construction des tableaux issues des capteurs de temperature
+    $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      $query0 = "SELECT * FROM `temperature_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
+      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+      while ($value0 = mysql_fetch_assoc($req0))
+      {
+        echo 'gTemperature["' . $periph['nom'] . '"] = ' . $value0['temp'] . ';';
+        echo 'gHygrometrie["' . $periph['nom'] . '"] = ' . $value0['hygro'] . ';';
+      } 
+    }
+    ?>
+    
+    <?
+    // Construction des tableaux issues des capteurs de temperature
+    $query = "SELECT * FROM peripheriques WHERE periph = 'vent'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      $query0 = "SELECT * FROM `vent_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
+      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+      while ($value0 = mysql_fetch_assoc($req0))
+      {
+        echo 'gDirectionVent["' . $periph['nom'] . '"] = "' . $value0['direction'] . '";';
+        echo 'gVitesseVent["' . $periph['nom'] . '"] = ' . $value0['vitesse'] . ';';
+      } 
+    }
+    ?>
+    
+    <?
+    // Construction des tableaux issues des capteurs de temperature
+    $query = "SELECT * FROM peripheriques WHERE periph = 'actioneur'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      if ($periph['protocol'] == 6) 
+      {
+          $protocol = true;
+      } 
+      else 
+      {
+          $protocol = false;
+      }
+      echo 'gActionneur["' . $periph['nom'] . '"] = ' . $zibase->getState($periph['id'], $protocol) . ';';
+    }
+    ?>
+    
+    <?        
+    // Creation des stickers
+    $queryStickers = "SELECT * FROM stickers";
+    $reqStickers = mysql_query($queryStickers, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($sticker = mysql_fetch_assoc($reqStickers)) {
+      echo 'if ('.$sticker['condition'].') { $( "#plan" ).append( "';        
+      echo '<img src=\"./img/plan/' . $sticker['fichier'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;;z-index:' . $sticker['id'] . '\"/>';
+      echo '");}';
+    }
+    ?>
+  </script>
+
+<script src="./js/highcharts.js"></script>

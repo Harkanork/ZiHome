@@ -323,6 +323,22 @@ CREATE TABLE IF NOT EXISTS `modules_accueil` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `stickers`
+--
+
+CREATE TABLE IF NOT EXISTS `stickers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `fichier` varchar(255) NOT NULL,
+  `left` int(11) NOT NULL,
+  `top` int(11) NOT NULL,
+  `condition` varchar(1024) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `video`
 --
 
