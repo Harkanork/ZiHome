@@ -91,7 +91,7 @@ while ($data = mysql_fetch_assoc($req0))
 $location = get_iPhone_location($data['periph_name'], $data['user'], $data['pass']);
 }
 $query = "UPDATE iphone_distances SET sonde = '".$_POST['sonde']."', `latitude` = '".$location['latitude']."', `longitude` = '".$location['longitude']."' WHERE id = '".$_POST['id']."'";
-echo $query;
+//echo $query;
 } else {
 $query = "UPDATE iphone_distances SET sonde = '".$_POST['sonde']."', `latitude` = '".$_POST['latitude']."', `longitude` = '".$_POST['longitude']."' WHERE id = '".$_POST['id']."'";
 }
