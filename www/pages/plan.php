@@ -72,20 +72,23 @@ if ($data['value'] == 'true')
 {
   $showAllNames = true;
 }
-
+$image_fond = "";
+if(file_exists("img/plan/jour.png")) {
+$image_fond = "img/plan/jour.png";
+}
 $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
 if(file_exists("img/plan/nuit.png")) {
 $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
 $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
 $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
-if($now<$soleil_nuit && $now>$soleil_jour) { $soleil = "jour";} else { $soleil = "nuit"; }
+if($now<$soleil_nuit && $now>$soleil_jour) { $soleil = "jour"; $image_fond = "img/plan/jour.png"; } else { $soleil = "nuit"; $image_fond = "img/plan/nuit.png"; }
 } else {
 $soleil = "jour";
 }
 
 ?>
 <div id="centerplan" style="text-align: center;margin: 15px;">
-<div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(img/plan/<? echo $soleil; ?>.png);">
+<div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(<? echo $image_fond; ?>);">
     <?
     $query = "SELECT * FROM plan";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -109,10 +112,14 @@ $soleil = "jour";
         $query12 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
         $req12 = mysql_query($query12, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data12 = mysql_fetch_assoc($req12);
+        $img = "";
+        if(file_exists("./img/plan/".$data['id'].".jpg")) {
+        $img = "./img/plan/".$data['id'].".jpg";
+        }
 
         if($data3 == null && ($data4 == null || (!(isset($_SESSION['auth'])))) && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
-        ?>
-            <div style="background-color: #fff;background:url(./img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
+	?>
+            <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
             if ($showAllNames and $data['show-libelle'])
             {
@@ -120,7 +127,7 @@ $soleil = "jour";
             }
             echo '</div>'; 
           } else { ?>
-            <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(./img/plan/<? echo $data['id']; ?>.jpg);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
+            <a href="javascript:showPopup('custom<? echo $data['id']; ?>');"><div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
             <?
             if ($showAllNames and $data['show-libelle'])
             {
@@ -180,7 +187,7 @@ $soleil = "jour";
                 }
                 echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
                 echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."&deg;</span>";
-                if ($data9[show_value2])
+                if ($data9['show_value2'])
                 {
                   echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
                 }
