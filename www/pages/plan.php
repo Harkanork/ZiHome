@@ -465,7 +465,11 @@ $soleil = "jour";
     $queryStickers = "SELECT * FROM stickers";
     $reqStickers = mysql_query($queryStickers, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($sticker = mysql_fetch_assoc($reqStickers)) {
-      echo 'if ('.$sticker['condition'].') { $( "#plan" ).append( "';        
+      if ($sticker['condition'] != "")
+      {
+        echo 'if ('.$sticker['condition'].')';
+      }
+      echo ' { $( "#plan" ).append( "';        
       echo '<img src=\"./img/plan/' . $sticker['fichier'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;;z-index:' . $sticker['id'] . '\"/>';
       echo '");}';
     }
