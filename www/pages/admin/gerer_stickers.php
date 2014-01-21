@@ -2,8 +2,8 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
   include("./pages/connexion.php");
-  if(isset($_GET['Supprimer'])){
-    $query = "DELETE FROM `stickers` WHERE `id` = '".$_POST['id']."'";
+  if(isset($_POST['Supprimer'])){
+    $query = "DELETE FROM stickers WHERE `id` = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   else if(isset($_POST['Modifier'])){
