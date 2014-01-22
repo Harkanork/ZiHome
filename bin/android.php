@@ -80,6 +80,7 @@ curl_setopt($ch, CURLOPT_AUTOREFERER, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $file);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 // Répétion de l'URL et affichage sur le naviguateur
 $value = curl_exec($ch);
