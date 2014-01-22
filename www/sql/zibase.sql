@@ -172,8 +172,6 @@ CREATE TABLE IF NOT EXISTS `iphone` (
   `periph_name` varchar(255) NOT NULL,
   `user` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
-  `sleep_base` int(11) NOT NULL,
-  `sleep_coef` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -205,8 +203,6 @@ CREATE TABLE IF NOT EXISTS `android` (
   `carrier` varchar(255) NOT NULL,
   `cellId` int(11) NOT NULL,
   `locationAreaCode` int(11) NOT NULL,
-  `sleep_base` int(11) NOT NULL,
-  `sleep_coef` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -568,7 +564,11 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (3, 'accueil', 'plan', 'selectbox'),
 (4, 'largeur icones', '60', 'number'),
 (5, 'hauteur icones', '60', 'number'),
-(6, 'afficher le nom des pi&egrave;ces', 'true', 'checkbox');
+(6, 'afficher le nom des pi&egrave;ces', 'true', 'checkbox'),
+(7, 'iphone_sleep_base', '60', 'number'),
+(8, 'iphone_sleep_coef', '60', 'number'),
+(9 'android_sleep_base', '60', 'number'),
+(10, 'android_sleep_coef', '60', 'number');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
