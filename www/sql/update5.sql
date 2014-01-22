@@ -86,4 +86,7 @@ CREATE TABLE IF NOT EXISTS `android_distances` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(13, 'android', 1);

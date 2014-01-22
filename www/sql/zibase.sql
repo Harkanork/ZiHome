@@ -507,7 +507,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (9, 'accueil', 1),
 (10, 'pluie', 1),
 (11, 'video', 1),
-(12, 'iphone', 1);
+(12, 'iphone', 1),
+(13, 'android', 1);
 
 -- --------------------------------------------------------
 
