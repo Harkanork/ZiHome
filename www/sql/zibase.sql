@@ -567,7 +567,7 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (6, 'afficher le nom des pi&egrave;ces', 'true', 'checkbox'),
 (7, 'iphone_sleep_base', '60', 'number'),
 (8, 'iphone_sleep_coef', '60', 'number'),
-(9 'android_sleep_base', '60', 'number'),
+(9, 'android_sleep_base', '60', 'number'),
 (10, 'android_sleep_coef', '60', 'number');
 
 
