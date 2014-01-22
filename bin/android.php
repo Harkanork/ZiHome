@@ -30,6 +30,18 @@ $db_selected = mysql_select_db($base,$link);
 if (!$db_selected) {
    die ('Impossible d\'utiliser la base : ' . mysql_error());
 }
+$sleepbase = 0;
+$sleepcoef = 1;
+$query = "SELECT * FROM  `paramettres` WHERE libelle = 'android_sleep_base'";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$sleepbase = mysql_result($res_query,0,"value");
+}
+$query = "SELECT * FROM  `paramettres` WHERE libelle = 'android_sleep_coef'";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$sleepcoef = mysql_result($res_query,0,"value");
+}
 
 $zibase = new ZiBase($ipzibase);
 $i = 0;
@@ -40,8 +52,6 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 $apikey =  $data['apikey'];
-$sleepcoef = $data['sleep_coef'];
-$sleepbase = $data['sleep_base'];
 
 $file = '{
 "homeMobileCountryCode": 208,
@@ -84,7 +94,7 @@ $longitude = $location['lng'];
 $latitude = $location['lat'];
 echo "latitude : ".$latitude."\n";
 echo "longitude : ".$longitude."\n";
-$query0 = "SELECT * FROM android_distances WHERE id_iphone = '".$data['id']."'";
+$query0 = "SELECT * FROM android_distances WHERE id_android = '".$data['id']."'";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data0 = mysql_fetch_assoc($req0))
 {

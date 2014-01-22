@@ -127,13 +127,13 @@ Position actuelle : <input type="checkbox" name="pos_actuelle" value="1"></input
 } else {
 if(isset($_POST['valider'])) {
 include("./pages/connexion.php");
-$query = "INSERT INTO `iphone` (periph_name, user, pass, sleep_base, sleep_coef) VALUES ('".$_POST['periph_name']."', '".$_POST['user']."', '".$_POST['pass']."', '".$_POST['sleep_base']."', '".$_POST['sleep_coef']."')";
+$query = "INSERT INTO `iphone` (periph_name, user, pass) VALUES ('".$_POST['periph_name']."', '".$_POST['user']."', '".$_POST['pass']."')";
 mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 mysql_close();
 }
 if(isset($_POST['modifier'])) {
 include("./pages/connexion.php");
-$query = "UPDATE iphone SET periph_name = '".$_POST['periph_name']."', `user` = '".$_POST['user']."', `pass` = '".$_POST['pass']."', `sleep_base` = '".$_POST['sleep_base']."', `sleep_coef` = '".$_POST['sleep_coef']."' WHERE id = '".$_POST['id']."'";
+$query = "UPDATE iphone SET periph_name = '".$_POST['periph_name']."', `user` = '".$_POST['user']."', `pass` = '".$_POST['pass']."' WHERE id = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
 if(isset($_POST['supprimer'])) {
@@ -147,17 +147,15 @@ $query = "SELECT * FROM iphone";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-echo "<TR><FORM method=POST action=\"./index.php?page=administration&detail=iphone\"><TD><input type=text name=periph_name value=\"".$data['periph_name']."\"></input></TD><TD><input type=text name=user value=\"".$data['user']."\"></input></TD><TD><input type=password name=pass value=\"".$data['pass']."\"></input></TD><TD><input type=text name=sleep_base value=\"".$data['sleep_base']."\"></input></TD><TD><input type=text name=sleep_coef value=\"".$data['sleep_coef']."\"></input></TD><TD><input type=hidden name=id value=".$data['id']."></input><input type=hidden name=id_iphone value=".$data['id']."></input><input type=submit name=supprimer value=Supprimer></input></TD><TD><input type=submit name=modifier value=Modifier></input></TD><TD><input type=submit name=site value=Coordonnees></input></TD></FORM></TR>";
+echo "<TR><FORM method=POST action=\"./index.php?page=administration&detail=iphone\"><TD><input type=text name=periph_name value=\"".$data['periph_name']."\"></input></TD><TD><input type=text name=user value=\"".$data['user']."\"></input></TD><TD><input type=password name=pass value=\"".$data['pass']."\"></input></TD><TD><input type=hidden name=id value=".$data['id']."></input><input type=hidden name=id_iphone value=".$data['id']."></input><input type=submit name=supprimer value=Supprimer></input></TD><TD><input type=submit name=modifier value=Modifier></input></TD><TD><input type=submit name=site value=Coordonnees></input></TD></FORM></TR>";
 }
 echo "</TABLE></CENTER></P>";
 ?>
 <FORM method=POST action="./index.php?page=administration&detail=iphone">
 Nom de Peripherique : <input type=text name=periph_name></input>
-<BR>User Icloud : <input type=text name=user></input>
-<BR>Mot de passe Icloud : <input type=password name=pass></input>
-<BR>Sleep Base : <input type=text name=sleep_base></input>
-<BR>Sleep Coef : <input type=text name=sleep_coef></input>
-<BR><input type=submit name=valider value=Valider></input>
+User Icloud : <input type=text name=user></input>
+Mot de passe Icloud : <input type=password name=pass></input>
+<input type=submit name=valider value=Valider></input>
 </FORM>
 <?
 }

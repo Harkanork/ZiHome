@@ -38,6 +38,18 @@ $db_selected = mysql_select_db($base,$link);
 if (!$db_selected) {
    die ('Impossible d\'utiliser la base : ' . mysql_error());
 }
+$sleepbase = 0;
+$sleepcoef = 1;
+$query = "SELECT * FROM  `paramettres` WHERE libelle = 'iphone_sleep_base'";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$sleepbase = mysql_result($res_query,0,"value");
+}
+$query = "SELECT * FROM  `paramettres` WHERE libelle = 'iphone_sleep_coef'";
+$res_query = mysql_query($query, $link);
+if(mysql_numrows($res_query) > 0){
+$sleepcoef = mysql_result($res_query,0,"value");
+}
 
 $zibase = new ZiBase($ipzibase);
 $i = 0;
@@ -50,8 +62,6 @@ while ($data = mysql_fetch_assoc($req))
 $periphname = $data['periph_name'];
 $user = $data['user'];
 $pass = $data['pass'];
-$sleepcoef = $data['sleep_coef'];
-$sleepbase = $data['sleep_base'];
 
 // Créion d'une nouvelle ressource cURL
 $ch = curl_init();
