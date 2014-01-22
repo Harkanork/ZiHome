@@ -1,33 +1,51 @@
 <?php
-echo "<CENTER><TABLE><TR><TD>Sonde</TD><TD>Batterie</TD><TD>Date Batterie</TD></TR>";
+echo "<CENTER><TABLE border=0 ><TR class='title' style='text-align: center'><TD>Sonde</TD><TD style='width:100px'>Dernier<br>changement</TD><TD style='width:140px'>Batterie<br>faible</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM owl_detail ORDER BY `date` DESC LIMIT 1";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
 {
-if($periph['battery'] == "100%") {
-$batterie = $periph['battery'];
-} else {
-$batterie = "<FONT COLOR='red'>".$periph['battery']."</FONT>";
-}
-echo "<TR><TD>OWL CM180</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
+  if($periph['battery'] == "100%") {
+    $batterie = $periph['battery'];
+  } else {
+    $batterie = "<FONT COLOR='red'>".$periph['battery']."</FONT>";
+  }
+  echo "<TR><TD>OWL CM180</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
 }
 $query = "SELECT * FROM peripheriques WHERE gerer_batterie = '1'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
 {
-if($periph['batterie'] == 0)
-{
-$batterie = "Ok";
-} else {
-$batterie = "<FONT COLOR='red'>Remplacer</FONT>";
-}
-if($periph['libelle'] == ""){
-$nom = $periph['nom'];
-} else {
-$nom = $periph['libelle'];
-}
-echo "<TR><TD>".$nom."</TD><TD ALIGN=CENTER>".$batterie."</TD><TD>".$periph['date_chgt_batterie']."</TD></TR>";
+  if($periph['batterie'] == 0)
+  {
+    $batterie = "<img src='./img/batterie_ok.png' height='20px'/>";
+  } else {
+    $batterie = "<img src='./img/batterie_ko.png' height='20px'/>";
+  }
+  if($periph['libelle'] == ""){
+    $nom = $periph['nom'];
+  } else {
+    $nom = $periph['libelle'];
+  }
+  echo "<TR class=\"contenu\">";
+  echo "<TD>".$batterie."<span style='vertical-align:3px'>".$nom."</span></TD>";
+  if ($periph['date_chgt_batterie'] != "0000-00-00")
+  {
+    echo "<TD style='text-align: center;'>".$periph['date_chgt_batterie']."</TD>";
+  }
+  else
+  {
+    echo "<TD></TD>";
+  }
+  if ($periph['alerte_batterie'] != "0000-00-00 00:00:00")
+  {
+    echo "<TD style='text-align: center;'>".$periph['alerte_batterie']."</TD>";
+  }
+  else
+  {
+    echo "<TD></TD>";
+  }
+  echo "</TR>";
 }
 ?>
 </TABLE></CENTER>
