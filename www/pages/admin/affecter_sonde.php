@@ -23,6 +23,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Icone
       </td>
       <td>
+      Texte
+      </td>      
+      <td>
       Hygro
       </td>
       <td>Batterie</td>
@@ -33,7 +36,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <?
   if(isset($_POST['id'])){
     include("./pages/connexion.php");
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."', show_value2 = '".$_POST['show_value2']."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."', show_value2 = '".$_POST['show_value2']."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   include("./pages/connexion.php");
@@ -63,6 +66,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <td class="droite"><center><INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5></center></td>
     <td class="bas"><center><INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5></center></td>
     <td class="icone"><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
+    <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>    
     <td class="icone"><center><INPUT type="checkbox" name="show_value2" value="1"<? if($data['show_value2'] == "1"){ echo " checked"; } ?>></center></td>
     <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></td>
     <td><INPUT type="date" name="date_chgt_batterie" size="10" value="<? echo $data['date_chgt_batterie']; ?>"></center></td>

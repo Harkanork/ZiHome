@@ -112,3 +112,6 @@ ALTER TABLE `android`
   DROP `sleep_base`,
   DROP `sleep_coef`;
 
+-- --------------------------------------------------------
+
+ALTER TABLE `peripheriques` ADD `texte` boolean NOT NULL default false; 

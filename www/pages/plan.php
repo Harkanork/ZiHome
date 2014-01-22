@@ -152,6 +152,15 @@ $soleil = "jour";
                     $ic = "g";
                 }
                 echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;border-style:none;\">";
+                if ($data6['texte'])
+                {
+                  if($data6['libelle'] == ""){
+                    $nom = $data6['nom'];
+                  } else {
+                    $nom = $data6['libelle'];
+                  }        
+                  echo "<div style=\"position:absolute;top:".($data6['top'] + $heightIcones)."px;left:". ($data6['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+                }                                
             }
             $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -168,10 +177,20 @@ $soleil = "jour";
                     $ic = "g";
                 }
                 echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;border-style:none;\">";
+                if ($data8['texte'])
+                {
+                  if($data8['libelle'] == ""){
+                    $nom = $data8['nom'];
+                  } else {
+                    $nom = $data8['libelle'];
+                  }        
+                  echo "<div style=\"position:absolute;top:".($data8['top'] + $heightIcones)."px;left:". ($data8['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+                }                
             }
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-            while($data9 = mysql_fetch_assoc($req7)) {
+            while($data9 = mysql_fetch_assoc($req7)) 
+            {
                 $query0 = "SELECT * FROM `temperature_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
                 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 if ($req0 && mysql_numrows($req0) > 0)
@@ -192,6 +211,17 @@ $soleil = "jour";
                   echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
                 }
                 echo "</div>";
+
+                if ($data9['texte'])
+                {
+                  if($data9['libelle'] == ""){
+                    $nom = $data9['nom'];
+                  } else {
+                    $nom = $data9['libelle'];
+                  }        
+                  echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+                }
+                
             }
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -209,6 +239,15 @@ $soleil = "jour";
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              if ($data9['texte'])
+              {
+                if($data9['libelle'] == ""){
+                  $nom = $data9['nom'];
+                } else {
+                  $nom = $data9['libelle'];
+                }        
+                echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+              }              
             }
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -226,6 +265,15 @@ $soleil = "jour";
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              if ($data9['texte'])
+              {
+                if($data9['libelle'] == ""){
+                  $nom = $data9['nom'];
+                } else {
+                  $nom = $data9['libelle'];
+                }        
+                echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+              }              
             }
             ?>
         </div></a>
