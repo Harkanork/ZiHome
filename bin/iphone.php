@@ -66,6 +66,7 @@ curl_setopt($ch, CURLOPT_USERAGENT, 'Find iPhone/1.3 MeKit (iPad: iPhone OS/4.2.
 curl_setopt($ch, CURLOPT_AUTOREFERER, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 // Répétion de l'URL et affichage sur le naviguateur
 $value = curl_exec($ch);
@@ -97,6 +98,7 @@ curl_setopt($ch, CURLOPT_AUTOREFERER, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_COOKIE, $cookie);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 // Répétion de l'URL et affichage sur le naviguateur
 $value = curl_exec($ch);
@@ -128,7 +130,7 @@ $i++;
 $sleep = intval((min($dist)/$sleepcoef)+$sleepbase);
 $today = getdate();
 $now = $today['year']."-".$today['mon']."-".$today['mday']." ".$today['hours'].":".$today['minutes'].":".$today['seconds'];
-//echo $now." - distance : ".min($dist)."m - sleep : ".(intval($sleep/60))."min ".($sleep-(intval($sleep/60)*60))."sec\n";
+echo $now." - distance : ".min($dist)."m - sleep : ".(intval($sleep/60))."min ".($sleep-(intval($sleep/60)*60))."sec\n";
 sleep($sleep);
 mysql_close();
 }
