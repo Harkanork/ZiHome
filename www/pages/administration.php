@@ -50,6 +50,11 @@ if($data['libelle'] == 'iphone') {
 <li><A HREF="./index.php?page=administration&detail=iphone">iPhone</A></li>
 <?
 }
+if($data['libelle'] == 'android') {
+?>
+<li><A HREF="./index.php?page=administration&detail=android">Android</A></li>
+<?
+}
 }
 ?>
 <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un actioneur</A></li>

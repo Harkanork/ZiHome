@@ -172,6 +172,8 @@ CREATE TABLE IF NOT EXISTS `iphone` (
   `periph_name` varchar(255) NOT NULL,
   `user` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
+  `sleep_base` int(11) NOT NULL,
+  `sleep_coef` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -184,6 +186,39 @@ CREATE TABLE IF NOT EXISTS `iphone` (
 CREATE TABLE IF NOT EXISTS `iphone_distances` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_iphone` int(11) NOT NULL,
+  `sonde` varchar(255) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `android`
+--
+
+CREATE TABLE IF NOT EXISTS `android` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `apikey` varchar(255) NOT NULL,
+  `MobileNetworkCode` int(11) NOT NULL,
+  `carrier` varchar(255) NOT NULL,
+  `cellId` int(11) NOT NULL,
+  `locationAreaCode` int(11) NOT NULL,
+  `sleep_base` int(11) NOT NULL,
+  `sleep_coef` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `android_distances`
+--
+
+CREATE TABLE IF NOT EXISTS `android_distances` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_android` int(11) NOT NULL,
   `sonde` varchar(255) NOT NULL,
   `longitude` varchar(255) NOT NULL,
   `latitude` varchar(255) NOT NULL,
