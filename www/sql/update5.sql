@@ -100,4 +100,15 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (9 'android_sleep_base', '60', 'number'),
 (10, 'android_sleep_coef', '60', 'number');
 
+-- --------------------------------------------------------
+
+ALTER TABLE `iphone`
+  DROP `sleep_base`,
+  DROP `sleep_coef`;
+
+-- --------------------------------------------------------
+
+ALTER TABLE `android`
+  DROP `sleep_base`,
+  DROP `sleep_coef`;
 
