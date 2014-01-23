@@ -141,7 +141,7 @@ include("./pages/connexion.php");
 $query = "DELETE FROM iphone WHERE id = '".$_POST['id']."'";
 mysql_query($query, $link);
 }
-echo "<P><CENTER><TABLE><TR><TD>Nom de peripherique</TD><TD>user</TD><TD>Mot de passe</TD><TD>Sleep Base</TD><TD>Sleep Coef</TD><TD>Supprimer</TD><TD>Modifier</TD><TD>Choisir Coordonnees</TD></TR>";
+echo "<P><CENTER><TABLE><TR><TD>Nom de peripherique</TD><TD>user</TD><TD>Mot de passe</TD><TD>Supprimer</TD><TD>Modifier</TD><TD>Choisir Coordonnees</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM iphone";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
