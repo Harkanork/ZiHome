@@ -7,7 +7,7 @@
         (function(document,navigator,standalone) {
             // prevents links from apps from oppening in mobile safari
             // this javascript must be the first script in your <head>
-		if ((standalone in navigator) && navigator[standalone]) {
+		        if ((standalone in navigator) && navigator[standalone]) {
                 var curnode, location=document.location, stop=/^(a|html)$/i;
                 document.addEventListener('click', function(e) {
                     curnode=e.target;
@@ -16,7 +16,7 @@
                     }
                     // Condidions to do this only on links to your own app
                     // if you want all links, use if('href' in curnode) instead.
-		    if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) && e.defaultPrevented !== true) {
+		                if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) && e.defaultPrevented !== true) {
                     //if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) ) {
                         e.preventDefault();
                         location.href = curnode.href;
@@ -36,17 +36,19 @@ $query = "SELECT * FROM paramettres WHERE libelle = 'icones'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-$icone = $data['value'];
+  $icone = $data['value'];
 }
 if(isset($_SESSION['css']) && $_SESSION['css'] != "")
 {
-echo "<link rel=\"stylesheet\" href=\"./styles/".$_SESSION['css'].".css\" type=\"text/css\" media=\"all\">";
-} else {
-$query = "SELECT * FROM paramettres WHERE libelle = 'css'";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
+  echo "<link rel=\"stylesheet\" href=\"./styles/".$_SESSION['css'].".css\" type=\"text/css\" media=\"all\">";
+} 
+else 
 {
-echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
-}
+  $query = "SELECT * FROM paramettres WHERE libelle = 'css'";
+  $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+  while ($data = mysql_fetch_assoc($req))
+  {
+    echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
+  }
 }
 ?>

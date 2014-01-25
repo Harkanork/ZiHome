@@ -308,14 +308,9 @@ color: white;
 text-align: center;
 }
 
-#logout img{
- margin-left: 13px;
-}
-
 #logout a{
 color: white;
 font-size: 12px;
-font-weight: bolder;
 }
 
 #body{

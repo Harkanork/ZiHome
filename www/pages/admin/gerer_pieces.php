@@ -16,7 +16,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Bas</TD><TD>Afficher<br>nom</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>supplementaire</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Bas</TD><TD>Afficher<br>nom</TD><TD>Taille-texte</TD><TD>Alignement</TD><TD>Bordure</TD><TD>suppl&eacute;mentaire</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM plan";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -91,7 +91,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 </select>
 </TD></TR>
 <TR><TD>Taille bordure :</TD><TD><INPUT type=text name=border></INPUT></TD></TR>
-<TR><TD>Option supplementaire :</TD><TD><INPUT type=text name=supplementaire></INPUT></TD></TR>
+<TR><TD>Option suppl&eacute;mentaire :</TD><TD><INPUT type=text name=supplementaire></INPUT></TD></TR>
 <TR><TD colspan=2 align=center><INPUT type=submit name=Valider value=Valider></TD></TR>
 </FORM>
 </TABLE>
