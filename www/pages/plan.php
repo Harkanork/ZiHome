@@ -429,7 +429,13 @@ $soleil = "jour";
     {
       return gActionneur[nom]; 
     }
-          
+       
+    var gConsoElec = new Object();
+    function consoElec(nom)
+    {
+      return gConsoElec[nom]; 
+    }
+              
     function nuit()
     {
       return <? 
@@ -490,6 +496,21 @@ $soleil = "jour";
     }
     ?>
     
+    <?
+    // Construction des tableaux issues des capteurs de consommation electrique
+    $query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      $query0 = "SELECT * FROM `conso_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
+      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+      while ($value0 = mysql_fetch_assoc($req0))
+      {
+        echo 'gConsoElec["' . $periph['nom'] . '"] = "' . $value0['conso'] . '";';
+      } 
+    }
+    ?>
+        
     <?
     // Construction des tableaux issues des capteurs de temperature
     $query = "SELECT * FROM peripheriques WHERE periph = 'actioneur'";
