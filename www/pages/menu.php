@@ -72,7 +72,10 @@ $query = "SELECT * FROM `insertion`";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))
 {
-  ?><li><a href = "./index.php?include=<? echo $data['id']; ?>"><img src = "./img/<? echo $data['icone']; ?>"/><span></span></a></li><?
+  if ($data['public'] || isset($_SESSION['auth']))
+  {
+    ?><li><a href = "./index.php?include=<? echo $data['id']; ?>"><img width="40px" height="40px" src = "./img/<? echo $data['icone']; ?>"/><span><? echo $data['libelle']; ?></span></a></li><?
+  }
 }
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
