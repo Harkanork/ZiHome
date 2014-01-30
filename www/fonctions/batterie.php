@@ -1,4 +1,5 @@
 <?php
+include("./lib/date_francais.php");
 echo "<CENTER><TABLE border=0 ><TR class='title' style='text-align: center'><TD>Sonde</TD><TD style='width:100px'>Dernier<br>changement</TD><TD style='width:140px'>Batterie<br>faible</TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM owl_detail ORDER BY `date` DESC LIMIT 1";
@@ -31,7 +32,7 @@ while ($periph = mysql_fetch_assoc($req))
   echo "<TD>".$batterie."<span style='vertical-align:3px'>".$nom."</span></TD>";
   if ($periph['date_chgt_batterie'] != "0000-00-00")
   {
-    echo "<TD style='text-align: center;'>".$periph['date_chgt_batterie']."</TD>";
+    echo "<TD style='text-align: center;'>".date_francais($periph['date_chgt_batterie'])."</TD>";
   }
   else
   {
@@ -39,7 +40,7 @@ while ($periph = mysql_fetch_assoc($req))
   }
   if ($periph['alerte_batterie'] != "0000-00-00 00:00:00")
   {
-    echo "<TD style='text-align: center;'>".$periph['alerte_batterie']."</TD>";
+    echo "<TD style='text-align: center;'>".date_francais($periph['alerte_batterie'])."</TD>";
   }
   else
   {
