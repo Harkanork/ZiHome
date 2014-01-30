@@ -359,7 +359,8 @@ $soleil = "jour";
                 include("./fonctions/scenario.php");
                 echo "</div>";
                 }
-                }
+               	echo "</div>"; 
+		}
                 if((!($data11 == null)) && (isset($_SESSION['auth']))){
                 ?>
                 <div id="tabs-<? echo $data['id']; ?>-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
