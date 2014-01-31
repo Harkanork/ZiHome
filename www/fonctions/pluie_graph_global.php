@@ -19,7 +19,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#pluie_<? echo $periph['id']; ?>').highcharts({
+        $('#global-<? echo $periph['id']; ?>').highcharts({
             chart: {
             },
             title: {
@@ -64,5 +64,5 @@ Highcharts.setOptions({
     });
                 </script>
 
-<div id="pluie_<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
+<div id="global-<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
 

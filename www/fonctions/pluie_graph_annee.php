@@ -4,12 +4,12 @@ $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_
 $liste1 = "";
 while($value0 = mysql_fetch_assoc($req0))
 {
-$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . ($value0['max'] - $value0['min']) ."],";
+  $liste1 .= "[".strtotime($value0['date']) * 1000 . "," . ($value0['max'] - $value0['min']) ."],";
 }
 if($periph['libelle'] == ""){
-$nom = $periph['nom'];
+  $nom = $periph['nom'];
 } else {
-$nom = $periph['libelle'];
+  $nom = $periph['libelle'];
 }
 ?>
                 <script type="text/javascript">
@@ -19,7 +19,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#pluie_<? echo $periph['id']; ?>').highcharts({
+        $('#year-<? echo $periph['id']; ?>').highcharts({
             chart: {
             },
             title: {
@@ -64,5 +64,5 @@ Highcharts.setOptions({
     });
                 </script>
 
-<div id="pluie_<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
+<div id="year-<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
 
