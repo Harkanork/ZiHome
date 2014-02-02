@@ -540,8 +540,20 @@ $soleil = "jour";
         echo 'if ('.$sticker['condition'].')';
       }
       echo ' { $( "#plan" ).append( "';        
-      echo '<img src=\"./img/stickers/' . $sticker['fichier'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;;z-index:' . $sticker['id'] . '\"/>';
+      echo '<img src=\"./img/stickers/' . $sticker['fichier'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;';
+      if ($sticker['height'])
+      {
+        echo 'height:' . $sticker['height'] . 'px;';
+      }
+      if ( $sticker['width'])
+      {
+        echo 'width:' . $sticker['width'] . 'px;';
+      }
+      echo 'z-index:' . $sticker['id'] . '\"/>';
       echo '");}';
+    ?>
+    
+    <?       
     }
     ?>
   </script>

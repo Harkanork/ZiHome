@@ -7,16 +7,16 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     mysql_query($query, $link);
   }
   else if(isset($_POST['Modifier'])){
-    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['id']."'";
+    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   else if(isset($_POST['Ajouter'])) {
-    $query = "INSERT INTO stickers (`libelle`, `fichier`, `left`, `top`, `condition`) VALUES ('".$_POST['libelle']."', '".$_POST['fichier']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['condition']."')";
+    $query = "INSERT INTO stickers (`libelle`, `fichier`, `left`, `top`, `width`, `height`, `condition`) VALUES ('".$_POST['libelle']."', '".$_POST['fichier']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['condition']."')";
     mysql_query($query, $link);
   }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD>Condition</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD style="width:10px">Largeur</TD><TD>Hauteur</TD><TD>Condition</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM stickers";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -27,10 +27,11 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
         echo '<TD><INPUT TYPE="text" NAME="id" VALUE="'.$data['id'].'" size="3"/></TD>';
         echo '<TD><INPUT TYPE="text" NAME="libelle" VALUE="'.$data['libelle'].'"/></TD>';
         echo '<TD><INPUT TYPE="text" NAME="fichier" VALUE="'.$data['fichier'].'"/></TD>';
-        echo '<TD><INPUT TYPE="number" NAME="left" VALUE="'.$data['left'].'"/></TD>';
-        echo '<TD><INPUT TYPE="number" NAME="top" VALUE="'.$data['top'].'"/></TD>';
-        $condition = str_replace('"', '"', $data['condition']);
-        
+        echo '<TD><INPUT TYPE="number" NAME="left" VALUE="'.$data['left'].'" style="width:60px;"/></TD>';
+        echo '<TD><INPUT TYPE="number" NAME="top" VALUE="'.$data['top'].'" style="width:60px;"/></TD>';
+        echo '<TD><INPUT TYPE="number" min="0" NAME="width" VALUE="'.$data['width'].'" style="width:60px;"/></TD>';
+        echo '<TD><INPUT TYPE="number" min="0" NAME="height" VALUE="'.$data['height'].'" style="width:60px;"/></TD>';
+        $condition = $data['condition'];
         echo '<TD><textarea NAME="condition" cols="40" rows="5">'.$condition.'</textarea></TD>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Modifier" VALUE="Modifier"/></center></td>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Supprimer" VALUE="Supprimer"/></center></td>';
@@ -47,6 +48,8 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <TR><TD>Fichier :</TD><TD><INPUT type=text name='fichier'></INPUT></TD></TR>
     <TR><TD>Position Droite :</TD><TD><INPUT type=number name='left'></INPUT></TD></TR>
     <TR><TD>Position Bas :</TD><TD><INPUT type=number name='top'></INPUT></TD></TR>
+    <TR><TD>Largeur :</TD><TD><INPUT type=number name='width'></INPUT></TD></TR>
+    <TR><TD>Hauteur :</TD><TD><INPUT type=number name='height'></INPUT></TD></TR>
     <TR><TD>Condition :</TD><TD><INPUT type=text name='condition'></INPUT></TD></TR>
     <TR><TD colspan=2 align=center><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
   </FORM>

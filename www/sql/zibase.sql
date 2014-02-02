@@ -366,6 +366,8 @@ CREATE TABLE IF NOT EXISTS `stickers` (
   `fichier` varchar(255) NOT NULL,
   `left` int(11) NOT NULL,
   `top` int(11) NOT NULL,
+  `width` int(11),
+  `height` int(11),
   `condition` varchar(1024) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

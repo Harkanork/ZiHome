@@ -121,3 +121,7 @@ ALTER TABLE `peripheriques` ADD `texte` boolean NOT NULL default false;
 ALTER TABLE `insertion` ADD `libelle` varchar(255) NOT NULL; 
 ALTER TABLE `insertion` ADD `public` boolean NOT NULL default true; 
 
+-- --------------------------------------------------------
+
+ALTER TABLE `stickers` ADD `width` int(11);
+ALTER TABLE `stickers` ADD `height` int(11);
