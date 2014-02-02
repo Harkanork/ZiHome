@@ -112,12 +112,15 @@ $soleil = "jour";
         $query12 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
         $req12 = mysql_query($query12, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data12 = mysql_fetch_assoc($req12);
+        $query13 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."'";
+        $req13 = mysql_query($query13, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data13 = mysql_fetch_assoc($req13);
         $img = "";
         if(file_exists("./img/plan/".$data['id'].".jpg")) {
-        $img = "./img/plan/".$data['id'].".jpg";
+          $img = "./img/plan/".$data['id'].".jpg";
         }
 
-        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null) {
+        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null) {
         ?>
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
@@ -133,6 +136,7 @@ $soleil = "jour";
             {
               echo '<div style="line-height: '. $data['line-height'] . 'px;">'.$data['libelle'].'</div>';
             }
+// ----- Capteur            
             $query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data6 = mysql_fetch_assoc($req4)) {
@@ -162,6 +166,7 @@ $soleil = "jour";
                   echo "<div style=\"position:absolute;top:".($data6['top'] + $heightIcones)."px;left:". ($data6['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
                 }                                
             }
+// ----- Actionneur            
             $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data8 = mysql_fetch_assoc($req6)) {
@@ -187,6 +192,7 @@ $soleil = "jour";
                   echo "<div style=\"position:absolute;top:".($data8['top'] + $heightIcones)."px;left:". ($data8['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
                 }                
             }
+// ----- Temperature            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) 
@@ -223,6 +229,7 @@ $soleil = "jour";
                 }
                 
             }
+// ----- Conso electrique            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) {
@@ -249,6 +256,7 @@ $soleil = "jour";
                 echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
               }              
             }
+// ----- Vent            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) {
@@ -275,6 +283,33 @@ $soleil = "jour";
                 echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
               }              
             }
+// ----- Pluie            
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `pluie_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['pluie'];
+              }
+              else
+              {
+                $valeur = "";
+              }
+              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
+              echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur."</span></div>";
+              if ($data9['texte'])
+              {
+                if($data9['libelle'] == ""){
+                  $nom = $data9['nom'];
+                } else {
+                  $nom = $data9['libelle'];
+                }        
+                echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+              }              
+            }
             ?>
         </div></a>
     <script type="text/javascript">
@@ -288,7 +323,7 @@ $soleil = "jour";
                 <?
                 if(!($data3 == null)){
                 ?>
-                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-1">Temperature</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-1">Temp&eacute;rature</a></li>
                 <?
                 }
                 if((!($data4 == null)) && isset($_SESSION['auth'])){
@@ -303,93 +338,132 @@ $soleil = "jour";
                 }
                 if((!($data7 == null)) && (isset($_SESSION['auth']))){
                 ?>
-                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-4">Scenario</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-4">Sc&eacute;nario</a></li>
                 <?
                 }
                 if((!($data11 == null)) && (isset($_SESSION['auth']))){
                 ?>
-                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-5">Video</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-5">Vid&eacute;o</a></li>
                 <?
                 }
+                if ($data12 != null){
                 ?>
-
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-6">Vent</a></li>
+                <?
+                }
+                if ($data13 != null){
+                ?>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-7">Pr&eacute;cipitation</a></li>
+                <?
+                }                                 
+                ?>
             </ul>
             <?
             if(!($data3 == null)){
-            ?>
-            <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
                 $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."'";
                 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
-                $width = "640px";
-                $height = "340px";
-                include("./fonctions/temperature_graph_jour.php");
+                  $width = "640px";
+                  $height = "340px";
+                  include("./fonctions/temperature_graph_jour.php");
                 }
                 ?>
-            </div>
-            <?
+              </div>
+              <?
             }
+            if(!($data12 == null)){
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
+                <?
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
+                $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while($periph = mysql_fetch_assoc($req1)) {
+                  $width = "640px";
+                  $height = "340px";
+                  include("./fonctions/vent_graph_jour.php");
+                }
+                ?>
+              </div>
+              <?
+            }
+            if(!($data13 == null)){
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
+                <?
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."'";
+                $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while($periph = mysql_fetch_assoc($req1)) {
+                  $width = "640px";
+                  $height = "340px";
+                  include("./fonctions/pluie_graph_global.php");
+                }
+                ?>
+              </div>
+              <?
+            }            
             if(isset($_SESSION['auth']))
             {
-            if(!($data4 == null)){
-            $query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
-            $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-            ?>
-            <div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+              if(!($data4 == null)){
+              $query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
+              $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
                 <?
                 while($periph = mysql_fetch_assoc($req2)) {
-                echo "<div id=\"actionneur\">";
-                include("./fonctions/actioneur.php");
-                echo "</div>";
+                  echo "<div id=\"actionneur\">";
+                  include("./fonctions/actioneur.php");
+                  echo "</div>";
                 }
                 ?> 
-            </div>
-            <?
-            }
+              </div>
+              <?
+              }
             }
             if((!($data7 == null)) && (isset($_SESSION['auth']))){
-            ?>
-            <div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
                 <?
                 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
                 $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req5)) {
-                echo "<div id=\"actionneur\">";
-                include("./fonctions/scenario.php");
-                echo "</div>";
+                  echo "<div id=\"actionneur\">";
+                  include("./fonctions/scenario.php");
+                  echo "</div>";
                 }
                	echo "</div>"; 
-		}
-                if((!($data11 == null)) && (isset($_SESSION['auth']))){
-                ?>
-                <div id="tabs-<? echo $data['id']; ?>-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+		        }
+            if((!($data11 == null)) && (isset($_SESSION['auth']))){
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
                 <?
                 $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
                 $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req11)) {
-                $width="640";
-                $height="340";
-                include("./fonctions/video.php");
+                  $width="640";
+                  $height="340";
+                  include("./fonctions/video.php");
                 }
                 echo "</div>";
-                }
-                if(!($data5 == null)){
-                ?>
+            }
+            if(!($data5 == null)){
+              ?>
                 <div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
-                    <?
-                    $query1 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
-                    $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-                    while($periph = mysql_fetch_assoc($req1)) {
+                  <?
+                  $query1 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
+                  $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                  while($periph = mysql_fetch_assoc($req1)) {
                     $width = "640px";
                     $height = "340px";
                     include("./fonctions/conso_elec_graph_mois.php");
-                    }
-                    ?>
+                  }
+                  ?>
                 </div>
                 <?
-                }
-                ?>
+              }
+              ?>
             </div>
         </div>
         <? 
