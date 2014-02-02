@@ -11,3 +11,4 @@ include("./fonctions/owl_global.php");
 include("./fonctions/owl_global_month.php");
 ?>
 <script src="./js/highcharts.js"></script>
+<script src="./config/conf_highcharts.js"></script>

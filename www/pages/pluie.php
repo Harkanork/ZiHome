@@ -16,3 +16,4 @@ include("./fonctions/pluie_graph_global.php");
 ?>
 </div>
 <script src="./js/highcharts.js"></script>
+<script src="./config/conf_highcharts.js"></script>

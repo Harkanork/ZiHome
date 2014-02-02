@@ -39,3 +39,4 @@ include("./fonctions/conso_elec_graph_annee.php");
 <?php } ?>
 </div>
 <script src="./js/highcharts.js"></script>
+<script src="./config/conf_highcharts.js"></script>

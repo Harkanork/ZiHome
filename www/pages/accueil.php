@@ -44,3 +44,5 @@ include("./fonctions/".$data3['url'].".php");
 <script src="./js/highcharts-more.js"></script>
 <script src="./js/modules/data.js"></script>
 <script src="./js/modules/exporting.js"></script>
+<script src="./config/conf_highcharts.js"></script>
+

@@ -11,7 +11,6 @@ $liste1 .= "[".strtotime($value0['date']) * 1000 . "," . $value0['min'] ."," . $
 $(function () {
 
         $('#year-<? echo $periph['id']; ?>').highcharts({
-
             chart: {
                 type: 'columnrange',
                 //inverted: true
