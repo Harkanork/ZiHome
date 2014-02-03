@@ -29,7 +29,6 @@ $header[] = 'X-Client-UUID: 0cf3dc501ff812adb0b202baed4f37274b210853';
 $header[] = 'Accept-Language: en-us';
 $header[] = 'Connection: keep-alive';
 
-while (true) {
 $link = mysql_connect($hote,$login,$plogin);
 if (!$link) {
    die('Non connect&eacute; : ' . mysql_error());
@@ -143,5 +142,4 @@ $now = $today['year']."-".$today['mon']."-".$today['mday']." ".$today['hours']."
 echo $now." - distance : ".min($dist)."m - sleep : ".(intval($sleep/60))."min ".($sleep-(intval($sleep/60)*60))."sec\n";
 sleep($sleep);
 mysql_close();
-}
 ?>

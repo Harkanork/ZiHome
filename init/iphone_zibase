@@ -18,8 +18,8 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Servic recuperation des coordonné de l'iPhone"
 NAME=iphone_zibase
-DAEMON=/usr/bin/php
-DAEMON_ARGS="/usr/bin/iphone.php --options args"
+DAEMON=/usr/bin/$NAME
+DAEMON_ARGS=
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
