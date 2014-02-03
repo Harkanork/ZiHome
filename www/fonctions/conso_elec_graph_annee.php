@@ -44,12 +44,7 @@ Highcharts.setOptions({
                 text: 'Annuel'
             },
             xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: {
-		    day: '%b %Y',
-                    month: '%b %Y',
-                    year: '%b %Y'
-                }
+                type: 'datetime'
             }],
             yAxis: [{
                 min: 0,

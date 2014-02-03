@@ -26,11 +26,7 @@ Highcharts.setOptions({
                 text: 'Vitesse du vent'
             },
             xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                }
+                type: 'datetime'
             }],
             yAxis: [{ // Primary yAxis
                 labels: {

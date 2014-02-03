@@ -21,12 +21,7 @@ $(function () {
             },
 
             xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: { 
-		    day: '%b %Y',
-	            month: '%b %Y',
-                    year: '%Y'
-                }
+                type: 'datetime'
             }],
 
             yAxis: {

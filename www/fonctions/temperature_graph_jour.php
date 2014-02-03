@@ -34,11 +34,7 @@ Highcharts.setOptions({
                 text: 'Temperature et Hygrometrie'
             },
             xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                }
+                type: 'datetime'
             }],
             yAxis: [{ // Primary yAxis
                 labels: {

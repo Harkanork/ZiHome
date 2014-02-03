@@ -39,11 +39,7 @@ Highcharts.setOptions({
                 text: 'Quotidienne'
             },
             xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                }
+                type: 'datetime'
             }],
             yAxis: [{
                 min: 0,

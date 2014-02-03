@@ -27,11 +27,7 @@ Highcharts.setOptions({
                 text: 'Detail sur 1 journee'
             },
             xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                }
+                type: 'datetime'
              },
             yAxis: {
                 title: {
