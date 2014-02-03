@@ -38,7 +38,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
                 title: {
-                    text: 'Precipitation'
+                    text: 'Précipitation'
                 }
             }],
             tooltip: {
@@ -56,7 +56,7 @@ Highcharts.setOptions({
                 }
             },
             series: [{
-                name: 'Precipitation',
+                name: 'Précipitation',
                 data: [<?php echo $liste1; ?>],
                 type: 'column'
             }]

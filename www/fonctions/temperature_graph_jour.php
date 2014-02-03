@@ -31,7 +31,7 @@ Highcharts.setOptions({
                 text: '<? echo $nom; ?>'
             },
             subtitle: {
-                text: 'Temperature et Hygrometrie'
+                text: 'Température et Hygrométrie'
             },
             xAxis: [{
                 type: 'datetime'
@@ -45,7 +45,7 @@ Highcharts.setOptions({
                     }
                 },
                 title: {
-                    text: 'Temperature',
+                    text: 'Température',
                     style: {
                     }
                 },
@@ -53,7 +53,7 @@ Highcharts.setOptions({
             }, { // Tertiary yAxis
                 gridLineWidth: 0,
                 title: {
-                    text: 'Hygrometrie',
+                    text: 'Hygrométrie',
                     style: {
                     }
                 },
@@ -71,7 +71,7 @@ Highcharts.setOptions({
             },
             series: [{
 <? if(!($liste2 == "")) { ?>
-                name: 'Hygrometrie',
+                name: 'Hygrométrie',
                 type: 'spline',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
@@ -83,7 +83,7 @@ Highcharts.setOptions({
                 }
             }, {
 <? } ?>
-                name: 'Temperature',
+                name: 'Température',
                 type: 'spline',
                 data: [<?php echo $liste1; ?>],
                 marker: {

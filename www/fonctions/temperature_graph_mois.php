@@ -18,7 +18,7 @@ $(function () {
             },
 
             title: {
-                text: 'Variation de temperature sur 1 mois'
+                text: 'Variation de température sur 1 mois'
             },
 
             xAxis: [{
@@ -27,7 +27,7 @@ $(function () {
 
             yAxis: {
                 title: {
-                    text: 'Temperature ( °C )'
+                    text: 'Température ( °C )'
                 }
             },
 
@@ -51,7 +51,7 @@ $(function () {
             },
 
             series: [{
-                name: 'Temperatures',
+                name: 'Températures',
                 data: [<?php echo $liste1; ?>]
             }]
 

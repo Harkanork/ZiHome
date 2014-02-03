@@ -39,7 +39,7 @@ $(function () {
                 endOnTick: false,
                 showLastLabel: true,
                 title: {
-                        text: 'Frequency (%)'
+                        text: 'Fréquence (%)'
                 },
                 labels: {
                         formatter: function () {
@@ -103,7 +103,7 @@ $j++;
                         <th class="freq">Total</th>
                 </tr>
 <?
-$pc = array("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW");
+$pc = array("N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSO", "SO", "OSO", "O", "ONO", "NO", "NNO");
 $i=0;
 while($i < count($pc)) {
 

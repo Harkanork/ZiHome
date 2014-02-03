@@ -10,6 +10,8 @@
             rangeSelectorFrom: 'De:',
             rangeSelectorTo: 'A:',
             rangeSelectorZoom: 'Période:',
+            contextButtonTitle: 'Menu du graphique',
+            printChart: 'Imprimer',
             downloadPNG: 'Télécharger en PNG',
             downloadJPEG: 'Télécharger en JPEG',
             downloadPDF: 'Télécharger en PDF',
