@@ -573,7 +573,13 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (7, 'iphone_sleep_base', '60', 'number'),
 (8, 'iphone_sleep_coef', '60', 'number'),
 (9, 'android_sleep_base', '60', 'number'),
-(10, 'android_sleep_coef', '60', 'number');
+(10, 'android_sleep_coef', '60', 'number')
+(11, 'Icone m&eacute;t&eacute;o', 'true', 'checkbox'),
+(12, 'Icone m&eacute;t&eacute;o dossier', 'colorful', 'selectbox'),
+(13, 'Icone m&eacute;t&eacute;o largeur', '60', 'number'),
+(14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
+(15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
+(16, 'Icone m&eacute;t&eacute;o bas', '10', 'number');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

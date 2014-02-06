@@ -74,22 +74,89 @@ if ($data['value'] == 'true')
 }
 $image_fond = "";
 if(file_exists("img/plan/jour.png")) {
-$image_fond = "img/plan/jour.png";
+  $image_fond = "img/plan/jour.png";
 }
 $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
 if(file_exists("img/plan/nuit.png")) {
-$soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
-$soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
-$now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
-if($now<$soleil_nuit && $now>$soleil_jour) { $soleil = "jour"; $image_fond = "img/plan/jour.png"; } else { $soleil = "nuit"; $image_fond = "img/plan/nuit.png"; }
+  $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
+  $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
+  $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
+  if($now<$soleil_nuit && $now>$soleil_jour) 
+  { 
+    $soleil = "jour"; 
+    $image_fond = "img/plan/jour.png"; 
+  } 
+  else 
+  { 
+    $soleil = "nuit"; 
+    $image_fond = "img/plan/nuit.png"; 
+  }
 } else {
-$soleil = "jour";
+  $soleil = "jour";
+}
+
+// METEO
+$meteoIcon = $weather->cc->icon;
+
+// default values
+$meteoIconShow = true;
+$meteoIconFolder = "colorful";
+$meteoIconLeft = 10;
+$meteoIconTop = 10;
+$meteoIconWidth = 50;
+$meteoIconHeight = 50;
+
+// Read values from the database
+$query = "SELECT * FROM paramettres WHERE id >= 11 and id <= 16";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+  switch ($data['id'])
+  {
+    case 11:
+    {
+      if ($data['value'] == "true")
+      {
+        $meteoIconShow = true;
+      }
+      else
+      {
+        $meteoIconShow = false;
+      }
+      break;
+    }
+    case 12:
+    {
+      $meteoIconFolder = $data['value'];
+      break;
+    }
+    case 13:
+    {
+      $meteoIconWidth = $data['value']; 
+      break;
+    }
+    case 14:
+    {
+      $meteoIconHeight = $data['value'];
+      break;
+    }
+    case 15:
+    {
+      $meteoIconLeft = $data['value'];
+      break;
+    }
+    case 16:
+    {
+      $meteoIconTop = $data['value'];
+      break;
+    }                       
+  }
 }
 
 ?>
 <div id="centerplan" style="text-align: center;margin: 15px;">
 <div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(<? echo $image_fond; ?>);">
-    <?
+    <?     
     $query = "SELECT * FROM plan";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -312,6 +379,21 @@ $soleil = "jour";
             }
             ?>
         </div></a>
+    <? 
+      if ($meteoIconShow)
+      {
+        echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
+        if ($meteoIconHeight)
+        {
+          echo 'height:' . $meteoIconHeight . 'px;';
+        }
+        if ($meteoIconWidth)
+        {
+          echo 'width:' . $meteoIconWidth . 'px;';
+        }
+        echo 'z-index:0"/>';
+      } 
+    ?> 
     <script type="text/javascript">
         $(document).ready(function() {
             $("#tabs-<? echo $data['id']; ?>").tabs();
@@ -469,11 +551,13 @@ $soleil = "jour";
         <? 
         }
       }
-
       ?>
     </div>
-  </div>      
+  </div> 
+      
+        
   <script>
+
     // Fonctions utilitaires
     var gTemperature = new Object();
     function temperature(nom)

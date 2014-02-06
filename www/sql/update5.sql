@@ -125,3 +125,13 @@ ALTER TABLE `insertion` ADD `public` boolean NOT NULL default true;
 
 ALTER TABLE `stickers` ADD `width` int(11);
 ALTER TABLE `stickers` ADD `height` int(11);
+
+-- --------------------------------------------------------
+
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(11, 'Icone m&eacute;t&eacute;o', 'true', 'checkbox'),
+(12, 'Icone m&eacute;t&eacute;o dossier', 'colorful', 'selectbox'),
+(13, 'Icone m&eacute;t&eacute;o largeur', '60', 'number'),
+(14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
+(15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
+(16, 'Icone m&eacute;t&eacute;o bas', '10', 'number');
