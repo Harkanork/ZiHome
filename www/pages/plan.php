@@ -182,12 +182,15 @@ while ($data = mysql_fetch_assoc($req))
         $query13 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."'";
         $req13 = mysql_query($query13, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data13 = mysql_fetch_assoc($req13);
+        $query14 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."'";
+        $req14 = mysql_query($query14, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data14 = mysql_fetch_assoc($req14);
         $img = "";
         if(file_exists("./img/plan/".$data['id'].".jpg")) {
           $img = "./img/plan/".$data['id'].".jpg";
         }
 
-        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null) {
+        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null && $data14 == null) {
         ?>
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
@@ -377,6 +380,33 @@ while ($data = mysql_fetch_assoc($req))
                 echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
               }              
             }
+// ----- Luminosite            
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `luminosite_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['lum'];
+              }
+              else
+              {
+                $valeur = "";
+              }
+              echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
+              echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur."</span></div>";
+              if ($data9['texte'])
+              {
+                if($data9['libelle'] == ""){
+                  $nom = $data9['nom'];
+                } else {
+                  $nom = $data9['libelle'];
+                }        
+                echo "<div style=\"position:absolute;top:".($data9['top'] + $heightIcones)."px;left:". ($data9['left'] - 10)."px;width:".($widthIcones + 20)."px;padding:2px;font-size:".$labelFontSize."px;font-weight:bold;font-family:sans-serif;border-style:none;background-color:rgba(255, 255, 255, 0.7);text-align:center;\">".$nom."</div>";          
+              }              
+            }
             ?>
         </div></a>
     <? 
@@ -438,6 +468,11 @@ while ($data = mysql_fetch_assoc($req))
                 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-7">Pr&eacute;cipitation</a></li>
                 <?
                 }                                 
+                if ($data14 != null){
+                ?>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-8">Luminosit&eacute;</a></li>
+                <?
+                }                                 
                 ?>
             </ul>
             <?
@@ -481,6 +516,21 @@ while ($data = mysql_fetch_assoc($req))
                   $width = "640px";
                   $height = "340px";
                   include("./fonctions/pluie_graph_global.php");
+                }
+                ?>
+              </div>
+              <?
+            }            
+            if(!($data14 == null)){
+              ?>
+              <div id="tabs-<? echo $data['id']; ?>-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
+                <?
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."'";
+                $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while($periph = mysql_fetch_assoc($req1)) {
+                  $width = "640px";
+                  $height = "340px";
+                  include("./fonctions/luminosite_graph_jour.php");
                 }
                 ?>
               </div>
@@ -571,6 +621,12 @@ while ($data = mysql_fetch_assoc($req))
       return gHygrometrie[nom]; 
     }
 
+    var gLuminosite = new Object();
+    function luminosite(nom)
+    {
+      return gLuminosite[nom]; 
+    }
+    
     var gVitesseVent = new Object();
     function vitesseVent(nom)
     {
@@ -640,7 +696,7 @@ while ($data = mysql_fetch_assoc($req))
     ?>
     
     <?
-    // Construction des tableaux issues des capteurs de temperature
+    // Construction des tableaux issues des capteurs de vent
     $query = "SELECT * FROM peripheriques WHERE periph = 'vent'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($periph = mysql_fetch_assoc($req))
@@ -669,9 +725,24 @@ while ($data = mysql_fetch_assoc($req))
       } 
     }
     ?>
-        
+   
     <?
-    // Construction des tableaux issues des capteurs de temperature
+    // Construction des tableaux issues des capteurs de luminosite
+    $query = "SELECT * FROM peripheriques WHERE periph = 'luminosite'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      $query0 = "SELECT * FROM `luminosite_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
+      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+      while ($value0 = mysql_fetch_assoc($req0))
+      {
+        echo 'gLuminosite["' . $periph['nom'] . '"] = "' . $value0['lum'] . '";';
+      } 
+    }
+    ?>
+            
+    <?
+    // Construction des tableaux issues des actionneurs
     $query = "SELECT * FROM peripheriques WHERE periph = 'actioneur'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($periph = mysql_fetch_assoc($req))

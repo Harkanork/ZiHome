@@ -21,6 +21,11 @@ while ($data = mysql_fetch_assoc($req))
     <li><A HREF="./index.php?page=temperature"><img src = "./img/icon_temp.png"/><span>Temp&eacute;rature</span></a></li>
   <?
   }
+  if($data['libelle'] == "luminosite" && $data['actif'] == 1) {
+  ?>
+    <li><A HREF="./index.php?page=luminosite"><img src = "./img/icon_lum.png"/><span>Luminosit&eacute;</span></a></li>
+  <?
+  }
   if($data['libelle'] == "owl" && $data['actif'] == 1) {
   ?>
     <li><A HREF="./index.php?page=owl"><img src = "./img/icon_elec.png"/><span>OWL</span></a></li>

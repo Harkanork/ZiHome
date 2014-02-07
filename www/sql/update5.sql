@@ -135,3 +135,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
 (15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
 (16, 'Icone m&eacute;t&eacute;o bas', '10', 'number');
+
+-- --------------------------------------------------------
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(14, 'luminosite', 1);

@@ -412,7 +412,8 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (17, 'temperature_graph_annee', 'Graphique temperature annuelle', 'temperature'),
 (18, 'vent_graph_jour', 'Graphique vent journalier', 'vent'),
 (19, 'actioneur', 'Actioneur', 'actioneur'),
-(20, 'scenario', 'Scenario', 'scenario');
+(20, 'scenario', 'Scenario', 'scenario'),
+(21, 'luminosite_graph_jour', 'Graphique journalier de luminosite', 'luminosite');
 
 -- --------------------------------------------------------
 
@@ -509,7 +510,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (10, 'pluie', 1),
 (11, 'video', 1),
 (12, 'iphone', 1),
-(13, 'android', 1);
+(13, 'android', 1),
+(14, 'luminosite', 1);
 
 -- --------------------------------------------------------
 
