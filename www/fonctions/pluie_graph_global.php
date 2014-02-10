@@ -1,5 +1,5 @@
 <?
-$query0 = "SELECT max(pluie) as max, min(pluie) as min, date FROM `pluie_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y')";
+$query0 = "SELECT max(pluie) as max, min(pluie) as min, date FROM `pluie_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $liste1 = "";
 while($value0 = mysql_fetch_assoc($req0))
@@ -19,14 +19,14 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-        $('#global-<? echo $periph['id']; ?>').highcharts({
+        $('#mois-<? echo $periph['id']; ?>').highcharts({
             chart: {
             },
             title: {
                 text: '<? echo $nom; ?>'
             },
             subtitle: {
-                text: 'Annuel'
+                text: 'Quotidienne'
             },
             xAxis: [{
                 type: 'datetime',
@@ -64,5 +64,5 @@ Highcharts.setOptions({
     });
                 </script>
 
-<div id="global-<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
+<div id="mois-<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>
 
