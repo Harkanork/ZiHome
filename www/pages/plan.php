@@ -650,7 +650,13 @@ while ($data = mysql_fetch_assoc($req))
     {
       return gConsoElec[nom]; 
     }
-              
+        
+    var gCapteur = new Object();
+    function capteur(nom)
+    {
+      return gCapteur[nom]; 
+    }
+                  
     function nuit()
     {
       return <? 
@@ -759,6 +765,31 @@ while ($data = mysql_fetch_assoc($req))
     }
     ?>
     
+    <?
+    // Construction des tableaux issues des actionneurs
+    $query = "SELECT * FROM peripheriques WHERE periph = 'capteur'";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      if ($periph['protocol'] == 6) 
+      {
+          $protocol = true;
+      } 
+      else 
+      {
+          $protocol = false;
+      }
+      if($protocol == true) 
+      {
+        echo 'gCapteur["' . $periph['nom'] . '"] = ' . $zibase->getState(substr($periph['id'], 1), $protocol) . ';';
+      }
+      else
+      {
+        echo 'gCapteur["' . $periph['nom'] . '"] = ' . $zibase->getState($periph['id'], $protocol) . ';';
+      }
+    }
+    ?>
+                    
     <?        
     // Creation des stickers
     $queryStickers = "SELECT * FROM stickers";
