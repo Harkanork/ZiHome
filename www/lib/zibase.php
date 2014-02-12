@@ -232,6 +232,20 @@
  		$this->ip = $ipAddr;
  	}
  	
+  /**
+   * Renvoie la valeur du bit se trouvant l'index donné dans la chaine hexadecimale
+ 	 * @param pHexString la chaine hexadecimale
+ 	 * @param pIndex l'index du bit  	 
+ 	 * @return 0 ou 1   
+   */      	
+  function extractBin($pHexString, $pIndex)
+  {
+    $hex = hexdec(substr($pHexString, (intval($pIndex / 8)) * 2, 2));
+    $bin = ($hex >> (($pIndex % 8) - 1)) & 0x1;
+  
+    return $bin;
+  }
+   	
  	/**
  	 * Envoie la requête à la Zibase sur le réseau
  	 * @param ZbRequest requête au format Zibase
@@ -295,7 +309,7 @@
 	  $request->command = 11;
 	  $request->param1 = 1;
 	  $request->param2 = $numScenario;
-      $this->sendRequest($request);	
+	  $this->sendRequest($request);	
  	}
 	
  	/**
@@ -310,7 +324,7 @@
 		$request->param2 = $port;
 		$request->param3 = 0;
 		$request->param4 = 0;
-    	$this->sendRequest($request,false);
+		$this->sendRequest($request,false);
  	}
 	
  	/**
@@ -325,7 +339,7 @@
 		$request->param2 = $port;
 		$request->param3 = 0;
 		$request->param4 = 0;
-    	$this->sendRequest($request,false);
+		$this->sendRequest($request,false);
  	}	
  	
  	/**
@@ -339,7 +353,7 @@
 		$request->param1 = 5;
 		$request->param3 = 0;
 		$request->param4 = $numVar;
-    	$response = $this->sendRequest($request);
+		$response = $this->sendRequest($request);
  		if ($response != null)
  			return $response->param1;
  		else
@@ -357,7 +371,7 @@
 		$request->param1 = 5;
 		$request->param3 = 2;
 		$request->param4 = $numCal - 1;
-    	$response = $this->sendRequest($request);    	
+		$response = $this->sendRequest($request);    	
  		if ($response != null)
  			return ZbCalendar::createFromInteger($response->param1);
  		else
@@ -409,9 +423,9 @@
 		$request->param1 = 5;
 		$request->param3 = 1;		
 		$request->param4 = $numVar;	
-	    $request->param2 = $value & 0xFFFF;
-	    
-    	$this->sendRequest($request); 		
+		$request->param2 = $value & 0xFFFF;
+		
+		$this->sendRequest($request); 		
  	}
  	
  	/**
@@ -442,42 +456,68 @@
  	 * @param string Identifiant de la sonde
  	 * @return array de la forme [0 => date du relevé (de type DateTime), 1 => V1, 2 => V2] 
  	 */
- 	public function getSensorInfo($idSensor) {
- 		$url = "http://" . $this->ip . "/sensors.xml";
- 		$handle = fopen($url, "rb");
- 		$xmlContent = stream_get_contents($handle);
- 		fclose($handle);
- 		
+	public function getSensorInfo($idSensor) {
+		$lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+		$chiffre   = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25");
+		
+		$url = "http://" . $this->ip . "/sensors.xml";
+		$handle = fopen($url, "rb");
+		$xmlContent = stream_get_contents($handle);
+		fclose($handle);
+		
 		date_default_timezone_set('Europe/Paris');
 		setlocale(LC_TIME, 'fr_FR', 'fra');
 		$type = substr($idSensor, 0, 2);
-		if(preg_match('#^[A-Z]#',substr($idSensor, 2, 1))){
-			$lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-			$chiffre   = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25");
-			$number = str_replace($lettre, $chiffre, substr($idSensor, 2, 1)) * 16 + substr($idSensor, 3) -1;
-		} else {
-			$number = substr($idSensor, 2);
-		}
- 		$xmlDoc = simplexml_load_string($xmlContent);
- 		$node = $xmlDoc->xpath("//ev[@id='".$number."' and @pro='".$type."']"); 		
- 		if ($node != null && $node[0]) { 			
- 			$info = array();
- 			date_default_timezone_set($this->timeZone);
- 			$dateSensor = new DateTime();
- 			$attributes = $node[0]->attributes();
- 			//date_timestamp_set($dateSensor, intval($attributes["gmt"]));
- 			$dateSensor->setTime(date("H", intval($attributes["gmt"])), date("i", intval($attributes["gmt"])), date("s", intval($attributes["gmt"])));
-			$dateSensor->setDate(date("Y", intval($attributes["gmt"])), date("n", intval($attributes["gmt"])), date("j", intval($attributes["gmt"])));
- 			$info[0] = $dateSensor;
- 			$info[1] = intval($attributes["v1"]);
- 			$info[2] = intval($attributes["v2"]); 			
- 			$info[3] = intval($attributes["lowbatt"]);
+		$xmlDoc = simplexml_load_string($xmlContent);
+		
+		// Test si c'est un capteur ZWave 
+		if (preg_match('#^Z[A-Z][0-9]*#',substr($idSensor, 0, 2)))
+		{
+			$number = str_replace($lettre, $chiffre, substr($idSensor, 1, 1)) * 16 + substr($idSensor, 2);
+			
+			$info = array();
+			$dateSensor = new DateTime();
+			$info[0] = $dateSensor;
+			$info[1] = 0;
+			$info[2] = 0;
+			$info[3] = $this->extractBin($xmlDoc->zwlowbatt, $number);
+			
 			return $info;
- 		}
- 		else
- 			return null; 		
- 	} 	
- 	
+		}
+		else
+		{
+			if(preg_match('#^[A-Z]#',substr($idSensor, 2, 1)))
+			{
+				$number = str_replace($lettre, $chiffre, substr($idSensor, 2, 1)) * 16 + substr($idSensor, 3) -1;
+			} else 
+			{
+				$number = substr($idSensor, 2);
+			}
+			
+			$node = $xmlDoc->xpath("//ev[@id='".$number."' and @pro='".$type."']"); 		
+			if ($node != null && $node[0]) 
+			{ 			
+				$info = array();
+				date_default_timezone_set($this->timeZone);
+				$dateSensor = new DateTime();
+				$attributes = $node[0]->attributes();
+				//date_timestamp_set($dateSensor, intval($attributes["gmt"]));
+				$dateSensor->setTime(date("H", intval($attributes["gmt"])), date("i", intval($attributes["gmt"])), date("s", intval($attributes["gmt"])));
+				$dateSensor->setDate(date("Y", intval($attributes["gmt"])), date("n", intval($attributes["gmt"])), date("j", intval($attributes["gmt"])));
+				$info[0] = $dateSensor;
+				$info[1] = intval($attributes["v1"]);
+				$info[2] = intval($attributes["v2"]);		
+				$info[3] = intval($attributes["lowbatt"]);
+				
+				return $info;
+			}
+			else
+			{
+				return null;
+			}
+		} 		
+	} 	
+
  	/**
  	 * Lance l'exécution d'un script.
  	 * Ex : lm [mon scenario] (= lance le scenarion "mon scenario")
@@ -604,8 +644,8 @@
                         $attributes = $ua[0]->attributes();
                         $info[$i]['c'] = $attributes["c"];
                         $info[$i]['n'] = $ua->n;
-			$info[$i]['t'] = $attributes["t"];
-			$info[$i]['i'] = $attributes["i"];
+                        $info[$i]['t'] = $attributes["t"];
+                        $info[$i]['i'] = $attributes["i"];
                         $i = $i + 1;
                 }
         return $info;
