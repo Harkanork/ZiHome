@@ -6,8 +6,8 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $query = "DELETE FROM stickers WHERE `id` = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
-  else if(isset($_POST['Modifier'])){
-    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['id']."'";
+  else if(isset($_POST['Valider'])){
+    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['idsource']."'";
     mysql_query($query, $link);
   }
   else if(isset($_POST['Ajouter'])) {
@@ -33,8 +33,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
         echo '<TD><INPUT TYPE="number" min="0" NAME="height" VALUE="'.$data['height'].'" style="width:60px;"/></TD>';
         $condition = $data['condition'];
         echo '<TD><textarea NAME="condition" cols="40" rows="5">'.$condition.'</textarea></TD>';
-        echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Modifier" VALUE="Modifier"/></center></td>';
+        echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"/></center></td>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Supprimer" VALUE="Supprimer"/></center></td>';
+        echo '<INPUT TYPE="HIDDEN" NAME="idsource" VALUE="' . $data['id'] . '">';
       echo '</FORM>';
     echo '</TR>';
   }
