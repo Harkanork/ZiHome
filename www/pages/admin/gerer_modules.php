@@ -42,7 +42,7 @@ while ($data = mysql_fetch_assoc($req))
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['id']; ?>">
 <td>
-<INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
+<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider">
 </td>
 </FORM>
 </tr>

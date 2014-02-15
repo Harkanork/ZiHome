@@ -4,7 +4,7 @@ if(isset($_SESSION['auth']))
 include("./config/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
-if(isset($_POST['VALIDER'])) {
+if(isset($_POST['Valider'])) {
 $cal = new ZbCalendar();
 for ($j = 0; $j < 24; $j++) {
 if($_POST[$j] == 'on'){
@@ -81,7 +81,7 @@ echo "<p align=center>Consigne de jour : ".(($zibase->getVariable($thermostat[$i
 ?>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['4']; ?>">
 <INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['4']))/10); ?>">
-<INPUT TYPE="SUBMIT" NAME="Modifier_vcj" VALUE="Modifier">
+<INPUT TYPE="SUBMIT" NAME="Modifier_vcj" VALUE="Valider">
 </p></FORM>
 <FORM method="post" action="./index.php?page=thermostat">
 <?
@@ -89,7 +89,7 @@ echo "<p align=center>Consigne de nuit : ".(($zibase->getVariable($thermostat[$i
 ?>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['6']; ?>">
 <INPUT TYPE="text" size="3" NAME="temperature" VALUE="<? echo (($zibase->getVariable($thermostat[$i]['6']))/10); ?>">
-<INPUT TYPE="SUBMIT" NAME="Modifier_vcn" VALUE="Modifier">
+<INPUT TYPE="SUBMIT" NAME="Modifier_vcn" VALUE="Valider">
 </p></FORM>
 <?
 echo "<p align=center>Hysteresis : ".$thermostat[$i]['8']."</p>";
@@ -105,7 +105,7 @@ echo "<center><p align=center>Mode : <br>";
 <input type="radio" name="mode" value="64"<? if($zibase->getVariable($thermostat[$i]['5']) == "64") { echo " checked"; } ?>>Nuit temporaire | 
 <input type="radio" name="mode" value="5"<? if($zibase->getVariable($thermostat[$i]['5']) == "5") { echo " checked"; } ?>>Stop
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['5']; ?>">
-<INPUT TYPE="SUBMIT" NAME="Modifier_mode" VALUE="Modifier">
+<INPUT TYPE="SUBMIT" NAME="Modifier_mode" VALUE="Valider">
 </FORM></p></center>
 <?
 for ($k = 0; $k < 3; $k++) {
@@ -130,7 +130,7 @@ Lundi <input type=checkbox name=lundi<? if($calendrier->day['lundi'] == 1) { ?> 
  | Dimanche <input type=checkbox name=dimanche<? if($calendrier->day['dimanche'] == 1) { ?> Checked<? } ?>>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $thermostat[$i]['7']+$k; ?>">
 <br>
-<INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
+<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider">
 </form></p></center>
 <?
 }

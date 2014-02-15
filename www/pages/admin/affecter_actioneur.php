@@ -32,8 +32,8 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Texte
       </td>      
       <td>Batterie</td>
-      <td>date</td>
-      <td>Libelle</td>
+      <td>Date changement batterie</td>
+      <td>Libell&eacute;</td>
       <td></td>
     </tr>
 <?
@@ -76,15 +76,15 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       <option value="<? echo $data1['zcode']; ?>"<? if($data1['zcode'] ==  $data['protocol']){ echo " selected"; } ?>><? echo $data1['nom']; ?></option>
     <? } ?>
     </select></td>
-    <td><INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5></td> 
-    <td><INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5></td>
+    <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"></td> 
+    <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"></td>
     <td><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></td>
     <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>        
     <td><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></td>
     <td><INPUT type="date" name="date_chgt_batterie" value="<? echo $data['date_chgt_batterie']; ?>"></td>
     <td><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></td>
-    <td><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
-    <INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER"></td>
+    <td class="input"><center><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
+    <INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"></center></td>
   </FORM>
   </tr>
   <?

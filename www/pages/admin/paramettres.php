@@ -62,7 +62,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
        
 ?>
     </td>
-    <td>
+    <td align="center">
       <input type="submit" name="valider" value="Valider">
     </td>
     </FORM>

@@ -7,7 +7,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $query = "DELETE FROM `insertion` WHERE `id`='".$_POST['id']."'";
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
-  else if(isset($_POST['Modifier']))
+  else if(isset($_POST['Valider']))
   {
     $query = null;
     if (!(empty($_POST['url'])))
@@ -24,7 +24,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Nom</TD><TD>Fichier</TD><TD>Icone</TD><TD>Public</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER>
+<br>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Nom</TD><TD>Fichier</TD><TD>Icone</TD><TD>Public</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM `insertion`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -42,7 +44,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
           echo " checked"; 
         }
         echo '/></center></td>';        
-        echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Modifier" VALUE="Modifier"/></center></td>';
+        echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"/></center></td>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Supprimer" VALUE="Supprimer"/></center></td>';
       echo '</FORM>';
     echo '</TR>';

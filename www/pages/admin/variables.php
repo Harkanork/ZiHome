@@ -4,7 +4,7 @@ if(isset($_SESSION['auth']))
 include("./config/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
-if(isset($_POST['VALIDER'])) {
+if(isset($_POST['Valider'])) {
 $zibase->setVariable($_POST['id'], $_POST['value']);
 include("./pages/connexion.php");
 $query = "UPDATE variables SET description = '".$_POST['description']."' WHERE `id` = '".$_POST['id']."'";
@@ -23,7 +23,7 @@ $data0 = mysql_fetch_assoc($req0)
 Variable <? echo $i; ?> : <input type="text" name="value" value="<? echo $var; ?>">
 Description : <input type="text" name="description" value="<? echo $data0['description']; ?>">
 <input type="hidden" name="id" value="<? echo $i; ?>">
-<INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
+<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider">
 </form></p></center>
 <?
 }

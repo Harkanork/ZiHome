@@ -11,6 +11,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 Nom
 </td>
 <td>
+Pi&egrave;ce
+</td>
+<td>
 Droite
 </td>
 <td>
@@ -20,12 +23,13 @@ Bas
 Icone
 </td>
 <td>
-G&eacute;rer les piles
+Batterie
 </td>
 <td>
-Date changement Batterie
+Date changement batterie
 </td>
-<td>Libelle</td><td></td>
+<td>Libell&eacute;</td>
+<td></td>
 </tr>
 <?
 
@@ -42,8 +46,10 @@ while ($data = mysql_fetch_assoc($req))
 ?>
 <tr>
 <FORM method="post" action="./index.php?page=administration&detail=affecter_conso_elec">
-<td>
-<? echo $data['nom']; ?> : <select name="sonde">
+<td class="name">
+<? echo $data['nom']; ?>
+</td>
+<td><select name="sonde">
 <option value="-1">ne pas afficher</option>
 <?
 $query3 = "SELECT * FROM `plan` ORDER BY `libelle`";
@@ -54,8 +60,8 @@ while($data3 = mysql_fetch_assoc($req3))
 <? } ?>
 </select>
 </td>
-<td class="droite"><center><INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5></center></td>
-<td class="bas"><center><INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5></center></td>
+<td class="droite"><center><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"></center></td>
+<td class="bas"><center><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"></center></td>
 <td class="icone"><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
 <td>
 <center>
@@ -73,9 +79,9 @@ while($data3 = mysql_fetch_assoc($req3))
 </center>
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
-<td>
+<td class="input">
 <center>
-<INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
+<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider">
 </center>
 </td>
 </tr>

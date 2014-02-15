@@ -27,10 +27,11 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       </td>
       <td>
       Texte
-      </td>         
-      <td>gestion pile</td>
-      <td>Date</td>
-      <td>Libelle</td><td></td>
+      </td>
+      <td>Batterie</td>
+      <td>Date changement batterie</td>
+      <td>Libell&eacute;</td>
+      <td></td>
     </tr>
 <?
 if(isset($_POST['id'])){
@@ -46,7 +47,7 @@ while ($data = mysql_fetch_assoc($req))
 ?>
 <tr>
 <FORM method="post" action="./index.php?page=administration&detail=affecter_capteur">
-<td>
+<td class="name">
 <? echo $data['nom']; ?></td>
 <td><select name="sonde">
 <option value="-1">ne pas afficher</option>
@@ -74,12 +75,12 @@ while($data1 = mysql_fetch_assoc($req1)) {
 </td>
 <td>
 <center>
-<INPUT TYPE="text" NAME="left" VALUE="<? echo $data['left']; ?>" size=5>
+<INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;">
 </center>
 </td>
 <td> 
 <center>
-<INPUT TYPE="text" NAME="top" VALUE="<? echo $data['top']; ?>" size=5>
+<INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;">
 </center>
 </td>
 <td>
@@ -104,9 +105,9 @@ while($data1 = mysql_fetch_assoc($req1)) {
 </center>
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
-<td>
+<td class="input">
 <center>
-<INPUT TYPE="SUBMIT" NAME="VALIDER" VALUE="VALIDER">
+<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider">
 </center>
 </td>
 </FORM>

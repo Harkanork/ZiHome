@@ -16,7 +16,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
 ?>
 <div id="action-tableau">
-<CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD style="width:10px">Largeur</TD><TD>Hauteur</TD><TD>Condition</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<CENTER>
+<br>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD style="width:10px">Largeur</TD><TD>Hauteur</TD><TD>Condition</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM stickers";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
