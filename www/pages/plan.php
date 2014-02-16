@@ -36,9 +36,9 @@ else
 // Recuperation de la hauteur des icones
 $query = "SELECT * FROM paramettres WHERE libelle = 'hauteur icones'";
 $res_query = mysql_query($query, $link);
-$data = mysql_fetch_assoc($res_query);
 if (mysql_numrows($res_query) > 0)
 {
+  $data = mysql_fetch_assoc($res_query);
   $heightIcones = $data['value'];
 }
 else
@@ -692,9 +692,10 @@ while ($data = mysql_fetch_assoc($req))
     while ($periph = mysql_fetch_assoc($req))
     {
       $query0 = "SELECT * FROM `temperature_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
-      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($value0 = mysql_fetch_assoc($req0))
+      $req0 = mysql_query($query0, $link);
+      if ($req0 && mysql_numrows($req0) > 0)
       {
+        $value0 = mysql_fetch_assoc($req0);
         echo 'gTemperature["' . $periph['nom'] . '"] = ' . $value0['temp'] . ';';
         echo 'gHygrometrie["' . $periph['nom'] . '"] = ' . $value0['hygro'] . ';';
       } 
@@ -708,9 +709,10 @@ while ($data = mysql_fetch_assoc($req))
     while ($periph = mysql_fetch_assoc($req))
     {
       $query0 = "SELECT * FROM `vent_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
-      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($value0 = mysql_fetch_assoc($req0))
+      $req0 = mysql_query($query0, $link);
+      if ($req0 && mysql_numrows($req0) > 0)
       {
+        $value0 = mysql_fetch_assoc($req0);
         echo 'gDirectionVent["' . $periph['nom'] . '"] = "' . $value0['direction'] . '";';
         echo 'gVitesseVent["' . $periph['nom'] . '"] = ' . $value0['vitesse'] . ';';
       } 
@@ -724,9 +726,10 @@ while ($data = mysql_fetch_assoc($req))
     while ($periph = mysql_fetch_assoc($req))
     {
       $query0 = "SELECT * FROM `conso_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
-      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($value0 = mysql_fetch_assoc($req0))
+      $req0 = mysql_query($query0, $link);
+      if ($req0 && mysql_numrows($req0) > 0)
       {
+        $value0 = mysql_fetch_assoc($req0);
         echo 'gConsoElec["' . $periph['nom'] . '"] = "' . $value0['conso'] . '";';
       } 
     }
@@ -739,9 +742,10 @@ while ($data = mysql_fetch_assoc($req))
     while ($periph = mysql_fetch_assoc($req))
     {
       $query0 = "SELECT * FROM `luminosite_".$periph['nom']."` ORDER BY `date` DESC LIMIT 1";
-      $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($value0 = mysql_fetch_assoc($req0))
+      $req0 = mysql_query($query0, $link);
+      if ($req0 && mysql_numrows($req0) > 0)
       {
+        $value0 = mysql_fetch_assoc($req0);
         echo 'gLuminosite["' . $periph['nom'] . '"] = "' . $value0['lum'] . '";';
       } 
     }
