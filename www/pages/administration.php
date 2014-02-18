@@ -12,67 +12,67 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   {
     if($data['libelle'] == 'vent') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=affecter_vent">Affecter un an&eacute;mom&egrave;tre</A></li>
+      <A HREF="./index.php?page=administration&detail=affecter_vent"><li>Affecter un an&eacute;mom&egrave;tre</li></A>
       <?
     }
     if($data['libelle'] == 'pluie') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=affecter_precipitation">Affecter une pr&eacute;cipitation</A></li>
+      <A HREF="./index.php?page=administration&detail=affecter_precipitation"><li>Affecter une pr&eacute;cipitation</li></A>
       <?
     }
     if($data['libelle'] == 'conso_elec') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=affecter_conso_elec">Affecter une conso-elec</A></li>
+      <A HREF="./index.php?page=administration&detail=affecter_conso_elec"><li>Affecter une conso-elec</li></A>
       <?
     }
     if($data['libelle'] == 'temperature') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=affecter_sonde">Affecter une temp&eacute;rature</A></li>
+      <A HREF="./index.php?page=administration&detail=affecter_sonde"><li>Affecter une temp&eacute;rature</li></A>
       <?
     }
     if($data['libelle'] == 'luminosite') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=affecter_luminosite">Affecter une luminosit&eacute;</A></li>
+      <A HREF="./index.php?page=administration&detail=affecter_luminosite"><li>Affecter une luminosit&eacute;</li></A>
       <?
     }    
     if($data['libelle'] == 'plan') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=gerer_pieces">G&eacute;rer les pi&egrave;ces</A></li>
-      <li><A HREF="./index.php?page=administration&detail=gerer_stickers">G&eacute;rer les stickers</A></li>
+      <A HREF="./index.php?page=administration&detail=gerer_pieces"><li>G&eacute;rer les pi&egrave;ces</li></A>
+      <A HREF="./index.php?page=administration&detail=gerer_stickers"><li>G&eacute;rer les stickers</li></A>
       <?
     }
     if($data['libelle'] == 'accueil') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></li>
+      <A HREF="./index.php?page=administration&detail=accueil"><li>Page Accueil</li></A>
       <?
     }
     if($data['libelle'] == 'video') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=video">Cam&eacute;ras</A></li>
+      <A HREF="./index.php?page=administration&detail=video"><li>Cam&eacute;ras</li></A>
       <?
     }
     if($data['libelle'] == 'iphone') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=iphone">iPhone</A></li>
+      <A HREF="./index.php?page=administration&detail=iphone"><li>iPhone</li></A>
       <?
     }
     if($data['libelle'] == 'android') {
       ?>
-      <li><A HREF="./index.php?page=administration&detail=android">Android</A></li>
+      <A HREF="./index.php?page=administration&detail=android"><li>Android</li></A>
       <?
     }
   }
   ?>
-  <li><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un actioneur</A></li>
-  <li><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un capteur</A></li>
-  <li><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un sc&eacute;nario</A></li>
-  <li><A HREF="./index.php?page=administration&detail=gerer_users">G&eacute;rer les utilisateurs</A></li>
-  <li><A HREF="./index.php?page=administration&detail=gerer_modules">G&eacute;rer les modules</A></li>
-  <li><A HREF="./index.php?page=administration&detail=gerer_protocol">G&eacute;rer les protocoles</A></li>
-  <li><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></li>
-  <li><A HREF="./index.php?page=administration&detail=variables">Variables</A></li>
-  <li><A HREF="./index.php?page=administration&detail=insertion">Insertion de page</A></li>
-  <li><A HREF="./index.php?page=administration&detail=paramettres">Param&egrave;tres</A></li>
+  <A HREF="./index.php?page=administration&detail=affecter_actioneur"><li>Affecter un actioneur</li></A>
+  <A HREF="./index.php?page=administration&detail=affecter_capteur"><li>Affecter un capteur</li></A>
+  <A HREF="./index.php?page=administration&detail=affecter_scenario"><li>Affecter un sc&eacute;nario</li></A>
+  <A HREF="./index.php?page=administration&detail=gerer_users"><li>G&eacute;rer les utilisateurs</li></A>
+  <A HREF="./index.php?page=administration&detail=gerer_modules"><li>G&eacute;rer les modules</li></A>
+  <A HREF="./index.php?page=administration&detail=gerer_protocol"><li>G&eacute;rer les protocoles</li></A>
+  <A HREF="./index.php?page=administration&detail=messages"><li>Messages Zibase</li></A>
+  <A HREF="./index.php?page=administration&detail=variables"><li>Variables</li></A>
+  <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
+  <A HREF="./index.php?page=administration&detail=paramettres"><li>Param&egrave;tres</li></A>
 </div>
 <div id="action">
   <?
