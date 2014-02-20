@@ -1,7 +1,7 @@
 <?
 /*------------Configuration----------------------*/
-include("/var/www/config/conf_zibase.php");
-include("/var/www/lib/zibase.php");
+include("conf_scripts.php");
+include("utils.php");
 
 /*-------------ne rien changer apres ici---------*/
 
