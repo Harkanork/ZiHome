@@ -1,14 +1,9 @@
 <?php
 include("./lib/date_francais.php");
-echo "<CENTER><TABLE border=0 ><TR class='title' style='text-align: center'><TD>Sonde</TD><TD style='width:100px'>Dernier<br>changement</TD><TD style='width:140px'>Batterie<br>faible</TD><TD></TD></TR>";
 include("./pages/connexion.php");
-if(isset($_SESSION['auth']))
-{
-  if(isset($_POST['id'])){
-    $query = "UPDATE ".$_POST['table']." SET date_chgt_batterie = '".date("Y-m-d")."', `alerte_batterie` = '0000-00-00 00:00:00' WHERE id = '".$_POST['id']."'";
-    mysql_query($query, $link);
-  }
-}
+
+echo "<CENTER><TABLE border=0 ><TR class='title' style='text-align: center'><TD>Sonde</TD><TD style='width:100px'>Dernier<br>changement</TD><TD style='width:140px'>Batterie<br>faible</TD></TR>";
+
 $query = "SELECT * FROM owl_detail ORDER BY `date` DESC LIMIT 1";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
@@ -20,6 +15,7 @@ while ($periph = mysql_fetch_assoc($req))
   }
   echo "<TR><TD>OWL CM180</TD><TD ALIGN=CENTER>".$batterie."</TD></TR>";
 }
+
 $query = "SELECT * FROM peripheriques WHERE gerer_batterie = '1'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
@@ -48,21 +44,10 @@ while ($periph = mysql_fetch_assoc($req))
   if ($periph['alerte_batterie'] != "0000-00-00 00:00:00")
   {
     echo "<TD style='text-align: center;'>".date_francais($periph['alerte_batterie'])."</TD>";
-    echo '<TD valign="center">';
-    if(isset($_SESSION['auth']))
-    {
-      echo '<FORM method="post" action="./index.php?page=batterie">';
-      echo '<INPUT TYPE="HIDDEN" NAME="table" VALUE="peripheriques">';
-      echo '<INPUT TYPE="HIDDEN" NAME="id" VALUE="'. $periph['id'] .'">';
-      echo '<INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Piles chang&eacute;es">';
-      echo '</FORM>';
-    }
-    echo '</TD>';
-    
   }
   else
   {
-    echo "<TD></TD><TD></TD>";
+    echo "<TD></TD>";
   }
   echo "</TR>";
 }

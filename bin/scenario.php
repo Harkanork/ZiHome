@@ -1,6 +1,6 @@
 <?php
-include("/var/www/config/conf_zibase.php");
-include("/var/www/lib/zibase.php");
+include("conf_scripts.php");
+include("utils.php");
 $zibase = new ZiBase($ipzibase);
 $actionlist=$zibase->getScenarioList($idzibase,$tokenzibase);
 

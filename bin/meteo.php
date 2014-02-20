@@ -1,6 +1,6 @@
 <?php
-require_once("/var/www/lib/zibase.php");
-include("/var/www/config/conf_zibase.php");
+include("conf_scripts.php");
+include("utils.php");
 $zibase = new ZiBase($ipzibase);
 
 //Au prealable rechercher sa ville sur weather.com et relever la valeur dans l'adresse qui ressemmble a FRXX1879:1:FR

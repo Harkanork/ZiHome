@@ -1,6 +1,6 @@
 <?
-include("/var/www/config/conf_zibase.php");
-include("/var/www/lib/zibase.php");
+include("conf_scripts.php");
+include("utils.php");
 $zibase = new ZiBase($ipzibase);
 $zibase->registerListener($ipserver);
 $socket = socket_create(AF_INET, SOCK_DGRAM, 0);
