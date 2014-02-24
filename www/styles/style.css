@@ -155,7 +155,6 @@ display: none;
 
 
 div.metro_nav{
-		postion:absloute;
 		z-index:100;
 		margin-top: -8px;
 		margin-left: -8px;
@@ -172,7 +171,6 @@ div.metro_nav{
 
 
 div.metro_nav-config{
-		postion:absloute;
 		z-index:99;
 		margin-top: -10px;
 		background-color: black;
@@ -375,4 +373,8 @@ padding: 5px;
 	background-color: white;
 	color: black;
 
+}
+
+#ui-datepicker-div{
+  z-index: 200!important;
 }
