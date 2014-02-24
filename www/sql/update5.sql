@@ -140,3 +140,17 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (14, 'luminosite', 1);
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(15, 'freebox', 1);
+
+INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
+(22, 'freebox_reboot', 'Freebox Reboot', ''),
+(23, 'freebox_ring_on', 'Freebox Telephone sonne', ''),
+(24, 'freebox_ring_off', 'Freebox Telephone stop sonne', ''),
+(25, 'freebox_wifi_off', 'Freebox Wifi OFF', ''),
+(26, 'freebox_wifi_on', 'Freebox Wifi ON', ''),
+(27, 'freebox_wifi_status', 'Freebox Wifi Status', ''),
+(28, 'freebox_firmware', 'Freebox version firmware', ''),
+(29, 'freebox_uptime', 'Freebox uptime', '')
+(30, 'freebox_conn_config', 'Freebox Connexion Status', '');

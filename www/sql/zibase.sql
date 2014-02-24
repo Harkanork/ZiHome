@@ -413,7 +413,16 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (18, 'vent_graph_jour', 'Graphique vent journalier', 'vent'),
 (19, 'actioneur', 'Actioneur', 'actioneur'),
 (20, 'scenario', 'Scenario', 'scenario'),
-(21, 'luminosite_graph_jour', 'Graphique journalier de luminosite', 'luminosite');
+(21, 'luminosite_graph_jour', 'Graphique journalier de luminosite', 'luminosite'),
+(22, 'freebox_reboot', 'Freebox Reboot', ''),
+(23, 'freebox_ring_on', 'Freebox Telephone sonne', ''),
+(24, 'freebox_ring_off', 'Freebox Telephone stop sonne', ''),
+(25, 'freebox_wifi_off', 'Freebox Wifi OFF', ''),
+(26, 'freebox_wifi_on', 'Freebox Wifi ON', ''),
+(27, 'freebox_wifi_status', 'Freebox Wifi Status', ''),
+(28, 'freebox_firmware', 'Freebox version firmware', ''),
+(29, 'freebox_uptime', 'Freebox uptime', '')
+(30, 'freebox_conn_config', 'Freebox Connexion Status', '');
 
 -- --------------------------------------------------------
 
@@ -511,7 +520,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (11, 'video', 1),
 (12, 'iphone', 1),
 (13, 'android', 1),
-(14, 'luminosite', 1);
+(14, 'luminosite', 1),
+(15, 'freebox', 1);
 
 -- --------------------------------------------------------
 
