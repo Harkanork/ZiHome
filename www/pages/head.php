@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" href="./styles/administration.css" type="text/css" media="all">
 <link rel="apple-touch-icon-precomposed" href="img/icon-iphone.jpg" />
@@ -25,11 +26,22 @@
             }
         })(document,window.navigator,'standalone');
     </script>
+<link rel="stylesheet" href="./js/themes/jquery-ui.min.css">
 <script type="text/javascript" src="./js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
-<script src="./js/modules/exporting.js"></script>
+<script type="text/javascript" src="./js/jquery.ui.datepicker-fr.min.js"></script>
+<script type="text/javascript" src="./js/modules/exporting.js"></script>
+<script type="text/javascript" src="./js/modernizr.custom.js"></script>
 <script type="text/javascript" src="./js/popup.js"></script>
+<script>
+  $(function() {
+    if (!Modernizr.inputtypes['date']) {
+      $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+      $('input[type=date]').datepicker({dateFormat: 'dd-mm-yy'});
+    }
+  });
+</script>
 <?
 include("./pages/connexion.php");
 $query = "SELECT * FROM paramettres WHERE libelle = 'icones'";

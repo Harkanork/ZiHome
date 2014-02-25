@@ -421,7 +421,7 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (26, 'freebox_wifi_on', 'Freebox Wifi ON', ''),
 (27, 'freebox_wifi_status', 'Freebox Wifi Status', ''),
 (28, 'freebox_firmware', 'Freebox version firmware', ''),
-(29, 'freebox_uptime', 'Freebox uptime', '')
+(29, 'freebox_uptime', 'Freebox uptime', ''),
 (30, 'freebox_conn_config', 'Freebox Connexion Status', '');
 
 -- --------------------------------------------------------
