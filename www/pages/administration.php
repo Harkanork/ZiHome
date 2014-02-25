@@ -2,6 +2,9 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>
+<link rel="stylesheet" href="./js/themes/jquery.ui.core.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.theme.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.datepicker.min.css">
 <center>
 <div id="sous-menu">
   <?
