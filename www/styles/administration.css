@@ -10,6 +10,10 @@ width: 1100px;
 #action-actionneur tr{
 background-color: #ccc;
 }
+#action-actionneur td{
+vertical-align:middle;
+}
+
 #action-actionneur td.name{
 	width: 38%;
 	height: 25px;
@@ -65,4 +69,12 @@ background-color: #ccc;
 	text-align: center;
 	height: 30px;
 	font-size: 18px;
+}
+#action-actionneur tr.contenu:hover{
+	background-color: white;
+	color: black;
+
+}
+.td_categorie {
+  min-width:120px !important;
 }

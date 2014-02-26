@@ -5,6 +5,45 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <link rel="stylesheet" href="./js/themes/jquery.ui.core.min.css">
 <link rel="stylesheet" href="./js/themes/jquery.ui.theme.min.css">
 <link rel="stylesheet" href="./js/themes/jquery.ui.datepicker.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.dialog.min.css">
+<link rel="stylesheet" href="./styles/administration.css" type="text/css" media="all">
+
+<script>
+var gAskConfirmURL;
+
+function askConfirmDeletion(pURL) {
+  gAskConfirmURL = pURL;
+  $("#dialog-confirm").dialog("open");
+}
+
+$(function() 
+{
+  $( "#dialog-confirm" ).dialog(
+  {
+    resizable: false,
+    height:160,
+    width:400,
+    autoOpen: false,
+    modal: true,
+    buttons: 
+    {
+      "Oui": function() 
+      {
+        $( this ).dialog( "close" );
+        window.location.href = gAskConfirmURL;
+      },
+      "Non": function() 
+      {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+});
+</script>
+<div id="dialog-confirm" title="Confirmation" style="display:none;">
+Confirmez-vous la suppression?
+</div>
+
 <center>
 <div id="sous-menu">
   <?
@@ -13,59 +52,35 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
   {
-    if($data['libelle'] == 'vent') {
-      ?>
-      <A HREF="./index.php?page=administration&detail=affecter_vent"><li>Affecter un an&eacute;mom&egrave;tre</li></A>
-      <?
-    }
-    if($data['libelle'] == 'pluie') {
-      ?>
-      <A HREF="./index.php?page=administration&detail=affecter_precipitation"><li>Affecter une pr&eacute;cipitation</li></A>
-      <?
-    }
-    if($data['libelle'] == 'conso_elec') {
-      ?>
-      <A HREF="./index.php?page=administration&detail=affecter_conso_elec"><li>Affecter une conso-elec</li></A>
-      <?
-    }
-    if($data['libelle'] == 'temperature') {
-      ?>
-      <A HREF="./index.php?page=administration&detail=affecter_sonde"><li>Affecter une temp&eacute;rature</li></A>
-      <?
-    }
-    if($data['libelle'] == 'luminosite') {
-      ?>
-      <A HREF="./index.php?page=administration&detail=affecter_luminosite"><li>Affecter une luminosit&eacute;</li></A>
-      <?
-    }    
     if($data['libelle'] == 'plan') {
       ?>
       <A HREF="./index.php?page=administration&detail=gerer_pieces"><li>G&eacute;rer les pi&egrave;ces</li></A>
       <A HREF="./index.php?page=administration&detail=gerer_stickers"><li>G&eacute;rer les stickers</li></A>
       <?
     }
-    if($data['libelle'] == 'accueil') {
+    else if($data['libelle'] == 'accueil') {
       ?>
       <A HREF="./index.php?page=administration&detail=accueil"><li>Page Accueil</li></A>
       <?
     }
-    if($data['libelle'] == 'video') {
+    else if($data['libelle'] == 'video') {
       ?>
       <A HREF="./index.php?page=administration&detail=video"><li>Cam&eacute;ras</li></A>
       <?
     }
-    if($data['libelle'] == 'iphone') {
+    else if($data['libelle'] == 'iphone') {
       ?>
       <A HREF="./index.php?page=administration&detail=iphone"><li>iPhone</li></A>
       <?
     }
-    if($data['libelle'] == 'android') {
+    else if($data['libelle'] == 'android') {
       ?>
       <A HREF="./index.php?page=administration&detail=android"><li>Android</li></A>
       <?
     }
   }
   ?>
+  <A HREF="./index.php?page=administration&detail=affecter_sonde"><li>G&eacute;rer les sondes</li></A>
   <A HREF="./index.php?page=administration&detail=affecter_actioneur"><li>Affecter un actioneur</li></A>
   <A HREF="./index.php?page=administration&detail=affecter_capteur"><li>Affecter un capteur</li></A>
   <A HREF="./index.php?page=administration&detail=affecter_scenario"><li>Affecter un sc&eacute;nario</li></A>
