@@ -35,14 +35,19 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       <td>Date changement batterie</td>
       <td>Libell&eacute;</td>
       <td></td>
+      <td></td>
     </tr>
 <?
-  if(isset($_POST['id'])){
-    include("./pages/connexion.php");
+  include("./pages/connexion.php");
+  if(isset($_GET['Supprimer'])){
+    $query = "DELETE FROM `peripheriques` WHERE `id` = '".$_GET['id']."'";
+    mysql_query($query, $link);
+  }
+  else if(isset($_POST['id'])){
     $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
-  include("./pages/connexion.php");
+  
   $query = "SELECT * FROM peripheriques WHERE periph = 'actioneur'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
@@ -85,7 +90,12 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <td><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></td>
     <td class="input"><center><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
     <INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"></center></td>
-  </FORM>
+    </FORM>
+    <td class="input">
+      <center>
+      <button onclick='javascript:askConfirmDeletion("./index.php?page=administration&detail=affecter_actioneur&Supprimer=Supprimer&id=<? echo $data['id']; ?>")'>Supprimer</button>
+      </center>
+    </td>
   </tr>
   <?
   }
