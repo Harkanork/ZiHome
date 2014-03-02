@@ -15,6 +15,7 @@ vertical-align:middle;
 }
 
 #action-actionneur td.name{
+	min-width:100px !important;
 	width: 38%;
 	height: 25px;
 	text-align: center;
@@ -78,3 +79,14 @@ vertical-align:middle;
 .td_categorie {
   min-width:120px !important;
 }
+
+.name-variable {
+  min-width:100px !important;
+  text-align: center;
+}
+
+.desc-variable {
+  min-width:300px !important;
+  text-align: center;
+}
+

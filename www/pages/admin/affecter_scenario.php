@@ -42,7 +42,7 @@ if(isset($_SESSION['auth']))
       {
         ?>
         <FORM method="post" action="./index.php?page=administration&detail=affecter_scenario">
-        <tr><td class="name">
+        <tr class="contenu"><td class="name">
         <? echo $data['nom']; ?></td>
         <td><center><select name="sonde">
         <option value="-1">ne pas afficher</option>

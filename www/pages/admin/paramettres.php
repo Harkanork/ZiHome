@@ -14,7 +14,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   <tr class="nom">
     <td>Nom</td>
     <td>Valeur</td>
-    <td>Action</td>
+    <td></td>
   </tr>
 <?
   include("./pages/connexion.php");
@@ -23,7 +23,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   while ($data = mysql_fetch_assoc($req))
   {
 ?>
-  <tr>
+  <tr class="contenu">
     <FORM method="post" action="./index.php?page=administration&detail=paramettres">
     <input type="hidden" name="id" value="<? echo $data['id']; ?>">
     <td class="name">

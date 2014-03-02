@@ -53,7 +53,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   while ($data = mysql_fetch_assoc($req))
   {
 ?>
-    <tr>
+    <tr class="contenu">
     <FORM method="post" action="./index.php?page=administration&detail=affecter_actioneur">
     <td class="name"><? echo $data['nom']; ?></td>
     <td><select name="sonde">
@@ -83,9 +83,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     </select></td>
     <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"></td> 
     <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"></td>
-    <td><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></td>
-    <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>        
-    <td><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></td>
+    <td><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
+    <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>
+    <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></center></td>
     <td><INPUT type="date" name="date_chgt_batterie" value="<? echo $data['date_chgt_batterie']; ?>"></td>
     <td><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></td>
     <td class="input"><center><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">

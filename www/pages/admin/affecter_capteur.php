@@ -49,7 +49,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   while ($data = mysql_fetch_assoc($req))
   {
     ?>
-  <tr>
+  <tr class="contenu">
     <FORM method="post" action="./index.php?page=administration&detail=affecter_capteur">
     <td class="name">
       <? echo $data['nom']; ?>

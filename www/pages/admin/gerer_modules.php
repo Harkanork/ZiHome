@@ -17,7 +17,6 @@ Action
 <td>
 </td>
 </tr>
-<tr>
 <?
 if(isset($_POST['id'])){
 include("./pages/connexion.php");
@@ -30,6 +29,7 @@ $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_er
 while ($data = mysql_fetch_assoc($req))
 {
 ?>
+<tr class="contenu">
 <FORM method="post" action="./index.php?page=administration&detail=gerer_modules">
 <td width="190px" align="center">
 <? echo $data['libelle']; ?>

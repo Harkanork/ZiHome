@@ -23,16 +23,16 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
 ?>
-<div id="action-tableau">
+<div id="action-actionneur">
 <CENTER>
 <br>
-<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Nom</TD><TD>Fichier</TD><TD>Icone</TD><TD>Public</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TABLE border=0 align="center"><TR class="nom"><TD>Nom</TD><TD>Fichier</TD><TD>Icone</TD><TD>Public</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM `insertion`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while($data = mysql_fetch_assoc($req))
   {
-    echo "<TR>";
+    echo "<TR class='contenu'>";
       echo '<FORM method="post" action="./index.php?page=administration&detail=insertion">';
         echo '<INPUT TYPE="HIDDEN" NAME="id" VALUE="'.$data['id'].'"/>';
         echo '<TD><INPUT TYPE="text" NAME="libelle" VALUE="'.$data['libelle'].'"/></TD>';
