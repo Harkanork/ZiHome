@@ -185,12 +185,15 @@ while ($data = mysql_fetch_assoc($req))
         $query14 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."'";
         $req14 = mysql_query($query14, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data14 = mysql_fetch_assoc($req14);
+        $query15 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."'";
+        $req15 = mysql_query($query15, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data15 = mysql_fetch_assoc($req15);
         $img = "";
         if(file_exists("./img/plan/".$data['id'].".jpg")) {
           $img = "./img/plan/".$data['id'].".jpg";
         }
 
-        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null && $data14 == null) {
+        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null && $data14 == null && $data15 == null) {
         ?>
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
