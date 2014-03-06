@@ -92,6 +92,9 @@ $query = "INSERT INTO owl_journalier (date, chan1, chan2, chan3, HC, cout) VALUE
 mysql_query($query, $link);
 $query = "UPDATE owl_journalier SET chan1 = '".$chan1['day']."',  chan2 = '".$chan2['day']."',  chan3 = '".$chan3['day']."', HC = '".$consoTemp."', cout = '".($coutfixe+($consoTemp*$coutHC/1000)+(($chan1['day']+$chan2['day']+$chan3['day']-$consoTemp)*$coutHP)/1000)."' WHERE date = curdate()";
 mysql_query($query, $link);
+} else if($control > 2000) {
+$query = "DELETE FROM owl_journalier WHERE date = curdate()";
+mysql_query($query, $link);
 }
 mysql_close();
 }
