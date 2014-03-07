@@ -424,7 +424,7 @@ while ($data = mysql_fetch_assoc($req))
         {
           echo 'width:' . $meteoIconWidth . 'px;';
         }
-        echo 'z-index:0"/>';
+        echo 'z-index:10000"/>';
       } 
     ?> 
     <script type="text/javascript">
