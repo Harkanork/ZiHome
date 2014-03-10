@@ -9,7 +9,7 @@ $query = "SELECT * FROM consommable ORDER BY `date` DESC LIMIT 20";
 echo "<center><br><table><tr class=\"title\" bgcolor=\"#6a6a6a\"><td>Operation</td><td>Date</td><td>Prix</td><td>Quantite</td></tr>";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req)) {
-echo "<tr class=\"contenu\"><td>".$data['type']."</td><td>".$date['date']."</td><td>".$data['prix']."</td><td>".$data['quantite']."</td></tr>";
+echo "<tr class=\"contenu\"><td>".$data['type']."</td><td>".$data['date']."</td><td>".$data['prix']."</td><td>".$data['quantite']."</td></tr>";
 }
 echo "</table><br><br>";
 $query = "SELECT SUM(quantite) as acheter FROM consommable WHERE type = 'Acheter' LIMIT 1";
