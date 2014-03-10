@@ -71,6 +71,16 @@ while ($data = mysql_fetch_assoc($req))
     <li><a href = "./index.php?page=video"><img src = "./img/icon_video.png"/><span>Cam&eacute;ra</span></a></li>
   <?
   }
+  if($data['libelle'] == "consommable" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
+  ?>
+    <li><a href = "./index.php?page=consommable"><img src = "./img/icon_elec.png"/><span>Consommable</span></a></li>
+  <?
+  }
+  if($data['libelle'] == "freebox" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
+  ?>
+    <li><a href = "./index.php?page=freebox"><img src = "./img/icon_home.png"/><span>Freebox</span></a></li>
+  <?
+  }
 }
 include("./pages/connexion.php");
 $query = "SELECT * FROM `insertion`";

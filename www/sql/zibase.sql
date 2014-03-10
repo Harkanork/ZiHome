@@ -23,6 +23,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `consommable`
+--
+
+CREATE TABLE IF NOT EXISTS `consommable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `prix` int(11) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `insertion`
 --
 
@@ -521,7 +536,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (12, 'iphone', 1),
 (13, 'android', 1),
 (14, 'luminosite', 1),
-(15, 'freebox', 1);
+(15, 'freebox', 1),
+(16, 'consommable', 1);
 
 -- --------------------------------------------------------
 

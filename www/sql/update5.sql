@@ -154,3 +154,16 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (28, 'freebox_firmware', 'Freebox version firmware', ''),
 (29, 'freebox_uptime', 'Freebox uptime', ''),
 (30, 'freebox_conn_config', 'Freebox Connexion Status', '');
+
+
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(16, 'consommable', 1);
+
+CREATE TABLE IF NOT EXISTS `consommable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `prix` int(11) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
