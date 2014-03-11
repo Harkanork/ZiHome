@@ -6,4 +6,6 @@ $config = array (
         'password' => "XXXXXXXXXX"                                        // Votre mot de passe de connexion
         );
 
+$char_interdit_xml = array("!","\"","#","$","%","&","'","(",")","*","+",",","/",";","<","=",">","?","@","[","\\","]","^","`","{","|","}","~");
+
 ?>

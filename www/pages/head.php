@@ -62,4 +62,8 @@ else
     echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
   }
 }
+include('./lib/freebox.php');
+include('./lib/taille_fichier.php');
+include('./lib/timestamp.php');
+include('./config/mafreebox.php');
 ?>
