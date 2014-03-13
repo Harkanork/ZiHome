@@ -82,7 +82,7 @@ $value = curl_exec($ch);
 // Fermeture de la session cURL
 curl_close($ch);
 
-echo $value;
+//echo $value;
 $lines = explode("\n",$value);
 foreach($lines as $line) {
 if(substr($line,0,17) == "X-Apple-MMe-Host:") {
@@ -137,6 +137,7 @@ $i++;
 }
 }
 $sleep = intval((min($dist)/$sleepcoef)+$sleepbase);
+if($sleep > 3600) { $sleep = 3600; }
 $today = getdate();
 $now = $today['year']."-".$today['mon']."-".$today['mday']." ".$today['hours'].":".$today['minutes'].":".$today['seconds'];
 echo $now." - distance : ".min($dist)."m - sleep : ".(intval($sleep/60))."min ".($sleep-(intval($sleep/60)*60))."sec\n";
