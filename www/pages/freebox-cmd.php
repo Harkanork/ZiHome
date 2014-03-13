@@ -14,17 +14,6 @@ if((isset($_SESSION['auth'])) || ($_SERVER["REMOTE_ADDR"] == $ipzibase))
 *******
 **************************************************************************************/
 
-require('./lib/freebox.php');
-include('./lib/taille_fichier.php');
-include('./lib/timestamp.php');
-
-$config_file = './config/mafreebox.php';
-if(file_exists($config_file))
-        require_once($config_file);
-else
-        die ("Fichier de configuration manquant !");
-
-$char_interdit_xml = array("!","\"","#","$","%","&","'","(",")","*","+",",","/",";","<","=",">","?","@","[","\\","]","^","`","{","|","}","~");
 
 // Description des méodes : http://37.59.126.61/marc/github/mafreebox/doc/api/
 $methodes_lecture = array (
@@ -81,7 +70,7 @@ if (isset($_GET['do']) && ($_GET['do'] != null))
         $do = $_GET['do'];
 else if(isset($_POST['do']) && ($_POST['do'] != null))
 	$do = $_POST['do'];
-else
+else if(!(isset($do)))
         parse_str($argv[1]);
 
 if (isset($do))
@@ -183,6 +172,13 @@ if (isset($do))
 			$params = "";
 			break;
 		}
+		case "dhcp_baux_dynamique" :
+		{
+			// récupérer la liste des baux dynamiques du dhcp
+			$methode = "dhcp.leases_get";
+			$params = "";
+			break;
+		}
                 default:$methode="none";
         }
         if ($methode != "none")
@@ -220,6 +216,16 @@ if (isset($do))
 				echo "<tr><td>Carte WIFI</td><td>".$json['active']."</td></tr>";
 				echo "<tr><td>".$json['bss']['perso']['name']."</td><td>".$json['bss']['perso']['active']."</td></tr>";
 				echo "<tr><td>".$json['bss']['freewifi']['name']."</td><td>".$json['bss']['freewifi']['active']."</td></tr>";
+				echo "</table>";
+				break;
+			}
+			case "dhcp_baux_dynamique" :
+			{
+				echo "<table><tr><td>Statu</td><td>Statique</td><td>IP</td><td>Nom</td><td>MAC address</td></tr>";
+				foreach($json as $value) {
+				//var_dump($value);
+				echo "<tr><td>".$value['state']."</td><td>".$value['is_static']."</td><td>".$value['ip']."</td><td>".$value['hostname']."</td><td>".$value['mac']."</td></tr>";
+				}
 				echo "</table>";
 				break;
 			}

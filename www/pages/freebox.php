@@ -19,7 +19,8 @@ echo "</div><div align=center style=\"margin: 30px;\">Activer le WIFI :<br>";
 include('./fonctions/freebox_wifi_on.php');
 echo "</div><div align=center style=\"margin: 30px;\">Arrêter le WIFI :<br>";
 include('./fonctions/freebox_wifi_off.php');
-echo "</div>";
+echo "</div><div align=center style=\"margin: 30px;\">Baux DHCP :<br>";
+include('./fonctions/freebox_dhcp_baux_dynamique.php');echo "</div>";
 
 }
 ?>
