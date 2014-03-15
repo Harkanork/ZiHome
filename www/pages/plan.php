@@ -153,6 +153,12 @@ while ($data = mysql_fetch_assoc($req))
   }
 }
 
+function showTechnicalStatus($sqlData)
+{
+  global $heightIcones;
+  echo "<img src='./img/batterie_ko_highlight.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".($sqlData['top'] + ($heightIcones / 2))."px;left:".$sqlData['left']."px;\"/>";
+}
+
 ?>
 <div id="centerplan" style="text-align: center;margin: 15px;">
 <div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(<? echo $image_fond; ?>);">
@@ -229,6 +235,7 @@ while ($data = mysql_fetch_assoc($req))
                     $ic = "g";
                 }
                 echo "<img src=\"./img/icones/".$icone.$ic."_".$data6['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:".$data6['top']."px;left:".$data6['left']."px;border-style:none;\">";
+                showTechnicalStatus($data6);
                 if ($data6['texte'])
                 {
                   if($data6['libelle'] == ""){

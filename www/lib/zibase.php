@@ -454,7 +454,7 @@
  	 * Pour les capteurs X10 : Utiliser la méthode getX10SensorInfo()
  	 * Ex: pour le MS18 : $idSensor = XS15425145 pour triggered et = XS15425144 pour reset
  	 * @param string Identifiant de la sonde
- 	 * @return array de la forme [0 => date du relevé (de type DateTime), 1 => V1, 2 => V2] 
+ 	 * @return array de la forme [0 => date du relevé (de type DateTime), 1 => V1, 2 => V2, 3 => batterie faible, 4 => erreur] 
  	 */
 	public function getSensorInfo($idSensor) {
 		$lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
@@ -481,6 +481,7 @@
 			$info[1] = 0;
 			$info[2] = 0;
 			$info[3] = $this->extractBin($xmlDoc->zwlowbatt, $number);
+			$info[4] = $this->extractBin($xmlDoc->zwerr, $number);
 			
 			return $info;
 		}
@@ -508,6 +509,7 @@
 				$info[1] = intval($attributes["v1"]);
 				$info[2] = intval($attributes["v2"]);		
 				$info[3] = intval($attributes["lowbatt"]);
+				$info[4] = 0;
 				
 				return $info;
 			}

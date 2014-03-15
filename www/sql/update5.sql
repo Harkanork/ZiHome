@@ -155,7 +155,6 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (29, 'freebox_uptime', 'Freebox uptime', ''),
 (30, 'freebox_conn_config', 'Freebox Connexion Status', '');
 
-
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (16, 'consommable', 1);
 
@@ -167,3 +166,7 @@ CREATE TABLE IF NOT EXISTS `consommable` (
   `type` varchar(16) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+ALTER TABLE `peripheriques` ADD `erreur` int(11) default 0 NOT NULL;
+ALTER TABLE `peripheriques` ADD `date_erreur` DATETIME NOT NULL;
+

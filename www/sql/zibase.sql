@@ -262,6 +262,8 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `alerte_batterie` DATE NOT NULL ,
   `show_value2` BOOLEAN NOT NULL DEFAULT FALSE,
   `texte` BOOLEAN NOT NULL DEFAULT FALSE,
+  `erreur` int(11) default 0 NOT NULL,
+  `date_erreur` DATETIME NOT NULL ,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
