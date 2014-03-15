@@ -160,6 +160,11 @@ function showTechnicalStatus($sqlData)
     global $heightIcones;
     echo "<img src='./img/batterie_ko_highlight.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".($sqlData['top'] + ($heightIcones / 2))."px;left:".$sqlData['left']."px;\"/>";
   }
+  if ($sqlData['erreur'])
+  {
+    global $heightIcones;
+    echo "<img src='./img/error.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".$sqlData['top']."px;left:".$sqlData['left']."px;\"/>";
+  }
 }
 
 ?>
