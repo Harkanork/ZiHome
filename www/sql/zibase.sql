@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `gerer_batterie` VARCHAR( 255 ) NOT NULL ,
   `date_chgt_batterie` DATE NOT NULL ,
   `libelle` VARCHAR( 255 ) NOT NULL ,
-  `alerte_batterie` DATE NOT NULL ,
+  `alerte_batterie` DATETIME NOT NULL ,
   `show_value2` BOOLEAN NOT NULL DEFAULT FALSE,
   `texte` BOOLEAN NOT NULL DEFAULT FALSE,
   `erreur` int(11) default 0 NOT NULL,
