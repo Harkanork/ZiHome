@@ -155,8 +155,11 @@ while ($data = mysql_fetch_assoc($req))
 
 function showTechnicalStatus($sqlData)
 {
-  global $heightIcones;
-  echo "<img src='./img/batterie_ko_highlight.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".($sqlData['top'] + ($heightIcones / 2))."px;left:".$sqlData['left']."px;\"/>";
+  if ($sqlData['batterie'])
+  {
+    global $heightIcones;
+    echo "<img src='./img/batterie_ko_highlight.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".($sqlData['top'] + ($heightIcones / 2))."px;left:".$sqlData['left']."px;\"/>";
+  }
 }
 
 ?>
@@ -262,6 +265,7 @@ function showTechnicalStatus($sqlData)
                     $ic = "g";
                 }
                 echo "<img src=\"./img/icones/".$icone.$ic."_".$data8['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:".$data8['top']."px;left:".$data8['left']."px;border-style:none;\">";
+                showTechnicalStatus($data8);
                 if ($data8['texte'])
                 {
                   if($data8['libelle'] == ""){
@@ -297,6 +301,7 @@ function showTechnicalStatus($sqlData)
                   echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$hygro."%</span>";
                 }
                 echo "</div>";
+                showTechnicalStatus($data9);
 
                 if ($data9['texte'])
                 {
@@ -326,6 +331,7 @@ function showTechnicalStatus($sqlData)
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              showTechnicalStatus($data9);
               if ($data9['texte'])
               {
                 if($data9['libelle'] == ""){
@@ -353,6 +359,7 @@ function showTechnicalStatus($sqlData)
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$temperature."</span></div>";
+              showTechnicalStatus($data9);
               if ($data9['texte'])
               {
                 if($data9['libelle'] == ""){
@@ -380,6 +387,7 @@ function showTechnicalStatus($sqlData)
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur."</span></div>";
+              showTechnicalStatus($data9);
               if ($data9['texte'])
               {
                 if($data9['libelle'] == ""){
@@ -407,6 +415,7 @@ function showTechnicalStatus($sqlData)
               }
               echo "<div style=\"position:absolute;top:".$data9['top']."px;left:".$data9['left']."px;border-style:none;\"><img src=\"./img/icones/".$icone."c_".$data9['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
               echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\"><span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur."</span></div>";
+              showTechnicalStatus($data9);
               if ($data9['texte'])
               {
                 if($data9['libelle'] == ""){
