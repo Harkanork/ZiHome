@@ -2,7 +2,7 @@
 if(isset($_SESSION['auth'])) {
 include("./config/conf_zibase.php");
 if(isset($_POST['valider'])) {
-$query = "INSERT INTO consommable (`date`, `quantite`, `prix`, `type`) VALUES ('".$_POST['date']."', '".$_POST['quantite']."', '".$_POST['prix']."', '".$_POST['type']."')";
+$query = "INSERT INTO consommable (`date`, `quantite`, `prix`, `type`) VALUES ('".date("Y-m-d", strtotime($_POST['date']))."', '".$_POST['quantite']."', '".$_POST['prix']."', '".$_POST['type']."')";
 mysql_query($query, $link);
 }
 $query = "SELECT * FROM consommable ORDER BY `date` DESC LIMIT 20";
