@@ -38,7 +38,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Texte
       </td>      
       <td>
-      Hygro
+      Hydro
       </td>
       <td>Batterie</td>
       <td>
