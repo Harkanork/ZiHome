@@ -141,6 +141,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (14, 'luminosite', 1);
 
+-- --------------------------------------------------------
+
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (15, 'freebox', 1);
 
@@ -155,6 +157,8 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (29, 'freebox_uptime', 'Freebox uptime', ''),
 (30, 'freebox_conn_config', 'Freebox Connexion Status', '');
 
+-- --------------------------------------------------------
+
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (16, 'consommable', 1);
 
@@ -167,6 +171,27 @@ CREATE TABLE IF NOT EXISTS `consommable` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
+-- --------------------------------------------------------
+
 ALTER TABLE `peripheriques` ADD `erreur` int(11) default 0 NOT NULL;
 ALTER TABLE `peripheriques` ADD `date_erreur` DATETIME NOT NULL;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dynaText`
+--
+
+CREATE TABLE IF NOT EXISTS `dynaText` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `font` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `bold` boolean NOT NULL default false, 
+  `italic` boolean NOT NULL default false,
+  `left` int(11) NOT NULL,
+  `top` int(11) NOT NULL,
+  `condition` varchar(1024) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

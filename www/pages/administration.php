@@ -56,6 +56,7 @@ Confirmez-vous la suppression?
       ?>
       <A HREF="./index.php?page=administration&detail=gerer_pieces"><li>G&eacute;rer les pi&egrave;ces</li></A>
       <A HREF="./index.php?page=administration&detail=gerer_stickers"><li>G&eacute;rer les stickers</li></A>
+      <A HREF="./index.php?page=administration&detail=gerer_dynaText"><li>G&eacute;rer les textes dynamiques</li></A>
       <?
     }
     else if($data['libelle'] == 'accueil') {
