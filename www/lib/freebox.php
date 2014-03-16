@@ -20,7 +20,7 @@ class FreeboxClient
   */
   public function __construct( $url_serveur, $identifiant, $mot_de_passe )
   {
-    // On assigne les paramèes aux variables d'instance.
+    // On assigne les paramètres aux variables d'instance.
     $this->uri = $url_serveur;
     $this->identifiant = $identifiant;
     $this->mot_de_passe = $mot_de_passe;
