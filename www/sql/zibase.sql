@@ -23,6 +23,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `dynaText`
+--
+
+CREATE TABLE IF NOT EXISTS `dynaText` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `font` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `bold` boolean NOT NULL default false,
+  `italic` boolean NOT NULL default false,
+  `left` int(11) NOT NULL,
+  `top` int(11) NOT NULL,
+  `condition` varchar(1024) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `consommable`
 --
 
