@@ -4,6 +4,8 @@
   * Basésur https://gist.github.com/dandelionmood/2579869
   * 
 */
+$char_interdit_xml = array("!","\"","#","$","%","&","'","(",")","*","+",",","/",";","<","=",">","?","@","[","\\","]","^","`","{","|","}","~");
+
 class FreeboxClient
 {
   private $url_serveur;

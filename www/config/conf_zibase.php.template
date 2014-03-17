@@ -37,4 +37,14 @@ $meteo_sonde_vent = "120002";
 $meteo_ville = "FRXX1879:1:FR";
 
 /*--------------------fin des Paramettres Meteo-------------------------*/
+
+/*--------------------Paramettres Freebox-------------------------------*/
+                                                                                                                                                                                
+$config = array (
+        'url'         => "http://192.168.0.254",                // URL de connexion àa page de configuration
+        'user'        => "freebox",                                                         // Nom de connexion (toujours "freebox")
+        'password' => "XXXXXXXXXX"                                        // Votre mot de passe de connexion
+        );
+                                                                                                                                                                                
+/*--------------------fin des Paramettres Freebox-----------------------*/
 ?>

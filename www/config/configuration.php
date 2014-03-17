@@ -44,7 +44,7 @@ if(!($erreur == true)) {
 				}
 				mysql_close($link);
 			}
-			$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n\n/*--------------------Paramettres Cout Electrique-----------------------*/\n\n\$coutfixe                   = '".$_POST['coutfixe']."';\n\$coutHC                     = '".$_POST['HC']."';\n\$coutHP                     = '".$_POST['HP']."';\n\$heuresCreuses[0]['debut']      = '".$_POST['heurescreusesdebut1'].":00';\n\$heuresCreuses[0]['fin']        = '".$_POST['heurescreusesfin1'].":00';\n\$heuresCreuses[1]['debut']      = '".$_POST['heurescreusesdebut2'].":00';\n\$heuresCreuses[1]['fin']        = '".$_POST['heurescreusesfin2'].":00';\n\n/*--------------------fin des Paramettres Cout Electrique---------------*/\n\n/*--------------------Paramettres\nZibase--------------------------------*/\n\n\$idzibase = '".$_POST['idzibase']."';\n\$tokenzibase = '".$_POST['tokenzibase']."';\n\$ipzibase = '".$_POST['ipzibase']."';\n\$ipserver = '".$_POST['ipserver']."';\n\n/*--------------------fin des Paramettres Zibase------------------------*/\n\n/*--------------------Paramettres Meteo---------------------------------*/\n\n\$meteo_sonde_temperature = '".$_POST['meteo_temperature']."';\n\$meteo_sonde_vent = '".$_POST['meteo_vent']."';\n//Rechercher sa ville sur weather.com et relever la valeur de l'adresse\n\$meteo_ville = '".$_POST['meteo_ville']."';\n\n/*--------------------fin des Paramettres Meteo-------------------------*/\n?>"; $fichier = fopen("./config/conf_zibase.php","w"); if (fwrite($fichier,$file)) { echo "
+			$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n\n/*--------------------Paramettres Cout Electrique-----------------------*/\n\n\$coutfixe                   = '".$_POST['coutfixe']."';\n\$coutHC                     = '".$_POST['HC']."';\n\$coutHP                     = '".$_POST['HP']."';\n\$heuresCreuses[0]['debut']      = '".$_POST['heurescreusesdebut1'].":00';\n\$heuresCreuses[0]['fin']        = '".$_POST['heurescreusesfin1'].":00';\n\$heuresCreuses[1]['debut']      = '".$_POST['heurescreusesdebut2'].":00';\n\$heuresCreuses[1]['fin']        = '".$_POST['heurescreusesfin2'].":00';\n\n/*--------------------fin des Paramettres Cout Electrique---------------*/\n\n/*--------------------Paramettres\nZibase--------------------------------*/\n\n\$idzibase = '".$_POST['idzibase']."';\n\$tokenzibase = '".$_POST['tokenzibase']."';\n\$ipzibase = '".$_POST['ipzibase']."';\n\$ipserver = '".$_POST['ipserver']."';\n\n/*--------------------fin des Paramettres Zibase------------------------*/\n\n/*--------------------Paramettres Meteo---------------------------------*/\n\n\$meteo_sonde_temperature = '".$_POST['meteo_temperature']."';\n\$meteo_sonde_vent = '".$_POST['meteo_vent']."';\n//Rechercher sa ville sur weather.com et relever la valeur de l'adresse\n\$meteo_ville = '".$_POST['meteo_ville']."';\n\n/*--------------------fin des Paramettres Meteo-------------------------*/\n\n/*--------------------Paramettres Freebox-------------------------------*/\n\n\$config = array (\n        'url'         => "http://".$_POST['ip_freebox']."",                // URL de connexion à la page de configuration\n        'user'        => "freebox",                                                         // Nom de connexion (toujours "freebox")\n        'password' => "".$_POST['pass_freebox'].""                                        // Votre mot de passe de connexion\n        );\n\n/*--------------------fin des Paramettres Freebox-----------------------*/\n?>"; $fichier = fopen("./config/conf_zibase.php","w"); if (fwrite($fichier,$file)) { echo "
 		<br>Fichier de configuration correctement cree"; } else { echo "Impossible de creer le fichier. merci d'ajouter les droits en ecriture sur le dossier config"; } fclose($fichier); } else { echo $message; ?> 
 		<P align=center>
 			<FORM method="post" action="./index.php">
@@ -110,6 +110,14 @@ if(!($erreur == true)) {
 				</INPUT>
 				<BR>Adresse IP Serveur : 
 				<INPUT type=text name=ipserver value="<? echo $_POST['ipserver']; ?>">
+				</INPUT>
+				<BR>
+				<BR>
+				<BR>Adresse IP freebox :
+				<INPUT type=text name=ip_freebox value="<? echo $_POST['ip_freebox']; ?>">
+				</INPUT>
+				<BR>Mot de passe freebox :
+				<INPUT type=text name=pass_freebox value="<? echo $_POST['pass_freebox']; ?>">
 				</INPUT>
 				<BR>
 				<BR>
@@ -185,6 +193,14 @@ if(!($erreur == true)) {
 			</INPUT>
 			<BR>Adresse IP Serveur : 
 			<INPUT type=text name=ipserver>
+			</INPUT>
+			<BR>
+			<BR>
+			<BR>Adresse IP de la freebox :
+			<INPUT type=text name=ip_freebox>
+			</INPPUT>
+			<BR>Mot de passe freebox :
+			<INPUT type=text name=pass_freebox>
 			</INPUT>
 			<BR>
 			<BR>

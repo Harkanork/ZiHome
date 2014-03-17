@@ -65,5 +65,5 @@ else
 include('./lib/freebox.php');
 include('./lib/taille_fichier.php');
 include('./lib/timestamp.php');
-include('./config/mafreebox.php');
+include('./config/conf_zibase.php');
 ?>
