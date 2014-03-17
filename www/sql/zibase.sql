@@ -418,6 +418,7 @@ CREATE TABLE IF NOT EXISTS `stickers` (
 CREATE TABLE IF NOT EXISTS `video` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `adresse` varchar(255) NOT NULL,
+  `adresse_internet` varchar(255) NOT NULL,
   `id_plan` int(11) NOT NULL,
   `option` int(11) NOT NULL,
   PRIMARY KEY (`id`)

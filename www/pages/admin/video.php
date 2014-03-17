@@ -2,12 +2,12 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   include("./pages/connexion.php");
   if(isset($_POST['Ajouter'])) {
-    $query = "INSERT INTO `video` (adresse, id_plan) VALUES ('".$_POST['adresse']."', '".$_POST['id_plan']."')";
+    $query = "INSERT INTO `video` (adresse, adresse_internet, id_plan) VALUES ('".$_POST['adresse']."', '".$_POST['adresse_internet']."', '".$_POST['id_plan']."')";
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     mysql_close();
   }
   else if(isset($_POST['Valider'])) {
-    $query = "UPDATE video SET id_plan = '".$_POST['id_plan']."', `adresse` = '".$_POST['adresse']."' WHERE id = '".$_POST['id']."'";
+    $query = "UPDATE video SET id_plan = '".$_POST['id_plan']."', `adresse` = '".$_POST['adresse']."', `adresse_internet` = '".$_POST['adresse_internet']."' WHERE id = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   else if(isset($_POST['Supprimer'])) {
@@ -17,13 +17,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   echo '<div id="action-tableau">';
   echo '<CENTER>';
   echo '<br>';
-  echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Adresse</TD><TD>Pi&egrave;ce</TD><TD></TD><TD></TD></TR>';
+  echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Adresse locale</TD><TD>Adresse Internet</TD><TD>Pi&egrave;ce</TD><TD></TD><TD></TD></TR>';
   $query = "SELECT * FROM video";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
   {
     echo "<TR class=\"contenu\"><FORM method=POST action=\"./index.php?page=administration&detail=video\">";
     echo "<TD><input type=text name=adresse value=\"".$data['adresse']."\" size=50></input></TD>";
+    echo "<TD><input type=text name=adresse_internet value=\"".$data['adresse_internet']."\" size=50></input></TD>";
     echo "<TD>";
     ?>
     <select name="id_plan">
@@ -50,7 +51,10 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   <TABLE>
   <FORM method=POST action="./index.php?page=administration&detail=video">
     <tr>
-      <td>Adresse :</td><td><input type=text name=adresse></input></td>
+      <td>Adresse locale :</td><td><input type=text name=adresse></input></td>
+    </tr>
+    <tr>
+      <td>Adresse distante :</td><td><input type=text name=adresse_internet></input></td>
     </tr>
     <tr>
       <td>Pi&egrave;ce :</td><td><select name="id_plan">
