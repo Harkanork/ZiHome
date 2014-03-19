@@ -1,5 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<META HTTP-EQUIV=Refresh CONTENT="600">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="apple-touch-icon-precomposed" href="img/icon-iphone.jpg" />
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,6 +61,12 @@ else
   {
     echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
   }
+}
+$query = "SELECT * FROM paramettres WHERE libelle = 'refresh'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+  echo "<META HTTP-EQUIV=Refresh CONTENT=\"".($data['value']*60)."\">";
 }
 include('./lib/freebox.php');
 include('./lib/taille_fichier.php');

@@ -196,6 +196,26 @@ CREATE TABLE IF NOT EXISTS `dynaText` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-ALTER TABLE  `video` ADD  `adresse_internet` VARCHAR( 255 ) NOT NULL AFTER  `adresse`
+ALTER TABLE  `video` ADD  `adresse_internet` VARCHAR( 255 ) NOT NULL AFTER  `adresse`;
 
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(17, 'refresh', '10', 'checkbox');
+
+CREATE TABLE IF NOT EXISTS `refresh` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+INSERT INTO `refresh` (`id`, `value`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 5),
+(5, 10),
+(6, 15),
+(7, 20),
+(8, 30),
+(9, 45),
+(10, 60);
 

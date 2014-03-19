@@ -427,6 +427,36 @@ CREATE TABLE IF NOT EXISTS `video` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `refresh`
+--
+
+CREATE TABLE IF NOT EXISTS `refresh` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
+-- Contenu de la table `refresh`
+--
+
+INSERT INTO `refresh` (`id`, `value`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 5),
+(5, 10),
+(6, 15),
+(7, 20),
+(8, 30),
+(9, 45),
+(10, 60);
+
+-- --------------------------------------------------------
+
+--
 -- Contenu de la table `modules_accueil`
 --
 
@@ -630,7 +660,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (13, 'Icone m&eacute;t&eacute;o largeur', '60', 'number'),
 (14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
 (15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
-(16, 'Icone m&eacute;t&eacute;o bas', '10', 'number');
+(16, 'Icone m&eacute;t&eacute;o bas', '10', 'number'),
+(17, 'refresh', '10', 'checkbox');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
