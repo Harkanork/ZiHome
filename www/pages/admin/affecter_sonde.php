@@ -32,6 +32,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Bas
       </td>
       <td>
+      Graph
+      </td>
+      <td>
       Icone
       </td>
       <td>
@@ -57,7 +60,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['id'])){
     $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', show_value2 = '".$_POST['show_value2']."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', graphique = '".$_POST['graphique']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', show_value2 = '".$_POST['show_value2']."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
 
@@ -92,6 +95,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     </td>
     <td class="droite"><center><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"/></center></td>
     <td class="bas"><center><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"/></center></td>
+    <td class="icone"><center><INPUT type="checkbox" name="graphique" value="1"<? if($data['graphique'] == "1"){ echo " checked"; } ?>/></center></td>
     <td class="icone"><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>/></center></td>
     <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>/></center></td>    
     <td class="icone">

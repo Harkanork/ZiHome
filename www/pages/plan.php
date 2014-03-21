@@ -238,13 +238,13 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
     {
-        $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."'";
+        $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data3 = mysql_fetch_assoc($req1);
         $query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
         $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data4 = mysql_fetch_assoc($req2);
-        $query3 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
+        $query3 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data5 = mysql_fetch_assoc($req3);
         $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
@@ -253,13 +253,13 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
         $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data11 = mysql_fetch_assoc($req11);
-        $query12 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
+        $query12 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req12 = mysql_query($query12, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data12 = mysql_fetch_assoc($req12);
-        $query13 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."'";
+        $query13 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req13 = mysql_query($query13, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data13 = mysql_fetch_assoc($req13);
-        $query14 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."'";
+        $query14 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req14 = mysql_query($query14, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data14 = mysql_fetch_assoc($req14);
         $query15 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."'";
@@ -487,7 +487,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               ?>
               <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
-                $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."'";
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND graphique = '1'";
                 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
                   $width = "640px";
@@ -502,7 +502,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               ?>
               <div id="tabs-<? echo $data['id']; ?>-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
-                $query1 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."'";
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND graphique = '1'";
                 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
                   $width = "640px";
@@ -517,7 +517,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               ?>
               <div id="tabs-<? echo $data['id']; ?>-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
-                $query1 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."'";
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND graphique = '1'";
                 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
                   $width = "640px";
@@ -532,7 +532,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               ?>
               <div id="tabs-<? echo $data['id']; ?>-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
-                $query1 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."'";
+                $query1 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND graphique = '1'";
                 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
                   $width = "640px";
@@ -591,7 +591,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               ?>
                 <div id="tabs-<? echo $data['id']; ?>-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
                   <?
-                  $query1 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."'";
+                  $query1 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND graphique = '1'";
                   $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                   while($periph = mysql_fetch_assoc($req1)) {
                     $width = "640px";

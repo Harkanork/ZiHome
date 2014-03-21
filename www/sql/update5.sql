@@ -219,3 +219,6 @@ INSERT INTO `refresh` (`id`, `value`) VALUES
 (9, 45),
 (10, 60);
 
+ALTER TABLE  `peripheriques` ADD  `graphique` BOOLEAN NOT NULL AFTER  `top`;
+
+

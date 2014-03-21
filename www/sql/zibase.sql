@@ -370,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `page_accueil` (
   `height` int(11) NOT NULL,
   `left` int(11) NOT NULL,
   `top` int(11) NOT NULL,
+  `graphique` tinyint(1) NOT NULL,
   `border` int(11) NOT NULL,
   `url` varchar(255) NOT NULL,
   `peripherique` varchar(255) NOT NULL,
