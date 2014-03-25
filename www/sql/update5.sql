@@ -196,7 +196,11 @@ CREATE TABLE IF NOT EXISTS `dynaText` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
 ALTER TABLE  `video` ADD  `adresse_internet` VARCHAR( 255 ) NOT NULL AFTER  `adresse`;
+
+-- --------------------------------------------------------
 
 INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (17, 'refresh', '10', 'checkbox');
@@ -219,6 +223,31 @@ INSERT INTO `refresh` (`id`, `value`) VALUES
 (9, 45),
 (10, 60);
 
+-- --------------------------------------------------------
+
 ALTER TABLE  `peripheriques` ADD  `graphique` BOOLEAN NOT NULL AFTER  `top`;
 
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `pollution`
+--
+
+CREATE TABLE IF NOT EXISTS `pollution` (
+  `date` DATE NOT NULL,
+  `Indice` int(11) NOT NULL,
+  `O3` int(11) NOT NULL,
+  `NO2` int(11) NOT NULL,
+  `PM10` int(11) NOT NULL,
+  `SO2` int(11) NOT NULL,
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(18, 'Icone pollution', 'true', 'checkbox'),
+(19, 'Icone pollution largeur', '60', 'number'),
+(20, 'Icone pollution hauteur', '60', 'number'),
+(21, 'Icone pollution droite', '100', 'number'),
+(22, 'Icone pollution bas', '10', 'number');
+
+-- --------------------------------------------------------

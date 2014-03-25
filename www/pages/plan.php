@@ -149,7 +149,70 @@ while ($data = mysql_fetch_assoc($req))
     {
       $meteoIconTop = $data['value'];
       break;
-    }                       
+    }
+  }
+}
+
+// POLLUTION
+$query = "SELECT * FROM pollution order by date DESC limit 1";
+$res_query = mysql_query($query, $link);
+if (mysql_numrows($res_query) > 0)
+{
+  $data = mysql_fetch_assoc($res_query);
+  $pollution = $data;
+}
+else
+{
+  $pollution = NULL;
+}
+
+// default values
+$pollutionIconShow = true;
+$pollutionIconFolder = "";
+$pollutionIconLeft = 10;
+$pollutionIconTop = 10;
+$pollutionIconWidth = 100;
+$pollutionIconHeight = 50;
+
+// Read values from the database
+$query = "SELECT * FROM paramettres WHERE id >= 18 and id <= 22";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+  switch ($data['id'])
+  {
+    case 18:
+    {
+      if ($data['value'] == "true")
+      {
+        $pollutionIconShow = true;
+      }
+      else
+      {
+        $pollutionIconShow = false;
+      }
+      break;
+    }
+    case 19:
+    {
+      $pollutionIconWidth = $data['value']; 
+      break;
+    }
+    case 20:
+    {
+      $pollutionIconHeight = $data['value'];
+      break;
+    }
+    case 21:
+    {
+      $pollutionIconLeft = $data['value'];
+      break;
+    }
+    case 22:
+    {
+      $pollutionIconTop = $data['value'];
+      break;
+    }
   }
 }
 
@@ -416,7 +479,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
             }
             ?>
         </a>
-    <? 
+    <?
       if ($meteoIconShow)
       {
         echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
@@ -430,7 +493,32 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         }
         echo 'z-index:10000"/>';
       } 
-    ?> 
+    ?>
+    <?
+      if ($pollutionIconShow && $pollution)
+      {
+        echo '<img src="./img/pollution/' . $pollutionIconFolder . '/Pollution' . $pollution['Indice'] . '.png"';
+        echo 'title="';
+        echo '<table align=\'center\'>';
+        echo '<tr><td><b> Indice : </b></td><td><b>'. $pollution['Indice'] . '</b></td></tr>';
+        echo '<tr><td> O3 : </td><td>'. $pollution['O3'] . '</td></tr>';
+        echo '<tr><td> NO2 : </td><td>'. $pollution['NO2'] . '</td></tr>';
+        echo '<tr><td> PM10 : </td><td>'. $pollution['PM10'] . '</td></tr>';
+        echo '<tr><td> SO2 : </td><td>'. $pollution['SO2'] . '</td></tr>';
+        echo '</table>"';
+        
+        echo 'style="position:absolute;top:' . $pollutionIconTop . 'px;left:' . $pollutionIconLeft . 'px;';
+        if ($pollutionIconHeight)
+        {
+          echo 'height:' . $pollutionIconHeight . 'px;';
+        }
+        if ($pollutionIconWidth)
+        {
+          echo 'width:' . $pollutionIconWidth . 'px;';
+        }
+        echo 'z-index:10000"/>';
+      } 
+    ?>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#tabs-<? echo $data['id']; ?>").tabs();
