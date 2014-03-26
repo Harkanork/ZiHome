@@ -328,6 +328,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         $query15 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."'";
         $req15 = mysql_query($query15, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data15 = mysql_fetch_assoc($req15);
+        $query17 = "SELECT * FROM peripheriques WHERE id_plan = '".$data['id']."'";
+        $req17 = mysql_query($query17, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data17 = mysql_fetch_assoc($req17);
         $img = "";
         if(file_exists("./img/plan/".$data['id'].".jpg")) {
           $img = "./img/plan/".$data['id'].".jpg";
@@ -342,6 +345,132 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               echo '<div style="line-height: '. $data['line-height'] . 'px;">'.$data['libelle'].'</div>';
             }
             echo '</div>';
+// ----- Capteur
+            $query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data6 = mysql_fetch_assoc($req4)) {
+                if($data6['protocol'] == 6) {
+                  $protocol = true;
+                } else {
+                    $protocol = false;
+                }
+                if($protocol == true) {
+                    $value = $zibase->getState(substr($data6['id'], 1), $protocol);
+                } else {
+                    $value = $zibase->getState($data6['id'], $protocol);
+                }
+                if($value == "1") {
+                    $ic = "c";
+                } else {
+                    $ic = "g";
+                }
+                showIconSimple($data, $data6, $ic);
+            }
+// ----- Actionneur
+            $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data8 = mysql_fetch_assoc($req6)) {
+                if($data8['protocol'] == 6) {
+                    $protocol = true;
+                } else {
+                    $protocol = false;
+                }
+                $value = $zibase->getState($data8['id'], $protocol);
+                if($value == 1) {
+                    $ic = "c";
+                } else {
+                    $ic = "g";
+                }
+                showIconSimple($data, $data8, $ic);
+            }
+// ----- Temperature
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7))
+            {
+                $query0 = "SELECT * FROM `temperature_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+                $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                if ($req0 && mysql_numrows($req0) > 0)
+                {
+                  $data0 = mysql_fetch_assoc($req0);
+                  $temperature=$data0['temp'];
+                  $hygro=$data0['hygro'];
+                }
+                else
+                {
+                  $temperature = "";
+                  $hygro = "";
+                }
+                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%");
+            }
+// ----- Conso electrique
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `conso_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['conso'];
+              }
+              else
+              {
+                $valeur = "";
+              }
+              showIcon($data, $data9, $valeur, "", "", "");
+            }
+// ----- Vent
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `vent_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['vitesse']/10;
+              }
+              else
+              {
+                $valeur = "";
+              }
+              showIcon($data, $data9, $valeur, "", "", "");
+            }
+// ----- Pluie
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `pluie_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['pluie'];
+              }
+              else
+              {
+                $valeur = "";
+              }
+              showIcon($data, $data9, $valeur, "", "", "");
+            }
+// ----- Luminosite
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $query0 = "SELECT * FROM `luminosite_".$data9['nom']."` ORDER BY `date` DESC LIMIT 1";
+              $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              if ($req0 && mysql_numrows($req0) > 0)
+              {
+                $data0 = mysql_fetch_assoc($req0);
+                $valeur=$data0['lum'];
+              }
+              else
+              {
+                $valeur = "";
+              }
+              showIcon($data, $data9, $valeur, "", "", "");
+            }
           } else { ?>
             <a href="javascript:showPopup('custom<? echo $data['id']; ?>');">
             <div style="background-color: #fff;background:url(<? echo $img; ?>);background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
@@ -479,46 +608,6 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
             }
             ?>
         </a>
-    <?
-      if ($meteoIconShow)
-      {
-        echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
-        if ($meteoIconHeight)
-        {
-          echo 'height:' . $meteoIconHeight . 'px;';
-        }
-        if ($meteoIconWidth)
-        {
-          echo 'width:' . $meteoIconWidth . 'px;';
-        }
-        echo 'z-index:10000"/>';
-      } 
-    ?>
-    <?
-      if ($pollutionIconShow && $pollution)
-      {
-        echo '<img src="./img/pollution/' . $pollutionIconFolder . '/Pollution' . $pollution['Indice'] . '.png"';
-        echo 'title="';
-        echo '<table align=\'center\'>';
-        echo '<tr><td><b> Indice : </b></td><td><b>'. $pollution['Indice'] . '</b></td></tr>';
-        echo '<tr><td> O3 : </td><td>'. $pollution['O3'] . '</td></tr>';
-        echo '<tr><td> NO2 : </td><td>'. $pollution['NO2'] . '</td></tr>';
-        echo '<tr><td> PM10 : </td><td>'. $pollution['PM10'] . '</td></tr>';
-        echo '<tr><td> SO2 : </td><td>'. $pollution['SO2'] . '</td></tr>';
-        echo '</table>"';
-        
-        echo 'style="position:absolute;top:' . $pollutionIconTop . 'px;left:' . $pollutionIconLeft . 'px;';
-        if ($pollutionIconHeight)
-        {
-          echo 'height:' . $pollutionIconHeight . 'px;';
-        }
-        if ($pollutionIconWidth)
-        {
-          echo 'width:' . $pollutionIconWidth . 'px;';
-        }
-        echo 'z-index:10000"/>';
-      } 
-    ?>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#tabs-<? echo $data['id']; ?>").tabs();
@@ -576,7 +665,6 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               <div id="tabs-<? echo $data['id']; ?>-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="overflow:auto;max-height:600px;">
                 <?
                 $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND graphique = '1'";
-                $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req1)) {
                   $width = "640px";
                   $height = "340px";
@@ -697,10 +785,48 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         }
       }
       ?>
+    <?
+      if ($meteoIconShow)
+      {
+        echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
+        if ($meteoIconHeight)
+        {
+          echo 'height:' . $meteoIconHeight . 'px;';
+        }
+        if ($meteoIconWidth)
+        {
+          echo 'width:' . $meteoIconWidth . 'px;';
+        }
+        echo 'z-index:10000"/>';
+      }
+    ?>
+    <?
+      if ($pollutionIconShow && $pollution)
+      {
+        echo '<img src="./img/pollution/' . $pollutionIconFolder . '/Pollution' . $pollution['Indice'] . '.png"';
+        echo 'title="';
+        echo '<table align=\'center\'>';
+        echo '<tr><td><b> Indice : </b></td><td><b>'. $pollution['Indice'] . '</b></td></tr>';
+        echo '<tr><td> O3 : </td><td>'. $pollution['O3'] . '</td></tr>';
+        echo '<tr><td> NO2 : </td><td>'. $pollution['NO2'] . '</td></tr>';
+        echo '<tr><td> PM10 : </td><td>'. $pollution['PM10'] . '</td></tr>';
+        echo '<tr><td> SO2 : </td><td>'. $pollution['SO2'] . '</td></tr>';
+        echo '</table>"';
+
+        echo 'style="position:absolute;top:' . $pollutionIconTop . 'px;left:' . $pollutionIconLeft . 'px;';
+        if ($pollutionIconHeight)
+        {
+          echo 'height:' . $pollutionIconHeight . 'px;';
+        }
+        if ($pollutionIconWidth)
+        {
+          echo 'width:' . $pollutionIconWidth . 'px;';
+        }
+        echo 'z-index:10000"/>';
+      }
+    ?>      
     </div>
-  </div> 
-      
-        
+  </div>      
   <script>
     
     // Fonctions utilitaires
