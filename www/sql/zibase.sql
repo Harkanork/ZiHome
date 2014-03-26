@@ -662,7 +662,7 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
 (15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
 (16, 'Icone m&eacute;t&eacute;o bas', '10', 'number'),
-(17, 'refresh', '10', 'checkbox');
+(17, 'refresh', '10', 'selectbox');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

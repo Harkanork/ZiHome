@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `dynaText` (
 ALTER TABLE  `video` ADD  `adresse_internet` VARCHAR( 255 ) NOT NULL AFTER  `adresse`;
 
 INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
-(17, 'refresh', '10', 'checkbox');
+(17, 'refresh', '10', 'selectbox');
 
 CREATE TABLE IF NOT EXISTS `refresh` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
