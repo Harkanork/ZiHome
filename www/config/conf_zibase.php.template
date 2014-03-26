@@ -1,14 +1,14 @@
 <?php
-/*--------------------Paramettres Mysql--------------------------------*/
+/*--------------------Parametres Mysql---------------------------------*/
 
 $login = 'user';
 $plogin = 'password';
 $hote = 'localhost';
 $base = 'zibase';
 
-/*--------------------fin des paramettres de configuration--------------*/
+/*--------------------fin des Parametres Mysql-------------------------*/
 
-/*--------------------Paramettres Cout Electrique-----------------------*/
+/*--------------------Parametres Cout Electrique-----------------------*/
 
 $coutfixe                   = '1.7368';
 $coutHC                     = '0.1002';
@@ -18,33 +18,41 @@ $heuresCreuses[0]['fin']        = '08:00:00';
 $heuresCreuses[1]['debut']      = '12:30:00';
 $heuresCreuses[1]['fin']        = '14:00:00';
 
-/*--------------------fin des Paramettres Cout Electrique---------------*/
+/*--------------------fin des Parametres Cout Electrique---------------*/
 
-/*--------------------Paramettres Zibase--------------------------------*/
+/*--------------------Parametres Zibase--------------------------------*/
 
 $idzibase = "ZiBASEXXXXXX";
 $tokenzibase = "ZZZZZZZZZZ";
 $ipzibase = "192.168.X.Y";
 $ipserver = "192.168.X.Y";
 
-/*--------------------fin des Paramettres Zibase------------------------*/
+/*--------------------fin des Parametres Zibase------------------------*/
 
-/*--------------------Paramettres Meteo---------------------------------*/
+/*--------------------Parametres Meteo---------------------------------*/
 
 $meteo_sonde_temperature = "120001";
 $meteo_sonde_vent = "120002";
 //Rechercher sa ville sur weather.com et relever la valeur de l'adresse
 $meteo_ville = "FRXX1879:1:FR";
 
-/*--------------------fin des Paramettres Meteo-------------------------*/
+/*--------------------fin des Parametres Meteo-------------------------*/
 
-/*--------------------Paramettres Freebox-------------------------------*/
+/*--------------------Parametres Freebox-------------------------------*/
                                                                                                                                                                                 
 $config = array (
-        'url'         => "http://192.168.0.254",                // URL de connexion àa page de configuration
-        'user'        => "freebox",                                                         // Nom de connexion (toujours "freebox")
-        'password' => "XXXXXXXXXX"                                        // Votre mot de passe de connexion
+        'url'         => "http://192.168.0.254",      // URL de connexion à la page de configuration
+        'user'        => "freebox",                   // Nom de connexion (toujours "freebox")
+        'password'    => "XXXXXXXXXX"                 // Votre mot de passe de connexion
         );
                                                                                                                                                                                 
-/*--------------------fin des Paramettres Freebox-----------------------*/
+/*--------------------fin des Parametres Freebox-----------------------*/
+
+/*--------------------Parametres Pollution-----------------------------*/
+
+// Rechercher sa ville (ou une grande ville proche) dans le fichier http://www.lcsqa.org/surveillance/indices/prevus/jour/xml
+$pollution_ville = "TOULOUSE";
+
+/*--------------------fin des Parametres Pollution---------------------*/
+
 ?>

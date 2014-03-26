@@ -9,11 +9,10 @@
 function updateBattery($pSqlInfo, $pZibaseInfo)
 {
   $query = array();
-  
   $update_alerte_batterie = false;
   $update_date_chgt_batterie = false;
   
-  if ($pZibaseInfo[3] != '' && $pSqlInfo['batterie'] != $pZibaseInfo[3])
+  if (strlen($pZibaseInfo[3]) > 0 && $pSqlInfo['batterie'] != $pZibaseInfo[3])
   {
     // L'etat des batteries a change
     if ($pZibaseInfo[3] == 1)
@@ -53,6 +52,49 @@ function updateBattery($pSqlInfo, $pZibaseInfo)
 }
 
 /**
+ * Analyse les changements d'etat de l'etat technique
+ * @param $pSqlInfo l'etat du capteur dans la base de donnee
+ * @param $pZibaseInfo l'etat du capteur dans la zibase
+ * @return la liste des parametres a mettre a jour
+ */
+function updateError($pSqlInfo, $pZibaseInfo)
+{
+  $query = array();
+  
+  $update_date_error = false;
+  
+  if ($pZibaseInfo[4] != '' && $pSqlInfo['erreur'] != $pZibaseInfo[4])
+  {
+    // L'etat technique a change
+    if ($pZibaseInfo[4] == 1)
+    {
+      // Mise a jour de la date uniquement si necessaire
+      if ($pSqlInfo['date_erreur'] == "0000-00-00 00:00:00") 
+      {
+        $today = getdate();
+        $date_error = $today['year']."-".$today['mon']."-".$today['mday']." ".$today['hours'].":".$today['minutes'].":".$today['seconds'];
+        $update_date_error = true;
+      }
+    }
+    else
+    {
+      // Les piles ont ete changee
+      $date_error = "0000-00-00 00:00:00";
+      $update_date_error = true;
+    }
+    
+    array_push($query, " erreur = '".$pZibaseInfo[4]."' ");
+  }
+  
+  if ($update_date_error)
+  {
+    array_push($query, " date_erreur = '".$date_error."' ");
+  } 
+  
+  return $query;
+}
+
+/**
  * Cree ou met a jour un capteur
  * @param $pSensorInfo descriptif du capteur venant de la zibase
  * @param $pZibaseInfo l'etat du capteur dans la zibase
@@ -78,8 +120,12 @@ function updateSensor($pSensorInfo, $pZibaseInfo, $pLink, $pType)
     {
       array_push($updatedValues, " logo = '".$pSensorInfo['i']."' ");
     }
+    
     // analyse des attributs lies a la batterie
     $updatedValues = array_merge($updatedValues, updateBattery($data, $pZibaseInfo));
+    
+    // analyse des attributs lies a l'etat technique
+    $updatedValues = array_merge($updatedValues, updateError($data, $pZibaseInfo));
     
     // Envoie de la requete uniquement si necessaire
     if (count($updatedValues) > 0)

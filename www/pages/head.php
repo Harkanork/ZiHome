@@ -33,12 +33,26 @@
 <script type="text/javascript" src="./js/modules/exporting.js"></script>
 <script type="text/javascript" src="./js/modernizr.custom.js"></script>
 <script type="text/javascript" src="./js/popup.js"></script>
+<link rel="stylesheet" href="./js/themes/jquery.ui.tooltip.min.css" type="text/css" media="all">
 <script>
   $(function() {
     if (!Modernizr.inputtypes['date']) {
       $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
       $('input[type=date]').datepicker({dateFormat: 'dd-mm-yy'});
     }
+    
+    var tooltips = $( "[title]" ).tooltip(
+    {
+      content: function() 
+      {
+        var element = $( this );
+        if ( element.is( "[title]" ) ) 
+        {
+          return element.attr( "title" );
+        }
+        return "";
+      }
+    });
   });
 </script>
 <?
