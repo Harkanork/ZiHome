@@ -251,3 +251,7 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (22, 'Icone pollution bas', '10', 'number');
 
 -- --------------------------------------------------------
+
+ALTER TABLE  `peripheriques` CHANGE  `graphique`  `graphique` TINYINT( 1 ) NOT NULL DEFAULT  '1';
+
+

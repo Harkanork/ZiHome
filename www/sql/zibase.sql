@@ -275,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `id_plan` int(11) NOT NULL DEFAULT '-1',
   `left` int(11) NOT NULL DEFAULT '0',
   `top` int(11) NOT NULL DEFAULT '0',
+  `graphique` tinyint(1) NOT NULL DEFAULT '1',
   `icone` int(11) NOT NULL DEFAULT '0',
   `gerer_batterie` VARCHAR( 255 ) NOT NULL ,
   `date_chgt_batterie` DATE NOT NULL ,
