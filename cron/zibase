@@ -1,12 +1,13 @@
 # /etc/cron.d/zibase: crontab fragment for zibase
-#  Mise a jour des tempétures dans Mysql
+# Mise a jour des tables Mysql
 
-*/3 * * * *	root	/usr/bin/php /usr/bin/temperature.php > /dev/null
-*/5 * * * *     root    /usr/bin/php /usr/bin/message_zibase_auth.php > /dev/null
-* * * * *     root    /usr/bin/php /usr/bin/vent.php > /dev/null
-0 * * * *	root	/usr/bin/php /usr/bin/actioneurs.php > /dev/null
-0 * * * *       root    /usr/bin/php /usr/bin/scenario.php > /dev/null
-0 * * * *       root    /usr/bin/php /usr/bin/pollution.php > /dev/null
-* * * * *     root    /usr/bin/php /usr/bin/precipitation.php > /dev/null
-* * * * *     root    /usr/bin/php /usr/bin/conso_electrique.php > /dev/null
-30 * * * *     root    /usr/bin/php /usr/bin/meteo.php > /dev/null
+*/3	*	*	*	*	root	/usr/bin/php /usr/bin/temperature.php > /dev/null
+*/3	*	*	*	*	root	/usr/bin/php /usr/bin/luminosite.php > /dev/null
+*/5	*	*	*	*	root	/usr/bin/php /usr/bin/message_zibase_auth.php > /dev/null
+*	*	*	*	*	root	/usr/bin/php /usr/bin/vent.php > /dev/null
+0	*	*	*	*	root	/usr/bin/php /usr/bin/actioneurs.php > /dev/null
+0	*	*	*	*	root	/usr/bin/php /usr/bin/scenario.php > /dev/null
+0	*	*	*	*	root	/usr/bin/php /usr/bin/pollution.php > /dev/null
+*	*	*	*	*	root	/usr/bin/php /usr/bin/precipitation.php > /dev/null
+*	*	*	*	*	root	/usr/bin/php /usr/bin/conso_electrique.php > /dev/null
+30	*	*	*	*	root	/usr/bin/php /usr/bin/meteo.php > /dev/null
