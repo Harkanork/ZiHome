@@ -679,7 +679,7 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (14, 'Icone m&eacute;t&eacute;o hauteur', '60', 'number'),
 (15, 'Icone m&eacute;t&eacute;o droite', '10', 'number'),
 (16, 'Icone m&eacute;t&eacute;o bas', '10', 'number'),
-(17, 'refresh', '10', 'selectbox'),
+(17, 'refresh', '600', 'selectbox'),
 (18, 'Icone pollution', 'true', 'checkbox'),
 (19, 'Icone pollution largeur', '60', 'number'),
 (20, 'Icone pollution hauteur', '60', 'number'),
