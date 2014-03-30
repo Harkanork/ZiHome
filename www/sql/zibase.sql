@@ -608,7 +608,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (13, 'android', 1),
 (14, 'luminosite', 1),
 (15, 'freebox', 1),
-(16, 'consommable', 1);
+(16, 'consommable', 1),
+(17, 'actionneurs',1);
 
 -- --------------------------------------------------------
 

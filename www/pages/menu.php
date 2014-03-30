@@ -41,6 +41,11 @@ while ($data = mysql_fetch_assoc($req))
     <li><a href = "./index.php?page=plan"><img src = "./img/icon_home.png"/><span>Plan</span></a></li>
   <?
   }
+  if($data['libelle'] == "actionneurs" && $data['actif'] == 1) {
+  ?>
+    <li><a href = "./index.php?page=actionneurs"><img src = "./img/icon_home.png"/><span>Actionneurs</span></a></li>
+  <?
+  }
   if($data['libelle'] == "thermostat" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
   ?>
     <li><a href = "./index.php?page=thermostat"><img src = "./img/icon_temp.png"/><span>Thermostat</span></a></li>

@@ -254,4 +254,7 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 
 ALTER TABLE  `peripheriques` CHANGE  `graphique`  `graphique` TINYINT( 1 ) NOT NULL DEFAULT  '1';
 
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(17, 'actionneurs', 1);
+
 
