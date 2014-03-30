@@ -22,6 +22,7 @@ if(isset($_POST['id'])){
 include("./pages/connexion.php");
 $query = "UPDATE modules SET actif = '".$_POST['actif']."' WHERE id = '".$_POST['id']."'";
 mysql_query($query, $link);
+echo "<meta http-equiv=\"refresh\" content=\"0; url=./index.php?page=administration&detail=gerer_modules\">";
 }
 include("./pages/connexion.php");
 $query = "SELECT * FROM modules";
