@@ -27,7 +27,7 @@ $value2 = mysql_fetch_assoc($req2);
 $duree += $value2['duree'];
 }
 } else {
-$duree += 0;
+$duree = 0;
 }
 echo "<TR><TD>Aujourd'hui&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 
@@ -53,7 +53,7 @@ $value2 = mysql_fetch_assoc($req2);
 $duree += $value2['duree'];
 }
 } else {
-$duree += 0;
+$duree = 0;
 }
 echo "<TR><TD>Hier&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 7 DAY)";
@@ -78,7 +78,7 @@ $value2 = mysql_fetch_assoc($req2);
 $duree += $value2['duree'];
 }
 } else {
-$duree += 0;
+$duree = 0;
 }
 echo "<TR><TD>7 Jours&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 1 MONTH)";
@@ -103,7 +103,7 @@ $value2 = mysql_fetch_assoc($req2);
 $duree += $value2['duree'];
 }
 } else {
-$duree += 0;
+$duree = 0;
 }
 echo "<TR><TD>1 Mois&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 1 YEAR)";
@@ -128,7 +128,7 @@ $value2 = mysql_fetch_assoc($req2);
 $duree += $value2['duree'];
 }
 } else {
-$duree += 0;
+$duree = 0;
 }
 echo "<TR><TD>1 An&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 echo "</TABLE></CENTER>";
