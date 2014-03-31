@@ -17,7 +17,11 @@ while($value0 = mysql_fetch_assoc($req0)) {
 $query1 = "SELECT `date` FROM `periph_".$periph['nom']."` WHERE actif = 0 AND `date` > '".$value0['date']."' ORDER BY `date` LIMIT 1";
 $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value1 = mysql_fetch_assoc($req1);
+if($value0['date'] > $value1['date']) {
 $query2 = "SELECT TIMESTAMPDIFF(SECOND, '".$value0['date']."', '".$value1['date']."') AS duree";
+} else {
+$query2 = "SELECT TIMESTAMPDIFF(SECOND, '".$value0['date']."', now()) AS duree";
+}
 $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value2 = mysql_fetch_assoc($req2);
 }
