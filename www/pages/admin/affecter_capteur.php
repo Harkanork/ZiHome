@@ -36,12 +36,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     </tr>
 <?
   include("./pages/connexion.php");
+  include("./lib/date_francais.php");
   if(isset($_GET['Supprimer'])){
     $query = "DELETE FROM `peripheriques` WHERE `id` = '".$_GET['id']."'";
     mysql_query($query, $link);
   }
   else if(isset($_POST['id'])){
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$_POST['date_chgt_batterie']."' WHERE nom = '".$_POST['id']."'";
+  $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   $query = "SELECT * FROM peripheriques WHERE periph = 'capteur'";
@@ -101,7 +103,17 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     </td>
     <td>
       <center>
-      <INPUT type="date" name="date_chgt_batterie" value="<? echo $data['date_chgt_batterie']; ?>">
+      <INPUT id="date_chgt_batterie_<? echo $data['nom']; ?>" type="date" name="date_chgt_batterie" size="10"/>
+		  <script>
+			if (!Modernizr.inputtypes['date']) 
+			{
+			  document.getElementById('date_chgt_batterie_<? echo $data["nom"]; ?>').value = "<? echo date_francais($data['date_chgt_batterie']); ?>";
+			}
+			else
+			{
+			  document.getElementById('date_chgt_batterie_<? echo $data["nom"]; ?>').value = "<? echo $data['date_chgt_batterie']; ?>";
+			}
+		  </script>
       </center>
     </td>
     <td>
