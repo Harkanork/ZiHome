@@ -594,60 +594,104 @@
  	 * Pour les sondes Oregon et TS10, il faut diviser v1 par 10.
  	 * Ex: pour le THGR228N : v1 = température x 10 et v2 = % d'humidité
  	 * @param string URL de la page internet où se trouve les infos
- 	 * Ex: http://zibase.net/m/get_xml_sensors.php?device=ZiBASExxx&token=yyyyyyyy
+ 	 * Ex: http://zibase2.net/m/get_xml_sensors.php?device=ZiBASExxx&token=yyyyyyyy
  	 * @param string Identifiant de la sonde
  	 * @return array de la forme [0 => date du relevé (de type DateTime), 1 => V1, 2 => V2] 
  	 */
- 	public function getSensorInfoFromInternet($url, $idSensor) { 		
+ 	public function getSensorInfoFromInternet($idprincipalzibase,$tokenzibase, $idSensor, $typeSensor) { 		
+                $info = array();
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=i".$typeSensor."&id=".idSensor;
  		$handle = fopen($url, "rb");
- 		$xmlContent = stream_get_contents($handle);
+                $json = json_decode(stream_get_contents($handle),true);
  		fclose($handle);
- 		
- 		$type = substr($idSensor, 0, 2);
-                if(preg_match('#^[A-Z]#',substr($idSensor, 2, 1))){
-                        $lettre = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-                        $chiffre   = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25");
-                        $number = str_replace($lettre, $chiffre, substr($idSensor, 2, 1)) * 16 + substr($idSensor, 3) -1;
-                } else {
-                        $number = substr($dSensor, 2);
-                }
-		if(substr($idSensor, 2, 0) > 9) {
-		}
- 		$xmlDoc = simplexml_load_string($xmlContent);
- 		$node = $xmlDoc->xpath("//ev[@id='".$number."']"); 		
- 		if ($node != null && $node[0]) { 			
- 			$info = array();
- 			date_default_timezone_set($this->timeZone);
- 			$dateSensor = new DateTime();
- 			$attributes = $node[0]->attributes();
- 			//date_timestamp_set($dateSensor, intval($attributes["gmt"]));
- 			$dateSensor->setTime(date("H", intval($attributes["gmt"])), date("i", intval($attributes["gmt"])), date("s", intval($attributes["gmt"])));
- 			$info[0] = $dateSensor;
- 			$info[1] = intval($attributes["v1"]);
- 			$info[2] = intval($attributes["v2"]); 			
- 			return $info;
+ 		$info = array();
+ 		date_default_timezone_set($this->timeZone);
+ 		$dateSensor = new DateTime();
+ 		$dateSensor->setTime(date("H", intval($json['body']['time'])), date("i", intval($json['body']['time'])), date("s", intval($json['body']['time'])));
+ 		$info[0] = $dateSensor;
+ 		$info[1] = intval($json['body']['val1']);
+ 		$info[2] = intval($json['body']['val2']); 			
+ 		return $info;
  		}
  		else
  			return null; 		
  	} 	
-	/**
-	* fonction permettantrecuperer la liste des peripheriquesde la zibase
-	*/
-	public function getSensorList($idprincipalzibase,$tokenzibase) {
-		$info = array();
-                $url = "http://zibase.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
+
+        /**
+        * fonction permettant de recuperer la liste des actioneurs de la zibase
+        */
+        public function getActuatorList($idprincipalzibase,$tokenzibase) {
+                $info = array();
+                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
-                $xmlContent = stream_get_contents($handle);
+                $json = json_decode(stream_get_contents($handle),true);
                 fclose($handle);
                 $i = 0;
-                $xmlDoc = simplexml_load_string($xmlContent);
-                $node = $xmlDoc->xpath('//e');
-                foreach ($node as $ua) {
-                        $attributes = $ua[0]->attributes();
-                        $info[$i]['c'] = $attributes["c"];
-                        $info[$i]['n'] = $ua->n;
-                        $info[$i]['t'] = $attributes["t"];
-                        $info[$i]['i'] = $attributes["i"];
+                foreach ($json['body']['actuators'] as $ua) {
+                        $info[$i]['id'] = $ua["id"];
+                        $info[$i]['name'] = $ua['name'];
+                        $info[$i]['icon'] = $ua["icon"];
+                        $info[$i]['protocol'] = $ua["protocol"];
+                        $i = $i + 1;
+                }
+        return $info;
+        }
+
+        /**
+        * fonction permettant de recuperer la liste des capteurs de la zibase
+        */
+        public function getSensorList($idprincipalzibase,$tokenzibase) {
+                $info = array();
+                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $handle = fopen($url, "rb");
+                $json = json_decode(stream_get_contents($handle),true);
+                fclose($handle);
+                $i = 0;
+                foreach ($json['body']['sensors'] as $ua) {
+                        $info[$i]['id'] = $ua["id"];
+                        $info[$i]['name'] = $ua['name'];
+                        $info[$i]['icon'] = $ua["icon"];
+                        $i = $i + 1;
+                }
+        return $info;
+        }
+
+        /**
+        * fonction permettant de recuperer la liste des telecommandes de la zibase
+        */
+        public function getRemoteList($idprincipalzibase,$tokenzibase) {
+                $info = array();
+                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $handle = fopen($url, "rb");
+                $json = json_decode(stream_get_contents($handle),true);
+                fclose($handle);
+                $i = 0;
+                foreach ($json['body']['remotes'] as $ua) {
+                        $info[$i]['id'] = $ua["id"];
+                        $info[$i]['name'] = $ua['name'];
+                        $info[$i]['icon'] = $ua["icon"];
+                        $info[$i]['protocol'] = $ua["protocol"];
+                        $i = $i + 1;
+                }
+        return $info;
+        }
+
+	/**
+	* fonction permettant de recuperer la liste des sondes de la zibase
+	*/
+	public function getProbeList($idprincipalzibase,$tokenzibase) {
+                $info = array();
+                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $handle = fopen($url, "rb");
+                $json = json_decode(stream_get_contents($handle),true);
+                fclose($handle);
+                $i = 0;
+                foreach ($json['body']['probes'] as $ua) {
+                        $info[$i]['id'] = $ua["id"];
+                        $info[$i]['name'] = $ua['name'];
+                        $info[$i]['type'] = $ua["type"];
+                        $info[$i]['icon'] = $ua["icon"];
+			$info[$i]['protocol'] = $ua["protocol"];
                         $i = $i + 1;
                 }
         return $info;
@@ -658,7 +702,7 @@
         */
         public function getThermostat($idprincipalzibase,$tokenzibase) {
 		$info = array();
-                $url = "http://zibase.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
+                $url = "http://zibase2.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
                 $handle = fopen($url, "rb");
                 $xmlContent = stream_get_contents($handle);
                 fclose($handle);
@@ -689,18 +733,15 @@
         */
         public function getScenarioList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "http://zibase.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
+                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
-                $xmlContent = stream_get_contents($handle);
-                fclose($handle);
-                $i = 0;
-                $xmlDoc = simplexml_load_string($xmlContent);
-                $node = $xmlDoc->xpath('//m');
-                foreach ($node as $ua) {
-                        $attributes = $ua[0]->attributes();
-                        $info[$i]['n'] = $ua->n;
-                        $info[$i]['id'] = $attributes["id"];
-                        $info[$i]['icon'] = $attributes["icon"];
+                $json = json_decode(stream_get_contents($handle),true);
+		fclose($handle);
+		$i = 0;
+		foreach ($json['body']['scenarios'] as $ua) {
+                        $info[$i]['n'] = $ua['name'];
+                        $info[$i]['id'] = $ua["id"];
+                        $info[$i]['icon'] = $ua["icon"];
                         $i = $i + 1;
                 }
         return $info;
@@ -716,7 +757,7 @@
     */
     public function getSensorHistoryFromInternet($idprincipalzibase,$tokenzibase,$sensor) {
             $info = array();
-            $contenu=file_get_contents("http://zibase.net/m/temperature_csv.php?device=".$idprincipalzibase."&token=".$tokenzibase);
+            $contenu=file_get_contents("http://zibase2.net/m/temperature_csv.php?device=".$idprincipalzibase."&token=".$tokenzibase);
 			$contenu = str_replace("\n","|",$contenu);
 			$contenu = str_replace("\"","",$contenu);
 			$lignes=explode("|",$contenu);

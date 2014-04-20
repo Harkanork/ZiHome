@@ -23,7 +23,7 @@ function ventPointCardinaux($deg) {
 }
 
 $zibase = new ZiBase($ipzibase);
-$sensorlist=$zibase->getSensorList($idzibase,$tokenzibase);
+$sensorlist=$zibase->getProbeList($idzibase,$tokenzibase);
 
 $sensornb = count($sensorlist);
 
@@ -38,15 +38,15 @@ if (!$db_selected) {
 
 $i = 0;
 while($i < $sensornb) {
-  if($sensorlist[$i]['t'] == 'wind') {
+  if($sensorlist[$i]['type'] == 'wind') {
     $info = "";
-    $info = $zibase->getSensorInfo($sensorlist[$i]['c']);
-    updateSensor($sensorlist[$i], $info, $link, 'vent');
+    $info = $zibase->getSensorInfo($sensorlist[$i]['id']);
+    updateProbe($sensorlist[$i], $info, $link, 'vent');
     
-    $query = "CREATE TABLE IF NOT EXISTS `vent_".$sensorlist[$i]['n']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+    $query = "CREATE TABLE IF NOT EXISTS `vent_".$sensorlist[$i]['name']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     mysql_query($query, $link);
     if(!($info == "")) {
-      $query = "INSERT INTO `vent_".$sensorlist[$i]['n']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",'". ventPointCardinaux($info[2]*3)."')";
+      $query = "INSERT INTO `vent_".$sensorlist[$i]['name']."` (date, vitesse, direction) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".$info[1].",'". ventPointCardinaux($info[2]*3)."')";
       mysql_query($query, $link);
     }
   }

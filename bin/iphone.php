@@ -82,7 +82,7 @@ $value = curl_exec($ch);
 // Fermeture de la session cURL
 curl_close($ch);
 
-//echo $value;
+echo $value;
 $lines = explode("\n",$value);
 foreach($lines as $line) {
 if(substr($line,0,17) == "X-Apple-MMe-Host:") {
