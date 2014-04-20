@@ -612,9 +612,10 @@
  		$info[1] = intval($json['body']['val1']);
  		$info[2] = intval($json['body']['val2']); 			
  		return $info;
- 		}
- 		else
- 			return null; 		
+			else 
+			{
+				return null;            
+			}  	
  	} 	
 
         /**
