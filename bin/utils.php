@@ -128,6 +128,10 @@ function updateProbe($pSensorInfo, $pZibaseInfo, $pLink, $pType)
     {
       array_push($updatedValues, " logo = '".$pSensorInfo['icon']."' ");
     }
+    if ($pSensorInfo['protocol'] != $data['protocol'])
+    {
+      array_push($updatedValues, " protocol = '".$pSensorInfo['protocol']."' ");
+    }
     // analyse des attributs lies a la batterie
     $updatedValues = array_merge($updatedValues, updateBattery($data, $pZibaseInfo));
 
