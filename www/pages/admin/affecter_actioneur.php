@@ -17,9 +17,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Type
       </td>
       <td>
-      Protocole
-      </td>
-      <td>
       Droite
       </td>
       <td>
@@ -46,7 +43,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['id'])){
     $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   
@@ -74,15 +71,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <option value="on_off"<? if($data['type'] == "on_off"){ echo " selected"; } ?>>On - Off</option>
     <option value="dim"<? if($data['type'] == "dim"){ echo " selected"; } ?>>Dimable</option>
     </select></td> 
-    <td><select name="protocol">
-    <?
-    $query1 = "SELECT * FROM protocol WHERE actif = 1 ORDER BY `nom`";
-    $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while($data1 = mysql_fetch_assoc($req1)) {
-    ?>
-      <option value="<? echo $data1['zcode']; ?>"<? if($data1['zcode'] ==  $data['protocol']){ echo " selected"; } ?>><? echo $data1['nom']; ?></option>
-    <? } ?>
-    </select></td>
     <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"></td> 
     <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"></td>
     <td><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>

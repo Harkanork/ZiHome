@@ -14,9 +14,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       Pi&egrave;ce
       </td>
       <td>
-      Protocole
-      </td>
-      <td>
       Droite
       </td>
       <td>
@@ -43,7 +40,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['id'])){
   $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', protocol = '".$_POST['protocol']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   $query = "SELECT * FROM peripheriques WHERE periph = 'capteur'";
@@ -66,19 +63,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
         <option value="<? echo $data3['id']; ?>"<? if($data3['id'] ==  $data['id_plan']){ echo " selected"; } ?>><? echo $data3['libelle']; ?></option>
       <? } ?>
       </select>
-    </td>
-    <td>
-      <center>
-      <select name="protocol">
-      <?
-      $query1 = "SELECT * FROM protocol WHERE actif = 1 ORDER BY `nom`";
-      $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while($data1 = mysql_fetch_assoc($req1)) {
-      ?>
-        <option value="<? echo $data1['zcode']; ?>"<? if($data1['zcode'] ==  $data['protocol']){ echo " selected"; } ?>><? echo $data1['nom']; ?></option>
-      <? } ?>
-      </select>
-      </center>
     </td>
     <td>
       <center>

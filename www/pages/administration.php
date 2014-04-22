@@ -87,7 +87,7 @@ Confirmez-vous la suppression?
   <A HREF="./index.php?page=administration&detail=affecter_scenario"><li>Affecter un sc&eacute;nario</li></A>
   <A HREF="./index.php?page=administration&detail=gerer_users"><li>G&eacute;rer les utilisateurs</li></A>
   <A HREF="./index.php?page=administration&detail=gerer_modules"><li>G&eacute;rer les modules</li></A>
-  <A HREF="./index.php?page=administration&detail=gerer_protocol"><li>G&eacute;rer les protocoles</li></A>
+<? /*  <A HREF="./index.php?page=administration&detail=gerer_protocol"><li>G&eacute;rer les protocoles</li></A> */ ?>
   <A HREF="./index.php?page=administration&detail=messages"><li>Messages Zibase</li></A>
   <A HREF="./index.php?page=administration&detail=variables"><li>Variables</li></A>
   <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
