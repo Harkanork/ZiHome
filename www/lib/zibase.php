@@ -594,7 +594,7 @@
  	 * Pour les sondes Oregon et TS10, il faut diviser v1 par 10.
  	 * Ex: pour le THGR228N : v1 = température x 10 et v2 = % d'humidité
  	 * @param string URL de la page internet où se trouve les infos
- 	 * Ex: http://zibase2.net/m/get_xml_sensors.php?device=ZiBASExxx&token=yyyyyyyy
+ 	 * Ex: http://zibase.net/m/get_xml_sensors.php?device=ZiBASExxx&token=yyyyyyyy
  	 * @param string Identifiant de la sonde
  	 * @return array de la forme [0 => date du relevé (de type DateTime), 1 => V1, 2 => V2] 
  	 */
@@ -619,7 +619,7 @@
         */
         public function getActuatorList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
                 $json = json_decode(stream_get_contents($handle),true);
                 fclose($handle);
@@ -639,7 +639,7 @@
         */
         public function getSensorList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
                 $json = json_decode(stream_get_contents($handle),true);
                 fclose($handle);
@@ -658,7 +658,7 @@
         */
         public function getRemoteList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
                 $json = json_decode(stream_get_contents($handle),true);
                 fclose($handle);
@@ -678,7 +678,7 @@
 	*/
 	public function getProbeList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
                 $json = json_decode(stream_get_contents($handle),true);
                 fclose($handle);
@@ -699,7 +699,7 @@
         */
         public function getThermostat($idprincipalzibase,$tokenzibase) {
 		$info = array();
-                $url = "http://zibase2.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
+                $url = "http://zibase.net/m/get_xml.php?device=".$idprincipalzibase."&token=".$tokenzibase;
                 $handle = fopen($url, "rb");
                 $xmlContent = stream_get_contents($handle);
                 fclose($handle);
@@ -730,7 +730,7 @@
         */
         public function getScenarioList($idprincipalzibase,$tokenzibase) {
                 $info = array();
-                $url = "https://zibase2.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
+                $url = "https://zibase.net/api/get/ZAPI.php?zibase=".$idprincipalzibase."&token=".$tokenzibase."&service=get&target=home";
                 $handle = fopen($url, "rb");
                 $json = json_decode(stream_get_contents($handle),true);
 		fclose($handle);
@@ -754,7 +754,7 @@
     */
     public function getSensorHistoryFromInternet($idprincipalzibase,$tokenzibase,$sensor) {
             $info = array();
-            $contenu=file_get_contents("http://zibase2.net/m/temperature_csv.php?device=".$idprincipalzibase."&token=".$tokenzibase);
+            $contenu=file_get_contents("http://zibase.net/m/temperature_csv.php?device=".$idprincipalzibase."&token=".$tokenzibase);
 			$contenu = str_replace("\n","|",$contenu);
 			$contenu = str_replace("\"","",$contenu);
 			$lignes=explode("|",$contenu);
