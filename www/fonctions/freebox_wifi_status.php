@@ -1,12 +1,7 @@
 <?php
 if(isset($_SESSION['auth']))
 {
-$xml = simplexml_load_file($XML_FREEBOX);
-
-// echo("<pre>");
-// print_r($xml);
-// echo("</pre>");
-
+$xml = simplexml_load_string($xmlfreebox);
 ?>
 <html>
 <head>
