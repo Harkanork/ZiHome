@@ -47,6 +47,7 @@ Highcharts.setOptions({
                 title: {
                     text: 'Température',
                     style: {
+			color: '#89A54E'
                     }
                 },
 <? if(!($liste2 == "")) { ?>
@@ -55,6 +56,7 @@ Highcharts.setOptions({
                 title: {
                     text: 'Hygrométrie',
                     style: {
+			color: '#4572A7'
                     }
                 },
                 labels: {
@@ -65,6 +67,7 @@ Highcharts.setOptions({
                     }
                 },
 <? } ?>
+opposite: true
             }],
             tooltip: {
                 shared: true
@@ -72,6 +75,7 @@ Highcharts.setOptions({
             series: [{
 <? if(!($liste2 == "")) { ?>
                 name: 'Hygrométrie',
+		color: '#4572A7',
                 type: 'spline',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
@@ -84,6 +88,7 @@ Highcharts.setOptions({
             }, {
 <? } ?>
                 name: 'Température',
+		color: '#89A54E',
                 type: 'spline',
                 data: [<?php echo $liste1; ?>],
                 marker: {

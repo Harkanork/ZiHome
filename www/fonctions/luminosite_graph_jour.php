@@ -43,7 +43,10 @@ Highcharts.setOptions({
                 title: {
                     text: 'Luminosité',
                     style: {
-                    }
+                    },
+		style: {
+			color: '#89A54E'
+		}
                 },
             }],
             tooltip: {
@@ -52,6 +55,7 @@ Highcharts.setOptions({
             series: [{
                 name: 'Luminosité',
                 type: 'spline',
+		color: '#89A54E',
                 data: [<?php echo $liste1; ?>],
                 marker: {
                     enabled: false

@@ -33,6 +33,9 @@ Highcharts.setOptions({
                 title: {
                     text: 'Consommation Wh'
                 },
+		style: {
+			color: '#4572A7'
+		},
                 min: 0
             },
             tooltip: {
@@ -51,6 +54,7 @@ Highcharts.setOptions({
 
             series: [{
                 name: 'Conso-Elec',
+		color: '#4572A7',
                 data: [<?php echo $liste1; ?>]
             }]
         });

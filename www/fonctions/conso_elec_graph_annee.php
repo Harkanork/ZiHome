@@ -50,12 +50,18 @@ Highcharts.setOptions({
                 min: 0,
                 title: {
                     text: 'Consommation (kWh)'
-                }
+                },
+		style: {
+			color: '#4572A7'
+		}
             }, {
                 min: 0,
                 title: {
                     text: 'Cout (Euro)'
-                }
+                },
+		style: {
+			color: '#89A54E'
+		}
             }],
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -74,12 +80,14 @@ Highcharts.setOptions({
             series: [{
                 name: 'Consommation (kWh)',
                 data: [<?php echo $liste1; ?>],
+		color: '#4572A7',
                 type: 'column'
 
             }, {
                 name: 'Cout (Euro)',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
+		color: '#89A54E',
                 type: 'column'
             }]
         });

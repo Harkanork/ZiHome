@@ -1,7 +1,8 @@
 <?php
+$i=0;
 include("./config/conf_zibase.php");
 echo "<CENTER><TABLE>";
-echo "<TR><TD></TD><TD ALIGN=CENTER>Nom</TD><TD>&nbsp;Actif&nbsp;</TD></TR>";
+echo "<TR style='text-align: center'><TD></TD><TD ALIGN=CENTER><b>Nom</b></TD><TD><b>&nbsp;Actif&nbsp;</b></TD></TR>";
 include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'actioneur'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -24,7 +25,8 @@ while ($periph = mysql_fetch_assoc($req))
   } else {
     $nom = $periph['libelle'];
   }
-  echo "<TR><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$stateactif."</TD></TR>";
+  echo "<TR  bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$stateactif."</TD></TR>";
+$i = $i+1;
 }
 echo "</TABLE></CENTER>";
 ?>

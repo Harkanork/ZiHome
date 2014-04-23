@@ -28,7 +28,10 @@ $(function () {
             yAxis: {
                 title: {
                     text: 'Luminosité'
-                }
+                },
+		style: {
+			color: '#89A54E'
+		}
             },
 
             tooltip: {
@@ -52,6 +55,7 @@ $(function () {
 
             series: [{
                 name: 'Luminosités',
+		color: '#89A54E',
                 data: [<?php echo $liste1; ?>]
             }]
 

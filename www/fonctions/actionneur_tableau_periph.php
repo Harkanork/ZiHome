@@ -1,6 +1,6 @@
 <?php
-echo "<CENTER><TABLE CELLSPACING='9'>";
-echo "<TR><TD>Nbr Activations </TD><TD>&nbsp;Nbr Activations&nbsp;</TD><TD>&nbsp;Temp Activation&nbsp;<TD></TR>";
+echo "<CENTER><TABLE>";
+echo "<TR style='text-align: center'><TD><b>Nbr Activations </b></TD><TD><b>&nbsp;Nbr Activations&nbsp;</b></TD><TD><b>&nbsp;Temp Activation&nbsp;</b><TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE DATE_FORMAT(`date`, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d') GROUP BY DATE_FORMAT(`date`, '%Y%m%d') ORDER BY DATE_FORMAT(`date`, '%Y%m%d') DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value0 = mysql_fetch_assoc($req0);
@@ -29,7 +29,7 @@ $duree += $value2['duree'];
 } else {
 $duree = 0;
 }
-echo "<TR><TD>Aujourd'hui&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
+echo "<TR bgcolor='#dddddd'><TD>Aujourd'hui&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE DATE_FORMAT(`date`, '%Y%m%d') = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 DAY), '%Y%m%d') GROUP BY DATE_FORMAT(`date`, '%Y%m%d') ORDER BY DATE_FORMAT(`date`, '%Y%m%d') DESC LIMIT 1";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -55,7 +55,7 @@ $duree += $value2['duree'];
 } else {
 $duree = 0;
 }
-echo "<TR><TD>Hier&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
+echo "<TR bgcolor='#eeeeee'><TD>Hier&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 7 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value0 = mysql_fetch_assoc($req0);
@@ -80,7 +80,7 @@ $duree += $value2['duree'];
 } else {
 $duree = 0;
 }
-echo "<TR><TD>7 Jours&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
+echo "<TR bgcolor='#dddddd'><TD>7 Jours&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 1 MONTH)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value0 = mysql_fetch_assoc($req0);
@@ -105,7 +105,7 @@ $duree += $value2['duree'];
 } else {
 $duree = 0;
 }
-echo "<TR><TD>1 Mois&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
+echo "<TR bgcolor='#eeeeee'><TD>1 Mois&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 $query0 = "SELECT SUM(actif) AS somme, date FROM `periph_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 1 YEAR)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value0 = mysql_fetch_assoc($req0);
@@ -130,6 +130,6 @@ $duree += $value2['duree'];
 } else {
 $duree = 0;
 }
-echo "<TR><TD>1 An&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
+echo "<TR bgcolor='#dddddd'><TD>1 An&nbsp;</TD><TD>".$somme."</TD><TD>".duree($duree)."</TD></TR>";
 echo "</TABLE></CENTER>";
 ?>
