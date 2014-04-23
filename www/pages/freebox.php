@@ -11,24 +11,6 @@ $char_interdit_xml = array("!","\"","#","$","%","&","'","(",")","*","+",",","/",
 $freebox = new apifreebox($config);
 $xmlfreebox = $freebox->config_to_XML();
 
-if ($xmlfreebox == false) {
-	echo 'Pas de xml en vue, véfier l\'IP</br>';
-	exit;
-}
-
-if (is_writable($XML_FREEBOX)) {
-	if (!$handle = fopen($XML_FREEBOX, 'r+')) {
-		echo 'Impossible d\'ouvrir le fichier '.$XML_FREEBOX;
-		exit;
-	}
-	if (fwrite($handle, $xmlfreebox) === FALSE) {
-		echo 'Impossible d\'ecrire dans le fichier '.$XML_FREEBOX.'. Vous n\'avez pas les permissions...</br>';
-		exit;
-	}
-	fclose($handle);
-} else {
-	echo 'Le fichier '.$XML_FREEBOX. 'que vous essayez de modifier n est pas inscriptible</br> ';
-}
   echo "<div align=center style=\"margin: 30px;\">";
   include('./fonctions/freebox_firmware.php');
   echo "</div><div align=center style=\"margin: 30px;\">Status de connexion :<br>";
