@@ -879,6 +879,12 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
       return gCapteur[nom]; 
     }
     
+    var gVariable = new Object();
+    function variable(id)
+    {
+      return gVariable[id]; 
+    }
+    
     function nuit()
     {
       return <? 
@@ -1013,6 +1019,14 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
       {
         echo 'gCapteur["' . $periph['nom'] . '"] = ' . $zibase->getState($periph['id'], $protocol) . ';';
       }
+    }
+    ?>
+    
+    <?
+    // Construction des tableaux issues des variables
+    for ($i = 0; $i < 60; $i++)
+    {
+      echo 'gVariable[' . $i . '] = ' . $zibase->getVariable($i) . ';';
     }
     ?>
     
