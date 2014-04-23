@@ -5,8 +5,6 @@ $xml = simplexml_load_file($XML_FREEBOX);
 /*
 echo("<pre>");
 print_r($xml);
-echo "---------------------------";
-print_r($xmlfreebox);
 echo("</pre>");
 */
 ?>
@@ -19,12 +17,12 @@ echo("</pre>");
 	<script src="../js/jquery.dataTables.js" language="javascript" type="text/javascript"></script>
 	<script src="../js/FixedHeader.js" language="javascript" type="text/javascript"></script>
 	<script type="text/javascript" language="javascript" >
-				$(document).ready( function () {
-			var oTable = $('#dhcp_dynamic').dataTable({
-					"bScrollCollapse": false,
+		$(document).ready( function () {
+			var oTable = $('#phone').dataTable({
+					"bScrollCollapse": true,
 					"bPaginate": false,
 					"bFilter": false,
-					"bSort": false,
+					"bSort": true,
 					"bInfo": false,
 					"bAutoWidth": false,
 					"bJQueryUI": true
@@ -36,28 +34,47 @@ echo("</pre>");
 
 <body>
 <?php
-echo("<table id='dhcp_dynamic' class='display'>");
+echo("<table id='phone' class='display'>");
 echo("<thead>");
 echo("	<tr>");
-echo("		<th>Hostname</th>");
-echo("		<th>Ip</th>");
-echo("		<th>Mac</th>");
+echo("		<th>number</th>");
+echo("		<th>type</th>");
+echo("		<th>durée</th>");
+echo("		<th>date</th>");
 echo("	</tr>");
 echo("</thead>");
 echo("<tbody>");
-foreach ($xml->Configuration as $Configuration){
-    foreach($Configuration->GetDhcpDynamicLeases as $id){
+foreach ($xml->Calls_Contacts as $Calls_Contacts){
+    foreach($Calls_Contacts->GetCallsList as $id){
 		 foreach($id as $tmp){
-			echo("	<tr>");
-			echo("		<td style='text-align:center;'>".$tmp->hostname."</td>");
-			echo("		<td style='text-align:center;'>".$tmp->ip."</td>");
-			echo("		<td style='text-align:right'>".$tmp->mac."</td>");
+			
+			switch($tmp->type){
+				case 'outgoing':
+					$img='<img src="/img/out.png" />Out';
+					break;
+				case 'accepted':
+					$img='<img src="/img/in.png" />In';
+					break;
+				case 'missed':
+					$img='<img src="/img/miss.png" />Miss';
+					break;
+				default:
+					$img='-';
+					break;
+			}
+			$datetime = intval($tmp->datetime);
+		 	echo("	<tr>");
+			echo("		<td>".$tmp->number."</td>");
+			echo("		<td>".$img."</td>");
+			echo("		<td style='text-align:right'>".$tmp->duration."s</td>");
+			echo("		<td style='text-align:center;'>".date('Y/m/d H:i:s', $datetime)."</td>");
 			echo("	</tr>");
 		}
 	}
 }
 echo("</tbody>");
 echo("</table>");
+
 }
 ?>
 </body>
