@@ -465,7 +465,7 @@ class apifreebox
 					{
 						$datas = call_user_func(array($class, $method_name));
 						$Method_Elt = $doc->createElement($method_name);
-						DomArrayToXml($datas["result"], $doc, $Method_Elt);
+						if(isset($datas["result"])) {DomArrayToXml($datas["result"], $doc, $Method_Elt); }
 						$Classe_Elt->appendChild($Method_Elt);
 					}
 				}
