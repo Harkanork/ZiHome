@@ -27,10 +27,6 @@ $xmlfreebox = $freebox->config_to_XML();
   include('./fonctions/freebox_dhcp_baux_dynamique.php');
   echo "</div><div align=center style=\"margin: 30px;\">Liste des appels :<br>";
   include('./fonctions/freebox_call.php');
-  // echo "</div><div align=center style=\"margin: 30px;\">Faire sonner le téléphone :<br>";
-  // include('./fonctions/freebox_ring_on.php');
-  // echo "</div><div align=center style=\"margin: 30px;\">Stopper la sonnerie du téléphone :<br>";
-  // include('./fonctions/freebox_ring_off.php');
 
 }
 ?>
