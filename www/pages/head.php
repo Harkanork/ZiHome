@@ -38,6 +38,19 @@
       $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
       $('input[type=date]').datepicker({dateFormat: 'dd-mm-yy'});
     }
+    
+    var tooltips = $( "[title]" ).tooltip(		
+    {		
+      content: function()		
+      {		
+        var element = $( this );		
+        if ( element.is( "[title]" ) )		
+        {		
+          return element.attr( "title" );		
+        }		
+        return "";		
+      }		
+    });
   });
 </script>
 <?
