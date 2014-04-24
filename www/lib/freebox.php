@@ -1,4 +1,4 @@
-Ôªø<?php
+<?php
 /**
   * API Freebox OS
   * https://github.com/DjMomo/ClassePhpFreebox
@@ -27,7 +27,7 @@ class apifreebox
 	*/
 	public function __construct($config)
 	{
-		// On assigne les param√®tres aux variables d'instance.
+		// On assigne les paramËtres aux variables d'instance.
 		$this->IP = $config['url'];
 		$this->PORT = $config['port'];
 		$this->APP_ID = $config['app_id'];
@@ -36,13 +36,14 @@ class apifreebox
 		$this->DEVICE_NAME = $_SERVER["SERVER_NAME"];
 		$api_info = $this->_GetAPIInfo();
 		$api_version = explode(".",$api_info['api_version']);
-		$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v1/";
+		$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v".$api_version[0]."/";
+		//$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v1/";
 		
 		$this->_NewSession();
 	}
   
 	/**
-	* Retourne les m√©thodes "Getxxxx" d'une classe
+	* Retourne les mÈthodes "Getxxxx" d'une classe
 	* @param string objet de la classe
 	*/
 	public function GetMethodsList($class)
@@ -71,7 +72,7 @@ class apifreebox
 	}
 
 	/**
-	* Effectue l'authentification aupr√®s de la Freebox
+	* Effectue l'authentification auprËs de la Freebox
 	* @param bool Force le rafraichissement du token
 	*/
 	public function _RequestAuth($force_refresh = 0)
@@ -101,16 +102,16 @@ class apifreebox
 						exit;
 					}
 				
-					fwrite($fp, $data);
+					fputcsv($fp, $data);
 
-					$this->APP_TOKEN = $result['result']['app_token'];
-					$this->TRACK_ID = $result['result']['track_id'];
+					//$this->APP_TOKEN = $result['result']['app_token'];
+					//$this->TRACK_ID = $result['result']['track_id'];
 					
 					fclose($fp);
 				} 
 			}
 			else
-				echo "Acc√®s au token $TokenFile interdit";
+				echo "AccËs au token $TokenFile interdit";
 		}
 		else
 		{
@@ -121,7 +122,7 @@ class apifreebox
 	}
 	
 	/**
-	* R√©cup√®re le status d'acc√®s
+	* RÈcupËre le status d'accËs
 	*/
 	public function _GetAuthStatus()
 	{
@@ -145,7 +146,7 @@ class apifreebox
 	}
 	
 	/**
-	* R√©cup√®re le token de la session
+	* RÈcupËre le token de la session
 	*/
 	public function _NewSession()
 	{
@@ -160,7 +161,7 @@ class apifreebox
 			while (strcmp($response['result']['status'],'pending') == 0)
 			{
 				sleep(1);
-				echo "<br />Attente d'autorisation pour l'application. Validez l'acc√®s depuis l'afficheur de la Freebox Server.";
+				echo "<br />Attente d'autorisation pour l'application. Validez l'accËs depuis l'afficheur de la Freebox Server.";
 				$response = $this->_GetAuthStatus();
 			}
 			if (strcmp($response['result']['status'],'granted') != 0)
@@ -183,7 +184,7 @@ class apifreebox
 	}
 	
 	/**
-	* R√©cup√®re les droits d'acc√®s
+	* RÈcupËre les droits d'accËs
 	*/
 	public function _GetRights()
 	{
@@ -212,7 +213,7 @@ class apifreebox
  
 	public function post ($pPostParams=array(), $pGetParams = array())
 	{
-    	return $this->_InterrogerAPI ($this->URL,'POST',$pPostParams);
+	    	return $this->_InterrogerAPI ($this->URL,'POST',$pPostParams);
 	}
     
 	public function put ($pPutParams = array())
@@ -275,7 +276,7 @@ class apifreebox
 
 		// Initialisation de la connexion avec CURL.
 		$ch = curl_init();
-    
+
 		curl_setopt($ch, CURLOPT_URL, $pUrl);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -308,7 +309,7 @@ class apifreebox
 		$retour_curl = curl_exec($ch);
 		curl_close($ch);
     
-		// On essaye de d√©coder le retour JSON.
+		// On essaye de dÈcoder le retour JSON.
 		$retour_json = json_decode( $retour_curl, true );
     
 		// Gestion minimale des erreurs.
@@ -425,12 +426,12 @@ class apifreebox
 		return $var;
 	}
 	
-	/* Retourne tous les param√®tres de la freebox dans un fichier XML */
+	/* Retourne tous les paramËtres de la freebox dans un fichier XML */
 	public function config_to_XML()
 	{
 		$array_classes = $this->GetListClasses();
 	
-		// Cr√©ation fichier XML avec les donn√©es
+		// CrÈation fichier XML avec les donnÈes
 		// Instance de la class DomDocument
 		$doc = new DOMDocument();
 
@@ -440,7 +441,7 @@ class apifreebox
 		$doc->formatOutput = true;
 
 		// Ajout d'un commentaire a la racine
-		$comment_elt = $doc->createComment(utf8_encode('Donn√©es de la Freebox R√©volution - Boitier Server'));
+		$comment_elt = $doc->createComment(utf8_encode('DonnÈes de la Freebox RÈvolution - Boitier Server'));
 		$doc->appendChild($comment_elt);
 
 		$racine = $doc->createElement('freeboxOS');
@@ -465,7 +466,7 @@ class apifreebox
 					{
 						$datas = call_user_func(array($class, $method_name));
 						$Method_Elt = $doc->createElement($method_name);
-						if(isset($datas["result"])) {DomArrayToXml($datas["result"], $doc, $Method_Elt); }
+						DomArrayToXml($datas["result"], $doc, $Method_Elt);
 						$Classe_Elt->appendChild($Method_Elt);
 					}
 				}
@@ -480,20 +481,20 @@ class apifreebox
 	{
 		if ($json["success"] == true)
 		{
-			echo "$action OK !";
-			echo "<br />Donn√©es suppl√©mentaires retourn√©es par la Freebox : ";
+			//echo "$action OK !";
+			//echo "<br />DonnÈes supplÈmentaires retournÈes par la Freebox : ";
 			$keys = array_keys($json["result"]);  
 			$i = 0;
 			foreach ($json["result"] as $value)
 			{
 				$value = $this->convert_truefalse_to_text(utf8_decode($value));
-				echo "<br />".$keys[$i]."= $value";
+				//echo "<br />".$keys[$i]."= $value";
 				$i++;
 			}
 		}
 		else
 		{
-			echo "Erreur lors de l'ex√©cution de la commande $action.";
+			echo "Erreur lors de l'exÈcution de la commande $action.";
 			echo "<br />Le message d'erreur est le suivant : ".utf8_decode($json["msg"])." (".utf8_decode($json["error_code"]).")";
 		}
 	
@@ -502,8 +503,8 @@ class apifreebox
 
 
 /**
-* Inclut la classe √† partir d'un fichier
-* @param string Nom de la classe √† inclure
+* Inclut la classe ‡ partir d'un fichier
+* @param string Nom de la classe ‡ inclure
 */
 function __autoload($classname) 
 {
@@ -512,7 +513,7 @@ function __autoload($classname)
 }
 
 /**
-* Converti (r√©cursivement) un array en XML (via DOM)
+* Converti (rÈcursivement) un array en XML (via DOM)
 */
 function DomArrayToXml($array, $dom_doc, $node)
 {

@@ -50,7 +50,7 @@ else if(!(isset($do)))
 		{
                         $configuration = new Configuration($freebox);
                         $enabled = true;
-                        $array_config = array("ap_params" => array( "enabled" => $enabled));
+                        $array_config = array( "enabled" => $enabled);
                         $freebox->DisplayResult($configuration->UpdateWifiConfig($array_config),"wifi");
 			break;
 		}
@@ -58,7 +58,7 @@ else if(!(isset($do)))
 		{
                         $configuration = new Configuration($freebox);
                         $enabled = false;
-                        $array_config = array("ap_params" => array( "enabled" => $enabled));
+                        $array_config = array( "enabled" => $enabled);
                         $freebox->DisplayResult($configuration->UpdateWifiConfig($array_config),"wifi");
 			break;
 		}
