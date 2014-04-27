@@ -48,8 +48,6 @@ $config = array (
        'app_version' => "1.0"
        );
 
-$XML_FREEBOX='./config/freebox.xml'; //Fichier XMl avec les valeurs de la freebox
-
 /*--------------------fin des Parametres Freebox-----------------------*/
 
 /*--------------------Parametres Pollution-----------------------------*/
