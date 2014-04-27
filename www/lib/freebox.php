@@ -89,8 +89,8 @@ class apifreebox
 		if ((!file_exists($TokenFile)) || ($force_refresh == 1))
 		{				
 			$result = $this->setURL($appURL)->post($appParams);
-			
-			$data = "<? \$token = \"".$result['result']['app_token']."\"; \$track_id = \"".$result['result']['track_id']."\"; ?>";
+
+			$data = "<? $token = \"".$result['result']['app_token']."\"; \$track_id = \"".$result['result']['track_id']."\"; ?>";
 
 			if ($result['success'] == true)
 			{
@@ -102,7 +102,7 @@ class apifreebox
 						exit;
 					}
 				
-					fputcsv($fp, $data);
+					fwrite($fp, $data);
 
 					//$this->APP_TOKEN = $result['result']['app_token'];
 					//$this->TRACK_ID = $result['result']['track_id'];
