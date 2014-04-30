@@ -38,15 +38,18 @@ class System
 	public function GetSystemStatus()
 	{
 		// without documentation
-		$appURL = "system/";
+		$appURL = "2/system/";
 		return $this->GetDatas($appURL);
 	}
 	
 	public function Reboot()
 	{
 		// without documentation
-		$appURL = "system/reboot/";
-		return $this->PostDatas($appURL);
+		$appURL = "1/system/reboot/";
+		$appParams = array(
+			"msg" => "ok"
+		);
+		return $this->PostDatas($appURL, $appParams);
 	}
 }
 

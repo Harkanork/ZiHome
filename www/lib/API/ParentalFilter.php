@@ -40,7 +40,7 @@ class ParentalFilter
 	{
 		// Get the ParentalFilterConfig
 		// http://dev.freebox.fr/sdk/os/parental/#get-parental-filter-config
-		$appURL = "parental/config/";
+		$appURL = "2/parental/config/";
 		return $this->GetDatas($appURL);
 	}
 	
@@ -48,7 +48,7 @@ class ParentalFilter
 	{
 		// Update the ParentalFilterConfig
 		// http://dev.freebox.fr/sdk/os/parental/#update-parental-filter-config
-		$appURL = "parental/config/";
+		$appURL = "2/parental/config/";
 		return $this->PutDatas($appURL,$array_config);
 	}
 	
@@ -56,7 +56,7 @@ class ParentalFilter
 	{
 		// Returns the collection of all ParentalFilter filters
 		// http://dev.freebox.fr/sdk/os/parental/#retrieve-a-parental-filter
-		$appURL = "parental/filter/";
+		$appURL = "2/parental/filter/";
 		return $this->GetDatas($appURL);
 	}
 	
@@ -64,7 +64,7 @@ class ParentalFilter
 	{
 		// Returns the ParentalFilter task with the given id
 		// http://dev.freebox.fr/sdk/os/parental/#retrieve-a-parental-filter
-		$appURL = "parental/filter/".$id;
+		$appURL = "2/parental/filter/".$id;
 		return $this->GetDatas($appURL);
 	}
 	
@@ -72,7 +72,7 @@ class ParentalFilter
 	{
 		// Delete the ParentalFilter task with the given id
 		// http://dev.freebox.fr/sdk/os/parental/#delete-a-parental-filter
-		$appURL = "parental/filter/".$id;
+		$appURL = "2/parental/filter/".$id;
 		return $this->DeleteDatas($appURL);
 	}
 	
@@ -80,7 +80,7 @@ class ParentalFilter
 	{
 		// Update the ParentalFilter with the given id
 		// http://dev.freebox.fr/sdk/os/parental/#update-a-parental-filter
-		$appURL = "parental/filter/".$id;
+		$appURL = "2/parental/filter/".$id;
 		return $this->PutDatas($appURL,$array_config);
 	}
 	
@@ -88,7 +88,7 @@ class ParentalFilter
 	{
 		// Add a ParentalFilter
 		// http://dev.freebox.fr/sdk/os/parental/#add-a-parental-filter
-		$appURL = "parental/filter/";
+		$appURL = "2/parental/filter/";
 		return $this->PostDatas($appURL,$array_config);
 	}
 	
@@ -96,7 +96,7 @@ class ParentalFilter
 	{
 		// Returns the ParentalFilterPlanning for the filter with the given id
 		// http://dev.freebox.fr/sdk/os/parental/#get-a-parental-filter-planning
-		$appURL = "parental/filter/".$id."/planning";
+		$appURL = "2/parental/filter/".$id."/planning";
 		return $this->GetDatas($appURL);
 	}
 	
@@ -104,7 +104,7 @@ class ParentalFilter
 	{
 		// Update the ParentalFilterPlanning with the given id
 		// http://dev.freebox.fr/sdk/os/parental/#update-a-parental-filter-planning
-		$appURL = "parental/filter/".$id."/planning";
+		$appURL = "2/parental/filter/".$id."/planning";
 		return $this->PutDatas($appURL,$array_config);
 	}
 }

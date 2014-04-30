@@ -40,7 +40,7 @@ class Calls_Contacts
 	{
 		// Returns the collection of all CallEntry call entries
 		// http://dev.freebox.fr/sdk/os/call/#list-every-calls
-		$appURL = "call/log/";
+		$appURL = "2/call/log/";
 		return $this->GetDatas($appURL);
 	}
 	
@@ -48,7 +48,7 @@ class Calls_Contacts
 	{
 		// Returns the CallEntry task with the given id
 		// http://dev.freebox.fr/sdk/os/call/#access-a-given-call-entry
-		$appURL = "call/log/".$id;
+		$appURL = "2/call/log/".$id;
 		return $this->GetDatas($appURL);
 	}
 	
@@ -56,7 +56,7 @@ class Calls_Contacts
 	{
 		// Deletes the CallEntry with the given id
 		// http://dev.freebox.fr/sdk/os/call/#delete-a-call
-		$appURL = "call/log/".$id;
+		$appURL = "2/call/log/".$id;
 		return $this->DeleteDatas($appURL);
 	}
 	
@@ -64,7 +64,7 @@ class Calls_Contacts
 	{
 		// Updates the CallEntry task with the given id
 		// http://dev.freebox.fr/sdk/os/call/#update-a-call-entry
-		$appURL = "call/log/".$id;
+		$appURL = "2/call/log/".$id;
 		return $this->PutDatas($appURL,$array_datas);
 	}
 	
@@ -72,7 +72,7 @@ class Calls_Contacts
 	{
 		// Returns the collection of all ContactEntry
 		// http://dev.freebox.fr/sdk/os/contacts/#get-a-list-of-contacts
-		$appURL = "contact/";
+		$appURL = "2/contact/";
 		return $this->GetDatas($appURL);
 	}
 	
@@ -80,7 +80,7 @@ class Calls_Contacts
 	{
 		// Returns the ContactEntry with the given id
 		// http://dev.freebox.fr/sdk/os/contacts/#access-a-given-contact-entry
-		$appURL = "contact/".$id;
+		$appURL = "2/contact/".$id;
 		return $this->GetDatas($appURL);
 	}
 	
@@ -88,7 +88,7 @@ class Calls_Contacts
 	{
 		// Creates a new ContactEntry
 		// http://dev.freebox.fr/sdk/os/contacts/#create-a-contact
-		$appURL = "contact/";
+		$appURL = "2/contact/";
 		return $this->PostDatas($appURL,$array_contact);
 	}
 	
@@ -96,7 +96,7 @@ class Calls_Contacts
 	{
 		// Deletes the ContactEntry with the given id
 		// http://dev.freebox.fr/sdk/os/contacts/#delete-a-contact
-		$appURL = "contact/".$id;
+		$appURL = "2/contact/".$id;
 		return $this->DeleteDatas($appURL);
 	}
 	
@@ -104,7 +104,7 @@ class Calls_Contacts
 	{
 		// Updates the ContactEntry with the given id
 		// http://dev.freebox.fr/sdk/os/contacts/#update-a-contact-entry
-		$appURL = "contact/".$id;
+		$appURL = "2/contact/".$id;
 		return $this->PutDatas($appURL,$array_contact);
 	}
 	
@@ -112,7 +112,7 @@ class Calls_Contacts
 	{
 		// Returns the collection of all Contactxxx for a given contact
 		// http://dev.freebox.fr/sdk/os/contacts/#get-the-list-of-numbers-for-a-given-contact
-		$appURL = "contact/".$id."/".$object;
+		$appURL = "2/contact/".$id."/".$object;
 		return $this->GetDatas($appURL);
 	}
 		
@@ -148,7 +148,7 @@ class Calls_Contacts
 	{
 		// Returns the ContactObject with the given id
 		// http://dev.freebox.fr/sdk/os/contacts/#access-a-given-contact-number
-		$appURL = $object."/".$id;
+		$appURL = "2/".$object."/".$id;
 		return $this->GetDatas($appURL);
 	}
 		
@@ -184,7 +184,7 @@ class Calls_Contacts
 	{
 		// Create the ContactObject
 		// http://dev.freebox.fr/sdk/os/contacts/#create-a-contact-number
-		$appURL = $object."/";
+		$appURL = "2/".$object."/";
 		return $this->PostDatas($appURL,$array_contact);
 	}
 		

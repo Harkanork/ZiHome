@@ -36,8 +36,8 @@ class apifreebox
 		$this->DEVICE_NAME = $_SERVER["SERVER_NAME"];
 		$api_info = $this->_GetAPIInfo();
 		$api_version = explode(".",$api_info['api_version']);
-		$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v".$api_version[0]."/";
-		//$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v1/";
+		//$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v".$api_version[0]."/";
+		$this->BASE_URL = $this->IP.":".$this->PORT.$api_info['api_base_url']."v";
 		
 		$this->_NewSession();
 	}
@@ -77,7 +77,7 @@ class apifreebox
 	*/
 	public function _RequestAuth($force_refresh = 0)
 	{
-		$appURL = "login/authorize/";
+		$appURL = "2/login/authorize/";
 		$TokenFile = "./config/token_freebox.php";
 		$appParams = array (
 				"app_id" => $this->APP_ID,
@@ -128,7 +128,7 @@ class apifreebox
 	{
 		if (strcmp($this->TRACK_ID,"") != 0)
 		{
-			$appURL = "login/authorize/".$this->TRACK_ID;
+			$appURL = "2/login/authorize/".$this->TRACK_ID;
 			$response = $this->setURL($appURL)->get();
 		}
 		else
@@ -136,7 +136,7 @@ class apifreebox
 			$this->_RequestAuth();
 			if (strcmp($this->TRACK_ID,"") != 0)
 			{
-				$appURL = "login/authorize/".$this->TRACK_ID;
+				$appURL = "2/login/authorize/".$this->TRACK_ID;
 				$response = $this->setURL($appURL)->get();
 			}
 			else
@@ -150,7 +150,7 @@ class apifreebox
 	*/
 	public function _NewSession()
 	{
-		$appURL = "login/session/";
+		$appURL = "2/login/session/";
 		$response = $this->_GetAuthStatus();
 
 		if (strcmp($response['result']['status'],'granted') != 0)
@@ -308,7 +308,7 @@ class apifreebox
 		    
 		$retour_curl = curl_exec($ch);
 		curl_close($ch);
-    
+ 
 		// On essaye de décoder le retour JSON.
 		$retour_json = json_decode( $retour_curl, true );
     
