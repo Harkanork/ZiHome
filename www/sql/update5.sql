@@ -257,4 +257,16 @@ ALTER TABLE  `peripheriques` CHANGE  `graphique`  `graphique` TINYINT( 1 ) NOT N
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (17, 'actionneurs', 1);
 
+INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
+(18, 'pellet', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pellet`
+--
+
+CREATE TABLE IF NOT EXISTS `pellet` (
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

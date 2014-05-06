@@ -43,6 +43,16 @@ CREATE TABLE IF NOT EXISTS `dynaText` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `pellet`
+--
+
+CREATE TABLE IF NOT EXISTS `pellet` (
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `consommable`
 --
 
@@ -593,23 +603,24 @@ INSERT INTO `variables` (`id`, `description`) VALUES
 --
 
 INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
-(1, 'owl', 1),
-(2, 'conso_elec', 1),
-(3, 'temperature', 1),
-(4, 'batterie', 1),
+(1, 'owl', 0),
+(2, 'conso_elec', 0),
+(3, 'temperature', 0),
+(4, 'batterie', 0),
 (5, 'plan', 1),
 (6, 'thermostat', 1),
 (7, 'calendrier', 1),
-(8, 'vent', 1),
-(9, 'accueil', 1),
-(10, 'pluie', 1),
-(11, 'video', 1),
-(12, 'iphone', 1),
-(13, 'android', 1),
-(14, 'luminosite', 1),
-(15, 'freebox', 1),
-(16, 'consommable', 1),
-(17, 'actionneurs',1);
+(8, 'vent', 0),
+(9, 'accueil', 0),
+(10, 'pluie', 0),
+(11, 'video', 0),
+(12, 'iphone', 0),
+(13, 'android', 0),
+(14, 'luminosite', 0),
+(15, 'freebox', 0),
+(16, 'consommable', 0),
+(17, 'actionneurs', 0),
+(18, 'pellet', 0);
 
 -- --------------------------------------------------------
 

@@ -61,6 +61,11 @@ while ($data = mysql_fetch_assoc($req))
     <li><a href = "./index.php?page=vent"><img src = "./img/icon_vent.png"/><span>Vent</span></a></li>
   <?
   }
+  if($data['libelle'] == "pellet" && $data['actif'] == 1) {
+  ?>
+    <li><a href = "./index.php?page=pellet"><img src = "./img/icon_home.png"/><span>Pellet</span></a></li>
+  <?
+  }
   if($data['libelle'] == "accueil" && $data['actif'] == 1) {
   ?>
     <li><a href = "./index.php?page=accueil"><img src = "./img/icon_home.png"/><span>Accueil</span></a></li>
