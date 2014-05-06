@@ -26,7 +26,6 @@ if(isset($_SESSION['auth']))
         </td>
       </tr>
       <?
-      include("./pages/connexion.php");
       if(isset($_GET['Supprimer'])){
         $query = "DELETE FROM `scenarios` WHERE `id` = '".$_GET['id']."'";
         mysql_query($query, $link);

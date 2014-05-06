@@ -1,6 +1,5 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
-  include("./pages/connexion.php");
   // Auto connect
   if(isset($_GET['supp-auto'])) {
     $query = "DELETE FROM `auto-logon` WHERE `id`='".$_GET['supp-auto']."'";

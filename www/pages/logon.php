@@ -12,7 +12,6 @@ if(!(isset($_SESSION['auth'])))
          $macAddr=$cols[2];
      }
   }
-  include("./pages/connexion.php");
   $query = "SELECT * FROM `auto-logon` WHERE macaddress = '".$macAddr."'";
   $req = @mysql_query ($query);
   $data = mysql_fetch_assoc ($req);
@@ -58,7 +57,6 @@ else
     }
     if ($message == NULL)
     {
-      include("./pages/connexion.php");
       $query = "SELECT * FROM `users` WHERE pseudo = '".$_POST['pseudo']."' AND pass = SHA1('".$_POST['pass']."')";
       $req = @mysql_query ($query);
       $data = mysql_fetch_assoc ($req);

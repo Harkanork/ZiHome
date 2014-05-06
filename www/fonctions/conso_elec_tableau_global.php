@@ -1,9 +1,7 @@
 <?php
 $i=0;
-include("./config/conf_zibase.php");
 echo "<CENTER><TABLE>";
 echo "<TR style='text-align: center'><TD></TD><TD ALIGN=CENTER><b>Nom</b></TD><TD><b>&nbsp;Consommation&nbsp;</b></TD></TR>";
-include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))

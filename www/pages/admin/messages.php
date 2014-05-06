@@ -1,7 +1,6 @@
 <?
 if(isset($_SESSION['auth']))
 {
-  include("./pages/connexion.php");
   ?>
   <p align=center><form method=post action="./index.php?page=administration&detail=messages">Annee : <select name=annee>
   <?

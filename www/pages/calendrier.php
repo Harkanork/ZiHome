@@ -1,7 +1,6 @@
 <?php
 if(isset($_SESSION['auth']))
 {
-include("./config/conf_zibase.php");
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 if(isset($_POST['Valider'])) {

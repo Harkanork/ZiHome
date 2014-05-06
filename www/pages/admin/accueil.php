@@ -1,7 +1,6 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
-  include("./pages/connexion.php");
   if(isset($_POST['rapatrier'])){
     $query = "DELETE FROM `page_accueil` WHERE user = '".$_SESSION['auth']."'";
     mysql_query($query, $link);
@@ -107,7 +106,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <select name=user>
     <option value=default>Default</option>
     <?
-    include("./pages/connexion.php");
     $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -125,7 +123,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <select name=user>
       <option value=default>Default</option>
       <?
-      include("./pages/connexion.php");
       $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
       $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
       while ($data = mysql_fetch_assoc($req))
@@ -149,7 +146,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <TR><TD>Module :</TD><TD>
       <select name=module>
       <?
-      include("./pages/connexion.php");
       $query = "SELECT * FROM modules_accueil ORDER BY libelle";
       $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
       while ($data = mysql_fetch_assoc($req))

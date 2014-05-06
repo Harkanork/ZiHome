@@ -3,7 +3,6 @@ $i=0;
 include("./lib/date_francais.php");
 echo "<CENTER><TABLE>";
 echo "<TR style='text-align: center'><TD></TD><TD><b>Nom</b></TD><TD><b>&nbsp;Temp&eacute;rature&nbsp;</b></TD><TD><b>&nbsp;Hygrom&eacute;trie&nbsp;</b></TD><TD><b>Date - Heure</b></TD></TR>";
-include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))

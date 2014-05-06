@@ -1,6 +1,5 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
-  include("./pages/connexion.php");
   if(isset($_POST['Ajouter'])) {
     $query = "INSERT INTO `video` (adresse, adresse_internet, id_plan) VALUES ('".$_POST['adresse']."', '".$_POST['adresse_internet']."', '".$_POST['id_plan']."')";
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -30,7 +29,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     <select name="id_plan">
     <option value="-1">ne pas afficher</option>
     <?
-    include("./pages/connexion.php");
     $query1 = "SELECT * FROM `plan` ORDER BY `libelle`";
     $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while($data1 = mysql_fetch_assoc($req1))
@@ -60,7 +58,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
       <td>Pi&egrave;ce :</td><td><select name="id_plan">
     <option value="-1">ne pas afficher</option>
     <?
-    include("./pages/connexion.php");
     $query = "SELECT * FROM `plan` ORDER BY `libelle`";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while($data = mysql_fetch_assoc($req))

@@ -2,7 +2,6 @@
 $i=0;
 echo "<CENTER><TABLE>";
 echo "<TR style='text-align: center'><TD></TD><TD ALIGN=CENTER><b>Nom</b></TD><TD><b>&nbsp;Pr&eacute;cipitation&nbsp;</b></TD><TD><b>&nbsp;Cumul&nbsp;</b></TD></TR>";
-include("./pages/connexion.php");
 $query = "SELECT * FROM peripheriques WHERE periph = 'pluie'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))

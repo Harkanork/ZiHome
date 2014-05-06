@@ -54,7 +54,6 @@
   });
 </script>
 <?
-include("./pages/connexion.php");
 $query = "SELECT * FROM paramettres WHERE libelle = 'icones'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
@@ -82,5 +81,4 @@ while ($data = mysql_fetch_assoc($req))
 }
 include('./lib/taille_fichier.php');
 include('./lib/timestamp.php');
-include('./config/conf_zibase.php');
 ?>

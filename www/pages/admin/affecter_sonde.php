@@ -2,7 +2,6 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
   include("./lib/date_francais.php");
-  include("./pages/connexion.php");
   
   $mapPeriph = array();
   $mapPeriph["temperature"] = "Thermom&egrave;tre";

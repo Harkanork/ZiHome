@@ -1,10 +1,8 @@
 <?
 if(isset($_SESSION['auth']))
 {
-  include("./config/conf_zibase.php");
   include("./lib/zibase.php");
   $zibase = new ZiBase($ipzibase);
-  include("./pages/connexion.php");  
   if(isset($_POST['Valider'])) {
     $zibase->setVariable($_POST['id'], $_POST['value']);
     $query = "UPDATE variables SET description = '".$_POST['description']."' WHERE `id` = '".$_POST['id']."'";

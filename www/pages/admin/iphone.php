@@ -66,7 +66,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     }
   }
   if(isset($_POST['site'])) {
-    include("./pages/connexion.php");
     if(isset($_POST['site_valider'])) {
       if($_POST['pos_actuelle'] == "1"){
         $query0 = "SELECT * FROM iphone WHERE id = '".$_POST['id_iphone']."'";
@@ -154,7 +153,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     </p>
     <?
   } else {
-    include("./pages/connexion.php");
     if (isset($_POST['Ajouter'])) {
       $query = "INSERT INTO `iphone` (periph_name, user, pass) VALUES ('".$_POST['periph_name']."', '".$_POST['user']."', '".$_POST['pass']."')";
       mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

@@ -2,7 +2,6 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
   if(isset($_POST['valider'])){
-    include("./pages/connexion.php");
     $query = "UPDATE paramettres SET value = '".$_POST['value']."' WHERE id = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
@@ -17,7 +16,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <td></td>
   </tr>
 <?
-  include("./pages/connexion.php");
   $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))

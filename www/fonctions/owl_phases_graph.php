@@ -3,7 +3,6 @@ $liste1 = "";
 $liste2 = "";
 $liste3 = "";
 $liste4 = "";
-include("./pages/connexion.php");
 if(isset($_GET['delai'])) {
 if($_GET['delai'] == "heure") {
 $query = "SELECT * FROM owl_detail WHERE date > DATE_SUB(NOW(), INTERVAL 1 HOUR)";

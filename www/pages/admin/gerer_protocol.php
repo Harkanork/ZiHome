@@ -17,7 +17,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       </TD>
     </tr>
     <?
-    include("./pages/connexion.php");
     if(isset($_POST['id'])){
       $query = "UPDATE protocol SET actif = '".$_POST['actif']."' WHERE id = '".$_POST['id']."'";
       mysql_query($query, $link);

@@ -35,7 +35,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       <td></td>
     </tr>
 <?
-  include("./pages/connexion.php");
   include("./lib/date_francais.php");
   if(isset($_GET['Supprimer'])){
     $query = "DELETE FROM `peripheriques` WHERE `id` = '".$_GET['id']."'";

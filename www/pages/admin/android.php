@@ -46,7 +46,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     return $location;
   }
   if(isset($_POST['site'])) {
-    include("./pages/connexion.php");
     if(isset($_POST['site_valider'])) {
       if($_POST['pos_actuelle'] == "1"){
         $query0 = "SELECT * FROM android WHERE id = '".$_POST['id_android']."'";
@@ -135,7 +134,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     
     <?
   } else {
-    include("./pages/connexion.php");
     if(isset($_POST['Ajouter'])) {
       $query = "INSERT INTO `android` (apikey, MobileNetworkCode, carrier, cellId, locationAreaCode) VALUES ('".$_POST['apikey']."', '".$_POST['MobileNetworkCode']."', '".$_POST['carrier']."', '".$_POST['cellId']."', '".$_POST['locationAreaCode']."')";
       mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());

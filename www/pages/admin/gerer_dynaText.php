@@ -1,8 +1,6 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
-  include("./pages/connexion.php");
-  
   if(isset($_POST['Supprimer'])){
     $query = "DELETE FROM dynaText WHERE `id` = '".$_POST['id']."'";
     mysql_query($query, $link);

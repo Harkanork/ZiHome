@@ -1,6 +1,5 @@
 <div id="global" style="position:relative;padding: 15px;margin: 15px;">
 <?
-include("./pages/connexion.php");
 if(isset($_SESSION['auth'])) {
 $query3 = "SELECT * FROM page_accueil WHERE user = '".$_SESSION['auth']."'";
 } else {

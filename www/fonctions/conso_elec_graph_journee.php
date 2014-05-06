@@ -1,6 +1,5 @@
 <?php
 $liste1 = "";
-include("./pages/connexion.php");
 $query0 = "SELECT * FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($value0 = mysql_fetch_assoc($req0))

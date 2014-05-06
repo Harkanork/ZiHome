@@ -47,7 +47,6 @@ Confirmez-vous la suppression?
 <center>
 <div id="sous-menu">
   <?
-  include("./pages/connexion.php");
   $query = "SELECT * FROM modules WHERE actif = '1'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))

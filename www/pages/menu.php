@@ -6,7 +6,6 @@ include("./pages/logon.php");
 ?>
 </li>
 <?
-include("./pages/connexion.php");
 $query = "SELECT * FROM modules";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
@@ -92,7 +91,6 @@ while ($data = mysql_fetch_assoc($req))
   <?
   }
 }
-include("./pages/connexion.php");
 $query = "SELECT * FROM `insertion`";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))
