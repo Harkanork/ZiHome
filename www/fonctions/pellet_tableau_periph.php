@@ -30,7 +30,7 @@ $query0 = "SELECT COUNT(date) AS somme, date FROM `pellet` WHERE date < curdate(
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $value0 = mysql_fetch_assoc($req0);
 if(!($value0['somme'] == NULL)) {
-$somme = $value0['somme'];
+$somme = $value0['somme']*$pellet;
 } else {
 $somme = 0;
 }
