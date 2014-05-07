@@ -696,7 +696,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (19, 'Icone pollution largeur', '60', 'number'),
 (20, 'Icone pollution hauteur', '60', 'number'),
 (21, 'Icone pollution droite', '100', 'number'),
-(22, 'Icone pollution bas', '10', 'number');
+(22, 'Icone pollution bas', '10', 'number'),
+(23, 'pellet', '140', 'number');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

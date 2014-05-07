@@ -270,3 +270,7 @@ CREATE TABLE IF NOT EXISTS `pellet` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+
+(23, 'pellet', '140', 'number');

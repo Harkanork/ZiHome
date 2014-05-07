@@ -1,12 +1,17 @@
 <?
+$query = "SELECT * FROM paramettres WHERE libelle = 'pellet'";
+$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+while ($data = mysql_fetch_assoc($req))
+{
+  $pellet = $data['value'];
+}
 $liste1 = "";
-$liste2 = "";
 $query9 = "SELECT COUNT(date) AS somme, date FROM `pellet` WHERE `date` > DATE_SUB(curdate(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d') ORDER BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req9 = mysql_query($query9, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($value9 = mysql_fetch_assoc($req9)){
 $somme = 0;
 if(!(empty($value9))) {
-$somme = $value9['somme'];
+$somme = $value9['somme']*$pellet;
 } else {
 $somme = 0;
 }
@@ -36,7 +41,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
                 title: {
-                    text: 'Nb Activations'
+                    text: 'Qte Pellet'
                 },
 		style: {
 		    color: '#89A54E'
@@ -57,7 +62,7 @@ Highcharts.setOptions({
                 }
             },
             series: [{
-                name: 'Nb Activation',
+                name: 'Qte Pellet',
                 data: [<?php echo $liste1; ?>],
 		color: '#89A54E',
                 type: 'column'
