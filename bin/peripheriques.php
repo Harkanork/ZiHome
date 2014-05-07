@@ -20,8 +20,8 @@ while($i < $sensornb) {
   if($sensorlist[$i]['type'] == 'rain') {
     $info = "";
     $info = $zibase->getSensorInfo($sensorlist[$i]['id']);
-    updateSensor($sensorlist[$i], $info, $link, 'pluie');
-    $query = "CREATE TABLE IF NOT EXISTS `vent_".$sensorlist[$i]['name']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY(`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+    updateProbe($sensorlist[$i], $info, $link, 'pluie');
+    $query = "CREATE TABLE IF NOT EXISTS `pluie_".$sensorlist[$i]['name']."` (`date` datetime NOT NULL, `direction` varchar(255) NOT NULL, `vitesse` float NOT NULL, PRIMARY KEY(`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     mysql_query($query, $link);
   }
   if($sensorlist[$i]['type'] == 'light') {
