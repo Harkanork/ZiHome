@@ -90,7 +90,7 @@ class apifreebox
 		{				
 			$result = $this->setURL($appURL)->post($appParams);
 
-			$data = "<? $token = \"".$result['result']['app_token']."\"; \$track_id = \"".$result['result']['track_id']."\"; ?>";
+			$data = "<? \$token = \"".$result['result']['app_token']."\"; \$track_id = \"".$result['result']['track_id']."\"; ?>";
 
 			if ($result['success'] == true)
 			{
