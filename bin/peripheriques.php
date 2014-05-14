@@ -28,7 +28,7 @@ while($i < $sensornb) {
     $info = "";
     $info = $zibase->getSensorInfo($sensorlist[$i]['id']);
     updateProbe($sensorlist[$i], $info, $link, 'luminosite');
-	$query = "CREATE TABLE IF NOT EXISTS `luminosite_".$sensorlist[$i]['name']."` (`date` datetime NOT NULL, `lum` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+    $query = "CREATE TABLE IF NOT EXISTS `luminosite_".$sensorlist[$i]['name']."` (`date` datetime NOT NULL, `lum` float NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     mysql_query($query, $link);
   }
   if($sensorlist[$i]['type'] == 'wind') {
@@ -62,7 +62,7 @@ $i = 0;
 while($i < $actionnb) {
   $info = "";
   $info = $zibase->getSensorInfo($actionlist[$i]['id']);
-  updateProbe($actionlist[$i], $info, $link, 'capteur');
+  updateProbe($actionlist[$i], $info, $link, 'actioneur');
   $query = "CREATE TABLE IF NOT EXISTS `periph_".$actionlist[$i]['name']."` (`date` datetime NOT NULL, `actif` TINYINT(1) NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1";
   mysql_query($query, $link);
   $i++;
@@ -74,7 +74,7 @@ $i = 0;
 while($i < $actionnb) {
   $info = "";
   $info = $zibase->getSensorInfo($actionlist[$i]['id']);
-  updateProbe($actionlist[$i], $info, $link, 'actioneur');
+  updateProbe($actionlist[$i], $info, $link, 'capteur');
   $query = "CREATE TABLE IF NOT EXISTS `periph_".$actionlist[$i]['name']."` (`date` datetime NOT NULL, `actif` TINYINT(1) NOT NULL, PRIMARY KEY (`date`)) ENGINE=InnoDB DEFAULT CHARSET=latin1";
   mysql_query($query, $link);
   $i++;
