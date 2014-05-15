@@ -20,41 +20,4 @@ $heuresCreuses[1]['fin']        = '14:00:00';
 
 /*--------------------fin des Parametres Cout Electrique---------------*/
 
-/*--------------------Parametres Zibase--------------------------------*/
-
-$idzibase = "ZiBASEXXXXXX";
-$tokenzibase = "ZZZZZZZZZZ";
-$ipzibase = "192.168.X.Y";
-$ipserver = "192.168.X.Y";
-
-/*--------------------fin des Parametres Zibase------------------------*/
-
-/*--------------------Parametres Meteo---------------------------------*/
-
-$meteo_sonde_temperature = "120001";
-$meteo_sonde_vent = "120002";
-//Rechercher sa ville sur weather.com et relever la valeur de l'adresse
-$meteo_ville = "FRXX1879:1:FR";
-
-/*--------------------fin des Parametres Meteo-------------------------*/
-
-/*--------------------Parametres Freebox-------------------------------*/
-
-$config = array (
-       'url'   => "http://mafreebox.freebox.fr",               // URL de connexion à la page de configuration
-       'port'  => 80,
-       'app_id' => "APIFreeboxZiHome",
-       'app_name' => "Classe PHP Freebox ZiHome",
-       'app_version' => "1.0"
-       );
-
-/*--------------------fin des Parametres Freebox-----------------------*/
-
-/*--------------------Parametres Pollution-----------------------------*/
-
-// Rechercher sa ville (ou une grande ville proche) dans le fichier http://www.lcsqa.org/surveillance/indices/prevus/jour/xml
-$pollution_ville = "TOULOUSE";
-
-/*--------------------fin des Parametres Pollution---------------------*/
-
 ?>

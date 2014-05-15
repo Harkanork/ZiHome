@@ -697,7 +697,15 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (20, 'Icone pollution hauteur', '60', 'number'),
 (21, 'Icone pollution droite', '100', 'number'),
 (22, 'Icone pollution bas', '10', 'number'),
-(23, 'pellet', '140', 'number');
+(23, 'pellet', '140', 'number')
+(24, 'meteo ville', '', 'text'),
+(25, 'meteo sonde temperature', '120001', 'text'),
+(26, 'meteo sonde vent', '120002', 'text'),
+(27, 'pollution ville', '', 'text'),
+(28, 'idzibase', '', 'text'),
+(29, 'tokenzibase', '', 'text'),
+(30, 'ipzibase', '192.168.1.0', 'text'),
+(31, 'ipserver', '192.168.1.0', 'text');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

@@ -5,6 +5,16 @@
   *
 */
 
+$config = array (
+       'url'   => "http://mafreebox.freebox.fr",               // URL de connexion à la page de configuration
+       'port'  => 80,
+       'app_id' => "APIFreeboxZiHome",
+       'app_name' => "Classe PHP Freebox ZiHome",
+       'app_version' => "1.0"
+       );
+
+$XML_FREEBOX='./config/freebox.xml'; //Fichier XMl avec les valeurs de la freebox
+
 class apifreebox
 {
 	private $IP;

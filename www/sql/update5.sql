@@ -272,5 +272,16 @@ CREATE TABLE IF NOT EXISTS `pellet` (
 
 
 INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
-
 (23, 'pellet', '140', 'number');
+
+
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(24, 'meteo ville', '', 'text'),
+(25, 'meteo sonde temperature', '120001', 'text'),
+(26, 'meteo sonde vent', '120002', 'text'),
+(27, 'pollution ville', '', 'text'),
+(28, 'idzibase', '', 'text'),
+(29, 'tokenzibase', '', 'text'),
+(30, 'ipzibase', '192.168.1.0', 'text'),
+(31, 'ipserver', '192.168.1.0', 'text');
+

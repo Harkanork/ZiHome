@@ -4,6 +4,7 @@ include("./config/configuration.php");
 } else {
 session_start();
 include("./pages/connexion.php");
+include("./config/variables.php");
 include("./pages/head.php");
 include("./pages/menu.php");
 if(isset($_GET['page'])){
