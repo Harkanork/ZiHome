@@ -294,3 +294,6 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (37, 'heure creuse 1 debut', '00:00', 'time'),
 (38, 'heure creuse 1 fin', '00:00', 'time');
 
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(39, 'couleur graph 1', '#89A54E', 'color'),
+(40, 'couleur graph 2', '#4572A7', 'color');
