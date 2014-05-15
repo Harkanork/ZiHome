@@ -33,7 +33,7 @@ Highcharts.setOptions({
                     text: 'Consommation Wh'
                 },
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		},
                 min: 0
             },
@@ -53,7 +53,7 @@ Highcharts.setOptions({
 
             series: [{
                 name: 'Conso-Elec',
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 data: [<?php echo $liste1; ?>]
             }]
         });

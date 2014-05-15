@@ -61,7 +61,7 @@ Highcharts.setOptions({
                     text: 'Nb Activations'
                 },
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		}
             }, {
                 min: 0,
@@ -69,7 +69,7 @@ Highcharts.setOptions({
                     text: 'Duree Activation (s)'
                 },
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		}
             }],
             tooltip: {
@@ -89,14 +89,14 @@ Highcharts.setOptions({
             series: [{
                 name: 'Nb Activation',
                 data: [<?php echo $liste1; ?>],
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 type: 'column'
 
             }, {
                 name: 'Duree Activation',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 type: 'column'
             }]
         });

@@ -1,15 +1,19 @@
 <?
 $liste1 = "";
-$query0 = "SELECT date, max(temp) AS max, min(temp) as min FROM `temperature_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
+$query0 = "SELECT date, max(temp) AS max, min(temp) as min, SUBSTRING(`date`,1,7) AS mdate FROM `temperature_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($value0 = mysql_fetch_assoc($req0))
 {
-$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . $value0['min'] ."," . $value0['max'] ."],";
+$liste1 .= "[".strtotime($value0['mdate']) * 1000 . "," . $value0['min'] ."," . $value0['max'] ."],";
 }
 ?>
 <script type="text/javascript">
 $(function () {
-
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
         $('#year-<? echo $periph['id']; ?>').highcharts({
             chart: {
                 type: 'columnrange',
@@ -21,12 +25,18 @@ $(function () {
             },
 
             xAxis: [{
-                type: 'datetime'
+                type: 'datetime',
+		dateTimeLabelFormats: {
+			//day: '%b \'%y',
+			//week: '%b \'%y',
+			month: '%b \'%y',
+			year: '%b %y'
+		}
             }],
 
             yAxis: {
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		},
                 title: {
                     text: 'Température ( °C )'
@@ -45,7 +55,7 @@ $(function () {
                                         return this.y + '°C';
                                 }
                         }
-                }
+		}
             },
 
             legend: {
@@ -54,7 +64,7 @@ $(function () {
 
             series: [{
                 name: 'Températures',
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 data: [<?php echo $liste1; ?>]
             }]
 

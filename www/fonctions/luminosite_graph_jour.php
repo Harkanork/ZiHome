@@ -45,7 +45,7 @@ Highcharts.setOptions({
                     style: {
                     },
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		}
                 },
             }],
@@ -55,7 +55,7 @@ Highcharts.setOptions({
             series: [{
                 name: 'Luminosité',
                 type: 'spline',
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 data: [<?php echo $liste1; ?>],
                 marker: {
                     enabled: false

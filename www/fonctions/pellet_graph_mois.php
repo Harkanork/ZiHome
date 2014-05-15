@@ -44,7 +44,7 @@ Highcharts.setOptions({
                     text: 'Qte Pellet'
                 },
 		style: {
-		    color: '#89A54E'
+		    color: '<? echo $couleurgraph1; ?>'
 		}
             }],
             tooltip: {
@@ -64,7 +64,7 @@ Highcharts.setOptions({
             series: [{
                 name: 'Qte Pellet',
                 data: [<?php echo $liste1; ?>],
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 type: 'column'
 
             }]

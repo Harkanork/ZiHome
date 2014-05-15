@@ -44,7 +44,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		},
                 title: {
                     text: 'Consommation (Wh)'
@@ -52,7 +52,7 @@ Highcharts.setOptions({
             }, {
                 min: 0,
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		},
                 title: {
                     text: 'Cout (Cent)'
@@ -75,14 +75,14 @@ Highcharts.setOptions({
             series: [{
                 name: 'Consommation (Wh)',
                 data: [<?php echo $liste1; ?>],
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 type: 'column'
 
             }, {
                 name: 'Cout (Cent)',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 type: 'column'
             }]
         });

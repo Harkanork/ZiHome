@@ -38,7 +38,7 @@ Highcharts.setOptions({
             yAxis: [{
                 min: 0,
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		},
                 title: {
                     text: 'Précipitation'
@@ -61,7 +61,7 @@ Highcharts.setOptions({
             series: [{
                 name: 'Précipitation',
                 data: [<?php echo $liste1; ?>],
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 type: 'column'
             }]
         });

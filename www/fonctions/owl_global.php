@@ -31,7 +31,7 @@ $(function () {
             yAxis: [{
                 min: 0,
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		},
                 title: {
                     text: 'Consommation (kWh)'
@@ -39,7 +39,7 @@ $(function () {
             }, {
                 min: 0,
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		},
                 title: {
                     text: 'Cout (Euro)'
@@ -62,13 +62,13 @@ $(function () {
             series: [{
                 name: 'Consommation (kWh)',
                 data: [<?php echo $liste1; ?>],
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
 		type: 'column'
             }, {
                 name: 'Cout (Euro)',
 		yAxis: 1,
                 data: [<?php echo $liste2; ?>],
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
 		type: 'column'
             }]
         });

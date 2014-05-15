@@ -29,7 +29,7 @@ $(function () {
                     text: 'Luminosité'
                 },
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		}
             },
 
@@ -54,7 +54,7 @@ $(function () {
 
             series: [{
                 name: 'Luminosités',
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 data: [<?php echo $liste1; ?>]
             }]
 

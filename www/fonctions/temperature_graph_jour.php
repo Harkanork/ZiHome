@@ -47,7 +47,7 @@ Highcharts.setOptions({
                 title: {
                     text: 'Température',
                     style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
                     }
                 },
 <? if(!($liste2 == "")) { ?>
@@ -56,7 +56,7 @@ Highcharts.setOptions({
                 title: {
                     text: 'Hygrométrie',
                     style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
                     }
                 },
                 labels: {
@@ -75,7 +75,7 @@ opposite: true
             series: [{
 <? if(!($liste2 == "")) { ?>
                 name: 'Hygrométrie',
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 type: 'spline',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
@@ -88,7 +88,7 @@ opposite: true
             }, {
 <? } ?>
                 name: 'Température',
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 type: 'spline',
                 data: [<?php echo $liste1; ?>],
                 marker: {

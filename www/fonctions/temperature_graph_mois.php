@@ -27,7 +27,7 @@ $(function () {
 
             yAxis: {
 		style: {
-			color: '#89A54E'
+			color: '<? echo $couleurgraph1; ?>'
 		},
                 title: {
                     text: 'Température ( °C )'
@@ -55,7 +55,7 @@ $(function () {
 
             series: [{
                 name: 'Températures',
-		color: '#89A54E',
+		color: '<? echo $couleurgraph1; ?>',
                 data: [<?php echo $liste1; ?>]
             }]
 

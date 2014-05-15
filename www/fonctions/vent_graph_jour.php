@@ -39,7 +39,7 @@ Highcharts.setOptions({
                 title: {
                     text: 'Vitesse',
 		style: {
-			color: '#4572A7'
+			color: '<? echo $couleurgraph2; ?>'
 		},
                     style: {
                     }
@@ -50,7 +50,7 @@ Highcharts.setOptions({
             },
             series: [{
                 name: 'Vent',
-		color: '#4572A7',
+		color: '<? echo $couleurgraph2; ?>',
                 type: 'spline',
                 data: [<?php echo $liste1; ?>],
                 marker: {
