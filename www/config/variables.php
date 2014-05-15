@@ -24,7 +24,7 @@ if($data['libelle'] == 'cout heure pleine') { $coutHP = $data['value']; }
 if($data['libelle'] == 'cout heure creuse') { $coutHC = $data['value']; }
 if($data['libelle'] == 'heure creuse 0 debut') { $heuresCreuses[0]['debut'] = $data['value'].':00'; }
 if($data['libelle'] == 'heure creuse 0 fin') { $heuresCreuses[0]['fin'] = $data['value'].':00'; }
-if($data['libelle'] == 'heure creuse 1 debut') { $$heuresCreuses[1]['debut'] = $data['value'].':00'; }
+if($data['libelle'] == 'heure creuse 1 debut') { $heuresCreuses[1]['debut'] = $data['value'].':00'; }
 if($data['libelle'] == 'heure creuse 1 fin') { $heuresCreuses[1]['fin'] = $data['value'].':00'; }
 }
 ?>
