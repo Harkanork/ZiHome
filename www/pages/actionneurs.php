@@ -38,7 +38,13 @@ while ($periph = mysql_fetch_assoc($req))
 <?
 $width = "100%";
 $height = "400px";
-
+if(isset($_SESSION['auth'])) 
+{
+  if($periph['periph'] == 'actioneur')
+  {
+    include("./fonctions/actioneur.php");
+  }
+}
 include("./fonctions/actionneur_tableau_periph.php");
 include("./fonctions/actionneur_graph_mois.php");
 include("./fonctions/actionneur_graph_annee.php");
