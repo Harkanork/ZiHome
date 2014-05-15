@@ -19,13 +19,13 @@ foreach ($xml->Calls_Contacts as $Calls_Contacts){
 			
 			switch($tmp->type){
 				case 'outgoing':
-					$img='<img src="/img/out.png" />Out';
+					$img='<img src="./img/out.png" />Out';
 					break;
 				case 'accepted':
-					$img='<img src="/img/in.png" />In';
+					$img='<img src="./img/in.png" />In';
 					break;
 				case 'missed':
-					$img='<img src="/img/miss.png" />Miss';
+					$img='<img src="./img/miss.png" />Miss';
 					break;
 				default:
 					$img='-';

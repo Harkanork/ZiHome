@@ -13,13 +13,13 @@ foreach ($xml->Configuration as $Configuration){
     foreach($Configuration->GetWifiConfig as $tmp){
 		switch($tmp->enabled){
 			case '1':
-				$img='<img src="/img/wifi_ok.png" />Activé';
+				$img='<img src="./img/wifi_ok.png" />Activé';
 				break;
 			case '0':
-				$img='<img src="/img/wifi_nok.png" />inactif';
+				$img='<img src="./img/wifi_nok.png" />inactif';
 				break;
 			default:
-				$img='<img src="/img/wifi_nok.png" />inactif';
+				$img='<img src="./img/wifi_nok.png" />inactif';
 				break;
 			}
 

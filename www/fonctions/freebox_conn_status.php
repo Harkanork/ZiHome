@@ -19,10 +19,10 @@ foreach ($xml->Configuration as $Configuration){
 		 // foreach($id as $tmp){
 		 switch($tmp->state){
 			case 'up':
-				$img='<img src="/img/ok.png" />Up';
+				$img='<img src="./img/ok.png" />Up';
 				break;
 			case 'down':
-				$img='<img src="/img/nok.png" />Down';
+				$img='<img src="./img/nok.png" />Down';
 				break;
 			default:
 				$img='-';
