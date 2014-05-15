@@ -285,3 +285,12 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (30, 'ipzibase', '192.168.1.0', 'text'),
 (31, 'ipserver', '192.168.1.0', 'text');
 
+INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
+(32, 'cout fixe', '1.7368', 'number" step="0.0001'),
+(33, 'cout heure pleine', '0.1467', 'number" step="0.0001'),
+(34, 'cout heure creuse', '0.1002', 'number" step="0.0001'),
+(35, 'heure creuse 0 debut', '00:00', 'time'),
+(36, 'heure creuse 0 fin', '00:00', 'time'),
+(37, 'heure creuse 1 debut', '00:00', 'time'),
+(38, 'heure creuse 1 fin', '00:00', 'time');
+

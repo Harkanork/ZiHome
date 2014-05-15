@@ -59,7 +59,21 @@ if(!($erreur == true)) {
 		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['ipserver']."' WHERE  `libelle` = 'ipserver'";
 		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-		$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n\n/*--------------------Paramettres Cout Electrique-----------------------*/\n\n\$coutfixe                   = '".$_POST['coutfixe']."';\n\$coutHC                     = '".$_POST['HC']."';\n\$coutHP                    = '".$_POST['HP']."';\n\$heuresCreuses[0]['debut']      = '".$_POST['heurescreusesdebut1'].":00';\n\$heuresCreuses[0]['fin']        = '".$_POST['heurescreusesfin1'].":00';\n\$heuresCreuses[1]['debut']      = '".$_POST['heurescreusesdebut2'].":00';\n\$heuresCreuses[1]['fin']        = '".$_POST['heurescreusesfin2'].":00';\n\n/*--------------------fin des Paramettres Cout Electrique---------------*/\n?>";
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['coutfixe']."' WHERE  `libelle` = 'cout fixe'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['HP']."' WHERE  `libelle` = 'cout heure pleine'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['HC']."' WHERE  `libelle` = 'cout heure creuse'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesdebut1']."' WHERE  `libelle` = 'heure creuse 0 debut'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesfin1']."' WHERE  `libelle` = 'heure creuse 0 fin'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesdebut2']."' WHERE  `libelle` = 'heure creuse 1 debut'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesfin2']."' WHERE  `libelle` = 'heure creuse 1 fin'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n?>";
 		$fichier = fopen("./config/conf_zibase.php","w"); if (fwrite($fichier,$file)) { echo "
 		<br>Fichier de configuration correctement cree"; } else { echo "Impossible de creer le fichier. merci d'ajouter les droits en ecriture sur le dossier config"; } fclose($fichier); } else { echo $message; ?> 
 		<P align=center>
