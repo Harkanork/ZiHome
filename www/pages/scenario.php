@@ -12,6 +12,7 @@ setTimeout("redirect()",0); // delai en millisecondes
 <?php
 include("../config/conf_zibase.php");
 include("../lib/zibase.php");
+include("../config/variables.php");
 $zibase = new ZiBase($ipzibase);
 $zibase->runScenario($_GET['action']);
 }
