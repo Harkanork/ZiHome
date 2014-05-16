@@ -92,11 +92,12 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 </P>
 <P align=center>
 <TABLE>
-<FORM method="post" action="./index.php?page=administration&detail=gerer_pieces">
+<FORM method="post" enctype="multipart/form-data" action="./index.php?page=administration&detail=gerer_pieces">
 <TR><TD><INPUT type=file name=image></INPUT></TD><TD><INPUT type=submit name=jour value=Jour></INPUT></TD>
 <TD><INPUT type=submit name=nuit value=Nuit></INPUT></TD></TR>
 </FORM>
 </TABLE>
+</p>
 <? 
 } 
 ?>
