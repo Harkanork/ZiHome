@@ -30,7 +30,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   while ($data = mysql_fetch_assoc($req))
   {
     echo "<TR class=\"contenu\">";
-      echo '<FORM method="post" action="./index.php?page=administration&detail=gerer_stickers">';
+      echo '<FORM method="post" enctype="multipart/form-data" action="./index.php?page=administration&detail=gerer_stickers">';
         echo '<TD><INPUT TYPE="text" NAME="id" VALUE="'.$data['id'].'" size="3"/></TD>';
         echo '<TD><INPUT TYPE="text" NAME="libelle" VALUE="'.$data['libelle'].'"/></TD>';
         echo '<TD><INPUT TYPE="text" NAME="fichier" VALUE="'.$data['fichier'].'"/></TD>';
@@ -52,7 +52,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 
 <P align=center>
 <TABLE>
-  <FORM method="post" action="./index.php?page=administration&detail=gerer_stickers">
+  <FORM method="post" enctype="multipart/form-data" action="./index.php?page=administration&detail=gerer_stickers">
     <TR><TD>Nom :</TD><TD><INPUT type=text name='libelle'></INPUT></TD></TR>
     <TR><TD>Nom du Fichier :</TD><TD><INPUT type=text name='fichier'></INPUT></TD></TR>
     <TR><TD>Fichier :</TD><TD><INPUT type=file name=file></INPUT></TD></TR>

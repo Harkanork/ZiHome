@@ -15,6 +15,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   else if(isset($_POST['Ajouter'])) {
     $query = "INSERT INTO plan (`libelle`, `width`, `height`, `left`, `top`, `line-height`, `text-align`, `border`, `supplementaire`, `show-libelle`) VALUES ('".$_POST['libelle']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['line-height']."', '".$_POST['text-align']."', '".$_POST['border']."', '".$_POST['supplementaire']."', '".$_POST['show-libelle']."')";
     mysql_query($query, $link);
+  } else if(isset($_POST['jour'])) {
+    if(is_uploaded_file($_FILES['image']['tmp_name'])){
+      move_uploaded_file($_FILES['image']['tmp_name'], "./img/plan/jour.jpg");
+    }
+  } else if(isset($_POST['nuit'])) {
+    if(is_uploaded_file($_FILES['image']['tmp_name'])){
+      move_uploaded_file($_FILES['image']['tmp_name'], "./img/plan/nuit.jpg");
+    }
   }
 ?>
 <div id="action-tableau">
@@ -82,6 +90,13 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 </FORM>
 </TABLE>
 </P>
+<P align=center>
+<TABLE>
+<FORM method="post" action="./index.php?page=administration&detail=gerer_pieces">
+<TR><TD><INPUT type=file name=image></INPUT></TD><TD><INPUT type=submit name=jour value=Jour></INPUT></TD>
+<TD><INPUT type=submit name=nuit value=Nuit></INPUT></TD></TR>
+</FORM>
+</TABLE>
 <? 
 } 
 ?>
