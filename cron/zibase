@@ -2,7 +2,7 @@
 # Mise a jour des tables Mysql
 
 */5	*	*	*	*	root	/usr/bin/php /usr/bin/message_zibase_auth.php > /dev/null
-*	*	*	*	*	root	/usr/bin/php /usr/bin/peripheriques_value.php > /dev/null
+*	*	*	*	*	root	/usr/bin/peripheriques_value.sh > /dev/null
 4	*	*	*	*	root	/usr/bin/php /usr/bin/peripheriques.php > /dev/null
 0	*	*	*	*	root	/usr/bin/php /usr/bin/scenario.php > /dev/null
 0	*	*	*	*	root	/usr/bin/php /usr/bin/pollution.php > /dev/null
