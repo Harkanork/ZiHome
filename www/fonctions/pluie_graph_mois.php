@@ -1,5 +1,5 @@
 <?
-$query0 = "SELECT max(pluie) as max, min(pluie) as min, date FROM `pluie_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY DATE_FORMAT(`date`, '%Y%m')";
+$query0 = "SELECT max(pluie) as max, min(pluie) as min, date FROM `pluie_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 1 MONTH) GROUP BY DATE_FORMAT(`date`, '%Y%m%d')";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $liste1 = "";
 while($value0 = mysql_fetch_assoc($req0))

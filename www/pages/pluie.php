@@ -12,6 +12,7 @@ $height = "400px";
 include("./fonctions/pluie_graph_global.php");
 include("./fonctions/pluie_graph_mois.php");
 include("./fonctions/pluie_graph_annee.php");
+include("./fonctions/pluie_graph_journee.php");
 }
 ?>
 </div>
