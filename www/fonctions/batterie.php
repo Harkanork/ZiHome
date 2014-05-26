@@ -1,5 +1,5 @@
 <?php
-include("./lib/date_francais.php");
+include_once("./lib/date_francais.php");
 $i=0;
 echo "<CENTER><TABLE ><TR class='title' style='text-align: center'><TD><b>Sonde</b></TD><TD style='width:100px'><b>Dernier<br>changement</b></TD><TD style='width:140px'><b>Batterie<br>faible</b></TD></TR>";
 
