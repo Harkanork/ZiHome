@@ -33,8 +33,6 @@ $(function () {
                 labels: {
                     formatter: function() {
                         return this.value +'°C';
-                    },
-                    style: {
                     }
                 },
 				title: {
@@ -55,25 +53,13 @@ $(function () {
                     formatter: function() {
                         return this.value +' %';
                     },
-                    style: {
-                    }
                 },
 <? } ?>
 
             }],
 
-            tooltip: {
-                valueSuffix: '°C'
-            },
-
             plotOptions: {
                 columnrange: {
-                        dataLabels: {
-                                enabled: true,
-                                formatter: function () {
-                                        return this.y + '°C';
-                                }
-                        }
                 }
             },
 

@@ -69,18 +69,9 @@ Highcharts.setOptions({
                 },
 				<? } ?>
             }],
-            tooltip: {
-                valueSuffix: '°C'
-            },
 
             plotOptions: {
                 columnrange: {
-                        dataLabels: {
-                                enabled: true,
-                                formatter: function () {
-                                        return this.y + '°C';
-                                }
-                        }
 		}
             },
 
