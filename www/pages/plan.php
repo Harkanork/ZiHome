@@ -228,7 +228,7 @@ function showTechnicalStatus($sqlData)
   }
 }
 
-function showIconSimple($sqlPiece, $sqlData, $status)
+function showIconSimple($sqlPiece, $sqlData, $status, $url)
 {
   global $icone;
   global $widthIcones;
@@ -241,8 +241,10 @@ function showIconSimple($sqlPiece, $sqlData, $status)
   global $labelFontSize;
   
   echo "<div style=\"position:absolute;top:".($sqlPiece['top'] + $sqlData['top'])."px;left:".($sqlPiece['left'] + $sqlData['left'])."px;border-style:none;z-index:300;\">";
+  echo "<a href=\"".$url."\">";
   echo "<img src=\"./img/icones/".$icone.$status."_".$sqlData['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
   showTechnicalStatus($sqlData);
+  echo "</a>";
   echo "</div>";
   
   if ($sqlData['texte'])
@@ -256,7 +258,7 @@ function showIconSimple($sqlPiece, $sqlData, $status)
   }
 }
 
-function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
+function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $url)
 {
   global $icone;
   global $widthIcones;
@@ -269,6 +271,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
   global $labelFontSize;
   
   echo "<div style=\"position:absolute;top:".($sqlPiece['top'] + $sqlData['top'])."px;left:".($sqlPiece['left'] + $sqlData['left'])."px;border-style:none;z-index:300;\">";
+  echo "<a href=\"".$url."\">";
   echo "<img src=\"./img/icones/".$icone."c_".$sqlData['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
   echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\">";
   echo "<span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur1.$unite1."</span>";
@@ -278,6 +281,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
     echo "<span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">". $valeur2 . $unite2."</span>";
   }
   showTechnicalStatus($sqlData);
+  echo "</a>";
   echo "</div>";
   
   if ($sqlData['texte'])
@@ -362,7 +366,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                 } else {
                     $ic = "g";
                 }
-                showIconSimple($data, $data6, $ic);
+                showIconSimple($data, $data6, $ic, "");
             }
 // ----- Actionneur
             $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -379,7 +383,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                 } else {
                     $ic = "g";
                 }
-                showIconSimple($data, $data8, $ic);
+                showIconSimple($data, $data8, $ic, "");
             }
 // ----- Temperature
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -399,7 +403,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                   $temperature = "";
                   $hygro = "";
                 }
-                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%");
+                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", "");
             }
 // ----- Conso electrique
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -416,7 +420,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "");
             }
 // ----- Vent
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -433,7 +437,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "");
             }
 // ----- Pluie
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -450,7 +454,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "");
             }
 // ----- Luminosite
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -467,7 +471,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "");
             }
           } else { ?>
             <a href="javascript:showPopup('custom<? echo $data['id']; ?>');">
@@ -497,7 +501,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                 } else {
                     $ic = "g";
                 }
-                showIconSimple($data, $data6, $ic);
+                showIconSimple($data, $data6, $ic, "");
             }
 // ----- Actionneur            
             $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -514,7 +518,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                 } else {
                     $ic = "g";
                 }
-                showIconSimple($data, $data8, $ic);
+                showIconSimple($data, $data8, $ic, "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-2]').parent().index());");
             }
 // ----- Temperature            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -534,7 +538,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
                   $temperature = ""; 
                   $hygro = ""; 
                 }
-                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%");
+                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-1]').parent().index());");
             }
 // ----- Conso electrique            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -551,7 +555,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-3]').parent().index());");
             }
 // ----- Vent            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -568,7 +572,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-6]').parent().index());");
             }
 // ----- Pluie            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -585,7 +589,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-7]').parent().index());");
             }
 // ----- Luminosite            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -602,7 +606,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "");
+              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-8]').parent().index());");
             }
             ?>
         </a>
