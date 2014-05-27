@@ -796,7 +796,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         {
           echo 'width:' . $meteoIconWidth . 'px;';
         }
-        echo 'z-index:10000"/>';
+        echo 'z-index:300"/>';
       }
     ?>
     <?
@@ -821,7 +821,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2)
         {
           echo 'width:' . $pollutionIconWidth . 'px;';
         }
-        echo 'z-index:10000"/>';
+        echo 'z-index:300"/>';
       }
     ?>      
     </div>
