@@ -10,7 +10,7 @@ $(document).ready(function() {
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'conso' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {

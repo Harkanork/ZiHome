@@ -2,7 +2,7 @@
 <div id="global">
 <?
 include("./fonctions/pluie_tableau_global.php");
-$query = "SELECT * FROM peripheriques WHERE periph = 'pluie'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'pluie' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
 {

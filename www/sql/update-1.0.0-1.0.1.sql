@@ -1,7 +1,7 @@
-DELETE FROM `zibase`.`modules_accueil` WHERE `modules_accueil`.`id` = 30;
-DELETE FROM `zibase`.`modules_accueil` WHERE `modules_accueil`.`id` = 24;
-DELETE FROM `zibase`.`modules_accueil` WHERE `modules_accueil`.`id` = 23;
-DELETE FROM `zibase`.`modules_accueil` WHERE `modules_accueil`.`id` = 29;
+DELETE FROM `modules_accueil` WHERE `modules_accueil`.`id` = 30;
+DELETE FROM `modules_accueil` WHERE `modules_accueil`.`id` = 24;
+DELETE FROM `modules_accueil` WHERE `modules_accueil`.`id` = 23;
+DELETE FROM `modules_accueil` WHERE `modules_accueil`.`id` = 29;
 
 INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (30, 'actionneur_graph_annee', 'Graphique annuel actioneur', 'actioneur'),
@@ -24,4 +24,9 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (47, 'pluie_graph_mois', 'Graphique mensuel de précipitation', ''),
 (48, 'pluie_tableau_global', 'Tableau global de précipitation', ''),
 (49, 'video', 'Camera', 'video');
+
+ALTER TABLE  `modules` ADD  `ordre` INT NOT NULL;
+
+ALTER TABLE  `peripheriques` ADD  `ordre` INT NOT NULL;
+
 

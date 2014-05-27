@@ -19,7 +19,7 @@ $(document).ready(function() {
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM peripheriques WHERE periph = 'actioneur' OR periph = 'capteur'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'actioneur' OR periph = 'capteur' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {

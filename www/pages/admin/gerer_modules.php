@@ -15,11 +15,14 @@ Nom
 Action
 </td>
 <td>
+Ordre
+</td>
+<td>
 </td>
 </tr>
 <?
 if(isset($_POST['id'])){
-$query = "UPDATE modules SET actif = '".$_POST['actif']."' WHERE id = '".$_POST['id']."'";
+$query = "UPDATE modules SET actif = '".$_POST['actif']."', ordre = '".$_POST['ordre']."' WHERE id = '".$_POST['id']."'";
 mysql_query($query, $link);
 echo "<meta http-equiv=\"refresh\" content=\"0; url=./index.php?page=administration&detail=gerer_modules\">";
 }
@@ -38,6 +41,9 @@ while ($data = mysql_fetch_assoc($req))
 <option value="1"<? if($data['actif'] == "1"){ echo " selected"; } ?>>Actif</option>
 <option value="0"<? if($data['actif'] == "0"){ echo " selected"; } ?>>Inactif</option>
 </select>
+</td>
+<td>
+<input type="number" name="ordre" value="<? echo $data['ordre']; ?>"></input>
 </td>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['id']; ?>">
 <td>

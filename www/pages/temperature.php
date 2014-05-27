@@ -11,7 +11,7 @@ include("./fonctions/temperature_tableau_global.php");
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'temperature' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {

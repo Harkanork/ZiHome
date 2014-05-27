@@ -1,7 +1,7 @@
 <title>Vent</title>
 <?php
 include("./fonctions/vent_tableau_global.php");
-$query = "SELECT * FROM peripheriques WHERE periph = 'vent'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'vent' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
 {
