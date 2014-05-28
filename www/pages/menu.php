@@ -91,7 +91,7 @@ while ($data = mysql_fetch_assoc($req))
   <?
   }
 }
-$query = "SELECT * FROM `insertion`";
+$query = "SELECT * FROM `insertion` ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($data = mysql_fetch_assoc($req))
 {

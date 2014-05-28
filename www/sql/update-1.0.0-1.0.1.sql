@@ -29,4 +29,6 @@ ALTER TABLE  `modules` ADD  `ordre` INT NOT NULL;
 
 ALTER TABLE  `peripheriques` ADD  `ordre` INT NOT NULL;
 
+ALTER TABLE  `insertion` ADD  `ordre` INT NOT NULL;
+
 
