@@ -14,8 +14,13 @@ $query = "SELECT * FROM peripheriques WHERE periph = 'conso' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
+if($data['libelle'] == ""){
+$nom = $data['nom'];
+} else {
+$nom = $data['libelle'];
+}
 ?>
-<li><a href="#onglet-<? echo $data['id']; ?>"><? echo $data['nom']; ?></a></li>
+<li><a href="#onglet-<? echo $data['id']; ?>"><? echo $nom; ?></a></li>
 <?
 }
 ?>

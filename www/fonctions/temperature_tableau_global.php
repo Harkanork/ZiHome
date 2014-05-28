@@ -24,7 +24,7 @@ while ($periph = mysql_fetch_assoc($req))
     } else {
       $nom = $periph['libelle'];
     }
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['temp']."</TD><TD ALIGN=CENTER>".$value0['hygro']."</TD><TD>".date_francais($value0['date'])."</TD></TR>";
+    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['temp']." &deg;C</TD><TD ALIGN=CENTER>".$value0['hygro']." %</TD><TD>".date_francais($value0['date'])."</TD></TR>";
   $i= $i + 1;
    echo "<PRE>";
   }
