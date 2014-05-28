@@ -518,7 +518,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 } else {
                     $ic = "g";
                 }
-                showIconSimple($data, $data8, $ic, "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-2]').parent().index());");
+                $url = "javascript:showPopup('custom".$data['id']."');";
+                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-8]').parent().index());"; }
+                showIconSimple($data, $data8, $ic, $url);
             }
 // ----- Temperature            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -538,7 +540,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                   $temperature = ""; 
                   $hygro = ""; 
                 }
-                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-1]').parent().index());");
+                $url = "javascript:showPopup('custom".$data['id']."');";
+                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-1]').parent().index());"; }
+                showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", $url);
             }
 // ----- Conso electrique            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -555,7 +559,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-3]').parent().index());");
+              $url = "javascript:showPopup('custom".$data['id']."');";
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-3]').parent().index());"; }
+              showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Vent            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -572,7 +578,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-6]').parent().index());");
+              $url = "javascript:showPopup('custom".$data['id']."');";
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-6]').parent().index());"; }
+              showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Pluie            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'pluie' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -589,7 +597,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-7]').parent().index());");
+              $url = "javascript:showPopup('custom".$data['id']."');";
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-7]').parent().index());"; }
+              showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Luminosite            
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'luminosite' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -606,7 +616,9 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              showIcon($data, $data9, $valeur, "", "", "", "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-8]').parent().index());");
+              $url = "javascript:showPopup('custom".$data['id']."');";
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-8]').parent().index());"; }
+              showIcon($data, $data9, $valeur, "", "", "", $url);
             }
             ?>
         </a>

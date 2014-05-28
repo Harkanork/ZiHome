@@ -71,12 +71,12 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <TABLE>
 <FORM method="post" action="./index.php?page=administration&detail=gerer_pieces">
   <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle></INPUT></TD></TR>
-  <TR><TD>Largeur :</TD><TD><INPUT type=number name=width></INPUT></TD></TR>
-  <TR><TD>Hauteur :</TD><TD><INPUT type=number name=height></INPUT></TD></TR>
-  <TR><TD>Position Droite :</TD><TD><INPUT type=number name=left></INPUT></TD></TR>
-  <TR><TD>Position Bas :</TD><TD><INPUT type=number name=top></INPUT></TD></TR>
+  <TR><TD>Largeur (px) :</TD><TD><INPUT type=number name=width></INPUT></TD></TR>
+  <TR><TD>Hauteur (px) :</TD><TD><INPUT type=number name=height></INPUT></TD></TR>
+  <TR><TD>Position Droite (px) :</TD><TD><INPUT type=number name=left></INPUT></TD></TR>
+  <TR><TD>Position Bas (px) :</TD><TD><INPUT type=number name=top></INPUT></TD></TR>
   <TR><TD>Afficher le nom :</TD><TD><INPUT type="checkbox" name="show-libelle" value="1" checked></INPUT></TD></TR>
-  <TR><TD>Taille zone Texte :</TD><TD><INPUT type=number name=line-height></INPUT></TD></TR>
+  <TR><TD>Taille zone Texte (px) :</TD><TD><INPUT type=number name=line-height></INPUT></TD></TR>
   <TR><TD>Alignement :</TD><TD>
   <select name=text-align>
   <option value=center>Centrer</option>
@@ -84,7 +84,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   <option value=left>Gauche</option>
   </select>
   </TD></TR>
-  <TR><TD>Taille bordure :</TD><TD><INPUT type=number name=border></INPUT></TD></TR>
+  <TR><TD>Taille bordure (px) :</TD><TD><INPUT type=number name=border></INPUT></TD></TR>
   <TR><TD>Option suppl&eacute;mentaire :</TD><TD><INPUT type=text name=supplementaire></INPUT></TD></TR>
   <TR><TD colspan=2 align=center><INPUT type=submit name="Ajouter" value="Ajouter"></TD></TR>
 </FORM>
