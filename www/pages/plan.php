@@ -519,7 +519,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                     $ic = "g";
                 }
                 $url = "javascript:showPopup('custom".$data['id']."');";
-                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-8]').parent().index());"; }
+                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-2]').parent().index());"; }
                 showIconSimple($data, $data8, $ic, $url);
             }
 // ----- Temperature            
@@ -541,7 +541,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                   $hygro = ""; 
                 }
                 $url = "javascript:showPopup('custom".$data['id']."');";
-                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-1]').parent().index());"; }
+                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-1]').parent().index());"; }
                 showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", $url);
             }
 // ----- Conso electrique            
@@ -560,7 +560,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $valeur = "";
               }
               $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-3]').parent().index());"; }
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-3]').parent().index());"; }
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Vent            
@@ -579,7 +579,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $valeur = "";
               }
               $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-6]').parent().index());"; }
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-6]').parent().index());"; }
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Pluie            
@@ -598,7 +598,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $valeur = "";
               }
               $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-7]').parent().index());"; }
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-7]').parent().index());"; }
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Luminosite            
@@ -617,7 +617,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $valeur = "";
               }
               $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a [href=#tabs-".$data['id']."-8]').parent().index());"; }
+              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-8]').parent().index());"; }
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
             ?>
