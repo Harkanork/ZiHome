@@ -6,14 +6,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     mysql_query($query, $link);
   }
   else if(isset($_POST['Valider'])){
-    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['idsource']."'";
+    $query = "UPDATE stickers SET `id` = '".$_POST['id']."', `page` = '".$_POST['page']."', `libelle` = '".$_POST['libelle']."', `fichier` = '".$_POST['fichier']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `condition` = '".$_POST['condition']."' WHERE `id` = '".$_POST['idsource']."'";
     mysql_query($query, $link);
     if(is_uploaded_file($_FILES['file']['tmp_name'])){
       move_uploaded_file($_FILES['file']['tmp_name'], "./img/stickers/".$_FILES['file']['name']);
     }
   }
   else if(isset($_POST['Ajouter'])) {
-    $query = "INSERT INTO stickers (`libelle`, `fichier`, `left`, `top`, `width`, `height`, `condition`) VALUES ('".$_POST['libelle']."', '".$_POST['fichier']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['condition']."')";
+    $query = "INSERT INTO stickers (`libelle`, `page`, `fichier`, `left`, `top`, `width`, `height`, `condition`) VALUES ('".$_POST['libelle']."', '".$_POST['page']."', '".$_POST['fichier']."', '".$_POST['left']."', '".$_POST['top']."', '".$_POST['width']."', '".$_POST['height']."', '".$_POST['condition']."')";
     mysql_query($query, $link);
     if(is_uploaded_file($_FILES['file']['tmp_name'])){
       move_uploaded_file($_FILES['file']['tmp_name'], "./img/stickers/".$_FILES['file']['name']);
@@ -23,7 +23,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <div id="action-tableau">
 <CENTER>
 <br>
-<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD style="width:10px">Largeur</TD><TD>Hauteur</TD><TD>Condition</TD><TD>Fichier</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Nom</TD><TD>Page</TD><TD>Fichier</TD><TD>Droite</TD><TD>Bas</TD><TD style="width:10px">Largeur</TD><TD>Hauteur</TD><TD>Condition</TD><TD>Fichier</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
 <?
   $query = "SELECT * FROM stickers";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -33,6 +33,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       echo '<FORM method="post" enctype="multipart/form-data" action="./index.php?page=administration&detail=gerer_stickers">';
         echo '<TD><INPUT TYPE="text" NAME="id" VALUE="'.$data['id'].'" size="3"/></TD>';
         echo '<TD><INPUT TYPE="text" NAME="libelle" VALUE="'.$data['libelle'].'"/></TD>';
+        echo "<TD>";
+?>
+        <select name='page'>
+          <option value=plan<?php if($data['page'] == "plan"){ echo " selected"; } ?>>Plan</option>
+          <option value=accueil<?php if($data['page'] == "accueil"){ echo " selected"; } ?>>Accueil</option>
+        </select>
+<?
+        echo "</TD>";
         echo '<TD><INPUT TYPE="text" NAME="fichier" VALUE="'.$data['fichier'].'"/></TD>';
         echo '<TD><INPUT TYPE="number" NAME="left" VALUE="'.$data['left'].'" style="width:60px;"/></TD>';
         echo '<TD><INPUT TYPE="number" NAME="top" VALUE="'.$data['top'].'" style="width:60px;"/></TD>';
@@ -54,6 +62,12 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <TABLE>
   <FORM method="post" enctype="multipart/form-data" action="./index.php?page=administration&detail=gerer_stickers">
     <TR><TD>Nom :</TD><TD><INPUT type=text name='libelle'></INPUT></TD></TR>
+    <TR><TD>Page :</TD><TD>
+      <select name='page'>
+      <option value=plan>Plan</option>
+      <option value=accueil>Accueil</option>
+      </select>
+    </TD></TR>
     <TR><TD>Nom du Fichier :</TD><TD><INPUT type=text name='fichier'></INPUT></TD></TR>
     <TR><TD>Fichier :</TD><TD><INPUT type=file name=file></INPUT></TD></TR>
     <TR><TD>Position Droite :</TD><TD><INPUT type=number name='left'></INPUT></TD></TR>

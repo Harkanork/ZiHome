@@ -53,20 +53,20 @@ while($data0 = mysql_fetch_assoc($req0)) {
       mysql_query($query0, $link);
     }
   }
-  if($data0['periph'] == 'conso')
+  else if($data0['periph'] == 'conso')
   {
-  $info = "";
-  $info = $zibase->getSensorInfo($data0['id']);
-  if(!($info == "")) {
+    $info = "";
+    $info = $zibase->getSensorInfo($data0['id']);
+    if(!($info == "")) {
       if(strlen($data0['id']) < 6) {
         $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*10).",".($info[1]*100).")";
       } else {
         $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*100).",".($info[1]*100).")";
       }
-    mysql_query($query, $link);
+      mysql_query($query, $link);
     }
   }
-  if($data0['periph'] == 'temperature')
+  else if($data0['periph'] == 'temperature')
   {
     $info = "";
     $info = $zibase->getSensorInfo($data0['id']);
@@ -76,7 +76,7 @@ while($data0 = mysql_fetch_assoc($req0)) {
       mysql_query($query, $link);
     }
   }
-  if($data0['periph'] == 'vent')
+  else if($data0['periph'] == 'vent')
   {
     $info = "";
     $info = $zibase->getSensorInfo($data0['id']);
@@ -86,7 +86,7 @@ while($data0 = mysql_fetch_assoc($req0)) {
       mysql_query($query, $link);
     }
   }
-  if($data0['periph'] == 'luminosite')
+  else if($data0['periph'] == 'luminosite')
   {
     $info = "";
     $info = $zibase->getSensorInfo($data0['id']);
@@ -96,7 +96,7 @@ while($data0 = mysql_fetch_assoc($req0)) {
       mysql_query($query, $link);
     }
   }
-  if($data0['periph'] == 'pluie')
+  else if($data0['periph'] == 'pluie')
   {
     $info = "";
     $info = $zibase->getSensorInfo($data0['id']);

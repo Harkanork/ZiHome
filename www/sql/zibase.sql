@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `dynaText` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
+  `page` varchar(255) NOT NULL default 'plan',
   `font` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
@@ -412,6 +413,7 @@ CREATE TABLE IF NOT EXISTS `modules_accueil` (
 CREATE TABLE IF NOT EXISTS `stickers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
+  `page` varchar(255) NOT NULL default 'plan',
   `fichier` varchar(255) NOT NULL,
   `left` int(11) NOT NULL,
   `top` int(11) NOT NULL,
