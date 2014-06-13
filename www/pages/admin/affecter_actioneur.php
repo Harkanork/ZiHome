@@ -32,6 +32,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       <td>Ordre</td>
       <td>Date changement batterie</td>
       <td>Libell&eacute;</td>
+      <td>Consommation<br>(W/h)</td>
       <td></td>
       <td></td>
     </tr>
@@ -43,7 +44,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['id'])){
     $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', ordre = '".$_POST['ordre']."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', type = '".$_POST['type']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', ordre = '".$_POST['ordre']."', conso = '".$_POST['conso']."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
   
@@ -76,7 +77,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <td><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
     <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>
     <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></center></td>
-    <td><center><input type="number" name="ordre" value="<? echo $data['ordre']; ?>"></input></center></td>
+    <td><center><input type="number" name="ordre" value="<? echo $data['ordre']; ?>" style="width:50px;"></input></center></td>
         <td> <INPUT id="date_chgt_batterie_<? echo $data['nom']; ?>" type="date" name="date_chgt_batterie" size="10"/>
       <script>
         if (!Modernizr.inputtypes['date']) 
@@ -90,6 +91,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       </script>
     </td>
     <td><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></td>
+    <td><input type="number" name="conso" value="<? echo $data['conso']; ?>"></input></td>
     <td class="input"><center><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
     <INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"></center></td>
     </FORM>

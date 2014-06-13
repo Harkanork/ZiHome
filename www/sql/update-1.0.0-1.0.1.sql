@@ -34,4 +34,5 @@ ALTER TABLE  `insertion` ADD  `ordre` INT NOT NULL;
 ALTER TABLE `stickers` ADD `page` varchar(255) NOT NULL default 'plan';
 ALTER TABLE `dynaText` ADD `page` varchar(255) NOT NULL default 'plan';
 
+ALTER TABLE  `peripheriques` ADD  `conso` INT NOT NULL;
 

@@ -36,7 +36,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <?
     if ($data['type'] == 'selectbox')
     {
-      $query1 = "SELECT * FROM ".$data['libelle'];
+      $query1 = "SELECT * FROM `".$data['libelle']."`";
       // est-ce qu'il y a une table associee au parametre
       $req1 = mysql_query($query1, $link);
       echo "<select name=\"value_".$data['id']."\">";    
