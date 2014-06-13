@@ -5,15 +5,24 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $query = "UPDATE paramettres SET value = '".$_POST['value']."' WHERE id = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
+  if(isset($_POST['valider_global'])){
+    $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($data = mysql_fetch_assoc($req))
+    {
+      $query1 = "UPDATE paramettres SET value = '".$_POST['value_'.$data['id']]."' WHERE id = '".$data['id']."'";
+      mysql_query($query1, $link);
+    }
+  }
 ?>
 <div id="action-actionneur">
 <center>
 <br>
+<FORM method="post" action="./index.php?page=administration&detail=paramettres">
 <table border="0" align="center">
   <tr class="nom">
     <td>Nom</td>
     <td>Valeur</td>
-    <td></td>
   </tr>
 <?
   $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
@@ -22,8 +31,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   {
 ?>
   <tr class="contenu">
-    <FORM method="post" action="./index.php?page=administration&detail=paramettres">
-    <input type="hidden" name="id" value="<? echo $data['id']; ?>">
     <td class="name">
       <? echo $data['libelle']; ?></td><td>
 <?
@@ -32,7 +39,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       $query1 = "SELECT * FROM ".$data['libelle'];
       // est-ce qu'il y a une table associee au parametre
       $req1 = mysql_query($query1, $link);
-      echo "<select name=\"value\">";    
+      echo "<select name=\"value_".$data['id']."\">";    
       while ($data1 = mysql_fetch_assoc($req1))
       {
         if($data1['value'] == $data['value'])
@@ -46,7 +53,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     }
     else if($data['type'] == 'checkbox')
     {
-      echo "<INPUT type=\"".$data['type']."\" name=\"value\" value=\"true\"";
+      echo "<INPUT type=\"".$data['type']."\" name=\"value_".$data['id']."\" value=\"true\"";
       if ($data['value'] == "true")
       {
         echo " checked ";
@@ -55,20 +62,18 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     }    
     else 
     {
-      echo "<INPUT size=\"10\" type=\"".$data['type']."\" name=\"value\" value=\"".$data['value']."\"/>";      
+      echo "<INPUT size=\"10\" type=\"".$data['type']."\" name=\"value_".$data['id']."\" value=\"".$data['value']."\"/>";      
     }   
        
 ?>
     </td>
-    <td align="center">
-      <input type="submit" name="valider" value="Valider">
-    </td>
-    </FORM>
   </tr>
 <?
   }
 ?>
+<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider_global" VALUE="Valider"></input></td>
 </table>
+</FORM>
 </center>
 </div>
 
