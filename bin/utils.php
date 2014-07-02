@@ -13,7 +13,7 @@ function updateBattery($pSqlInfo, $pZibaseInfo)
   $update_alerte_batterie = false;
   $update_date_chgt_batterie = false;
   
-  if ($pZibaseInfo[3] != '' && $pSqlInfo['batterie'] != $pZibaseInfo[3])
+  if (isset($pZibaseInfo[3]) && $pSqlInfo['batterie'] != $pZibaseInfo[3])
   {
     // L'etat des batteries a change
     if ($pZibaseInfo[3] == 1)
