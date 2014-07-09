@@ -1,8 +1,8 @@
 <?php
 $i=0;
 include_once("./lib/date_francais.php");
-echo "<CENTER><TABLE>";
-echo "<TR style='text-align: center'><TD></TD><TD><b>Nom</b></TD><TD><b>&nbsp;Temp&eacute;rature&nbsp;</b></TD><TD><b>&nbsp;Hygrom&eacute;trie&nbsp;</b></TD><TD><b>Date - Heure</b></TD></TR>";
+echo "<CENTER><TABLE width=500px>";
+echo "<TR class=tab-titre><TD></TD><TD>Capteur</TD><TD width=100px>Temp&eacute;rature</TD><TD width=100px>Hygrom&eacute;trie</TD><TD width=150px>Dernier enregistrement</TD></TR>";
 $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
@@ -24,7 +24,7 @@ while ($periph = mysql_fetch_assoc($req))
     } else {
       $nom = $periph['libelle'];
     }
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['temp']." &deg;C</TD><TD ALIGN=CENTER>".$value0['hygro']." %</TD><TD>".date_francais($value0['date'])."</TD></TR>";
+    echo "<TR class=tab-ligne bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['temp']." &deg;C</TD><TD ALIGN=CENTER>".$value0['hygro']." %</TD><TD>".date_simplifiee($value0['date'])."</TD></TR>";
   $i= $i + 1;
    echo "<PRE>";
   }

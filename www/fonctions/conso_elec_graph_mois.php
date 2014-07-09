@@ -5,24 +5,27 @@ $liste1 = "";
 $liste2 = "";
 while($value0 = mysql_fetch_assoc($req0))
 {
-$consoTemp = 0;
-foreach($heuresCreuses as $heureCreuse){
-$query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$periph['nom']."` where `date` >= '".substr($value0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($value0['date'], 0, 10)." ".$heureCreuse['fin']."'";
-$res_query6 = mysql_query($query6, $link);
-if(mysql_numrows($res_query6) > 0){
-$consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");
-}
-}
-$liste1 .= "[".strtotime($value0['date']) * 1000 . "," . ($value0['max'] - $value0['min']) ."],";
-$liste2 .= "[".strtotime($value0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)*100),2) ."],";
+  $consoTemp = 0;
+  foreach($heuresCreuses as $heureCreuse){
+    if ($heureCreuse['debut'] != "00:00:00" || $heureCreuse['fin'] != "00:00:00")
+    {
+      $query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$periph['nom']."` where `date` >= '".substr($value0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($value0['date'], 0, 10)." ".$heureCreuse['fin']."'";
+      $res_query6 = mysql_query($query6, $link);
+      if(mysql_numrows($res_query6) > 0){
+        $consoTemp += mysql_result($res_query6,0,"max") - mysql_result($res_query6,0,"min");
+      }
+    }
+  }
+  $liste1 .= "[".strtotime($value0['date']) * 1000 . "," . ($value0['max'] - $value0['min']) ."],";
+  $liste2 .= "[".strtotime($value0['date']) * 1000 . "," . number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)*100),2) ."],";
 }
 if($periph['libelle'] == ""){
-$nom = $periph['nom'];
+  $nom = $periph['nom'];
 } else {
-$nom = $periph['libelle'];
+  $nom = $periph['libelle'];
 }
 ?>
-                <script type="text/javascript">
+<script type="text/javascript">
 $(function () {
 Highcharts.setOptions({
     global: {
@@ -43,17 +46,17 @@ Highcharts.setOptions({
             }],
             yAxis: [{
                 min: 0,
-		style: {
-			color: '<? echo $couleurgraph2; ?>'
-		},
+                style: {
+                  color: '<? echo $couleurgraph2; ?>'
+                },
                 title: {
                     text: 'Consommation (Wh)'
                 }
-            }, {
+              }, {
                 min: 0,
-		style: {
-			color: '<? echo $couleurgraph1; ?>'
-		},
+                style: {
+                  color: '<? echo $couleurgraph1; ?>'
+                },
                 title: {
                     text: 'Cout (Cent)'
                 }
@@ -75,18 +78,18 @@ Highcharts.setOptions({
             series: [{
                 name: 'Consommation (Wh)',
                 data: [<?php echo $liste1; ?>],
-		color: '<? echo $couleurgraph2; ?>',
+                color: '<? echo $couleurgraph2; ?>',
                 type: 'column'
 
             }, {
                 name: 'Cout (Cent)',
                 yAxis: 1,
                 data: [<?php echo $liste2; ?>],
-		color: '<? echo $couleurgraph1; ?>',
+                color: '<? echo $couleurgraph1; ?>',
                 type: 'column'
             }]
         });
     });
-                </script>
+</script>
 
 <div id="conso_elec_<? echo $periph['id']; ?>" style="width:<? echo $width; ?>;height:<? echo $height; ?>;"></div>

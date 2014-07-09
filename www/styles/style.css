@@ -391,3 +391,20 @@ body .ui-tooltip {
 	border-width: 2px;
 	background-color: white;
 }
+
+.tab-titre {
+    font-weight: bold;
+    background-color: #000;
+    padding:10px;
+    color: #fff;
+    font-family: "Trebuchet MS"; 
+    font-size: 13px;
+    text-align:center;
+}
+.tab-ligne {
+    padding:10px;
+    color: #000;
+    font-family: "Trebuchet MS"; 
+    font-size: 13px;
+    text-align: center;
+}

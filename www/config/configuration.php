@@ -73,6 +73,10 @@ if(!($erreur == true)) {
 		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesfin2']."' WHERE  `libelle` = 'heure creuse 1 fin'";
 		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesdebut3']."' WHERE  `libelle` = 'heure creuse 2 debut'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		$query = "UPDATE  `paramettres` SET  `value` =  '".$_POST['heurescreusesfin3']."' WHERE  `libelle` = 'heure creuse 2 fin'";
+		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 		$file = "<?php\n/*--------------------Paramettres Mysql--------------------------------*/\n\n\$login = '".$_POST['login']."';\n\$plogin = '".$_POST['plogin']."';\n\$hote = '".$_POST['hote']."';\n\$base = '".$_POST['base']."';\n\n/*--------------------fin des paramettres de configuration--------------*/\n?>";
 		$fichier = fopen("./config/conf_zibase.php","w"); if (fwrite($fichier,$file)) { echo "
 		<br>Fichier de configuration correctement cree"; } else { echo "Impossible de creer le fichier. merci d'ajouter les droits en ecriture sur le dossier config"; } fclose($fichier); } else { echo $message; ?> 
@@ -115,6 +119,12 @@ if(!($erreur == true)) {
 				</INPUT>
 				<BR>Electricite plage Heure Creuse 2 fin : 
 				<INPUT type=time name=heurescreusesfin2 value="<? echo $_POST['heurescreusesfin2']; ?>">
+				</INPUT>
+				<BR>Electricite plage Heure Creuse 3 debut : 
+				<INPUT type=time name=heurescreusesdebut3 value="<? echo $_POST['heurescreusesdebut3']; ?>">
+				</INPUT>
+				<BR>Electricite plage Heure Creuse 3 fin : 
+				<INPUT type=time name=heurescreusesfin3 value="<? echo $_POST['heurescreusesfin3']; ?>">
 				</INPUT>
 				<BR>
 				<BR>
@@ -195,6 +205,12 @@ if(!($erreur == true)) {
 			</INPUT>
 			<BR>Electricite plage Heure Creuse 2 fin : 
 			<INPUT type=time name=heurescreusesfin2 value="00:00">
+			</INPUT>
+			<BR>Electricite plage Heure Creuse 3 debut : 
+			<INPUT type=time name=heurescreusesdebut3 value="00:00">
+			</INPUT>
+			<BR>Electricite plage Heure Creuse 3 fin : 
+			<INPUT type=time name=heurescreusesfin3 value="00:00">
 			</INPUT>
 			<BR>
 			<BR>

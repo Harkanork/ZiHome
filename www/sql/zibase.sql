@@ -716,8 +716,10 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (36, 'heure creuse 0 fin', '00:00', 'time'),
 (37, 'heure creuse 1 debut', '00:00', 'time'),
 (38, 'heure creuse 1 fin', '00:00', 'time'),
-(39, 'couleur graph 1', '#89A54E', 'color'),
-(40, 'couleur graph 2', '#4572A7', 'color');
+(39, 'heure creuse 2 debut', '00:00', 'time'),
+(40, 'heure creuse 2 fin', '00:00', 'time'),
+(41, 'couleur graph 1', '#89A54E', 'color'),
+(42, 'couleur graph 2', '#4572A7', 'color');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
