@@ -755,6 +755,8 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
             if((!($data7 == null)) && (isset($_SESSION['auth']))){
               ?>
               <div id="tabs-<? echo $data['id']; ?>-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+                <br>
+                <br>
                 <?
                 $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
                 $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -764,7 +766,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                   echo "</div>";
                 }
                	echo "</div>"; 
-		        }
+            }
             if((!($data11 == null)) && (isset($_SESSION['auth']))){
               ?>
               <div id="tabs-<? echo $data['id']; ?>-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">

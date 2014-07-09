@@ -200,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `scenarios` (
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `libelle` varchar(255) NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',

@@ -13,12 +13,15 @@ if(isset($_SESSION['auth']))
         </td>
         <td>
         Pi&egrave;ce
-        </td>        
+        </td>
         <td>
         Droite
         </td>
         <td>
         Bas
+        </td>
+        <td>
+        Libell&eacute;
         </td>
         <td>
         </td>
@@ -31,7 +34,7 @@ if(isset($_SESSION['auth']))
         mysql_query($query, $link);
       }
       else if(isset($_POST['id'])){
-        $query = "UPDATE scenarios SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."' WHERE nom = '".$_POST['id']."'";
+        $query = "UPDATE scenarios SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', `libelle` = '".$_POST['libelle']."' WHERE nom = '".$_POST['id']."'";
         mysql_query($query, $link);
       }
       
@@ -61,6 +64,10 @@ if(isset($_SESSION['auth']))
         <td class="bas">
           <center>
           <INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;">
+          </center>
+        </td>
+        <td class="name"><center>
+          <INPUT TYPE="text" NAME="libelle" VALUE="<? echo $data['libelle']; ?>" style="width:100px;">
           </center>
         </td>
         <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
