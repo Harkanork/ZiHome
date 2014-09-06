@@ -262,7 +262,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
 {
   global $icone;
   global $widthIcones;
-  global $heightIcones;
+  global $heightIcones;                                 
   global $labelWidth;
   global $labelOffsetLeft;
   global $labelOffsetTop;
@@ -518,8 +518,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 } else {
                     $ic = "g";
                 }      
-                $url = "javascript:showPopup('custom".$data['id']."');";
-                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-2]').parent().index());"; }
+                $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-2');";
                 showIconSimple($data, $data8, $ic, $url);
             }
 // ----- Temperature            
@@ -540,8 +539,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                   $temperature = ""; 
                   $hygro = ""; 
                 }
-                $url = "javascript:showPopup('custom".$data['id']."');";
-                if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-1]').parent().index());"; }
+                $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-1');";
                 showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", $url);
             }
 // ----- Conso electrique            
@@ -559,8 +557,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])) { $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-3]').parent().index());"; }
+              $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-3');";
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Vent            
@@ -578,8 +575,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-6]').parent().index());"; }
+              $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-6');";
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Pluie            
@@ -597,8 +593,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-7]').parent().index());"; }
+              $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-7');";
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
 // ----- Luminosite            
@@ -616,8 +611,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               {
                 $valeur = "";
               }
-              $url = "javascript:showPopup('custom".$data['id']."');";
-              if(preg_match('/Chrome/i',$_SERVER['HTTP_USER_AGENT'])){ $url = "javascript:showPopup('custom".$data['id']."');$('#tabs-".$data['id']."').tabs('option', 'active', $('#tabs-".$data['id']." a[href=#tabs-".$data['id']."-8]').parent().index());"; }
+              $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-8');";
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
             ?>
