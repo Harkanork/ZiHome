@@ -44,4 +44,6 @@ while ($periph = mysql_fetch_assoc($req))
 </div>
 <script src="./js/highcharts.js"></script>
 <script src="./js/highcharts-more.js"></script>
+<script src="./js/modules/data.js"></script>
+<script src="./js/modules/exporting.js"></script>
 <script src="./config/conf_highcharts.js"></script>
