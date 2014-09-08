@@ -6,13 +6,12 @@ $query = "SELECT * FROM peripheriques WHERE periph = 'pluie' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
 {
-$width = "100%";
-$height = "400px";
+  $width = "100%";
+  $height = "400px";
 
-include("./fonctions/pluie_graph_global.php");
-include("./fonctions/pluie_graph_mois.php");
-include("./fonctions/pluie_graph_annee.php");
-include("./fonctions/pluie_graph_journee.php");
+  include("./fonctions/pluie_graph_journee.php");
+  include("./fonctions/pluie_graph_mois.php");
+  include("./fonctions/pluie_graph_annee.php");
 }
 ?>
 </div>
