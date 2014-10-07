@@ -24,7 +24,12 @@ while ($periph = mysql_fetch_assoc($req))
     } else {
       $nom = $periph['libelle'];
     }
-    echo "<TR class=tab-ligne bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['temp']." &deg;C</TD><TD ALIGN=CENTER>".$value0['hygro']." %</TD><TD>".date_simplifiee($value0['date'])."</TD></TR>";
+    echo "<TR class=tab-ligne bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."' id='TR_".$periph['id']."'>";
+    echo "  <TD>".$batterie."</TD>";
+    echo "  <TD><span style='vertical-align:3px'>".$nom."</span></TD>";
+    echo "  <TD ALIGN=CENTER>".$value0['temp']." &deg;C</TD><TD ALIGN=CENTER>".$value0['hygro']." %</TD>";
+    echo "  <TD>".date_simplifiee($value0['date'])."</TD>";
+    echo "</TR>";
   $i= $i + 1;
    echo "<PRE>";
   }

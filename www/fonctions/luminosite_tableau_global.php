@@ -22,7 +22,7 @@ while ($periph = mysql_fetch_assoc($req))
     } else {
       $nom = $periph['libelle'];
     }
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['lum']."</TD><TD>".date_francais($value0['date'])."</TD></TR>";
+    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."' id='TR_".$periph['id']."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['lum']."</TD><TD>".date_francais($value0['date'])."</TD></TR>";
     $i++;
   }
 }

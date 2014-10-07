@@ -17,7 +17,7 @@ while ($periph = mysql_fetch_assoc($req))
   $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($value0 = mysql_fetch_assoc($req0))
   {
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$periph['nom']."</span></TD><TD ALIGN=CENTER>".$value0['direction']."</TD><TD ALIGN=CENTER>".($value0['vitesse']/10)." m/s</TD><TD>".date_francais($value0['date'])."</TD></TR>";
+    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."' id='TR_".$periph['id']."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$periph['nom']."</span></TD><TD ALIGN=CENTER>".$value0['direction']."</TD><TD ALIGN=CENTER>".($value0['vitesse']/10)." m/s</TD><TD>".date_francais($value0['date'])."</TD></TR>";
     $i++;
   }
 }

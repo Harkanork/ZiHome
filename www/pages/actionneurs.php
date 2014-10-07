@@ -55,3 +55,22 @@ include("./fonctions/actionneur_graph_annee.php");
 <script src="./js/highcharts.js"></script>
 <script src="./config/conf_highcharts.js"></script>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+  <?
+    // Construction des liens entre les lignes et les tabs
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      echo "$('#TR_".$periph['id']."').click( function()";
+      echo " { ";
+      echo "   window.location = 'javascript:$(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);';";
+      echo "   return false;";
+      echo " });";
+      echo "$('#TR_".$periph['id']."').css( 'cursor', 'pointer' );";
+    }
+  ?>
+  });
+</script>
+
+

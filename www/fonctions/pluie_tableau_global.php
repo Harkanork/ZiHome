@@ -17,7 +17,13 @@ while ($periph = mysql_fetch_assoc($req))
   $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($value0 = mysql_fetch_assoc($req0))
   {
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$periph['nom']."</span></TD><TD ALIGN=CENTER>".$value0['pluie']." mm/h</TD><TD ALIGN=CENTER>".($value0['cumul'])." mm</TD><TD>".date_francais($value0['date'])."</TD></TR>";
+    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."' id='TR_".$periph['id']."'>";
+    echo "  <TD>".$batterie."</TD>";
+    echo "  <TD><span style='vertical-align:3px'>".$periph['nom']."</span></TD>";
+    echo "  <TD ALIGN=CENTER>".$value0['pluie']." mm/h</TD>";
+    echo "  <TD ALIGN=CENTER>".($value0['cumul'])." mm</TD>";
+    echo "  <TD>".date_francais($value0['date'])."</TD>";
+    echo "</TR>";
     $i++;
   }
 }
