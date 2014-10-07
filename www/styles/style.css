@@ -410,3 +410,10 @@ body .ui-tooltip {
     font-size: 13px;
     text-align: center;
 }
+.titre-texte {
+    font-weight: bold;
+    color: #000;
+    font-family: "Trebuchet MS"; 
+    font-size: 13px;
+    text-align:center;
+}

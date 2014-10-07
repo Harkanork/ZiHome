@@ -1,6 +1,7 @@
 <?php
-echo "<CENTER><TABLE>";
-echo "<TR style='text-align: center'><TD><b>(kWh)</b></TD><TD><b>&nbsp;Consommation&nbsp;</b></TD><TD><b>&nbsp;Cout&nbsp;</b></TD></TR>";
+echo "<p class=titre-texte>Statistiques pour ".$periph['libelle']." :</p>";
+echo "<p><CENTER><TABLE width=500px>";
+echo "<TR class=tab-titre><TD><b>P&eacute;riode</b></TD><TD width=120px><b>&nbsp;Consommation&nbsp;</b></TD><TD width=150px><b>&nbsp;Coût&nbsp;</b></TD></TR>";
 $query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date FROM `conso_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL 3 DAY) GROUP BY DATE_FORMAT(`date`, '%Y%m%d') ORDER BY DATE_FORMAT(`date`, '%Y%m%d') DESC LIMIT 2";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 $i=1;
@@ -18,9 +19,9 @@ while ($value0 = mysql_fetch_assoc($req0))
     }
   }
   if($i == 1) {
-    echo "<TR bgcolor='#dddddd'><TD>Aujourd'hui&nbsp;</TD><TD>".(($value0['max'] - $value0['min'])/1000)."</TD><TD>".number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2)." &euro;</TD></TR>";
+    echo "<TR bgcolor='#dddddd' class=tab-ligne><TD>Aujourd'hui&nbsp;</TD><TD style='text-align: right'>".number_format((($value0['max'] - $value0['min'])/1000),1, ',', ' ')." kWh&nbsp;</TD><TD style='text-align: right'>".number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2,',',' ')." &euro;&nbsp;</TD></TR>";
   } else {
-    echo "<TR bgcolor='#eeeeee'><TD>hier</TD><TD>".(($value0['max'] - $value0['min'])/1000)."</TD><TD>".number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2)." &euro;</TD></TR>";
+    echo "<TR bgcolor='#eeeeee' class=tab-ligne><TD>Hier</TD><TD style='text-align: right'>".number_format((($value0['max'] - $value0['min'])/1000),1, ',', ' ')." kWh&nbsp;</TD><TD style='text-align: right'>".number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2,',',' ')." &euro;&nbsp;</TD></TR>";
   }
   $i++;
 }
@@ -44,7 +45,7 @@ while($value0 = mysql_fetch_assoc($req0))
       }
     }
   }
-  echo "<TR bgcolor='#dddddd'><TD>7 jours</TD><TD>".(($value0['max'] - $value0['min'])/1000)."</TD><TD>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2)." &euro;</TD></TR>";
+  echo "<TR bgcolor='#dddddd' class=tab-ligne><TD>Semaine</TD><TD style='text-align: right'>".number_format((($value0['max'] - $value0['min'])/1000),0, ',', ' ')." kWh&nbsp;</TD><TD style='text-align: right'>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2,',',' ')." &euro;&nbsp;</TD></TR>";
 }
 $query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date, DATE_FORMAT(`date`, '%Y-%m') AS mois FROM `conso_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 30 DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -66,7 +67,7 @@ while($value0 = mysql_fetch_assoc($req0))
       }
     }
   }
-  echo "<TR bgcolor='#eeeeee'><TD>30 jours</TD><TD>".(($value0['max'] - $value0['min'])/1000)."</TD><TD>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2)." &euro;</TD></TR>";
+  echo "<TR bgcolor='#eeeeee' class=tab-ligne><TD>Mois</TD><TD style='text-align: right'>".number_format((($value0['max'] - $value0['min'])/1000),0, ',', ' ')." kWh&nbsp;</TD><TD style='text-align: right'>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2,',',' ')." &euro;&nbsp;</TD></TR>";
 }
 $query0 = "SELECT max(conso_total) as max, min(conso_total) as min, date, DATE_FORMAT(`date`, '%Y-%m') AS mois FROM `conso_".$periph['nom']."` WHERE date < curdate() AND date > DATE_SUB(curdate(), INTERVAL 1 YEAR)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.'<br>'.mysql_error());
@@ -88,7 +89,7 @@ while($value0 = mysql_fetch_assoc($req0))
       }
     }
   }
-  echo "<TR bgcolor='#dddddd'><TD>1 an</TD><TD>".(($value0['max'] - $value0['min'])/1000)."</TD><TD>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),2)." &euro;</TD></TR>";
+  echo "<TR bgcolor='#dddddd' class=tab-ligne><TD>Ann&eacute;e</TD><TD style='text-align: right'>".number_format((($value0['max'] - $value0['min'])/1000),0, ',', ' ')." kWh&nbsp;</TD><TD style='text-align: right'>". number_format(((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)),0, ',', ' ')." &euro;&nbsp;</TD></TR>";
 }
-echo "</TABLE></CENTER>";
+echo "</TABLE></CENTER></p>";
 ?>
