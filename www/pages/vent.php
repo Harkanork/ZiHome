@@ -1,4 +1,5 @@
 <title>Vent</title>
+<br>
 <?php
 include("./fonctions/vent_tableau_global.php");
 ?>

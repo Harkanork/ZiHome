@@ -1,4 +1,5 @@
-<title>luminosite</title>
+<title>Luminosit&eacute</title>
+<br>
 <?php
 include("./fonctions/luminosite_tableau_global.php");
 ?>

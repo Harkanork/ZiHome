@@ -8,8 +8,11 @@ else { return intval($time/86400)."j ".intval(($time - (intval($time/86400) * 86
 }
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
+echo "<br>";
 include("./fonctions/actionneurs_tableau_global.php");
+echo "<br>";
 include("./fonctions/capteurs_tableau_global.php");
+echo "<br>";
 ?>
 <script type="text/javascript">
 $(document).ready(function() {

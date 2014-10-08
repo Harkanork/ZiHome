@@ -1,4 +1,5 @@
 <title>Pluie</title>
+<br>
 <?php
 include("./fonctions/pluie_tableau_global.php");
 ?>
