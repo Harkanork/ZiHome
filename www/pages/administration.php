@@ -78,6 +78,11 @@ Confirmez-vous la suppression?
       <A HREF="./index.php?page=administration&detail=android"><li>Android</li></A>
       <?
     }
+    else if($data['libelle'] == 'conso_elec') {
+      ?>
+      <A HREF="./index.php?page=administration&detail=verif_conso"><li>V&eacute;rification donn&eacute;es conso</li></A>
+      <?
+    }
   }
   ?>
   <A HREF="./index.php?page=administration&detail=affecter_sonde"><li>G&eacute;rer les sondes</li></A>
