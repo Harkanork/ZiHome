@@ -59,7 +59,7 @@ include("./fonctions/vent_graph_rosedesvents.php");
     {
       echo "$('#TR_".$periph['id']."').click( function()";
       echo " { ";
-      echo "   window.location = 'javascript:$(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);';";
+      echo "   $(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);";
       echo "   return false;";
       echo " });";
       echo "$('#TR_".$periph['id']."').css( 'cursor', 'pointer' );";
