@@ -42,3 +42,5 @@ UPDATE `paramettres` SET `id` = '41' WHERE `paramettres`.`id` =39;
 UPDATE `paramettres` SET `id` = '42' WHERE `paramettres`.`id` =40;
 INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES ('39', 'heure creuse 2 debut', '00:00', 'time');
 INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES ('40', 'heure creuse 2 fin', '00:00', 'time');
+
+ALTER TABLE `plan` ADD `image` varchar(255) NOT NULL default '';

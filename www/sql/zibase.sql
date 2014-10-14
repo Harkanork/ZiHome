@@ -145,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
   `popup` text NOT NULL,
   `supplementaire` varchar(255) NOT NULL,
   `show-libelle` boolean default true,
+  `image` varchar(255) NOT NULL default '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

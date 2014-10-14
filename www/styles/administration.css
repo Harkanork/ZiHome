@@ -90,3 +90,29 @@ vertical-align:middle;
   text-align: center;
 }
 
+.panneau_table {
+  width: 500px;
+  border-spacing: 0px;
+  border: 2px solid #6a6a6a;
+}
+
+.panneau_titre {
+  background-color: #6a6a6a;
+  color: white;
+  border: 1px solid black;
+}
+
+.panneau_centre {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.panneau_centre tr{
+  background-color: #ccc;
+}
+
+.panneau_centre tr:hover{
+  background-color: white;
+  color: black;
+
+}
