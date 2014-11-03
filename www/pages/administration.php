@@ -96,6 +96,9 @@ Confirmez-vous la suppression?
   <A HREF="./index.php?page=administration&detail=variables"><li>Variables</li></A>
   <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
   <A HREF="./index.php?page=administration&detail=paramettres"><li>Param&egrave;tres</li></A>
+<br>
+<span style="font-size: 10px;">v 1.1</span>
+<br>
 </div>
 <div id="action">
   <?
@@ -105,7 +108,7 @@ Confirmez-vous la suppression?
     include("./pages/admin/gerer_pieces.php");
   }
   ?>
-</div>
+</div> 
 </center>
 <?
 }
