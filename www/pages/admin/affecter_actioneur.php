@@ -2,39 +2,39 @@
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
 ?>
-<div id="action-actionneur">
+<div id="action-tableau">
   <center>
   <br>
-  <table border="0" align="center">
-    <tr class="nom">
-      <td>
+  <table border="0">
+    <tr class="title" bgcolor="#6a6a6a">
+      <TH>
       Nom
-      </td>
-      <td>
+      </TH>
+      <TH>
       Pi&egrave;ce
-      </td>
-      <td>
+      </TH>
+      <TH>
       Type
-      </td>
-      <td>
+      </TH>
+      <TH>
       Droite
-      </td>
-      <td>
+      </TH>
+      <TH>
       Bas
-      </td>
-      <td>
+      </TH>
+      <TH>
       Icone
-      </td>
-      <td>
+      </TH>
+      <TH>
       Texte
-      </td>      
-      <td>Batterie</td>
-      <td>Ordre</td>
-      <td>Date changement batterie</td>
-      <td>Libell&eacute;</td>
-      <td>Consommation<br>(W/h)</td>
-      <td></td>
-      <td></td>
+      </TH>
+      <TH>Batterie</TH>
+      <TH>Ordre</TH>
+      <TH>Date changement batterie</TH>
+      <TH>Libell&eacute;</TH>
+      <TH>Consommation<br>(W/h)</TH>
+      <TH></TH>
+      <TH></TH>
     </tr>
 <?
   include("./lib/date_francais.php");
@@ -91,7 +91,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       </script>
     </td>
     <td><INPUT type="texte" name="libelle" value="<? echo $data['libelle']; ?>"></td>
-    <td><input type="number" name="conso" value="<? echo $data['conso']; ?>"></input></td>
+    <td><input type="number" name="conso" value="<? echo $data['conso']; ?>" style="width:60px;"/></td>
     <td class="input"><center><INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $data['nom']; ?>">
     <INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"></center></td>
     </FORM>

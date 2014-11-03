@@ -1,21 +1,29 @@
-<title>Verification et correction des données de consommation &eacute;lectrique</title>
-<p></p>
-<table width="800px" align="center" style="margin-top:30px"><tr style="text-align:center;background-color:#000;color:#fff;font-weight:bold;font-family:arial, sans-serif;line-height:30px;"><td>Date</td><td>Puissance</td><td>Conso</td><td>Action</td></tr>
+<title>V&eacute;rification et correction des donn&eacute;es de consommation &eacute;lectrique</title>
+<div id="action-tableau">
+<CENTER>
+<br>
+<table width="800px" border=0>
+  <tr class="title" bgcolor="#6a6a6a">
+    <TH>Date</TH>
+    <TH>Puissance</TH>
+    <TH>Conso</TH>
+    <TH width="200px">Action</TH>
+  </tr>
 
 <?php
 
-// on désactive la limite de chargement
+// on d&eacute;sactive la limite de chargement
 set_time_limit(0);
 
-// on récupère l'url de cette page pour la destination des formulaires
+// on r&eacute;cup&egrave;re l'url de cette page pour la destination des formulaires
 $urlGet = explode("?",dirname($_SERVER['SERVER_PROTOCOL']) . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 $urlSansLeGet = $urlGet[0]; // URL sans les diverses variables get
-$urlform = $urlSansLeGet."?page=administration&detail=verif_conso"; // on remet juste les variables page et detail qui permettent de faire appel à cette page
+$urlform = $urlSansLeGet."?page=administration&detail=verif_conso"; // on remet juste les variables page et detail qui permettent de faire appel &agrave; cette page
 
-$message="Vérification des données effectuée :";
-if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de correction, si oui on fait l'action
+$message="V&eacute;rification des donn&eacute;es effectu&eacute;e";
+if (isset($_GET['action'])) {//on v&eacute;rifie si on vient d'envoyer une action de correction, si oui on fait l'action
 
-	if ($_GET['action']=="precdim") {// on a cliqué sur corriger les précédents à la baisse : l'outil retranche manuellement la valeur maximale à partir de laquelle il est reparti de zéro
+	if ($_GET['action']=="precdim") {// on a cliqu&eacute; sur corriger les pr&eacute;c&eacute;dents &agrave; la baisse : l'outil retranche manuellement la valeur maximale &agrave; partir de laquelle il est reparti de z&eacute;ro
 		$date=$_GET['date'];
 		$valdim=$_GET['valdim'];
 		$periph=$_GET['periph'];
@@ -26,9 +34,9 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 			$querymaj="UPDATE `".$periph."` SET `conso_total`= '".$valuedatenew."' WHERE date = '".$valuedate['date']."'" ;
 			$reqmaj = mysql_query($querymaj, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 		}
-		$message="Correction à la baisse effectuée avec succès pour ".$periph;
+		$message="Correction &agrave; la baisse effectu&eacute;e avec succ&egrave;s pour ".$periph;
 	}
-	if ($_GET['action']=="precadd") {// on a cliqué sur corriger les précédents à la hausse : l'outil ajoute manuellement la valeur maximale à partir de laquelle il est reparti de zéro
+	if ($_GET['action']=="precadd") {// on a cliqu&eacute; sur corriger les pr&eacute;c&eacute;dents &agrave; la hausse : l'outil ajoute manuellement la valeur maximale &agrave; partir de laquelle il est reparti de z&eacute;ro
 		$date=$_GET['date'];
 		$valadd=$_GET['valadd'];
 		$periph=$_GET['periph'];
@@ -39,16 +47,16 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 			$querymajadd="UPDATE `".$periph."` SET `conso_total`= '".$valueaddnew."' WHERE date = '".$valueadd['date']."'" ;
 			$reqmajadd = mysql_query($querymajadd, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 		}
-		$message="Correction à la hausse effectuée avec succès pour ".$periph;
+		$message="Correction &agrave; la hausse effectu&eacute;e avec succ&egrave;s pour ".$periph;
 	}
 	if ($_GET['action']=="suppr") {
 		$date=$_GET['date'];
 		$periph=$_GET['periph'];
 		$querysuppr="DELETE FROM `".$periph."` WHERE date = '".$date."'";
 		$reqsuppr = mysql_query($querysuppr, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-		$message="Valeur ".$date." supprimée pour ".$periph;
+		$message="Valeur ".$date." supprim&eacute;e pour ".$periph;
 	}
-	if ($_GET['action']=="simplif") {  // on a cliqué sur simplifier l'historique du capteur
+	if ($_GET['action']=="simplif") {  // on a cliqu&eacute; sur simplifier l'historique du capteur
 		$periph=$_GET['periph'];
 		$querysimplif="SELECT * FROM `".$periph."` WHERE date < DATE_SUB(NOW(), INTERVAL 31 DAY) ORDER BY `date` ASC";
 		$reqsimplif = mysql_query($querysimplif, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -59,7 +67,7 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 		$date_prec1="";
 		while ($datasimplif = mysql_fetch_assoc($reqsimplif)) {
 			$jour=substr($datasimplif['date'],0,10);
-			if ($jour<>$jour_prec1) { // chaque jour on remet à zéro les conso min et max
+			if ($jour<>$jour_prec1) { // chaque jour on remet &agrave; z&eacute;ro les conso min et max
 				$conso_min=10000;
 				$conso_max=0;
 				$date_min="";
@@ -74,7 +82,7 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 			      }
    			}
 			if ($jour==$jour_prec1 AND $jour_prec1==$jour_prec2 AND $HC==$HC_prec1 AND $HC_prec1==$HC_prec2) {
-				// si trois égaux à la suite, on supprime celui du milieu, ce qui permet de tout supprimer sauf la première et la dernière valeur de chaque jour et de chaque plage HC/HP
+				// si trois &eacute;gaux &agrave; la suite, on supprime celui du milieu, ce qui permet de tout supprimer sauf la premi&egrave;re et la derni&egrave;re valeur de chaque jour et de chaque plage HC/HP
 				// mais on supprime seulement si ce n'est ni le max journalier, ni le min journalier
 				if ($datasimplif['conso']<=$conso_max AND $datasimplif['conso']>=$conso_min) {
 					$querysimplifsuppr="DELETE FROM `".$periph."` WHERE date = '".$date_prec1."'";
@@ -97,7 +105,7 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 			$HC_prec1=$HC;
 			$date_prec1=$datasimplif['date'];
 		}
-		$message="Simplification des données effectuée avec succès pour ".$periph." .";
+		$message="Simplification des donn&eacute;es effectu&eacute;e avec succ&egrave;s pour ".$periph." .";
 	}
 }
 
@@ -105,13 +113,18 @@ if (isset($_GET['action'])) {//on vérifie si on vient d'envoyer une action de c
 echo "<p style='color:red'><b>".$message."</b></p>";
 
 
-// on vérifie les tableaux et affiche les erreurs
+// on v&eacute;rifie les tableaux et affiche les erreurs
 $inf_neg=-999999999999999999999999999999999; // pour les prochains tests
 $query = "SELECT * FROM peripheriques WHERE periph = 'conso' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
-	echo "<tr style=\"background-color:#666;color:#fff;line-height:30px;text-align:center;border-style:solid;border-color:#000;border-width:2px 0px 0px 0px;\"><td colspan=3><strong>".$data['libelle']."</strong></td><td><a href=\"".$urlform."&action=simplif&periph=conso_".$data['nom']."\" style=\"color:#fff;text-decoration: underline;\">Simplifier l'historique de ce capteur</a><br/>(au delà de 30 jours, ne conserve que les extrêmes journaliers et consos HP/HC)</td></tr>";
+	if($data['libelle'] == ""){
+		$nom = $data['nom'];
+	} else {
+		$nom = $data['libelle'];
+	}
+	echo "<tr class=\"contenu\"><td colspan=3><strong>".$nom."</strong></td><td><a href=\"".$urlform."&action=simplif&periph=conso_".$data['nom']."\" style=\"color:black;text-decoration: underline;\">Simplifier l'historique de ce capteur</a><br/>(au del&agrave; de 30 jours, ne conserve que les extr&ecirc;mes journaliers et consos HP/HC)</td></tr>";
 	$erreurs=0;
 	$conso_prec2=0;
 	$date_prec2=0;
@@ -125,7 +138,7 @@ while ($data = mysql_fetch_assoc($req))
 	while($value0 = mysql_fetch_assoc($req0))
 	{
 		if ($rang>0) {
-			echo "<tr><td>".$value0['date']."</td><td>".$value0['conso']."</td><td>".$value0['conso_total']."</td></tr>";
+			echo "<tr class=\"contenu\"><td>".$value0['date']."</td><td>".$value0['conso']."</td><td>".$value0['conso_total']."</td></tr>";
 			$rang=$rang-1;
 		}
 		if ($value0['conso_total']<$conso_prec1) {
@@ -134,24 +147,24 @@ while ($data = mysql_fetch_assoc($req))
 			if ($value0['conso_total']<0) {$valeur_supposee=$value0['conso_total'];}
 			$valdim=$conso_prec1-$valeur_supposee;
 			$rang=2;
-			echo "<tr><td>".$date_prec2."</td><td>".$puis_prec2."</td><td>".$conso_prec2."</td></tr>";
-			echo "<tr><td>".$date_prec1."</td><td>".$puis_prec1."</td><td>".$conso_prec1."</td></tr>";
-			echo "<tr><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
-			echo "Remise à zéro du capteur ? ";
+			echo "<tr class=\"contenu\"><td>".$date_prec2."</td><td>".$puis_prec2."</td><td>".$conso_prec2."</td></tr>";
+			echo "<tr class=\"contenu\"><td>".$date_prec1."</td><td>".$puis_prec1."</td><td>".$conso_prec1."</td></tr>";
+			echo "<tr class=\"contenu\"><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
+			echo "Remise &agrave; z&eacute;ro du capteur ? ";
 			echo " -".strtotime(substr($value0['date'],11))."- ";
-			echo "<a href=\"".$urlform."&action=precdim&periph=conso_".$data['nom']."&date=".$value0['date']."&valdim=".$valdim."\">Corriger les précédents à la baisse (-".$valdim.")</a><br/>";
+			echo "<a href=\"".$urlform."&action=precdim&periph=conso_".$data['nom']."&date=".$value0['date']."&valdim=".$valdim."\">Corriger les pr&eacute;c&eacute;dents &agrave; la baisse (-".$valdim.")</a><br/>";
 			echo "<a href=\"".$urlform."&action=suppr&periph=conso_".$data['nom']."&date=".$value0['date']."\">Supprimer la valeur</a>";
 			echo "</td></tr>";
 		}
 		if (($value0['conso_total']-$conso_prec1)/(strtotime($value0['date'])-strtotime($date_prec1))>30 AND $conso_prec1<>$inf_neg) {
 			$erreurs++;
 			$rang=2;
-			echo "<tr><td>".$date_prec2."</td><td>".$puis_prec2."</td><td>".$conso_prec2."</td></tr>";
-			echo "<tr><td>".$date_prec1."</td><td>".$puis_prec1."</td><td>".$conso_prec1."</td></tr>";
-			echo "<tr><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
+			echo "<tr class=\"contenu\"><td>".$date_prec2."</td><td>".$puis_prec2."</td><td>".$conso_prec2."</td></tr>";
+			echo "<tr class=\"contenu\"><td>".$date_prec1."</td><td>".$puis_prec1."</td><td>".$conso_prec1."</td></tr>";
+			echo "<tr class=\"contenu\"><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
 			$ecart=$value0['conso_total']-$conso_prec1;
-			echo "Erreur de correction précédente ? ";
-			echo "<a href=\"".$urlform."&action=precadd&periph=conso_".$data['nom']."&date=".$value0['date']."&valadd=".$ecart."\">Corriger les précédents à la hausse (+".$ecart.")</a><br/>";
+			echo "Erreur de correction pr&eacute;c&eacute;dente ? ";
+			echo "<a href=\"".$urlform."&action=precadd&periph=conso_".$data['nom']."&date=".$value0['date']."&valadd=".$ecart."\">Corriger les pr&eacute;c&eacute;dents &agrave; la hausse (+".$ecart.")</a><br/>";
 			echo "<a href=\"".$urlform."&action=suppr&periph=conso_".$data['nom']."&date=".$value0['date']."\">Supprimer la valeur</a>";
 			echo "</td></tr>";
 		}
@@ -163,14 +176,14 @@ while ($data = mysql_fetch_assoc($req))
 		$date_prec1=$value0['date'];
 		if ((strtotime($value0['date'])-mktime(0, 0, 0, 1, 1, 2013))<0) {
 			$erreurs++;
-			echo "<tr><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
+			echo "<tr class=\"contenu\"><td>".$value0['date']."</td><td>".$value0['conso']."</td><td><strong>".$value0['conso_total']."</strong></td><td>";
 			echo "Erreur de date sur cette valeur. ";
 			echo "<a href=\"".$urlform."&action=suppr&periph=conso_".$data['nom']."&date=".$value0['date']."\">Supprimer la valeur</a>";
 			echo "</td></tr>";
 		}
 	}
 	if ($erreurs==0) {
-		echo "<tr><td colspan=4>Aucune erreur trouvée dans l'historique de ce capteur</td></tr>";
+		echo "<tr class=\"contenu\"><td colspan=4>Aucune erreur trouv&eacute;e dans l'historique de ce capteur</td></tr>";
 	}
 }
 ?>

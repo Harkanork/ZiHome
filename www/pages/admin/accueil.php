@@ -39,7 +39,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   ?>
   <div id="action-tableau">
-  <br><CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Nom</TD><TD>Largeur</TD><TD>Hauteur</TD><TD>Droite</TD><TD>Bas</TD><TD>Bordure</TD><TD>Module</TD><TD>Options</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+  <br><CENTER><TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Nom</TH><TH>Largeur</TH><TH>Hauteur</TH><TH>Droite</TH><TH>Bas</TH><TH>Bordure</TH><TH>Module</TH><TH>Options</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></TR>
     <?
     $query = "SELECT * FROM page_accueil WHERE user = '".$_SESSION['auth']."'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -101,82 +101,130 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   </TABLE></CENTER></div>
 
   <P align=center>
-  <FORM method="post" action="./index.php?page=administration&detail=accueil">
-    Migrer le profil vers un utilisateur (attention, la migration &eacute;crase le profil existant)<br>
-    <select name=user>
-    <option value=default>Default</option>
-    <?
-    $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
-    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while ($data = mysql_fetch_assoc($req))
-    {
-      echo "<option value=\"".$data['pseudo']."\">".$data['pseudo']."</option>";
-    }
-    ?>
-    </select>
-    <INPUT type=submit name=Migrer value=Migrer>
-  </FORM>
-  </p>
-  <P align=center>
-  <FORM method="post" action="./index.php?page=administration&detail=accueil">
-    Rapatrier le profil d'un utilisateur (attention, la migration &eacute;crase le profil existant)<br>
-    <select name=user>
-      <option value=default>Default</option>
-      <?
-      $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
-      $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($data = mysql_fetch_assoc($req))
-      {
-        echo "<option value=\"".$data['pseudo']."\">".$data['pseudo']."</option>";
-      }
-      ?>
-    </select>
-    <INPUT type=submit name=rapatrier value=Rapatrier>
-  </FORM>
-  </p>
-  <P align=center>
-  <TABLE>
-    <FORM method="post" action="./index.php?page=administration&detail=accueil">
-    <TR><TD>Nom :</TD><TD><INPUT type=text name=libelle></INPUT></TD></TR>
-    <TR><TD>Largeur :</TD><TD><INPUT type=number name=width></INPUT></TD></TR>
-    <TR><TD>Hauteur :</TD><TD><INPUT type=number name=height></INPUT></TD></TR>
-    <TR><TD>Position Droite :</TD><TD><INPUT type=number name=left></INPUT></TD></TR>
-    <TR><TD>Position Bas :</TD><TD><INPUT type=number name=top></INPUT></TD></TR>
-    <TR><TD>Taille bordure :</TD><TD><INPUT type=number name=border></INPUT></TD></TR>
-    <TR><TD>Module :</TD><TD>
-      <select name=module>
-      <?
-      $query = "SELECT * FROM modules_accueil ORDER BY libelle";
-      $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-      while ($data = mysql_fetch_assoc($req))
-      {
-        if($data['type'] == "") {
-          echo "<option value=\"".$data['url']."\">".$data['libelle']."</option>";
-        } else if($data['type'] == "scenario") {
-          $query0 = "SELECT * FROM scenarios";
-          $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($data0 = mysql_fetch_assoc($req0))
-          {
-            echo "<option value=\"".$data['url']."-".$data0['id']."\">".$data['libelle']." ".$data0['nom']."</option>";
-          }
-        } else {
-          $query0 = "SELECT * FROM peripheriques WHERE periph = '".$data['type']."'";
-          $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($data0 = mysql_fetch_assoc($req0))
-          {
-            echo "<option value=\"".$data['url']."-".$data0['id']."\">".$data['libelle']." ".$data0['nom']."</option>";
-          }
-        }
-      }
-      ?>
-      </select>
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Nouvel &eacute;l&eacute;ment</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+        <CENTER>
+          <TABLE>
+            <FORM method="post" action="./index.php?page=administration&detail=accueil">
+            <TR><TD class=panneau_libelle>Nom</TD><TD><INPUT type=text name=libelle></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Largeur</TD><TD><INPUT type=number name=width></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Hauteur</TD><TD><INPUT type=number name=height></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Position Droite</TD><TD><INPUT type=number name=left></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Position Bas</TD><TD><INPUT type=number name=top></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Taille bordure</TD><TD><INPUT type=number name=border></INPUT></TD></TR>
+            <TR><TD class=panneau_libelle>Module</TD><TD>
+              <select name=module>
+              <?
+              $query = "SELECT * FROM modules_accueil ORDER BY libelle";
+              $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              while ($data = mysql_fetch_assoc($req))
+              {
+                if($data['type'] == "") {
+                  echo "<option value=\"".$data['url']."\">".$data['libelle']."</option>";
+                } else if($data['type'] == "scenario") {
+                  $query0 = "SELECT * FROM scenarios";
+                  $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                  while ($data0 = mysql_fetch_assoc($req0))
+                  {
+                    echo "<option value=\"".$data['url']."-".$data0['id']."\">".$data['libelle']." ".$data0['nom']."</option>";
+                  }
+                } else {
+                  $query0 = "SELECT * FROM peripheriques WHERE periph = '".$data['type']."'";
+                  $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                  while ($data0 = mysql_fetch_assoc($req0))
+                  {
+                    echo "<option value=\"".$data['url']."-".$data0['id']."\">".$data['libelle']." ".$data0['nom']."</option>";
+                  }
+                }
+              }
+              ?>
+              </select>
+              </TD>
+            </TR>
+            <TR><TD class=panneau_libelle>Options</TD><TD><INPUT type=text name=option></INPUT></TD></TR>
+            <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name=Ajouter value=Ajouter></TD></TR>
+          </FORM>
+          </TABLE>
+        </CENTER>
       </TD>
     </TR>
-    <TR><TD>Options :</TD><TD><INPUT type=text name=option></INPUT></TD></TR>
-    <TR><TD colspan=2 align=center><INPUT type=submit name=Ajouter value=Ajouter></TD></TR>
-  </FORM>
-  </TABLE>
+  </TABLE>  
   </P>
+  
+  <P align=center>
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Exporter la configuration courante vers un autre utilisateur<br>(attention, sa configuration sera &eacute;cras&eacute;e)</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+        <CENTER>
+          <FORM method="post" action="./index.php?page=administration&detail=accueil">
+            <TABLE width=80%>
+              <TR class=panneau_boutons>
+                <TD>
+                  <select name=user>
+                    <option value=default>Default</option>
+                    <?
+                    $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
+                    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                    while ($data = mysql_fetch_assoc($req))
+                    {
+                      echo "<option value=\"".$data['pseudo']."\">".$data['pseudo']."</option>";
+                    }
+                    ?>
+                  </select>
+                </TD>
+                <TD>
+                  <INPUT type=submit name=Migrer value=Exporter>
+                </TD>
+              </TR>
+            </TABLE>
+          </FORM>
+        </CENTER>
+      </TD>
+    </TR>
+  </TABLE>
+  </p>
+  <P align=center>
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Importer la configuration d'un autre utilisateur<br>(attention, la configuration courante sera &eacute;cras&eacute;e)</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+        <CENTER>
+          <FORM method="post" action="./index.php?page=administration&detail=accueil">
+            <TABLE width=80%>
+              <TR class=panneau_boutons>
+                <TD>
+                  <select name=user>
+                    <option value=default>Default</option>
+                    <?
+                    $query = "SELECT * FROM users WHERE pseudo != '".$_SESSION['auth']."'";
+                    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                    while ($data = mysql_fetch_assoc($req))
+                    {
+                      echo "<option value=\"".$data['pseudo']."\">".$data['pseudo']."</option>";
+                    }
+                    ?>
+                  </select>
+                </TD>
+                <TD>
+                  <INPUT type=submit name=rapatrier value=Importer>
+                </TD>
+              </TR>
+            </TABLE>
+          </FORM>
+        </CENTER>
+      </TD>
+    </TR>
+  </TABLE>
+  </p>
   <? 
 }
 ?>

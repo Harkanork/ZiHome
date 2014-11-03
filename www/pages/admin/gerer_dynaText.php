@@ -18,7 +18,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <div id="action-tableau">
 <CENTER>
 <br>
-<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Id</TD><TD>Libell&eacute;</TD><TD>Page</TD><TD>Police</TD><TD>Couleur</TD><TD>Taille</TD><TD>Gras</TD><TD>Italique</TD><TD>Droite</TD><TD>Bas</TD><TD>Condition</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Id</TH><TH>Libell&eacute;</TH><TH>Page</TH><TH>Police</TH><TH>Couleur</TH><TH>Taille</TH><TH>Gras</TH><TH>Italique</TH><TH>Droite</TH><TH>Bas</TH><TH>Condition</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></TR>
 <?
   $query = "SELECT * FROM dynaText";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -70,25 +70,36 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 </TABLE></CENTER></div>
 
 <P align=center>
-<TABLE>
-  <FORM method="post" action="./index.php?page=administration&detail=gerer_dynaText">
-    <TR><TD>Libell&eacute; :</TD><TD><INPUT type=text name='libelle'></INPUT></TD></TR>
-    <TR><TD>Page :</TD><TD>
-      <select name='page'>
-      <option value=plan>Plan</option>
-      <option value=accueil>Accueil</option>
-      </select>
-    </TD></TR>
-    <TR><TD>Police :</TD><TD><select name='font' id='NewDynaText'></select></TD></TR>
-    <TR><TD>Couleur :</TD><TD><INPUT type=color name='color'></INPUT></TD></TR>
-    <TR><TD>Taille :</TD><TD><INPUT type=number min="0" name='size' value='20'></INPUT></TD></TR>
-    <TR><TD>Gras :</TD><TD><INPUT type="checkbox" name="bold" value="1"></INPUT></TD></TR>
-    <TR><TD>Italique :</TD><TD><INPUT type="checkbox" name="italic" value="1"></INPUT></TD></TR>
-    <TR><TD>Position Droite :</TD><TD><INPUT type=number name='left'></INPUT></TD></TR>
-    <TR><TD>Position Bas :</TD><TD><INPUT type=number name='top'></INPUT></TD></TR>
-    <TR><TD>Condition :</TD><TD><INPUT type=text name='condition'></INPUT></TD></TR>
-    <TR><TD colspan=2 align=center><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
-  </FORM>
+<TABLE class=panneau_table >
+  <TR class=panneau_titre>
+    <TH>Nouveau texte dynamique</TH>
+  </TR>
+  <TR>
+    <TD class=panneau_centre>
+      <CENTER>
+      <TABLE>
+        <FORM method="post" action="./index.php?page=administration&detail=gerer_dynaText">
+          <TR><TD class=panneau_libelle>Libell&eacute;</TD><TD><INPUT type=text name='libelle'></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Page</TD><TD>
+            <select name='page'>
+            <option value=plan>Plan</option>
+            <option value=accueil>Accueil</option>
+            </select>
+          </TD></TR>
+          <TR><TD class=panneau_libelle>Police</TD><TD><select name='font' id='NewDynaText'></select></TD></TR>
+          <TR><TD class=panneau_libelle>Couleur</TD><TD><INPUT type=color name='color'></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Taille</TD><TD><INPUT type=number min="0" name='size' value='20'></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Gras</TD><TD><INPUT type="checkbox" name="bold" value="1"></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Italique</TD><TD><INPUT type="checkbox" name="italic" value="1"></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Position Droite</TD><TD><INPUT type=number name='left'></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Position Bas</TD><TD><INPUT type=number name='top'></INPUT></TD></TR>
+          <TR><TD class=panneau_libelle>Condition</TD><TD><INPUT type=text name='condition'></INPUT></TD></TR>
+          <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
+        </FORM>
+      </TABLE>
+      </CENTER>
+    </TD>
+  </TR>
 </TABLE>
 </P>
 <script>

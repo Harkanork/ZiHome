@@ -4,29 +4,29 @@ if(isset($_SESSION['auth']))
   ?>
   <div id="body-action">
     <br>
-    <div id="action-actionneur">
+    <div id="action-tableau">
       <center>
-      <table border="0" width="700px" align="center">
-      <tr class="nom">
-        <td>
+      <table border="0" width="700px">
+      <tr class="title" bgcolor="#6a6a6a">
+        <TH>
         Nom
-        </td>
-        <td>
+        </TH>
+        <TH>
         Pi&egrave;ce
-        </td>
-        <td>
+        </TH>
+        <TH>
         Droite
-        </td>
-        <td>
+        </TH>
+        <TH>
         Bas
-        </td>
-        <td>
+        </TH>
+        <TH>
         Libell&eacute;
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
+        </TH>
+        <TH>
+        </TH>
+        <TH>
+        </TH>
       </tr>
       <?
       if(isset($_GET['Supprimer'])){

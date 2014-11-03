@@ -1,22 +1,14 @@
 <?
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
+  
+  include('./lib/mac_address.php');
+  
   // Auto connect
   if(isset($_GET['supp-auto'])) {
     $query = "DELETE FROM `auto-logon` WHERE `id`='".$_GET['supp-auto']."'";
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
   else if(isset($_POST['add-auto'])) {
-    $ipAddress=$_SERVER['REMOTE_ADDR'];
-    $macAddr=false;
-    exec('/usr/sbin/arp -n '.$ipAddress,$arp);
-    foreach($arp as $line)
-    {
-       $cols=preg_split('/\s+/', trim($line));
-       if ($cols[0]==$ipAddress)
-       {
-           $macAddr=$cols[2];
-       }
-    }
     $query = "INSERT INTO `auto-logon` (pseudo, macaddress, description) VALUES ('".$_SESSION['auth']."', '".$macAddr."', '".$_POST['description']."')";
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
@@ -91,10 +83,10 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     }
   }
   ?>
-  <div id="action-actionneur">
+  <div id="action-tableau">
   <CENTER>
   <br>
-  <TABLE border=0><TR class="nom"><TD>Login</TD><TD>Mot de passe</TD><TD>Confirmation</TD><TD>Droits</TD><TD>Style</TD><TD>&nbsp;Page d'accueil&nbsp;</TD><TD></TD><TD></TD></TR>
+  <TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Login</TH><TH>Mot de passe</TH><TH>Confirmation</TH><TH>Droits</TH><TH>Style</TH><TH>Page d'accueil</TH><TH></TH><TH></TH></TH>
   <?
   $query = "SELECT * FROM `users`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -161,50 +153,73 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
 */
   }
   ?>
-  </TABLE></CENTER></div>
+      </TABLE>
+    </CENTER>
+  </div>
+  
+  <P align=center>
   <?
-  echo "<BR><center>
-  <FORM method=\"POST\" action=\"./index.php?page=administration&detail=gerer_users\">
-  <table align=\"center\">
-    <TR><TD>Login : </TD><TD><input type=\"text\" name=\"login\" size=\"12\" maxlength=\"40\"></input></TD></TR>
-    <TR><TD>Mot de passe : </TD><TD><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"40\"></input></TD></TR>
-    <TR><TD>Confirmation : </TD><TD><input type=\"password\" name=\"pass2\" size=\"12\" maxlength=\"40\"></input></TD></TR>
-    <TR><TD>Droits : </TD><TD>
-    <select name=\"droit\">
-    <option value=\"admin\" selected>Administrateur</option>
-    <option value=\"utilisateur\">Utilisateur</option>
-    </select>
-    </TD></TR>
-    <TR><TD>Style CSS :</TD><TD>
-    <select name=\"style\">
-    <option value=\"\" selected>Default</option>";
-    $query = "SELECT * FROM `css`";
-    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while($data = mysql_fetch_assoc($req))
-    {
-      echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
-    }
-    echo "</TD></TR>
-    <TR><TD>Page d'accueil :</TD><TD>
-    <select name=\"accueil\">
-    <option value=\"\" selected>Default</option>";
-    $query = "SELECT * FROM `accueil`";
-    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while($data = mysql_fetch_assoc($req))
-    {
-      echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
-    }
-    echo "</TD></TR>
-    <TR><TD colspan=2><center><input type=\"submit\" name=\"add-user\" value=\"Ajouter\" class=\"input\"></input></center></TD></TR>
-  </table>
-  </FORM></center><BR><BR>";
+  echo "
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Nouvel utilisateur</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+      <CENTER>
+        <FORM method=\"POST\" action=\"./index.php?page=administration&detail=gerer_users\">
+        <table align=\"center\">
+          <TR><TD class=panneau_libelle>Login</TD><TD><input type=\"text\" name=\"login\" size=\"12\" maxlength=\"40\"></input></TD></TR>
+          <TR><TD class=panneau_libelle>Mot de passe</TD><TD><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"40\"></input></TD></TR>
+          <TR><TD class=panneau_libelle>Confirmation</TD><TD><input type=\"password\" name=\"pass2\" size=\"12\" maxlength=\"40\"></input></TD></TR>
+          <TR><TD class=panneau_libelle>Droits</TD><TD>
+            <select name=\"droit\">
+              <option value=\"admin\" selected>Administrateur</option>
+              <option value=\"utilisateur\">Utilisateur</option>
+            </select>
+          </TD></TR>
+          <TR>
+            <TD class=panneau_libelle>Style CSS</TD>
+            <TD>
+              <select name=\"style\">
+                <option value=\"\" selected>Default</option>";
+                $query = "SELECT * FROM `css`";
+                $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while($data = mysql_fetch_assoc($req))
+                {
+                  echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
+                }
+              echo "</select>";
+            echo "</TD></TR>
+          <TR>
+            <TD class=panneau_libelle>Page d'accueil</TD>
+            <TD>
+              <select name=\"accueil\">
+                <option value=\"\" selected>Default</option>";
+                $query = "SELECT * FROM `accueil`";
+                $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while($data = mysql_fetch_assoc($req))
+                {
+                  echo "<option value=\"".$data['value']."\">".$data['value']."</option>";
+                }
+              echo "</select>";
+            echo "</TD>
+          </TR>
+          <TR><TD colspan=2 class=panneau_boutons><center><input type=\"submit\" name=\"add-user\" value=\"Ajouter\" class=\"input\"></input></center></TD></TR>
+        </table>
+        </FORM>
+      </center>
+      </TD>
+    </TR>
+  </TABLE>
+  </p>";
   echo "<br>";
   echo "Connexion automatique depuis les p&eacute;riph&eacute;riques suivants (uniquement sur le r&eacute;seau local).";
   ?>
-  <div id="action-actionneur">
+  <div id="action-tableau">
   <CENTER>
   <br>
-  <TABLE border=0><TR class="nom"><TD>&nbsp;Login&nbsp;</TD><TD>&nbsp;Description&nbsp;</TD><TD></TD></TR>
+  <TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Login</TH><TH>Mac adresse</TH><TH>Description</TH><TH></TH></TR>
   <?
   $query = "SELECT * FROM `auto-logon`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -212,6 +227,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   {
     echo "<TR class=\"contenu\">
             <TD align=center>".$data['pseudo']."</TD>
+            <TD align=center>".$data['macaddress']."</TD>
             <TD align=center>".$data['description']."</TD>
             <TD align=center><button onclick='javascript:askConfirmDeletion(\"./index.php?page=administration&detail=gerer_users&supp-auto=".$data['id']."\")'>Supprimer</button></TD>
           </TR>";
@@ -219,16 +235,27 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   }
   ?>
   </TABLE></CENTER></div>
-  <br>
-  <CENTER><br>
-  <FORM method="POST" action="./index.php?page=administration&detail=gerer_users">
-    <table>
-      <tr><td>Login :</td><td><? echo $_SESSION['auth'];?></td></tr>
-      <tr><td>Description :</td><td><input type="text" name="description" size="12" maxlength="40"></input></td></tr>
-      <tr><td colspan=2 align=center><input type="submit" name="add-auto" value="Ajouter"></input></td></tr>
-    </table>
-  </form>
-  </center>
+  <P align=center>
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Nouvelle connexion automatique depuis l'appareil courant</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+        <CENTER>
+        <FORM method="POST" action="./index.php?page=administration&detail=gerer_users">
+          <table>
+            <tr><td class=panneau_libelle>Login</td><td class=panneau_libelle><? echo $_SESSION['auth'];?></td></tr>
+            <tr><td class=panneau_libelle>Mac adresse</td><td class=panneau_libelle><? echo $macAddr; ?></td></tr>
+            <tr><td class=panneau_libelle>Description</td><td><input type="text" name="description" size="12" maxlength="40"/></td></tr>
+            <tr><td colspan=2 class=panneau_boutons><input type="submit" name="add-auto" value="Ajouter"/></td></tr>
+          </table>
+        </form>
+        </center>
+      </TD>
+    </TR>
+  </TABLE>
+  </P>
 <?
 } else {
   echo "<center>acc&egrave;s non authoris&eacute;</center>";

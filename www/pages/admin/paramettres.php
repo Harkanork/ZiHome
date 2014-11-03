@@ -15,14 +15,14 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     }
   }
 ?>
-<div id="action-actionneur">
+<div id="action-tableau">
 <center>
 <br>
 <FORM method="post" action="./index.php?page=administration&detail=paramettres">
-<table border="0" align="center">
-  <tr class="nom">
-    <td>Nom</td>
-    <td>Valeur</td>
+<table border="0">
+  <tr class="title" bgcolor="#6a6a6a">
+    <TH>Nom</TH>
+    <TH>Valeur</TH>
   </tr>
 <?
   $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
@@ -31,8 +31,10 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   {
 ?>
   <tr class="contenu">
-    <td class="name">
-      <? echo $data['libelle']; ?></td><td>
+    <td class="name" style="width:200px">
+      <? echo $data['libelle']; ?>
+    </td>
+    <td style="text-align:left">
 <?
     if ($data['type'] == 'selectbox')
     {
@@ -71,7 +73,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <?
   }
 ?>
-<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider_global" VALUE="Valider"></input></td>
+<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider_global" VALUE="Valider"></input></td>
 </table>
 </FORM>
 </center>
@@ -112,7 +114,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $i = $i + 1;
   }
   echo '<tr>';
-  echo '<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
+  echo '<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
   echo '</tr>';
   echo '</table></form></p>';
 ?>
@@ -154,7 +156,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $i = $i + 1;
   }
   echo '<tr>';
-  echo '<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
+  echo '<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
   echo '</tr>';
   echo '</table></form></p>';
 ?>

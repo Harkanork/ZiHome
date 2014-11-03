@@ -22,10 +22,10 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
 ?>
-<div id="action-actionneur">
+<div id="action-tableau">
 <CENTER>
 <br>
-<TABLE border=0 align="center"><TR class="nom"><TD>Nom</TD><TD>Fichier</TD><TD>Icone</TD><TD>Public</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Nom</TH><TH>Fichier</TH><TH>Icone</TH><TH>Public</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></TR>
 <?
   $query = "SELECT * FROM `insertion`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -52,14 +52,25 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 </TABLE></CENTER></div>
 
 <P align=center>
-<TABLE>
-  <FORM method="post" action="./index.php?page=administration&detail=insertion">
-    <TR><TD>Nom :</TD><TD><INPUT type=text name='libelle'/></TD></TR>
-    <TR><TD>Fichier :</TD><TD><INPUT type=text name='url'/></TD></TR>
-    <TR><TD>Icone :</TD><TD><INPUT type=text name='icone'/></TD></TR>
-    <TR><TD>Public :</TD><TD><INPUT type="checkbox" name="public" value="1"/></TD></TR>
-    <TR><TD colspan=2 align=center><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
-  </FORM>
+<TABLE class=panneau_table >
+  <TR class=panneau_titre>
+    <TH>Nouvelle page</TH>
+  </TR>
+  <TR>
+    <TD class=panneau_centre>
+      <CENTER>
+      <TABLE>
+        <FORM method="post" action="./index.php?page=administration&detail=insertion">
+          <TR><TD class=panneau_libelle>Nom</TD><TD><INPUT type=text name='libelle'/></TD></TR>
+          <TR><TD class=panneau_libelle>Fichier</TD><TD><INPUT type=text name='url'/></TD></TR>
+          <TR><TD class=panneau_libelle>Icone</TD><TD><INPUT type=text name='icone'/></TD></TR>
+          <TR><TD class=panneau_libelle>Public</TD><TD><INPUT type="checkbox" name="public" value="1"/></TD></TR>
+          <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
+        </FORM>
+      </TABLE>
+      </CENTER>
+    </TD>
+  </TR>
 </TABLE>
 </P>
 <? 
