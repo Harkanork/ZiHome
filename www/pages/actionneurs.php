@@ -8,8 +8,11 @@ else { return intval($time/86400)."j ".intval(($time - (intval($time/86400) * 86
 }
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
+echo "<br>";
 include("./fonctions/actionneurs_tableau_global.php");
+echo "<br>";
 include("./fonctions/capteurs_tableau_global.php");
+echo "<br>";
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -19,7 +22,7 @@ $(document).ready(function() {
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM peripheriques WHERE periph = 'actioneur' OR periph = 'capteur'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'actioneur' OR periph = 'capteur' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -54,4 +57,23 @@ include("./fonctions/actionneur_graph_annee.php");
 </div>
 <script src="./js/highcharts.js"></script>
 <script src="./config/conf_highcharts.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  <?
+    // Construction des liens entre les lignes et les tabs
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      echo "$('#TR_".$periph['id']."').click( function()";
+      echo " { ";
+      echo "   $(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);";
+      echo "   return false;";
+      echo " });";
+      echo "$('#TR_".$periph['id']."').css( 'cursor', 'pointer' );";
+    }
+  ?>
+  });
+</script>
+
 

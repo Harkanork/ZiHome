@@ -10,45 +10,46 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   $mapPeriph["luminosite"] = "Luminosit&eacute;";
   $mapPeriph["conso"] = "Conso Elec";
 ?>
-<div id="action-actionneur">
+<div id="action-tableau">
   <center>
   <br>
-  <table border="0" align="center">
-    <tr class="nom">
-      <td class="td_categorie">
+  <table border="0">
+    <tr class="title" bgcolor="#6a6a6a">
+      <TH class="td_categorie">
       Cat&eacute;gorie
-      </td>
-      <td>
+      </TH>
+      <TH>
       Nom
-      </td>
-      <td>
+      </TH>
+      <TH>
       Pi&egrave;ce
-      </td>
-      <td>
+      </TH>
+      <TH>
       Droite
-      </td>
-      <td>
+      </TH>
+      <TH>
       Bas
-      </td>
-      <td>
+      </TH>
+      <TH>
       Graph
-      </td>
-      <td>
+      </TH>
+      <TH>
       Icone
-      </td>
-      <td>
+      </TH>
+      <TH>
       Texte
-      </td>      
-      <td>
+      </TH>
+      <TH>
       Hydro
-      </td>
-      <td>Batterie</td>
-      <td>
+      </TH>
+      <TH>Batterie</TH>
+      <TH>Ordre</TH>
+      <TH>
       Date changement batterie
-      </td>
-      <td>Libell&eacute;</td>
-      <td></td>
-      <td></td>
+      </TH>
+      <TH>Libell&eacute;</TH>
+      <TH></TH>
+      <TH></TH>
     </tr>
 <?
   if(isset($_GET['Supprimer'])){
@@ -59,7 +60,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['id'])){
     $date_chgt_batterie = date_ISO($_POST['date_chgt_batterie']);
-    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', graphique = '".$_POST['graphique']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', show_value2 = '".$_POST['show_value2']."' WHERE nom = '".$_POST['id']."'";
+    $query = "UPDATE peripheriques SET id_plan = '".$_POST['sonde']."', `top` = '".$_POST['top']."', `left` = '".$_POST['left']."', graphique = '".$_POST['graphique']."', Icone = '".$_POST['icone']."', Texte = '".$_POST['texte']."', gerer_batterie = '".$_POST['gerer_batterie']."', libelle = '".$_POST['libelle']."', date_chgt_batterie = '".$date_chgt_batterie."', show_value2 = '".$_POST['show_value2']."', ordre = '".$_POST['ordre']."' WHERE nom = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
 
@@ -110,6 +111,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
       </center>
     </td>
     <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>/></center></td>
+    <td><center><input type="number" name="ordre" value="<? echo $data['ordre']; ?>" style="width:60px;"/></center></td>
     <td> <INPUT id="date_chgt_batterie_<? echo $data['nom']; ?>" type="date" name="date_chgt_batterie" size="10"/>
       <script>
         if (!Modernizr.inputtypes['date']) 

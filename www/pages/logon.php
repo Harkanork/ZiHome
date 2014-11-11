@@ -1,17 +1,8 @@
 <?
 if(!(isset($_SESSION['auth']))) 
 {
-  $ipAddress=$_SERVER['REMOTE_ADDR'];
-  $macAddr=false;
-  exec('/usr/sbin/arp -n '.$ipAddress,$arp);
-  foreach($arp as $line)
-  {
-     $cols=preg_split('/\s+/', trim($line));
-     if ($cols[0]==$ipAddress)
-     {
-         $macAddr=$cols[2];
-     }
-  }
+  include('./lib/mac_address.php');
+  
   $query = "SELECT * FROM `auto-logon` WHERE macaddress = '".$macAddr."'";
   $req = @mysql_query ($query);
   $data = mysql_fetch_assoc ($req);

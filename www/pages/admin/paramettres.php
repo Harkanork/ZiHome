@@ -5,15 +5,24 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $query = "UPDATE paramettres SET value = '".$_POST['value']."' WHERE id = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
+  if(isset($_POST['valider_global'])){
+    $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($data = mysql_fetch_assoc($req))
+    {
+      $query1 = "UPDATE paramettres SET value = '".$_POST['value_'.$data['id']]."' WHERE id = '".$data['id']."'";
+      mysql_query($query1, $link);
+    }
+  }
 ?>
-<div id="action-actionneur">
+<div id="action-tableau">
 <center>
 <br>
-<table border="0" align="center">
-  <tr class="nom">
-    <td>Nom</td>
-    <td>Valeur</td>
-    <td></td>
+<FORM method="post" action="./index.php?page=administration&detail=paramettres">
+<table border="0">
+  <tr class="title" bgcolor="#6a6a6a">
+    <TH>Nom</TH>
+    <TH>Valeur</TH>
   </tr>
 <?
   $query = "SELECT * FROM paramettres WHERE libelle != 'icones' AND id != 12";
@@ -22,17 +31,17 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   {
 ?>
   <tr class="contenu">
-    <FORM method="post" action="./index.php?page=administration&detail=paramettres">
-    <input type="hidden" name="id" value="<? echo $data['id']; ?>">
-    <td class="name">
-      <? echo $data['libelle']; ?></td><td>
+    <td class="name" style="width:200px">
+      <? echo $data['libelle']; ?>
+    </td>
+    <td style="text-align:left">
 <?
     if ($data['type'] == 'selectbox')
     {
-      $query1 = "SELECT * FROM ".$data['libelle'];
+      $query1 = "SELECT * FROM `".$data['libelle']."`";
       // est-ce qu'il y a une table associee au parametre
       $req1 = mysql_query($query1, $link);
-      echo "<select name=\"value\">";    
+      echo "<select name=\"value_".$data['id']."\">";    
       while ($data1 = mysql_fetch_assoc($req1))
       {
         if($data1['value'] == $data['value'])
@@ -46,7 +55,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     }
     else if($data['type'] == 'checkbox')
     {
-      echo "<INPUT type=\"".$data['type']."\" name=\"value\" value=\"true\"";
+      echo "<INPUT type=\"".$data['type']."\" name=\"value_".$data['id']."\" value=\"true\"";
       if ($data['value'] == "true")
       {
         echo " checked ";
@@ -55,20 +64,18 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     }    
     else 
     {
-      echo "<INPUT size=\"10\" type=\"".$data['type']."\" name=\"value\" value=\"".$data['value']."\"/>";      
+      echo "<INPUT size=\"10\" type=\"".$data['type']."\" name=\"value_".$data['id']."\" value=\"".$data['value']."\"/>";      
     }   
        
 ?>
     </td>
-    <td align="center">
-      <input type="submit" name="valider" value="Valider">
-    </td>
-    </FORM>
   </tr>
 <?
   }
 ?>
+<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider_global" VALUE="Valider"></input></td>
 </table>
+</FORM>
 </center>
 </div>
 
@@ -107,7 +114,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $i = $i + 1;
   }
   echo '<tr>';
-  echo '<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
+  echo '<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
   echo '</tr>';
   echo '</table></form></p>';
 ?>
@@ -149,7 +156,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     $i = $i + 1;
   }
   echo '<tr>';
-  echo '<td colspan="4" align="center"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
+  echo '<td colspan="4" align="center" style="height: 30px;background-color: #ccc;"><INPUT TYPE="SUBMIT" NAME="valider" VALUE="Valider"/></td>';
   echo '</tr>';
   echo '</table></form></p>';
 ?>

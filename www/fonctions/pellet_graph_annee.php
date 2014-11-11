@@ -34,7 +34,7 @@ Highcharts.setOptions({
                 text: '<? echo $nom; ?>'
             },
             subtitle: {
-                text: 'Quotidienne'
+                text: 'Annuel'
             },
             xAxis: [{
                 type: 'datetime'

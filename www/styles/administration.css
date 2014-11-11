@@ -77,7 +77,7 @@ vertical-align:middle;
 
 }
 .td_categorie {
-  min-width:120px !important;
+  min-width:100px !important;
 }
 
 .name-variable {
@@ -90,3 +90,75 @@ vertical-align:middle;
   text-align: center;
 }
 
+#action-tableau td{
+	width: 80px;
+	text-align: center;
+	font-size: 16px;
+}
+
+#action-tableau td.name{
+  min-width:100px !important;
+  padding-left: 6px;
+  padding-right: 6px;
+
+}
+
+#action-tableau tr.title{
+	color: white;
+	background-color: #6a6a6a;
+	height: 45px;
+}
+
+#action-tableau tr.title th{
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#action-tableau tr.contenu{
+	color: black;
+	background-color: #ccc;
+	height: 30px;
+}
+
+#action-tableau tr.contenu:hover{
+	background-color: white;
+	color: black;
+
+}
+
+.panneau_table {
+  width: 500px;
+  border-spacing: 0px;
+  border: 2px solid #6a6a6a;
+}
+
+.panneau_titre {
+  background-color: #6a6a6a;
+  color: white;
+  border: 1px solid black;
+}
+
+.panneau_centre {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.panneau_centre tr{
+  background-color: #ccc;
+}
+
+.panneau_centre tr:hover{
+  background-color: white;
+  color: black;
+
+}
+
+.panneau_boutons {
+  height: 30px;
+  text-align:center;
+}
+
+.panneau_libelle{
+  padding-left: 6px;
+  padding-right: 6px;
+}

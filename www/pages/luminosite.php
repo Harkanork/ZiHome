@@ -1,4 +1,5 @@
-<title>luminosite</title>
+<title>Luminosit&eacute</title>
+<br>
 <?php
 include("./fonctions/luminosite_tableau_global.php");
 ?>
@@ -11,7 +12,7 @@ include("./fonctions/luminosite_tableau_global.php");
 <div id="global">
 <ul style="width:100%;">
 <?
-$query = "SELECT * FROM peripheriques WHERE periph = 'luminosite'";
+$query = "SELECT * FROM peripheriques WHERE periph = 'luminosite' ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($data = mysql_fetch_assoc($req))
 {
@@ -45,3 +46,21 @@ while ($periph = mysql_fetch_assoc($req))
 <script src="./js/highcharts.js"></script>
 <script src="./js/highcharts-more.js"></script>
 <script src="./config/conf_highcharts.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  <?
+    // Construction des liens entre les lignes et les tabs
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($periph = mysql_fetch_assoc($req))
+    {
+      echo "$('#TR_".$periph['id']."').click( function()";
+      echo " { ";
+      echo "   $(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);";
+      echo "   return false;";
+      echo " });";
+      echo "$('#TR_".$periph['id']."').css( 'cursor', 'pointer' );";
+    }
+  ?>
+  });
+</script>

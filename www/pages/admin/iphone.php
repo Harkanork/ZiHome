@@ -103,7 +103,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo '<div id="action-tableau">';
     echo '<CENTER>';
     echo '<br>';
-    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Sonde</TD><TD>Latitude</TD><TD>Longitude</TD><TD>Position actuelle</TD><TD></TD><TD></TD></TR>';
+    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Sonde</TH><TH>Latitude</TH><TH>Longitude</TH><TH>Position actuelle</TH><TH></TH><TH></TH></TR>';
     $query = "SELECT * FROM iphone_distances WHERE id_iphone = '".$_POST['id_iphone']."'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -127,29 +127,40 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo "</TABLE></CENTER></div>";
     ?>
     <p align=center>
-    <TABLE>
-      <FORM method=POST action="./index.php?page=administration&detail=iphone">
-        <tr>
-          <td>Sonde :</td><td><input type=text name=sonde></input></td>
-        </tr>
-        <tr>
-          <td>Latitude :</td><td><input type=text name=latitude></input></td>
-        </tr>
-        <tr>
-          <td>Longitude :</td><td><input type=text name=longitude></input></td>
-        </tr>
-        <tr>
-          <td>Position actuelle :</td><td><input type="checkbox" name="pos_actuelle" value="1"></input></td>
-        </tr>
-        <tr> 
-          <td colspan=2 align=center>
-            <input type=hidden name=site value=<? echo $_POST['site']; ?>>
-            <input type=hidden name=id_iphone value=<? echo $_POST['id_iphone']; ?>>
-            <input type=submit name=site_valider value=Ajouter></input>
-          </td>
-        </tr>
-      </FORM>
-    </table>
+    <TABLE class=panneau_table >
+      <TR class=panneau_titre>
+        <TH>Nouvel emplacement</TH>
+      </TR>
+      <TR>
+        <TD class=panneau_centre>
+          <CENTER>
+            <TABLE>
+              <FORM method=POST action="./index.php?page=administration&detail=iphone">
+                <tr>
+                  <td class=panneau_libelle>Sonde</td><td><input type=text name=sonde></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Latitude</td><td><input type=text name=latitude></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Longitude</td><td><input type=text name=longitude></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Position actuelle</td><td><input type="checkbox" name="pos_actuelle" value="1"></input></td>
+                </tr>
+                <tr> 
+                  <td colspan=2 class=panneau_boutons>
+                    <input type=hidden name=site value=<? echo $_POST['site']; ?>>
+                    <input type=hidden name=id_iphone value=<? echo $_POST['id_iphone']; ?>>
+                    <input type=submit name=site_valider value=Ajouter></input>
+                  </td>
+                </tr>
+              </FORM>
+            </table>
+          </CENTER>
+        </TD>
+      </TR>
+    </TABLE>
     </p>
     <?
   } else {
@@ -168,7 +179,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo '<div id="action-tableau">';
     echo '<CENTER>';
     echo '<br>';
-    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Nom du p&eacute;riph&eacute;rique</TD><TD>Utilisateur</TD><TD>Mot de passe</TD><TD>Coordonn&eacute;es</TD><TD></TD><TD></TD></TR>';
+    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Nom du p&eacute;riph&eacute;rique</TH><TH>Utilisateur</TH><TH>Mot de passe</TH><TH>Coordonn&eacute;es</TH><TH></TH><TH></TH></TR>';
     $query = "SELECT * FROM iphone";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -189,20 +200,31 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo "</TABLE></CENTER></div>";
     ?>
     <p align=center>
-    <TABLE>
-      <FORM method=POST action="./index.php?page=administration&detail=iphone">
-        <tr>
-          <td>Nom du p&eacute;riph&eacute;rique :</td><td><input type=text name=periph_name></input></td>
-        </tr>
-        <tr>
-          <td>Utilisateur Icloud :</td><td><input type=text name=user></input></td>
-        </tr>
-        <tr>
-          <td>Mot de passe Icloud :</td><td><input type=password name=pass></input></td>
-        </tr>
-        <tr><td colspan=2 align=center><input type=submit name=Ajouter value=Ajouter></input></td></tr>
-      </FORM>
-    </table>
+    <TABLE class=panneau_table >
+      <TR class=panneau_titre>
+        <TH>Nouveau p&eacute;riph&eacute;rique</TH>
+      </TR>
+      <TR>
+        <TD class=panneau_centre>
+          <CENTER>
+            <TABLE>
+              <FORM method=POST action="./index.php?page=administration&detail=iphone">
+                <tr>
+                  <td class=panneau_libelle>Nom du p&eacute;riph&eacute;rique</td><td><input type=text name=periph_name></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Utilisateur Icloud</td><td><input type=text name=user></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Mot de passe Icloud</td><td><input type=password name=pass></input></td>
+                </tr>
+                <tr><td colspan=2 class=panneau_boutons><input type=submit name=Ajouter value=Ajouter></input></td></tr>
+              </FORM>
+            </table>
+          </CENTER>
+        </TD>
+      </TR>
+    </TABLE>
     </p>
   <?
   }

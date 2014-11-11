@@ -1,7 +1,8 @@
 <?php
+include_once("./lib/date_francais.php");
 $i=0;
-echo "<CENTER><TABLE>";
-echo "<TR style='text-align: center'><TD></TD><TD ALIGN=CENTER><b>Nom</b></TD><TD><b>&nbsp;Consommation&nbsp;</b></TD></TR>";
+echo "<CENTER><TABLE width=500px>";
+echo "<TR class=tab-titre><TD></TD><TD>Appareil</TD><TD width=120px>Puissance instantann&eacute;e</TD><TD  width=150px>Dernier enregistrement</TD></TR>";
 $query = "SELECT * FROM peripheriques WHERE periph = 'conso'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
@@ -21,7 +22,7 @@ while ($periph = mysql_fetch_assoc($req))
     } else {
       $nom = $periph['libelle'];
     }
-    echo "<TR bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['conso']."</TD></TR>";
+    echo "<TR class=tab-ligne bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."' id='TR_".$periph['id']."'><TD>".$batterie."</TD><TD><span style='vertical-align:3px'>".$nom."</span></TD><TD ALIGN=CENTER>".$value0['conso']." W</TD><TD>".date_simplifiee($value0['date'])."</TD></TR>";
     $i=$i+1;
   }
 }

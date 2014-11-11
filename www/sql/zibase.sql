@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `dynaText` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
+  `page` varchar(255) NOT NULL default 'plan',
   `font` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
@@ -144,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
   `popup` text NOT NULL,
   `supplementaire` varchar(255) NOT NULL,
   `show-libelle` boolean default true,
+  `image` varchar(255) NOT NULL default '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -199,6 +201,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `scenarios` (
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `libelle` varchar(255) NOT NULL,
   `id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `logo` varchar(255) CHARACTER SET latin1 NOT NULL,
   `id_plan` int(11) NOT NULL DEFAULT '-1',
@@ -412,6 +415,7 @@ CREATE TABLE IF NOT EXISTS `modules_accueil` (
 CREATE TABLE IF NOT EXISTS `stickers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
+  `page` varchar(255) NOT NULL default 'plan',
   `fichier` varchar(255) NOT NULL,
   `left` int(11) NOT NULL,
   `top` int(11) NOT NULL,
@@ -713,8 +717,10 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (36, 'heure creuse 0 fin', '00:00', 'time'),
 (37, 'heure creuse 1 debut', '00:00', 'time'),
 (38, 'heure creuse 1 fin', '00:00', 'time'),
-(39, 'couleur graph 1', '#89A54E', 'color'),
-(40, 'couleur graph 2', '#4572A7', 'color');
+(39, 'heure creuse 2 debut', '00:00', 'time'),
+(40, 'heure creuse 2 fin', '00:00', 'time'),
+(41, 'couleur graph 1', '#89A54E', 'color'),
+(42, 'couleur graph 2', '#4572A7', 'color');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';

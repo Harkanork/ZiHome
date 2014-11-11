@@ -20,9 +20,12 @@ if (!$db_selected) {
 while (true) {
 socket_recvfrom($socket, $data, 512, 0, $remote_ip, $remote_port);
 $zbData = new ZbResponse($data);
+$zbData->message = str_replace("'","",$zbData->message);
 $query = "INSERT INTO message_zibase (date, message) VALUES (now(), '".$zbData->message."')";
 mysql_query($query, $link);
 $query = "DELETE FROM message_zibase WHERE date < DATE_SUB(NOW(), INTERVAL 1 WEEK)";
 mysql_query($query, $link);
+//print_r($zbData->message);
+//echo "\n";
 }
 ?>

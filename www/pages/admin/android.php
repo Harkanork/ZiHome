@@ -83,7 +83,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo '<div id="action-tableau">';
     echo '<CENTER>';
     echo '<br>';
-    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Sonde</TD><TD>Latitude</TD><TD>Longitude</TD><TD>Position actuelle</TD><TD></TD><TD></TD></TR>';
+    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Sonde</TH><TH>Latitude</TH><TH>Longitude</TH><TH>Position actuelle</TH><TH></TH><TH></TH></TH>';
     $query = "SELECT * FROM android_distances WHERE id_android = '".$_POST['id_android']."'";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -107,29 +107,40 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo "</TABLE></CENTER></div>";
     ?>
     <p align=center>
-    <TABLE>
-      <FORM method=POST action="./index.php?page=administration&detail=android">
-        <tr>
-          <td>Sonde :</td><td><input type=text name=sonde></input></td>
-        </tr>
-        <tr>
-          <td>Latitude :</td><td><input type=text name=latitude></input></td>
-        </tr>
-        <tr>
-          <td>Longitude :</td><td><input type=text name=longitude></input></td>
-        </tr>
-        <tr>
-          <td>Position actuelle :</td><td><input type="checkbox" name="pos_actuelle" value="1"></input></td>
-        </tr>
-        <tr> 
-          <td colspan=2 align=center>
-            <input type=hidden name=site value=<? echo $_POST['site']; ?>>
-            <input type=hidden name=id_android value=<? echo $_POST['id_android']; ?>>
-            <input type=submit name=site_valider value=Ajouter></input>
-          </td>
-        </tr>
-      </FORM>
-    </table>
+    <TABLE class=panneau_table >
+      <TR class=panneau_titre>
+        <TH>Nouvel emplacement</TH>
+      </TR>
+      <TR>
+        <TD class=panneau_centre>
+          <CENTER>
+            <TABLE>
+              <FORM method=POST action="./index.php?page=administration&detail=android">
+                <tr>
+                  <td class=panneau_libelle>Sonde</td><td><input type=text name=sonde></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Latitude</td><td><input type=text name=latitude></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Longitude</td><td><input type=text name=longitude></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Position actuelle</td><td><input type="checkbox" name="pos_actuelle" value="1"></input></td>
+                </tr>
+                <tr> 
+                  <td colspan=2 class=panneau_boutons>
+                    <input type=hidden name=site value=<? echo $_POST['site']; ?>>
+                    <input type=hidden name=id_android value=<? echo $_POST['id_android']; ?>>
+                    <input type=submit name=site_valider value=Ajouter></input>
+                  </td>
+                </tr>
+              </FORM>
+            </table>
+          </CENTER>
+        </TD>
+      </TR>
+    </TABLE>
     </p>
     
     <?
@@ -149,7 +160,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo '<div id="action-tableau">';
     echo '<CENTER>';
     echo '<br>';
-    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>APIkey</TD><TD>MobileNetworkCode</TD><TD>Carrier</TD><TD>cellId</TD><TD>locationAreaCode</TD><TD>Coordonn&eacute;es</TD><TD></TD><TD></TD></TR>';
+    echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>APIkey</TH><TH>MobileNetworkCode</TH><TH>Carrier</TH><TH>cellId</TH><TH>locationAreaCode</TH><TH>Coordonn&eacute;es</TH><TH></TH><TH></TH></TR>';
     $query = "SELECT * FROM android";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -170,28 +181,39 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     echo "</TABLE></CENTER></div>";
     ?>
     <p align=center>
-    <TABLE>
-      <FORM method=POST action="./index.php?page=administration&detail=android">
-        <tr>
-          <td>APIkey :</td><td><input type=text name=apikey></input></td>
-        </tr>
-        <tr>
-          <td>MobileNetworkCode :</td><td><input type=text name=MobileNetworkCode></input></td>
-        </tr>
-        <tr>
-          <td>Carrier :</td><td><input type=text name=carrier></input></td>
-        </tr>
-        <tr>
-          <td>cellId :</td><td><input type=text name=cellId></input></td>
-        </tr>
-        <tr>
-          <td>locationAreaCode :</td><td><input type=text name=locationAreaCode></input></td>
-        </tr>
-        <tr>
-          <td colspan=2 align=center><input type=submit name=Ajouter value=Ajouter></input></td>
-        </tr>
-      </FORM>
-    </table>
+    <TABLE class=panneau_table >
+      <TR class=panneau_titre>
+        <TH>Nouveau p&eacute;riph&eacute;rique</TH>
+      </TR>
+      <TR>
+        <TD class=panneau_centre>
+          <CENTER>
+            <TABLE>
+              <FORM method=POST action="./index.php?page=administration&detail=android">
+                <tr>
+                  <td class=panneau_libelle>APIkey</td><td><input type=text name=apikey></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>MobileNetworkCode</td><td><input type=text name=MobileNetworkCode></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>Carrier</td><td><input type=text name=carrier></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>cellId</td><td><input type=text name=cellId></input></td>
+                </tr>
+                <tr>
+                  <td class=panneau_libelle>locationAreaCode</td><td><input type=text name=locationAreaCode></input></td>
+                </tr>
+                <tr>
+                  <td colspan=2 class=panneau_boutons><input type=submit name=Ajouter value=Ajouter></input></td>
+                </tr>
+              </FORM>
+            </table>
+          </CENTER>
+        </TD>
+      </TR>
+    </TABLE>
     </p>
   <?
   }

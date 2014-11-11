@@ -1,7 +1,8 @@
 <?php
-include("./lib/date_francais.php");
+include_once("./lib/date_francais.php");
 $i=0;
-echo "<CENTER><TABLE ><TR class='title' style='text-align: center'><TD><b>Sonde</b></TD><TD style='width:100px'><b>Dernier<br>changement</b></TD><TD style='width:140px'><b>Batterie<br>faible</b></TD></TR>";
+echo "<CENTER><TABLE width=500px>";
+echo "<TR class=tab-titre><TD style='width:16px'></TD><TD>Capteur</TD><TD style='width:100px'>Dernier<br>changement</TD><TD style='width:140px'>Batterie<br>faible</TD></TR>";
 
 $query = "SELECT * FROM owl_detail ORDER BY `date` DESC LIMIT 1";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -31,9 +32,10 @@ while ($periph = mysql_fetch_assoc($req))
   } else {
     $nom = $periph['libelle'];
   }
-  echo "<TR class=\"contenu\" bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'>";
+  echo "<TR class=tab-ligne bgcolor='".( ($i % 2 == 1) ? '#dddddd' : '#eeeeee' )."'>";
   $i++;
-  echo "<TD>".$batterie."<span style='vertical-align:3px'>".$nom."</span></TD>";
+  echo "<TD>".$batterie."</TD>";
+  echo "<TD><span style='vertical-align:3px'>".$nom."</span></TD>";
   if ($periph['date_chgt_batterie'] != "0000-00-00")
   {
     echo "<TD style='text-align: center;'>".date_francais($periph['date_chgt_batterie'])."</TD>";
@@ -44,7 +46,7 @@ while ($periph = mysql_fetch_assoc($req))
   }
   if ($periph['alerte_batterie'] != "0000-00-00 00:00:00")
   {
-    echo "<TD style='text-align: center;'>".date_francais($periph['alerte_batterie'])."</TD>";
+    echo "<TD style='text-align: center;'>".date_simplifiee($periph['alerte_batterie'])."</TD>";
   }
   else
   {

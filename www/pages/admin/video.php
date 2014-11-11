@@ -16,7 +16,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   echo '<div id="action-tableau">';
   echo '<CENTER>';
   echo '<br>';
-  echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TD>Adresse locale</TD><TD>Adresse Internet</TD><TD>Pi&egrave;ce</TD><TD></TD><TD></TD></TR>';
+  echo '<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Adresse locale</TH><TH>Adresse Internet</TH><TH>Pi&egrave;ce</TH><TH></TH><TH></TH></TR>';
   $query = "SELECT * FROM video";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
@@ -46,29 +46,43 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   echo "</TABLE></CENTER></div>";
   ?>
   <p align=center>
-  <TABLE>
-  <FORM method=POST action="./index.php?page=administration&detail=video">
-    <tr>
-      <td>Adresse locale :</td><td><input type=text name=adresse></input></td>
-    </tr>
-    <tr>
-      <td>Adresse distante :</td><td><input type=text name=adresse_internet></input></td>
-    </tr>
-    <tr>
-      <td>Pi&egrave;ce :</td><td><select name="id_plan">
-    <option value="-1">ne pas afficher</option>
-    <?
-    $query = "SELECT * FROM `plan` ORDER BY `libelle`";
-    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while($data = mysql_fetch_assoc($req))
-    { ?>
-     <option value="<? echo $data['id']; ?>"><? echo $data['libelle']; ?></option>
-    <? } ?>
-    </select></td>
-    </tr>
-    <tr><td colspan=2 align=center><input type=submit name=Ajouter value=Ajouter></input></td></tr>
-  </FORM>
-  </table>
+  <TABLE class=panneau_table >
+    <TR class=panneau_titre>
+      <TH>Nouvelle cam&eacute;ra</TH>
+    </TR>
+    <TR>
+      <TD class=panneau_centre>
+        <CENTER>
+          <TABLE>
+            <FORM method=POST action="./index.php?page=administration&detail=video">
+              <tr>
+                <td class=panneau_libelle>Adresse locale</td><td><input type=text name=adresse></input></td>
+              </tr>
+              <tr>
+                <td class=panneau_libelle>Adresse distante</td><td><input type=text name=adresse_internet></input></td>
+              </tr>
+              <tr>
+                <td class=panneau_libelle>Pi&egrave;ce</td>
+                <td>
+                  <select name="id_plan">
+                    <option value="-1">ne pas afficher</option>
+                    <?
+                    $query = "SELECT * FROM `plan` ORDER BY `libelle`";
+                    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                    while($data = mysql_fetch_assoc($req))
+                    { ?>
+                     <option value="<? echo $data['id']; ?>"><? echo $data['libelle']; ?></option>
+                    <? } ?>
+                  </select>
+                </td>
+              </tr>
+              <tr><td colspan=2 class=panneau_boutons><input type=submit name=Ajouter value=Ajouter></input></td></tr>
+            </FORM>
+          </table>
+        </CENTER>
+      </TD>
+    </TR>
+  </TABLE>
   </p>
 <?
 }

@@ -10,21 +10,21 @@ if(isset($_SESSION['auth']))
     mysql_query($query, $link);
   }
   ?>
-  <div id="action-actionneur">
+  <div id="action-tableau">
   <center>
   <br>
-  <table border="0" align="center">
-    <tr class="nom">
-      <td class="name-variable">
+  <table border="0">
+    <tr class="title" bgcolor="#6a6a6a">
+      <TH class="name-variable">
       Variable
-      </td>
-      <td>
+      </TH>
+      <TH>
       Valeur
-      </td>
+      </TH>
       <td class="desc-variable">
       Description
-      </td>
-      <td></td>
+      </TH>
+      <TH></TH>
     </tr>
     <?
     for ($i = 0; $i < 60; $i++) {
