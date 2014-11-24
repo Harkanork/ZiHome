@@ -97,7 +97,7 @@ Confirmez-vous la suppression?
   <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
   <A HREF="./index.php?page=administration&detail=paramettres"><li>Param&egrave;tres</li></A>
 <br>
-<span style="font-size: 10px;">v 1.1</span>
+<span style="font-size: 10px;">v 1.2 (dev)</span>
 <br>
 </div>
 <div id="action">
