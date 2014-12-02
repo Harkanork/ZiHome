@@ -1,4 +1,5 @@
 <title>Consommation Electrique</title>
+<br>
 <?php
 include("./fonctions/conso_elec_tableau_global.php");
 ?>
@@ -36,31 +37,17 @@ $width = "100%";
 $height = "400px";
 
 include("./fonctions/conso_elec_tableau_periph.php");
-include("./fonctions/conso_elec_graph_journee.php");
-include("./fonctions/conso_elec_graph_mois.php");
-include("./fonctions/conso_elec_graph_annee.php");
+include("./fonctions/conso_elec_graph_puissance.php");
+?>
+<br/>
+<?
+include("./fonctions/conso_elec_graph_conso_cout.php");
 ?>
 </div>
 <?php } ?>
 </div>
-<script src="./js/highcharts.js"></script>
-<script src="./config/conf_highcharts.js"></script>
+<script src="./js/highstock.js"></script>
+<script src="./config/conf_highstock.js"></script> 
+<script src="./js/modules/exporting.js"></script> 
 
-<script type="text/javascript">
-  $(document).ready(function(){
-  <?
-    // Construction des liens entre les lignes et les tabs
-    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    while ($periph = mysql_fetch_assoc($req))
-    {
-      echo "$('#TR_".$periph['id']."').click( function()";
-      echo " { ";
-      echo "   $(\"#global\").tabs(\"option\", \"active\", $(\"#onglet-".$periph['id']."\").index() - 1);";
-      echo "   return false;";
-      echo " });";
-      echo "$('#TR_".$periph['id']."').css( 'cursor', 'pointer' );";
-    }
-  ?>
-  });
-</script>
 

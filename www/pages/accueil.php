@@ -50,9 +50,12 @@ $zibase = new ZiBase($ipzibase);
   
 ?>
 </div>
+
+<script src="./js/highstock.js"></script>
+<script src="./config/conf_highstock.js"></script>
 <script src="./js/highcharts.js"></script>
 <script src="./js/highcharts-more.js"></script>
 <script src="./js/modules/data.js"></script>
-<script src="./js/modules/exporting.js"></script>
 <script src="./config/conf_highcharts.js"></script>
+<script src="./js/modules/exporting.js"></script> 
 
