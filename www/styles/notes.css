@@ -1,0 +1,89 @@
+/************ Tags ************/
+body {
+	background:#FFFFE0;
+	padding:0;
+	margin:0;
+	font-family: Helvetica, Verdana, Geneva, sans-serif
+}
+
+header {
+	padding-left:20px;
+	height:50px;
+	display:block;
+	background:white;
+	-webkit-box-shadow:0px 2px 5px gray;
+	-moz-box-shadow:0px 2px 5px gray;
+	box-shadow:0px 2px 5px gray;
+	text-align:right;
+}
+
+
+h1 {
+	display:inline;
+	color:#4D4D4D;
+	padding:15px 10px 0px 0px;
+	font-size:210%;
+	text-transform:capitalize;
+}
+
+input[type="button"] {
+	padding:10px;
+	color:grey;
+	font-weight:bold;
+	background:white;
+	border:1px solid #E5E5E5;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	float:left;
+	margin:5px 10px 0 0;
+}
+
+input[type="button"]:hover {
+	background:grey;
+	color:white;
+	cursor:pointer;
+}
+/************ Classes ************/
+
+/* Postick's button "delete" */
+.delete {
+	cursor:pointer;
+	font-size:120%;
+}
+
+
+.postick {
+	border:1px solid gray;
+	font-size:85%;
+	background:#FFFC7F;
+	-moz-box-shadow:2px 2px 2px #999999;
+	-webkit-box-shadow:2px 2px 2px #999999;
+	box-shadow:2px 2px 2px #999999;
+	position:absolute;
+	border-radius:3px;
+}
+
+.toolbar {
+	text-align:right;
+	font-weight:bold;
+	padding-right:5px;
+	cursor:move;
+}
+
+/* Content to be editable inside the postick */
+
+.editable {
+	cursor:text;
+	height:100%;
+	marging:0 auto;
+	position:relative;
+	-moz-text-shadow: 1px 1px 0px white;
+	text-shadow: 1px 1px 0px white;
+	padding:15px;
+}
+
+.editable:hover {
+	border:1px dotted gray;
+}
+
+

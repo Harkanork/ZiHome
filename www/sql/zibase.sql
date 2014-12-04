@@ -489,6 +489,29 @@ CREATE TABLE IF NOT EXISTS `pollution` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `notes`
+--
+
+CREATE TABLE IF NOT EXISTS `notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `text` text COLLATE utf8_unicode_ci NOT NULL,
+  `x` int(10) NOT NULL,
+  `y` int(10) NOT NULL,
+  `z` int(10) NOT NULL,
+  `w` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+--
+-- Contenu de la table `notes`
+--
+
+INSERT INTO `notes` (`id`, `text`, `x`, `y`, `z`, `w`) VALUES
+(1, 'Vous pouvez me déplacer, m''élargir, me modifier, ou me supprimer !', 200, 200, 1, 200);
+
+-- --------------------------------------------------------
+
+--
 -- Contenu de la table `modules_accueil`
 --
 
@@ -623,7 +646,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (15, 'freebox', 0),
 (16, 'consommable', 0),
 (17, 'actionneurs', 0),
-(18, 'pellet', 0);
+(18, 'pellet', 0),
+(19, 'notes', 1);
 
 -- --------------------------------------------------------
 

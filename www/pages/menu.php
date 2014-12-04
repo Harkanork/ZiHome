@@ -90,6 +90,11 @@ while ($data = mysql_fetch_assoc($req))
     <li><a href = "./index.php?page=freebox"><img src = "./img/icon_home.png"/><span>Freebox</span></a></li>
   <?
   }
+  if($data['libelle'] == "notes" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
+  ?>
+    <li><a href = "./index.php?page=notes"><img src = "./img/icon_notes.png"/><span>Notes</span></a></li>
+  <?
+  }
 }
 $query = "SELECT * FROM `insertion` ORDER BY ordre";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
