@@ -8,41 +8,9 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <link rel="stylesheet" href="./js/themes/jquery.ui.dialog.min.css">
 <link rel="stylesheet" href="./styles/administration.css" type="text/css" media="all">
 
-<script>
-var gAskConfirmURL;
-
-function askConfirmDeletion(pURL) {
-  gAskConfirmURL = pURL;
-  $("#dialog-confirm").dialog("open");
-}
-
-$(function() 
-{
-  $( "#dialog-confirm" ).dialog(
-  {
-    resizable: false,
-    height:160,
-    width:400,
-    autoOpen: false,
-    modal: true,
-    buttons: 
-    {
-      "Oui": function() 
-      {
-        $( this ).dialog( "close" );
-        window.location.href = gAskConfirmURL;
-      },
-      "Non": function() 
-      {
-        $( this ).dialog( "close" );
-      }
-    }
-  });
-});
-</script>
-<div id="dialog-confirm" title="Confirmation" style="display:none;">
-Confirmez-vous la suppression?
-</div>
+<?
+include("./fonctions/dialogue_confirmation.php");
+?>
 
 <center>
 <div id="sous-menu">

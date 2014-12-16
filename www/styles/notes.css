@@ -86,4 +86,11 @@ input[type="button"]:hover {
 	border:1px dotted gray;
 }
 
+/* configure le dialogue de confirmation pour qu'il passe devant les notes */
+.ui-dialog {
+  z-index: 9999;
+}
 
+.ui-widget-overlay {
+  z-index: 9998;
+}
