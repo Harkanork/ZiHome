@@ -13,7 +13,7 @@ installCron () {
   echo "Suppression des anciennes commandes"
   
   # List des fichiers de ZiHome
-  commands="ZiHome meteo.php scenario.php peripheriques_value peripheriques.php message_zibase_auth.php pollution.php domo.sh";
+  commands="ZiHome [^_]meteo.php scenario.php peripheriques_value peripheriques.php message_zibase_auth.php pollution.php domo.sh";
   # Transforme la liste en tableau
   commands=${commands//:/ }
   
@@ -68,6 +68,10 @@ configureS99 () {
 
 #-------------------------------------------------------------------------------
 installS99 () {
+  echo "-------------------------------"
+  echo "Configuration des scripts de demarrage"
+  echo ""
+
   echo "Installation du script de recuperation des messages ZiBase"
   configureS99 "message_zibase.sh" "/usr/syno/etc.defaults/rc.d/"
   echo "Installation du script de gestion des sondes OWL"
