@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `insertion` (
   `icone` varchar(255) NOT NULL,
   `libelle` varchar(255) NOT NULL,
   `public` boolean NOT NULL default true,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -123,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   `actif` tinyint(1) NOT NULL,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -299,6 +301,7 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `erreur` int(11) default 0 NOT NULL,
   `date_erreur` DATETIME NOT NULL,
   `conso` INT NOT NULL,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
