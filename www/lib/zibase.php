@@ -688,7 +688,10 @@
                         $info[$i]['name'] = $ua['name'];
                         $info[$i]['type'] = $ua["type"];
                         $info[$i]['icon'] = $ua["icon"];
-			$info[$i]['protocol'] = $ua["protocol"];
+                        if (isset($ua["protocol"]))
+                        {
+                          $info[$i]['protocol'] = $ua["protocol"];
+                        }
                         $i = $i + 1;
                 }
         return $info;

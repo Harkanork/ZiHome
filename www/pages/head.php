@@ -73,11 +73,13 @@ else
     echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
   }
 }
-$query = "SELECT * FROM paramettres WHERE libelle = 'refresh'";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
-  echo "<META HTTP-EQUIV=Refresh CONTENT=\"".($data['value']*60)."\">";
+if ($_GET['page']!="administration") {   // désactive le refresh dans la partie admninistration
+  $query = "SELECT * FROM paramettres WHERE libelle = 'refresh'";
+  $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+  while ($data = mysql_fetch_assoc($req))
+  {
+    echo "<META HTTP-EQUIV=Refresh CONTENT=\"".($data['value']*60)."\">";
+  }
 }
 include('./lib/taille_fichier.php');
 include('./lib/timestamp.php');

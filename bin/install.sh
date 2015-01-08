@@ -13,7 +13,7 @@ installCron () {
   echo "Suppression des anciennes commandes"
   
   # List des fichiers de ZiHome
-  commands="ZiHome meteo.php scenario.php peripheriques_value peripheriques.php message_zibase_auth.php pollution.php";
+  commands="ZiHome [^_]meteo.php scenario.php peripheriques_value peripheriques.php message_zibase_auth.php pollution.php domo.sh";
   # Transforme la liste en tableau
   commands=${commands//:/ }
   
@@ -53,6 +53,31 @@ configureScripts () {
   echo "$ZiHome" > "$currentFolder/conf_scripts.php"
 }
 
+#-------------------------------------------------------------------------------
+configureS99 () { 
+  # On remplace les jokers par le bon nom de dossier
+  currentFolderSed=`echo "$currentFolder" | sed "s.\/.\\\\\/.g"`
+  ZiHome=`cat "$currentFolder/template_S99$1" | sed "s/remplacement/$currentFolderSed/g"`
+  echo "$ZiHome" > "$2/S99$1"
+  chmod a+x "$2/S99$1"
+
+  ZiHome=`cat "$currentFolder/template_$1" | sed "s/remplacement/$currentFolderSed/g"`
+  echo "$ZiHome" > "$currentFolder/$1"
+  chmod a+x "$currentFolder/$1"
+}
+
+#-------------------------------------------------------------------------------
+installS99 () {
+  echo "-------------------------------"
+  echo "Configuration des scripts de demarrage"
+  echo ""
+
+  echo "Installation du script de recuperation des messages ZiBase"
+  configureS99 "message_zibase.sh" "/usr/syno/etc.defaults/rc.d/"
+  echo "Installation du script de gestion des sondes OWL"
+  configureS99 "owl.sh" "/usr/syno/etc.defaults/rc.d/"
+}
+
 # recuperation du repertoire courant
 currentFolder=`dirname $0`
 currentFolder="`( cd \"$currentFolder\" && pwd )`"
@@ -81,7 +106,10 @@ configureScripts
 
 installCron
 
+installS99
 
 echo "-------------------------------"
 echo "Fini!"
+echo "-------------------------------"
+echo "Vous devez redemarrer le NAS pour que les messages ZiBase et les sondes OWL fonctionnent"
 echo "-------------------------------"

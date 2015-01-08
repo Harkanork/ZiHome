@@ -848,5 +848,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
   generateDynInfo("plan", "#plan", $soleil);
   ?>
 
-<script src="./js/highcharts.js"></script>
-<script src="./config/conf_highcharts.js"></script>
+
+<script src="./js/highstock.js"></script>
+<script src="./config/conf_highstock.js"></script> 
+<script src="./js/modules/exporting.js"></script> 

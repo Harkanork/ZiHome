@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `insertion` (
   `icone` varchar(255) NOT NULL,
   `libelle` varchar(255) NOT NULL,
   `public` boolean NOT NULL default true,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -123,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   `actif` tinyint(1) NOT NULL,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -297,7 +299,9 @@ CREATE TABLE IF NOT EXISTS `peripheriques` (
   `show_value2` BOOLEAN NOT NULL DEFAULT FALSE,
   `texte` BOOLEAN NOT NULL DEFAULT FALSE,
   `erreur` int(11) default 0 NOT NULL,
-  `date_erreur` DATETIME NOT NULL ,
+  `date_erreur` DATETIME NOT NULL,
+  `conso` INT NOT NULL,
+  `ordre` INT NOT NULL,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -489,6 +493,29 @@ CREATE TABLE IF NOT EXISTS `pollution` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `notes`
+--
+
+CREATE TABLE IF NOT EXISTS `notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `text` text COLLATE utf8_unicode_ci NOT NULL,
+  `x` int(10) NOT NULL,
+  `y` int(10) NOT NULL,
+  `z` int(10) NOT NULL,
+  `w` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+--
+-- Contenu de la table `notes`
+--
+
+INSERT INTO `notes` (`id`, `text`, `x`, `y`, `z`, `w`) VALUES
+(1, 'Vous pouvez me déplacer, m''élargir, me modifier, ou me supprimer !', 200, 200, 1, 200);
+
+-- --------------------------------------------------------
+
+--
 -- Contenu de la table `modules_accueil`
 --
 
@@ -498,16 +525,15 @@ INSERT INTO `modules_accueil` (`id`, `url`, `libelle`, `type`) VALUES
 (3, 'owl_global', 'Graphique quotidien OWL', ''),
 (4, 'temperature_graph_jour', 'Graphique journalier de temperature', 'temperature'),
 (5, 'vent_graph_rosedesvents', 'Rose des vents', 'vent'),
-(6, 'conso_elec_graph_annee', 'Graphique consomation electrique annuelle', 'conso'),
+(6, 'conso_elec_graph_conso_cout', 'Graphique historique consommation et cout', 'conso'),
 (7, 'conso_elec_tableau_periph', 'Tableau consomation electrique', ''),
 (8, 'owl_phases_graph', 'Consomation electrique par phase OWL', ''),
 (9, 'temperature_graph_mois', 'Graphique temperature mensuelle', 'temperature'),
 (10, 'vent_tableau_global', 'Tableau vent', ''),
-(11, 'conso_elec_graph_journee', 'Graphique consomation electrique journaliere', 'conso'),
+(11, 'conso_elec_graph_puissance', 'Graphique historique puissance elec', 'conso'),
 (12, 'owl_batterie', 'Batterie OWL', 'owl'),
 (13, 'owl_tableau_global', 'Tableau OWL global', ''),
 (14, 'temperature_tableau_global', 'Tableau temperature global', ''),
-(15, 'conso_elec_graph_mois', 'Graphique consomation electrique mensuelle', 'conso'),
 (16, 'owl_global_month', 'Graphique consomation electrique mensuelle OWL', ''),
 (17, 'temperature_graph_annee', 'Graphique temperature annuelle', 'temperature'),
 (18, 'vent_graph_jour', 'Graphique vent journalier', 'vent'),
@@ -624,7 +650,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (15, 'freebox', 0),
 (16, 'consommable', 0),
 (17, 'actionneurs', 0),
-(18, 'pellet', 0);
+(18, 'pellet', 0),
+(19, 'notes', 1);
 
 -- --------------------------------------------------------
 

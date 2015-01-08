@@ -72,11 +72,11 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <option value="on_off"<? if($data['type'] == "on_off"){ echo " selected"; } ?>>On - Off</option>
     <option value="dim"<? if($data['type'] == "dim"){ echo " selected"; } ?>>Dimable</option>
     </select></td> 
-    <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"></td> 
-    <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"></td>
-    <td><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>></center></td>
-    <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>></center></td>
-    <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>></center></td>
+    <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"/></td> 
+    <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"/></td>
+    <td class="icone"><center><INPUT type="checkbox" name="icone" value="1"<? if($data['icone'] == "1"){ echo " checked"; } ?>/></center></td>
+    <td class="icone"><center><INPUT type="checkbox" name="texte" value="1"<? if($data['texte'] == "1"){ echo " checked"; } ?>/></center></td>
+    <td><center><INPUT type="checkbox" name="gerer_batterie" value="1"<? if($data['gerer_batterie'] == "1"){ echo " checked"; } ?>/></center></td>
     <td><center><input type="number" name="ordre" value="<? echo $data['ordre']; ?>" style="width:50px;"></input></center></td>
         <td> <INPUT id="date_chgt_batterie_<? echo $data['nom']; ?>" type="date" name="date_chgt_batterie" size="10"/>
       <script>
