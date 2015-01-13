@@ -1,7 +1,10 @@
 <?xml version='1.0' standalone='yes'?>
 
 <document>
-<version>
+<version_stable>
+1.2
+</version_stable>
+<version_dev>
 1.2.1(beta)
-</version>
+</version_dev>
 </document>
