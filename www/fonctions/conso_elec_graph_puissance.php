@@ -9,6 +9,7 @@ while($value0 = mysql_fetch_assoc($req0)) {
     $HC=false;
     foreach($heuresCreuses as $heureCreuse){
         if ($heureCreuse['debut'] != "00:00:00" || $heureCreuse['fin'] != "00:00:00") {
+            if ($heureCreuse['fin']=="00:00:00" || $heureCreuse['fin']=="24:00:00") { $heureCreuse['fin']="23:59:59";} // cas où la plage HC est à cheval sur deux jours
             if (($value0['date'] >= substr($value0['date'], 0, 10)." ".$heureCreuse['debut'] ) AND ( $value0['date'] <= substr($value0['date'], 0, 10)." ".$heureCreuse['fin'])) {
                 $HC=true;
             }
