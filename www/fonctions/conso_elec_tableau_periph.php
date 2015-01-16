@@ -11,6 +11,7 @@ while ($value0 = mysql_fetch_assoc($req0))
   foreach($heuresCreuses as $heureCreuse){
     if ($heureCreuse['debut'] != "00:00:00" || $heureCreuse['fin'] != "00:00:00")
     {
+      if ($heureCreuse['fin']=="00:00:00" || $heureCreuse['fin']=="24:00:00") { $heureCreuse['fin']="23:59:59";} // cas où la plage HC est à cheval sur deux jours
       $query6 = "SELECT min(conso_total) as min, max(conso_total) as max FROM `conso_".$periph['nom']."` where `date` >= '".substr($value0['date'], 0, 10)." ".$heureCreuse['debut']."' and `date` <= '".substr($value0['date'], 0, 10)." ".$heureCreuse['fin']."'";
       $res_query6 = mysql_query($query6, $link);
       if(mysql_numrows($res_query6) > 0){
