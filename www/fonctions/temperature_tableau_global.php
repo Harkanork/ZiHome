@@ -31,7 +31,6 @@ while ($periph = mysql_fetch_assoc($req))
     echo "  <TD>".date_simplifiee($value0['date'])."</TD>";
     echo "</TR>";
     $i= $i + 1;
-    echo "<PRE>";
   }
 }
 echo "</TABLE></CENTER>";

@@ -74,7 +74,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
         echo '<TD><textarea NAME="condition" cols="40" rows="5">'.$condition.'</textarea></TD>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Valider" VALUE="Valider"/></center></td>';
         echo '<td class="input"><center><INPUT TYPE="SUBMIT" NAME="Supprimer" VALUE="Supprimer"/></center></td>';
-        echo '<INPUT TYPE="HIDDEN" NAME="idsource" VALUE="' . $data['id'] . '">';
+        echo '<INPUT TYPE="HIDDEN" NAME="idsource" VALUE="' . $data['id'] . '"/>';
       echo '</FORM>';
     echo '</TR>';
   }
@@ -108,12 +108,12 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 ?>
               </select></TD>
             </TR>
-            <TR><TD class=panneau_libelle>Position Droite</TD><TD><INPUT type=number name='left'></INPUT></TD></TR>
-            <TR><TD class=panneau_libelle>Position Bas</TD><TD><INPUT type=number name='top'></INPUT></TD></TR>
-            <TR><TD class=panneau_libelle>Largeur</TD><TD><INPUT type=number name='width'></INPUT></TD></TR>
-            <TR><TD class=panneau_libelle>Hauteur</TD><TD><INPUT type=number name='height'></INPUT></TD></TR>
-            <TR><TD class=panneau_libelle>Condition</TD><TD><INPUT type=text name='condition'></INPUT></TD></TR>
-            <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name='Ajouter' value='Ajouter'></TD></TR>
+            <TR><TD class=panneau_libelle>Position Droite</TD><TD><INPUT type=number name='left'/></TD></TR>
+            <TR><TD class=panneau_libelle>Position Bas</TD><TD><INPUT type=number name='top'/></TD></TR>
+            <TR><TD class=panneau_libelle>Largeur</TD><TD><INPUT type=number name='width'/></TD></TR>
+            <TR><TD class=panneau_libelle>Hauteur</TD><TD><INPUT type=number name='height'/></TD></TR>
+            <TR><TD class=panneau_libelle>Condition</TD><TD><INPUT type=text name='condition'/></TD></TR>
+            <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name='Ajouter' value='Ajouter'/></TD></TR>
           </FORM>
         </TABLE>
       </CENTER>

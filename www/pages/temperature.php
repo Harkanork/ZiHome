@@ -1,4 +1,4 @@
-<title>Temp&eacuterature</title>
+<title>Temp&eacute;rature</title>
 <?php
 include("./fonctions/temperature_tableau_global.php");
 ?>

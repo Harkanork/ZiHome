@@ -2,7 +2,7 @@
 $i=0;
 include_once("./lib/date_francais.php");
 echo "<CENTER><TABLE width=500px>";
-echo "<TR class=tab-titre><TD></TD><TD>Capteur</TD><TD width=100px>Luminosit&eacute</TD><TD width=150px>Dernier enregistrement</TD></TR>";
+echo "<TR class=tab-titre><TD></TD><TD>Capteur</TD><TD width=100px>Luminosit&eacute;</TD><TD width=150px>Dernier enregistrement</TD></TR>";
 $query = "SELECT * FROM peripheriques WHERE periph = 'luminosite'";
 $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while ($periph = mysql_fetch_assoc($req))
