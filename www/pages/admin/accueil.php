@@ -29,11 +29,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
   else if(isset($_POST['Valider'])){
     $url = explode("-",$_POST['module']);
-    $i=2;
-    while ($i < count($url)) { // permet d'autoriser les tirets dans le nom des scenarios. Dans ce cas la décomposition accidentelle du nom est annulée par cette boucle
-      $url[1].="-".$url[$i];
-      $i++;
-    }
     $query = "UPDATE page_accueil SET `libelle` = '".$_POST['libelle']."',`width` = '".$_POST['width']."', `height` = '".$_POST['height']."', `left` = '".$_POST['left']."', `top` = '".$_POST['top']."', `border` = '".$_POST['border']."', `url` = '".$url[0]."', `peripherique` = '".$url[1]."', `option` = '".$_POST['option']."' WHERE `id` = '".$_POST['id']."'";
     mysql_query($query, $link);
   }
@@ -60,7 +55,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
         echo "<TD><INPUT type=number style='width:60px;' name=top value='".$data['top']."'/></TD>";
         echo "<TD><INPUT type=number style='width:60px;' name=border value='".$data['border']."'/></TD>";
         echo "<TD>";
-    echo "<select name=module><option value=\"\"> - </option> "; // ajout pour ne rien afficher quand ça colle pas, plutôt que d'afficher le premier
+          echo "<select name=module>";
           $query2 = "SELECT * FROM modules_accueil ORDER BY libelle";
           $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
           while ($data2 = mysql_fetch_assoc($req2))
@@ -77,8 +72,8 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
               $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
               while ($data0 = mysql_fetch_assoc($req0))
               {
-                echo "<option value=\"".$data2['url']."-".$data0['nom']."\""; // modif pour les scénarios = on prend en référence le nom et pas l'id (qui bouge quand on supprime un scénario sur la zibase)
-                if($data2['url']."-".$data0['nom'] == $data['url']."-".$data['peripherique']) { echo " selected"; }
+                echo "<option value=\"".$data2['url']."-".$data0['id']."\"";
+                if($data2['url']."-".$data0['id'] == $data['url']."-".$data['peripherique']) { echo " selected"; }
                 echo ">".$data2['libelle']." ".$data0['nom']."</option>";
               }
             } 
@@ -135,7 +130,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
                   $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                   while ($data0 = mysql_fetch_assoc($req0))
                   {
-                    echo "<option value=\"".$data['url']."-".$data0['nom']."\">".$data['libelle']." ".$data0['nom']."</option>"; // pour les scénarios on met en value le couple url - nom et pas url-id (voir remarque plus haut)
+                    echo "<option value=\"".$data['url']."-".$data0['id']."\">".$data['libelle']." ".$data0['nom']."</option>";
                   }
                 } else {
                   $query0 = "SELECT * FROM peripheriques WHERE periph = '".$data['type']."'";
@@ -233,4 +228,3 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   <? 
 }
 ?>
-

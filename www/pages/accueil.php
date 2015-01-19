@@ -29,7 +29,7 @@ $zibase = new ZiBase($ipzibase);
       {
         $periph = $data1;
       }
-      $query = "SELECT * FROM scenarios WHERE nom = '".$data3['peripherique']."'"; // les scenarios sont appelés par leur nom et pas leur id (car la zibase modifie l'id à chaque suppression de scénario)
+      $query = "SELECT * FROM scenarios WHERE id = '".$data3['peripherique']."'";
       $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
       while ($data1 = mysql_fetch_assoc($req))
       {
