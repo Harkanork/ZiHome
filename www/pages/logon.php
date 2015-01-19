@@ -30,7 +30,7 @@ if(isset($_SESSION['auth']))
   }
   else
   {
-    echo "<div id=\"logout\"><center><a href=./index.php?logout=logout><img src=\"./img/icon_logout.png\"><br>D&eacute;connexion</font></a></center></div>";
+    echo "<div id=\"logout\"><center><a href='./index.php?logout=logout'><img src=\"./img/icon_logout.png\"><br>D&eacute;connexion</a></center></div>";
   }
 }
 else
