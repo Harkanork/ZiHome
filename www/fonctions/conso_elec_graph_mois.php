@@ -22,7 +22,7 @@ while($value0 = mysql_fetch_assoc($req0))
         }
         $liste1 .= "[".strtotime(substr($value0['date'], 0, 10)." 12:00:00") * 1000 . "," . ($value0['max'] - $value0['min'] - $consoTemp)/1000 ."],"; // Conso journalière heures pleines
         $liste2 .= "[".strtotime(substr($value0['date'], 0, 10)." 12:00:00") * 1000 . "," . ($consoTemp)/1000 ."],"; // Conso journalière heures creuses
-        $liste3 .= "[".strtotime(substr($value0['date'], 0, 10)." 12:00:00") * 1000 . "," . number_format((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)+$coutfixe/365,1) ."],"; // coût journalier incluant abonnement
+        $liste3 .= "[".strtotime(substr($value0['date'], 0, 10)." 12:00:00") * 1000 . "," . number_format((($consoTemp*$coutHC/1000)+(($value0['max'] - $value0['min'] - $consoTemp)*$coutHP)/1000)+$coutfixe,1) ."],"; // coût journalier incluant abonnement
     }
     $i++;
 }
