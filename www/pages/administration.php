@@ -1,6 +1,7 @@
 <? 
 if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 {
+  include("./lib/versions.php");
 ?>
 <link rel="stylesheet" href="./js/themes/jquery.ui.core.min.css">
 <link rel="stylesheet" href="./js/themes/jquery.ui.theme.min.css">
@@ -15,6 +16,13 @@ include("./fonctions/dialogue_confirmation.php");
 <center>
 <div id="sous-menu">
   <?
+  // Verification des mises a jour
+  if ($version_local < $version_server)
+  {
+    echo "<A HREF='./index.php?page=administration&detail=update'><li class=update>Nouvelle version disponible</li></A>";
+  }
+  
+  // Affiche les pages d'administration des differents modules
   $query = "SELECT * FROM modules WHERE actif = '1'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
@@ -64,9 +72,17 @@ include("./fonctions/dialogue_confirmation.php");
   <A HREF="./index.php?page=administration&detail=variables"><li>Variables</li></A>
   <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
   <A HREF="./index.php?page=administration&detail=paramettres"><li>Param&egrave;tres</li></A>
-<br>
-<span style="font-size: 10px;">v 1.3 (dev)</span>
-<br>
+  <br>
+  <span style="font-size: 10px;">
+  <?
+    echo "v " . $version_local;
+    if ($version_dev == "true")
+    {
+      echo " (dev)";
+    }
+  ?>
+  </span>
+  <br>
 </div>
 <div id="action">
   <?

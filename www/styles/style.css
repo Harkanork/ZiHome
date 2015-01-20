@@ -320,33 +320,6 @@ box-shadow: 0 0 10px #333333;
 min-height: 600px;
 }
 
-#sous-menu{
-margin-left: 10px;
-position :absolute;
-z-index: 100;
-}
-
-#sous-menu li{
-        display : block;
-        width : 200px;
-        height: 20px;
-        padding : 10px;
-        position:relative;
-        cursor : pointer;
-        text-decoration : none;
-        background-color:  #6a6a6a;
-        border: #2F343C;
-        margin-top: 8px;
-        border-radius: 5px;
-        color: #fff;
-        font-weight: bold;
-}
-
-#sous-menu li a{
-color: #fff;
-}
-
-
 #action{
 margin-left: 250px;
 //width :700px;
