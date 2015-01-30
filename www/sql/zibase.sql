@@ -437,10 +437,15 @@ CREATE TABLE IF NOT EXISTS `stickers` (
 
 CREATE TABLE IF NOT EXISTS `video` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordre` INT(3) NOT NULL,
+  `libelle` VARCHAR(60) NOT NULL,
   `adresse` varchar(255) NOT NULL,
   `adresse_internet` varchar(255) NOT NULL,
   `id_plan` int(11) NOT NULL,
   `option` int(11) NOT NULL,
+  `width` INT NOT NULL DEFAULT '640',
+  `fps` INT NOT NULL,
+  `delai` INT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
