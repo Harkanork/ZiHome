@@ -366,3 +366,56 @@ body .ui-tooltip {
     font-size: 13px;
     text-align:center;
 }
+
+/* Styles du module video */
+
+#fond_video {
+    height:100%;
+    width:100%;
+    text-align:center;
+    padding:0px;
+    margin:0px;
+}
+.video_cadre {
+    background-color: #000;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    margin:1%;
+    margin-bottom:0px;
+    width:40%;
+    padding:0px;
+    display: inline-block;
+    box-shadow: 4px 4px 5px 4px #aaa;
+    border-radius: 17px;
+    min-height: 230px;
+    line-height: 200px;
+}
+.video_titre {
+    color:#fff;
+    width:100%;
+    height:30px;
+    line-height: 30px;
+    font-family: "Trebuchet MS";
+    font-size:12px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 5px;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    background-color: #545453;
+}
+.video_img {
+    color:#fff;
+    width:auto;
+    margin:10px;
+    margin-top:0px;
+}
+.video_img a {
+    color:#fff;
+    text-decoration: none;
+}
+img.video {
+    width:100%;
+}

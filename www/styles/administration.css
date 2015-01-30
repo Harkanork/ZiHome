@@ -176,3 +176,65 @@ vertical-align:middle;
   padding-left: 6px;
   padding-right: 6px;
 }
+
+.checkbox_delete {
+	width: 40px;	
+	margin: auto;
+	position: relative;
+	text-align: left;
+}
+.checkbox_delete input[type=checkbox] {
+	visibility: hidden;
+}
+
+.checkbox_delete label {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 0;
+	border-radius: 4px;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+
+	background: -webkit-linear-gradient(top, #fff 0%, #fce4e4 100%);
+	background: -moz-linear-gradient(top, #fff 0%, #fce4e4 100%);
+	background: -o-linear-gradient(top, #fff 0%, #fce4e4 100%);
+	background: -ms-linear-gradient(top, #fff 0%, #fce4e4 100%);
+	background: linear-gradient(top, #fff 0%, #fce4e4 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#fce4e4',GradientType=0 );
+}
+
+.checkbox_delete label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: "X";
+	font-family: Arial, Sans-Serif;
+	font-weight: bold;
+	color:red;
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 0px;
+	left: 4px;
+}
+
+.checkbox_delete label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+}
+
+.checkbox_delete input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+.tableau-admin {
+	margin:10px;
+}
