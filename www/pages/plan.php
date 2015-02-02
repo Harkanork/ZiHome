@@ -768,8 +768,12 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
                 $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 while($periph = mysql_fetch_assoc($req11)) {
-                  $width="640";
-                  $height="340";
+                  $width=$periph['width'];
+                  $libelle = $periph['libelle'];
+                  $fps = 0;
+                  $delai_tentative=0;
+                  $adloc=$periph['adresse'];
+                  $adweb=$periph['adresse_internet'];
                   include("./fonctions/video.php");
                 }
                 echo "</div>";
