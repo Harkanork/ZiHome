@@ -12,7 +12,12 @@ while ($data = mysql_fetch_assoc($req))
 {
   if($data['libelle'] == "conso_elec" && $data['actif'] == 1) {
   ?>
-    <li><A HREF="./index.php?page=conso_elec"><img src = "./img/icon_elec.png"/><span>Conso-Elec</span></a></li>
+    <li><A HREF="./index.php?page=conso_elec"><img src = "./img/icon_elec.png"/><span>Conso Elec</span></a></li>
+  <?
+  }
+  if($data['libelle'] == "conso_eau" && $data['actif'] == 1) {
+  ?>
+    <li><A HREF="./index.php?page=conso_eau"><img src = "./img/icon_eau.png"/><span>Conso Eau</span></a></li>
   <?
   }
   if($data['libelle'] == "temperature" && $data['actif'] == 1) {

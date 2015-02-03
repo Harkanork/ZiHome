@@ -262,7 +262,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
 {
   global $icone;
   global $widthIcones;
-  global $heightIcones;                                 
+  global $heightIcones;
   global $labelWidth;
   global $labelOffsetLeft;
   global $labelOffsetTop;
@@ -273,8 +273,10 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
   echo "<div style=\"position:absolute;top:".($sqlPiece['top'] + $sqlData['top'])."px;left:".($sqlPiece['left'] + $sqlData['left'])."px;border-style:none;z-index:300;\">";
   echo "<a href=\"".$url."\">";
   echo "<img src=\"./img/icones/".$icone."c_".$sqlData['logo']."\" width=\"".$widthIcones."\" heigth=\"".$heightIcones."\" style=\"position:absolute;top:0px;left:0px;border-style:none;\">";
-  echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\">";
-  echo "<span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur1.$unite1."</span>";
+  if ($valeur1 != "") {
+    echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\">";
+    echo "<span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur1.$unite1."</span>";
+  }
   if ($sqlData['show_value2'])
   {
     echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\">";
@@ -303,18 +305,18 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
     {
-        $query1 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND graphique = '1'";
-        $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-        $data3 = mysql_fetch_assoc($req1);
-        $query2 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
-        $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-        $data4 = mysql_fetch_assoc($req2);
-        $query3 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND graphique = '1'";
+        $query3 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req3 = mysql_query($query3, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-        $data5 = mysql_fetch_assoc($req3);
-        $query5 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
+        $data3 = mysql_fetch_assoc($req3);
+        $query4 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."'";
+        $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data4 = mysql_fetch_assoc($req4);
+        $query5 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND graphique = '1'";
         $req5 = mysql_query($query5, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-        $data7 = mysql_fetch_assoc($req5);
+        $data5 = mysql_fetch_assoc($req5);
+        $query7 = "SELECT * FROM scenarios WHERE id_plan = '".$data['id']."'";
+        $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data7 = mysql_fetch_assoc($req7);
         $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
         $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data11 = mysql_fetch_assoc($req11);
@@ -333,12 +335,15 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
         $query17 = "SELECT * FROM peripheriques WHERE id_plan = '".$data['id']."'";
         $req17 = mysql_query($query17, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         $data17 = mysql_fetch_assoc($req17);
+        $query18 = "SELECT * FROM peripheriques WHERE periph = 'eau' AND id_plan = '".$data['id']."' AND graphique = '1'";
+        $req18 = mysql_query($query18, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+        $data18 = mysql_fetch_assoc($req18);
         $img = "";
         if(!empty($data['image']) && file_exists("./img/plan/".$data['image'])) {
           $img = "./img/plan/".$data['image'];
         }
 
-        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null && $data14 == null && $data15 == null) {
+        if($data3 == null && $data4 == null && $data5 == null && $data7 == null && $data11 == null && $data12 == null && $data13 == null && $data14 == null && $data15 == null && $data18 == null) {
         ?>
             <div style="background-color: #fff;background:url('<? echo $img; ?>');background-size:<? echo $data['width']; ?>px <? echo $data['height']; ?>px;background-repeat:no-repeat;width: <? echo $data['width']; ?>px;height: <? echo $data['height']; ?>px;top: <? echo $data['top']; ?>px;left: <? echo $data['left']; ?>px;border: solid <? echo $data['border']; ?>px #777;position: absolute;z-index: <? echo $data['id']; ?>;color: black;font-size: 20px;text-align: <? echo $data['text-align']; ?>;<? echo $data['supplementaire']; ?>;">
         <?
@@ -422,6 +427,12 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               }
               showIcon($data, $data9, $valeur, "", "", "", "");
             }
+// ----- Conso eau
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'eau' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              showIcon($data, $data9, "", "", "", "", "");
+            }
 // ----- Vent
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -482,7 +493,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               echo '<div style="line-height: '. $data['line-height'] . 'px;">'.$data['libelle'].'</div>';
             }
             echo '</div>';
-// ----- Capteur            
+// ----- Capteur
             $query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req4 = mysql_query($query4, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data6 = mysql_fetch_assoc($req4)) {
@@ -503,7 +514,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 }
                 showIconSimple($data, $data6, $ic, "");
             }
-// ----- Actionneur            
+// ----- Actionneur
             $query6 = "SELECT * FROM peripheriques WHERE periph = 'actioneur' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req6 = mysql_query($query6, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data8 = mysql_fetch_assoc($req6)) {
@@ -521,7 +532,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-2');";
                 showIconSimple($data, $data8, $ic, $url);
             }
-// ----- Temperature            
+// ----- Temperature
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'temperature' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) 
@@ -542,7 +553,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-1');";
                 showIcon($data, $data9, $temperature, "&deg;", $hygro, "%", $url);
             }
-// ----- Conso electrique            
+// ----- Conso electrique
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'conso' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) {
@@ -560,7 +571,14 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-3');";
               showIcon($data, $data9, $valeur, "", "", "", $url);
             }
-// ----- Vent            
+// ----- Conso eau
+            $query7 = "SELECT * FROM peripheriques WHERE periph = 'eau' AND id_plan = '".$data['id']."' AND icone ='1'";
+            $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while($data9 = mysql_fetch_assoc($req7)) {
+              $url = "javascript:showPopupTab('custom".$data['id']."', '#tabs-".$data['id']."', '#tabs-".$data['id']."-9');";
+              showIcon($data, $data9, "", "", "", "", $url);
+            }
+// ----- Vent
             $query7 = "SELECT * FROM peripheriques WHERE periph = 'vent' AND id_plan = '".$data['id']."' AND icone ='1'";
             $req7 = mysql_query($query7, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             while($data9 = mysql_fetch_assoc($req7)) {
@@ -637,7 +655,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 } 
                 if(!($data5 == null)){
                 ?>
-                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-3">Conso-Elec</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-3">Conso Elec</a></li>
                 <?
                 }
                 if((!($data7 == null)) && (isset($_SESSION['auth']))){
@@ -659,12 +677,17 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 ?>
                 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-7">Pr&eacute;cipitation</a></li>
                 <?
-                }                                 
+                }
                 if ($data14 != null){
                 ?>
                 <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-8">Luminosit&eacute;</a></li>
                 <?
-                }                                 
+                }
+                if ($data18 != null){
+                ?>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-<? echo $data['id']; ?>-9">Conso Eau</a></li>
+                <?
+                }
                 ?>
             </ul>
             <?
@@ -767,7 +790,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                 <?
                 $query11 = "SELECT * FROM video WHERE id_plan = '".$data['id']."'";
                 $req11 = mysql_query($query11, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-                while($periph = mysql_fetch_assoc($req11)) {
+                while ($periph = mysql_fetch_assoc($req11)) {
                   $width=$periph['width'];
                   $libelle = $periph['libelle'];
                   $fps = 0;
@@ -791,9 +814,25 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
                   }
                   ?>
                 </div>
-                <?
-              }
+              <?
+            }
+            if(!($data18 == null)){
               ?>
+                <div id="tabs-<? echo $data['id']; ?>-9" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
+                  <?
+                  $query1 = "SELECT * FROM peripheriques WHERE periph = 'eau' AND id_plan = '".$data['id']."' AND graphique = '1'";
+                  $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                  while($periph = mysql_fetch_assoc($req1)) {
+                    $width = "640px";
+                    $height = "340px";
+                    $graphInterval = 3;
+                    include("./fonctions/conso_eau_graph.php");
+                  }
+                  ?>
+                </div>
+              <?
+            }
+            ?>
             </div>
         </div>
         <? 

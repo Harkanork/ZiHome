@@ -28,6 +28,7 @@ while ($data = mysql_fetch_assoc($req))
   if($data['libelle'] == 'heure creuse 1 fin') { $heuresCreuses[1]['fin'] = $data['value'].':00'; }
   if($data['libelle'] == 'heure creuse 2 debut') { $heuresCreuses[2]['debut'] = $data['value'].':00'; }
   if($data['libelle'] == 'heure creuse 2 fin') { $heuresCreuses[2]['fin'] = $data['value'].':00'; }
+  if($data['libelle'] == 'cout eau') { $coutEau = $data['value']; }
   if($data['libelle'] == 'couleur graph 1') { $couleurgraph1 = $data['value']; }
   if($data['libelle'] == 'couleur graph 2') { $couleurgraph2 = $data['value']; }
 }

@@ -656,7 +656,8 @@ INSERT INTO `modules` (`id`, `libelle`, `actif`) VALUES
 (16, 'consommable', 0),
 (17, 'actionneurs', 0),
 (18, 'pellet', 0),
-(19, 'notes', 1);
+(19, 'notes', 1),
+(20, 'conso_eau', 0);
 
 -- --------------------------------------------------------
 
@@ -752,7 +753,8 @@ INSERT INTO `paramettres` (`id`, `libelle`, `value`, `type`) VALUES
 (39, 'heure creuse 2 debut', '00:00', 'time'),
 (40, 'heure creuse 2 fin', '00:00', 'time'),
 (41, 'couleur graph 1', '#89A54E', 'color'),
-(42, 'couleur graph 2', '#4572A7', 'color');
+(42, 'couleur graph 2', '#4572A7', 'color'),
+(43, 'cout eau', '3.52', 'number" step="0.01');
 
 
 CREATE VIEW accueil AS SELECT id AS id, libelle AS value FROM modules WHERE actif = '1';
