@@ -9,6 +9,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   $mapPeriph["pluie"] = "Pluviom&egrave;tre";
   $mapPeriph["luminosite"] = "Luminosit&eacute;";
   $mapPeriph["conso"] = "Conso Elec";
+  $mapPeriph["eau"] = "Conso Eau";
 ?>
 <div id="action-tableau">
   <center>
@@ -64,7 +65,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     mysql_query($query, $link);
   }
 
-  $query = "SELECT * FROM peripheriques WHERE periph = 'temperature' OR periph = 'vent' OR periph = 'pluie' OR periph = 'conso' OR periph = 'luminosite'";
+  $query = "SELECT * FROM peripheriques WHERE periph = 'temperature' OR periph = 'vent' OR periph = 'pluie' OR periph = 'conso' OR periph = 'luminosite' OR periph = 'eau'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
   {
