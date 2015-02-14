@@ -9,8 +9,15 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   }
   else if(isset($_POST['add-auto'])) {
-    $query = "INSERT INTO `auto-logon` (pseudo, macaddress, description) VALUES ('".$_SESSION['auth']."', '".$macAddr."', '".$_POST['description']."')";
-    mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    if (empty($macAddr))
+    {
+      echo "<h2><span style='font-weight:bold;color:red;'>Ajout impossible car l'adresse mac n'est pas valide.</span></h2>";
+    }
+    else
+    {
+      $query = "INSERT INTO `auto-logon` (pseudo, macaddress, description) VALUES ('".$_SESSION['auth']."', '".$macAddr."', '".$_POST['description']."')";
+      mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    }
   }
   // Add user
   else if(isset($_POST['add-user']))
@@ -219,7 +226,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   <div id="action-tableau">
   <CENTER>
   <br>
-  <TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Login</TH><TH>Mac adresse</TH><TH>Description</TH><TH></TH></TR>
+  <TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Login</TH><TH>Adresse mac</TH><TH>Appareil</TH><TH></TH></TR>
   <?
   $query = "SELECT * FROM `auto-logon`";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -243,14 +250,25 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
     <TR>
       <TD class=panneau_centre>
         <CENTER>
-        <FORM method="POST" action="./index.php?page=administration&detail=gerer_users">
-          <table>
-            <tr><td class=panneau_libelle>Login</td><td class=panneau_libelle><? echo $_SESSION['auth'];?></td></tr>
-            <tr><td class=panneau_libelle>Mac adresse</td><td class=panneau_libelle><? echo $macAddr; ?></td></tr>
-            <tr><td class=panneau_libelle>Description</td><td><input type="text" name="description" size="12" maxlength="40"/></td></tr>
-            <tr><td colspan=2 class=panneau_boutons><input type="submit" name="add-auto" value="Ajouter"/></td></tr>
-          </table>
-        </form>
+<?
+          if (empty($macAddr))
+          {
+            echo "<p> Echec de la lecture de l'adresse mac de l'appareil courant.</p>";
+          }
+          else
+          {
+?>
+            <FORM method="POST" action="./index.php?page=administration&detail=gerer_users">
+              <table>
+                <tr><td class=panneau_libelle>Login</td><td class=panneau_libelle><? echo $_SESSION['auth'];?></td></tr>
+                <tr><td class=panneau_libelle>Adresse mac</td><td class=panneau_libelle><? echo $macAddr; ?></td></tr>
+                <tr><td class=panneau_libelle>Nom de l'appareil</td><td><input type="text" name="description" size="12" maxlength="40"/></td></tr>
+                <tr><td colspan=2 class=panneau_boutons><input type="submit" name="add-auto" value="Ajouter"/></td></tr>
+              </table>
+            </form>
+<?
+          }
+?>
         </center>
       </TD>
     </TR>
