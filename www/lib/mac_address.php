@@ -67,7 +67,4 @@
        }
     }
   }
-  
-  echo "Adresse : '" . $ipAddress . "' <br>";
-  echo "Mac : '" . $macAddr . "' <br>";
 ?>
