@@ -37,11 +37,15 @@ include("./fonctions/conso_eau_tableau_periph.php");
 $graphInterval = 16;
 include("./fonctions/conso_eau_graph.php");
 ?>
+<br> 
+<?
+include("./fonctions/conso_eau_graph_barres.php");
+?>
 </div>
 <?php } ?>
 </div>
 <script src="./js/highstock.js"></script>
-<script src="./config/conf_highstock.js"></script> 
+<script src="./config/conf_highstock.js"></script>
 <script src="./js/modules/exporting.js"></script> 
 
 

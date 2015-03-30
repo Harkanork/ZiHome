@@ -1,5 +1,6 @@
 <?php
 $liste1 = "";
+$conso_max = 0;
 $datePrecedente=0;
 $query0 = "SELECT * FROM `eau_".$periph['nom']."` WHERE date > DATE_SUB(NOW(), INTERVAL " . $graphInterval . " DAY)";
 $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -14,10 +15,15 @@ while($value0 = mysql_fetch_assoc($req0))
     $liste1 .= "[". (($datePrecedente + 5 * 60) * 1000) . "," . 0 ."],";
     $liste1 .= "[". (($dateCourante - 5 * 60) * 1000) . "," . 0 ."],";
   }
-    
-  $liste1 .= "[". ($dateCourante * 1000) . "," . $value0['conso'] ."],";
+  $conso = $value0['conso'];
+  $liste1 .= "[". ($dateCourante * 1000) . "," . $conso ."],";
   
   $datePrecedente = $dateCourante;
+  
+  if ($conso_max < $conso)
+  {
+    $conso_max = $conso;
+  }
 }
 
 $dateCourante = time();
@@ -62,13 +68,14 @@ if($periph['libelle'] == ""){
                         fontWeight: 'bold'
                     }
                 },
-             }],
+            }],
             rangeSelector : {
                 buttons: [{
                     type: 'hour',
                     count: 1,
                     text: 'Heure'
-                }, {
+                }, 
+                {
                     type: 'day',
                     count: 1,
                     text: 'Journée'
@@ -122,7 +129,8 @@ if($periph['libelle'] == ""){
                 style: {
                    color: '#0000a0'
                 },
-                min: 0
+                min: 0,
+                max: <? echo ($conso_max * 1.1); ?>
             },
             plotOptions: {
                 areaspline: {
