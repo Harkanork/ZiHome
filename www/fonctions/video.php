@@ -19,6 +19,13 @@
 		<div><? echo $libelle; ?></div>
 	</div>
 	<div class="video_img">
-		<p><a href="<? echo $src; ?>"><img class="video" src="<? echo $src; ?>" <? if ($refresh_image > 0) { ?>onload='setTimeout(function() {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, <? echo $refresh_image ?>)' onerror='setTimeout(function() {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, <? echo $dt ?>)' <? } ?> alt='Non disponible'></a></p>
+		<p><a href="<? echo $src; ?>"><img class="video" src="<? echo $src; ?>" <? 
+    if ($refresh_image > 0) 
+    { 
+      ?>
+      onload ='setTimeout(function() { src = src.substring(0, (src.lastIndexOf("t=") + 2)) + (new Date()).getTime() }, <? echo $refresh_image ?>)'
+      onerror='setTimeout(function() { src = src.substring(0, (src.lastIndexOf("t=") + 2)) + (new Date()).getTime() }, <? echo $dt ?>)' <? 
+    } 
+    ?> alt='Non disponible'></a></p>
 	</div>
 </div>
