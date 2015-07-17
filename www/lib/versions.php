@@ -42,11 +42,11 @@ $version_dev = $xmlLocal->attributes()->dev;
 // récupère les données xml sur le dépôt google ZiHome
 if ($version_dev == "true")
 {
-  $xmlServer=RemoteToXml('https://interface-utilisateur-domotique-zibase.googlecode.com/git-history/dev/www/config/version.xml');
+  $xmlServer=RemoteToXml('https://raw.githubusercontent.com/Harkanork/ZiHome/dev/www/config/version.xml');
 }
 else
 {
-  $xmlServer=RemoteToXml('https://interface-utilisateur-domotique-zibase.googlecode.com/git-history/master/www/config/version.xml');
+  $xmlServer=RemoteToXml('https://raw.githubusercontent.com/Harkanork/ZiHome/master/www/config/version.xml');
 }
 
 if (isset($xmlServer->version))
