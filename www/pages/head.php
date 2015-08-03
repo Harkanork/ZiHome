@@ -60,7 +60,7 @@ while ($data = mysql_fetch_assoc($req))
 {
   $icone = $data['value'];
 }
-if(isset($_SESSION['css']) && $_SESSION['css'] != "")
+if (isset($_SESSION['css']) && $_SESSION['css'] != "")
 {
   echo "<link rel=\"stylesheet\" href=\"./styles/".$_SESSION['css'].".css\" type=\"text/css\" media=\"all\">";
 } 
@@ -78,7 +78,30 @@ if ($_GET['page']!="administration") {   // désactive le refresh dans la partie
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
   {
-    echo "<META HTTP-EQUIV=Refresh CONTENT=\"".($data['value']*60)."\">";
+    ?>
+    <script type="text/javascript"> 
+      var nbreMillisec = <?echo ($data['value'] * 60000)?>;
+      gEnableAutoRefresh = true;
+      
+      function enableAutoRefresh(enable)
+      {
+        gEnableAutoRefresh = enable;
+      }
+      
+      function refresh() 
+      {
+        if (gEnableAutoRefresh)
+        {
+          window.location.reload();
+        }
+        else
+        {
+          setTimeout("refresh();", nbreMillisec);
+        }
+      }
+      setTimeout("refresh();", nbreMillisec); 
+    </script>
+    <?
   }
 }
 include('./lib/taille_fichier.php');
