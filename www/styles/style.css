@@ -19,7 +19,7 @@ left: 140px;
      opacity: 0.5;
 }
 
-#actionneur{
+.actionneur{
 width: 640px; 
 height: 100px; 
 margin: 0 auto;
