@@ -12,12 +12,14 @@ function showPopupTab(popup, tab, page)
 {
   showPopup(popup);
   $(tab).tabs('option', 'active', $(tab + ' a[href=' + page + ']').parent().index());
+  enableAutoRefresh(false);
 }
 
 function hidePopup(popup) 
 {
   $("#grayBack").fadeOut('fast', function () { $(this).remove() });
   $("#"+popup).fadeOut('fast', function () { $(this).hide() });
+  enableAutoRefresh(true);
 }
 
 function affichDiv(popup) 
