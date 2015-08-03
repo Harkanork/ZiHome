@@ -760,7 +760,7 @@ function showIcon($sqlPiece, $sqlData, $valeur1, $unite1, $valeur2, $unite2, $ur
               <div id="tabs-<? echo $data['id']; ?>-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" style="overflow:auto;max-height:600px;">
                 <?
                 while($periph = mysql_fetch_assoc($req2)) {
-                  echo "<div id=\"actionneur\">";
+                  echo "<div id='actionneur-" . $periph['id'] . "' class='actionneur'>";
                   include("./fonctions/actioneur.php");
                   echo "</div>";
                 }

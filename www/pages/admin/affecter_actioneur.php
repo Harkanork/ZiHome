@@ -68,9 +68,10 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     <? } ?>
     </select></td>
     <td><select name="type">
-    <option value="on"<? if($data['type'] == "on"){ echo " selected"; } ?>>On</option>
-    <option value="on_off"<? if($data['type'] == "on_off"){ echo " selected"; } ?>>On - Off</option>
-    <option value="dim"<? if($data['type'] == "dim"){ echo " selected"; } ?>>Dimable</option>
+      <option value="on"<? if($data['type'] == "on"){ echo " selected"; } ?>>On</option>
+      <option value="on_off"<? if($data['type'] == "on_off"){ echo " selected"; } ?>>On - Off</option>
+      <option value="dim"<? if($data['type'] == "dim"){ echo " selected"; } ?>>Dimable</option>
+      <option value="rgb"<? if($data['type'] == "rgb"){ echo " selected"; } ?>>RGB</option>
     </select></td> 
     <td><INPUT TYPE="number" NAME="left" VALUE="<? echo $data['left']; ?>" style="width:60px;"/></td> 
     <td><INPUT TYPE="number" NAME="top" VALUE="<? echo $data['top']; ?>" style="width:60px;"/></td>

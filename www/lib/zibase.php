@@ -530,9 +530,9 @@
  	public function execScript($script) {
 	 	if (strlen($script) > 0) {
 			$request = new ZbRequest();
-			$request->command = 16;		  
+			$request->command = 16;
 			$request->message = "cmd: ".$script;
-		    $this->sendRequest($request, false);
+			$this->sendRequest($request, false);
 		}	
  	}
  	
@@ -797,7 +797,26 @@
 				}
     return $info;
     }
- 	
+    
+  /**
+   * fonction permettant de piloter un controleur RGBW Fibaro
+   *
+   * @param string id = le nom du controleur (ex : ZA10)   
+   * @param int red = La couleur rouge (0-255)
+   * @param int green = La couleur verte (0-255)
+   * @param int blue = La couleur bleu (0-255)
+   * @param int white = La couleur blanche (0-255)      
+  */
+    public function sendRGBW($id, $red, $green, $blue, $white) 
+    {
+      $script = "ZWDEV Z" . $id . " 33 05 08 01 " . dechex($white) . " 02 " . dechex($red) . " 03 " . dechex($green) . " 04 " . dechex($blue);
+      
+      $command = "http://" . $this->ip . "/cgi-bin/domo.cgi?cmd=" . rawurlencode($script);
+      
+      $url = curl_init($command);
+      $rawdata = curl_exec($url);
+      curl_close($url);
+    }
  }
  
 ?>
