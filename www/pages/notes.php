@@ -6,10 +6,10 @@ include("./fonctions/dialogue_confirmation.php");
 <link rel="stylesheet" href="js/themes/jquery-ui.min.css" type="text/css" media="all" />
 <link rel="stylesheet" rev="stylesheet" href="styles/notes.css" />
 
-<header>
+<div id="sous-menu">
   <h1>&nbsp;</h1>
   <input type="button" value="Ajouter une note" id="btn-addNote" />
-</header>
+</div>
 <div id="tableau"> 
 </div>
 
