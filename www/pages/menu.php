@@ -1,122 +1,60 @@
-<div class="metro_nav">
-<ul>
-<li class="log">
-<?
-include("./pages/logon.php");
-?>
-</li>
-<?
-$query = "SELECT * FROM modules ORDER BY ordre";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
-{
-  if($data['libelle'] == "conso_elec" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=conso_elec"><img src = "./img/icon_elec.png"/><span>Conso Elec</span></a></li>
+<script src="./js/ajax_edition.js"></script>
+<div class="bandeau">
+      <div class="menu-configuration">
+      <div id="bouton_menu">
+        <img src="./img/icon_zihome.png">
+      </div>
+    </div>
+  <div id="list-menu">
+    <?
+    $query = "SELECT * FROM menu ORDER BY ordre";
+    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+    while ($data = mysql_fetch_assoc($req))
+    {
+      $afficher=false;
+      if (($data['auth']==0) OR (isset($_SESSION['auth']))) {
+        switch($data['type']) {
+          case "module" :
+            $query2 = 'SELECT * FROM modules WHERE id='.$data['module_id'];
+            $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+            while ($module = mysql_fetch_assoc($req2)) {
+              $page="./index.php?page=".$module['url'];
+              $afficher=true;
+            }
+            break;
+          case "iframe":
+            $page="./index.php?iframe=".$data['id'];
+            $afficher=true;
+            break;
+          case "interne":
+            $page="./index.php?interne=".$data['id'];
+            $afficher=true;
+            break;
+          case "vue" :
+            $page="./index.php?vue=".$data['module_id'];
+            $afficher=true;
+            break;
+        }
+      }
+      if ($afficher) {
+        echo '<div id="menu_'.$data['id'].'" class="menu_editable"><A HREF="'.$page.'"><img src = "./img/'.$data['icone'].'"/><span>'.$data['libelle'].'</span></a></div>';
+      }   
+    }
+    if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
+      echo '<div id="menu_ajouter" class="menu_editable"><a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a></div>';
+    }
+    ?>
+  </div>
+</div>
+<div id="sous-menu-zihome">
+  <div><? include("./pages/logon.php"); ?></div>
   <?
-  }
-  if($data['libelle'] == "conso_eau" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=conso_eau"><img src = "./img/icon_eau.png"/><span>Conso Eau</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "temperature" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=temperature"><img src = "./img/icon_temp.png"/><span>Temp&eacute;rature</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "luminosite" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=luminosite"><img src = "./img/icon_lum.png"/><span>Luminosit&eacute;</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "owl" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=owl"><img src = "./img/icon_elec.png"/><span>OWL</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "batterie" && $data['actif'] == 1) {
-  ?>
-    <li><A HREF="./index.php?page=batterie"><img src = "./img/icon_pile.png"/><span>Batteries</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "plan" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=plan"><img src = "./img/icon_home.png"/><span>Plan</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "actionneurs" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=actionneurs"><img src = "./img/icon_home.png"/><span>Actionneurs</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "thermostat" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=thermostat"><img src = "./img/icon_temp.png"/><span>Thermostat</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "calendrier" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=calendrier"><img src = "./img/icon_calendrier.png"/><span>Calendrier</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "vent" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=vent"><img src = "./img/icon_vent.png"/><span>Vent</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "pellet" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=pellet"><img src = "./img/icon_home.png"/><span>Pellet</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "accueil" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=accueil"><img src = "./img/icon_home.png"/><span>Accueil</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "pluie" && $data['actif'] == 1) {
-  ?>
-    <li><a href = "./index.php?page=pluie"><img src = "./img/icon_pluie.png"/><span>Pluie</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "video" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=video"><img src = "./img/icon_video.png"/><span>Cam&eacute;ra</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "consommable" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=consommable"><img src = "./img/icon_elec.png"/><span>Consommable</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "freebox" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=freebox"><img src = "./img/icon_home.png"/><span>Freebox</span></a></li>
-  <?
-  }
-  if($data['libelle'] == "notes" && $data['actif'] == 1 && isset($_SESSION['auth'])) {
-  ?>
-    <li><a href = "./index.php?page=notes"><img src = "./img/icon_notes.png"/><span>Notes</span></a></li>
-  <?
-  }
-}
-$query = "SELECT * FROM `insertion` ORDER BY ordre";
-$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($data = mysql_fetch_assoc($req))
-{
-  if ($data['public'] || isset($_SESSION['auth']))
-  {
-    ?><li><a href = "./index.php?include=<? echo $data['id']; ?>"><img width="40px" height="40px" src = "./img/<? echo $data['icone']; ?>"/><span><? echo $data['libelle']; ?></span></a></li><?
-  }
-}
-if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
-{
-  ?>
-  <li class="menu-configuration"><A HREF="./index.php?page=administration"><img src="./img/icon_config.png"><span>Administration</span></a></li>
-
-  <?
-}
-?>
-</ul>
+    if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
+    {
+      ?>
+      <div><A HREF="./index.php?page=administration">Administration</a></div>
+      <div id="mode_edition">Mode Edition</div>
+      <?
+    }
+    ?>
 </div>
