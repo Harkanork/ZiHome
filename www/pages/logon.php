@@ -30,7 +30,7 @@ if(isset($_SESSION['auth']))
   }
   else
   {
-    echo "<div id=\"logout\"><center><a href='./index.php?logout=logout'><img src=\"./img/icon_logout.png\"><br>D&eacute;connexion</a></center></div>";
+    echo "<a href='./index.php?logout=logout'>D&eacute;connexion</a>";
   }
 }
 else
@@ -40,11 +40,11 @@ else
     $message = NULL;
     if (empty($_POST['pseudo']))
     { 
-      $message .= '<p>Merci de saisir un login</p>'; 
+      $message .= 'Vous avez oubli&eacute; le login. '; 
     }
     if (empty($_POST['pass']))
     { 
-      $message .= '<p>Merci de saisir un mot de passe</p>'; 
+      $message .= 'Vous avez oubli&eacute; le mot de passe !'; 
     }
     if ($message == NULL)
     {
@@ -60,30 +60,22 @@ else
       }
       else
       {
-        echo "<center>erreur d'identification<br></center>";
+        echo "<center>Erreur d'identification</center>";
         echo "<meta http-equiv=\"refresh\" content=\"4; url=".$_SERVER['PHP_SELF']."\">";
       }
     }
     else
     {
-      echo $message;
+      echo "<p>".$message."</p>";
       echo "<meta http-equiv=\"refresh\" content=\"4; url=".$_SERVER['PHP_SELF']."\">";
     }
   }
   else
   {
-    echo "<center> <form method=\"POST\" action=\"".$_SERVER['PHP_SELF']."\" style=\"margin:0;padding=0;\">
-    <table style=\"border: 0px;\" cellspacing=\"0\">
-      <tr>
-        <td><img src=\"./img/user.png\" width=\"14px\"></td>
-        <td><input type=\"text\" name=\"pseudo\" size=\"12\" maxlength=\"40\"/></td>
-      </tr>
-      <tr>
-        <td><img src=\"./img/mdp.png\" width=\"14px\"></td>
-        <td><input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"20\"/></td>
-      </tr>
-    </table>
-    <input type=\"submit\" name=\"submit1\" value=\"Valider\" class=\"input\"></input></form></center>";
+    echo "<form method=\"POST\" action=\"".$_SERVER['PHP_SELF']."\" style=\"margin:0;padding=0;\">
+          <input type=\"text\" name=\"pseudo\" size=\"12\" maxlength=\"40\" placeholder=\"Login\"/>
+          <input type=\"password\" name=\"pass\" size=\"12\" maxlength=\"20\" placeholder=\"Mot de passe\"/>
+          <input type=\"submit\" name=\"submit1\" value=\"Connexion\" class=\"input\"></form>";
   }
 }
 ?>
