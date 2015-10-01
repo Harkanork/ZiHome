@@ -15,65 +15,64 @@ include("./fonctions/dialogue_confirmation.php");
 
 <center>
 <div id="sous-menu">
+  <div><A HREF="./index.php?page=administration&detail=paramettres">Param&egrave;tres</A></div>
+  <div><A HREF="./index.php?page=administration&detail=gerer_modules">G&eacute;rer les modules</A></div>
+  <div><A HREF="./index.php?page=administration&detail=gerer_users">G&eacute;rer les utilisateurs</A></div>
+  <div><A HREF="./index.php?page=administration&detail=affecter_sonde">G&eacute;rer les sondes</A></div>
+  <div><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un actioneur</A></div>
+  <div><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un capteur</A></div>
+  <div><A HREF="./index.php?page=administration&detail=affecter_scenario">Affecter un sc&eacute;nario</A></div>
   <?
-  // Verification des mises a jour
-  if ($version_local < $version_server)
-  {
-    echo "<A HREF='./index.php?page=administration&detail=update'><li class=update>Nouvelle version disponible</li></A>";
-  }
-  
   // Affiche les pages d'administration des differents modules
   $query = "SELECT * FROM modules WHERE actif = '1'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))
   {
-    if($data['libelle'] == 'plan') {
+    if($data['url'] == 'plan') {
       ?>
-      <A HREF="./index.php?page=administration&detail=gerer_pieces"><li>G&eacute;rer les pi&egrave;ces</li></A>
-      <A HREF="./index.php?page=administration&detail=gerer_stickers"><li>G&eacute;rer les stickers</li></A>
-      <A HREF="./index.php?page=administration&detail=gerer_dynaText"><li>G&eacute;rer les textes dynamiques</li></A>
+      <div><A HREF="./index.php?page=administration&detail=gerer_pieces">G&eacute;rer les pi&egrave;ces</A></div>
+      <div><A HREF="./index.php?page=administration&detail=gerer_stickers">G&eacute;rer les stickers</A></div>
+      <div><A HREF="./index.php?page=administration&detail=gerer_dynaText">G&eacute;rer les textes dynamiques</A></div>
       <?
     }
-    else if($data['libelle'] == 'accueil') {
+    else if($data['url'] == 'accueil') {
       ?>
-      <A HREF="./index.php?page=administration&detail=accueil"><li>Page Accueil</li></A>
+      <div><A HREF="./index.php?page=administration&detail=accueil">Page Accueil</A></div>
       <?
     }
-    else if($data['libelle'] == 'video') {
+    else if($data['url'] == 'video') {
       ?>
-      <A HREF="./index.php?page=administration&detail=video"><li>Cam&eacute;ras</li></A>
+      <div><A HREF="./index.php?page=administration&detail=video">Cam&eacute;ras</A></div>
       <?
     }
-    else if($data['libelle'] == 'iphone') {
+    else if($data['url'] == 'iphone') {
       ?>
-      <A HREF="./index.php?page=administration&detail=iphone"><li>iPhone</li></A>
+      <div><A HREF="./index.php?page=administration&detail=iphone">iPhone</A></div>
       <?
     }
-    else if($data['libelle'] == 'android') {
+    else if($data['url'] == 'android') {
       ?>
-      <A HREF="./index.php?page=administration&detail=android"><li>Android</li></A>
+      <div><A HREF="./index.php?page=administration&detail=android">Android</A></div>
       <?
     }
-    else if($data['libelle'] == 'conso_elec') {
+    else if($data['url'] == 'conso_elec') {
       ?>
-      <A HREF="./index.php?page=administration&detail=verif_conso"><li>V&eacute;rification donn&eacute;es conso</li></A>
+      <div><A HREF="./index.php?page=administration&detail=verif_conso">V&eacute;rification donn&eacute;es conso</A></div>
       <?
     }
   }
+  ?> 
+  
+<? /*  <A HREF="./index.php?page=administration&detail=gerer_protocol">G&eacute;rer les protocoles</A> */ ?>
+  <div><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></div>
+  <div><A HREF="./index.php?page=administration&detail=variables">Variables</A></div>
+  <?
+  // Verification des mises a jour
+  if ($version_local < $version_server) {
+    echo "<div><A HREF='./index.php?page=administration&detail=update'><li class=update>Nouvelle version disponible</A></div>";
+  }
   ?>
-  <A HREF="./index.php?page=administration&detail=affecter_sonde"><li>G&eacute;rer les sondes</li></A>
-  <A HREF="./index.php?page=administration&detail=affecter_actioneur"><li>Affecter un actioneur</li></A>
-  <A HREF="./index.php?page=administration&detail=affecter_capteur"><li>Affecter un capteur</li></A>
-  <A HREF="./index.php?page=administration&detail=affecter_scenario"><li>Affecter un sc&eacute;nario</li></A>
-  <A HREF="./index.php?page=administration&detail=gerer_users"><li>G&eacute;rer les utilisateurs</li></A>
-  <A HREF="./index.php?page=administration&detail=gerer_modules"><li>G&eacute;rer les modules</li></A>
-<? /*  <A HREF="./index.php?page=administration&detail=gerer_protocol"><li>G&eacute;rer les protocoles</li></A> */ ?>
-  <A HREF="./index.php?page=administration&detail=messages"><li>Messages Zibase</li></A>
-  <A HREF="./index.php?page=administration&detail=variables"><li>Variables</li></A>
-  <A HREF="./index.php?page=administration&detail=insertion"><li>Insertion de page</li></A>
-  <A HREF="./index.php?page=administration&detail=paramettres"><li>Param&egrave;tres</li></A>
-  <br>
-  <span style="font-size: 10px;">
+  <span style="font-size: 10px; float:right;">
   <?
     echo "v " . $version_local;
     if ($version_dev == "true")
@@ -82,9 +81,8 @@ include("./fonctions/dialogue_confirmation.php");
     }
   ?>
   </span>
-  <br>
 </div>
-<div id="action">
+<div id="admin">
   <?
   if(isset($_GET['detail'])){
     include("./pages/admin/".$_GET['detail'].".php");
