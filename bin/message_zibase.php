@@ -24,7 +24,7 @@ while (true) {
   $zbData->message = str_replace("'","",$zbData->message);
   $query = "INSERT INTO message_zibase (date, message) VALUES (now(), '".$zbData->message."')";
   mysql_query($query, $link);
-  $query = "DELETE FROM message_zibase WHERE date < DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+  $query = "DELETE FROM message_zibase WHERE date < DATE_SUB(NOW(), INTERVAL 1 MONTH)";
   mysql_query($query, $link);
 }
 ?>
