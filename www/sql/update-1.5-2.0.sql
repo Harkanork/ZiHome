@@ -41,7 +41,7 @@ UPDATE `menu` SET libelle = 'Freebox', icone ='icon_home.png', auth=1 WHERE modu
 UPDATE `menu` SET libelle = 'Notes', icone ='icon_notes.png', auth=1 WHERE module_id = ( SELECT `id` FROM `modules` WHERE `libelle` = 'notes' );
 UPDATE `menu` SET libelle = 'IPhone', icone ='icon_iphone.png', auth=1 WHERE module_id = ( SELECT `id` FROM `modules` WHERE `libelle` = 'iphone' );
 UPDATE `menu` SET libelle = 'Android', icone ='icon_apps.png', auth=1 WHERE module_id = ( SELECT `id` FROM `modules` WHERE `libelle` = 'android' );
-UPDATE `menu` SET libelle = 'Conso eau', icone ='icon_eau.png', auth=1 WHERE module_id = ( SELECT `id` FROM `modules` WHERE `libelle` = 'conso_eau' );
+UPDATE `menu` SET libelle = 'Conso eau', icone ='icon_eau.png' WHERE module_id = ( SELECT `id` FROM `modules` WHERE `libelle` = 'conso_eau' );
 
 --
 -- On récupère les pages supplémentaires insérées, leur libellé, et on les ajoute à la suite des menus précédents
@@ -62,24 +62,24 @@ ALTER TABLE `modules` DROP `ordre`;
 ALTER TABLE `modules` ADD `url` VARCHAR( 50 ) NOT NULL ;
 UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso &eacute;lec' WHERE `libelle` = 'conso_elec';
 UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es temp&eacute;rature' WHERE `libelle` = 'temperature';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es luminosit&eacute;'WHERE `libelle` = 'luminosite';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL'WHERE `libelle` = 'owl';
-UPDATE `modules` SET url = libelle, libelle = 'Etat des batteries'WHERE `libelle` = 'batterie';
-UPDATE `modules` SET url = libelle, libelle = 'Plan - Bientot obsolete'WHERE `libelle` = 'plan';
-UPDATE `modules` SET url = libelle, libelle = 'Bilan des actionneurs'WHERE `libelle` = 'actionneurs';
-UPDATE `modules` SET url = libelle, libelle = 'Module thermostat'WHERE `libelle` = 'thermostat';
-UPDATE `modules` SET url = libelle, libelle = 'Module calendrier'WHERE `libelle` = 'calendrier';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es an&eacute;mom&eacute;trie'WHERE `libelle` = 'vent';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso pellet'WHERE `libelle` = 'pellet';
-UPDATE `modules` SET url = libelle, libelle = 'Accueil - Bientot obsolete'WHERE `libelle` = 'accueil';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es pluviom&eacute;trie'WHERE `libelle` = 'pluie';
-UPDATE `modules` SET url = libelle, libelle = 'Affichage des cam&eacute;ras'WHERE `libelle` = 'video';
-UPDATE `modules` SET url = libelle, libelle = 'Gestion des consommables'WHERE `libelle` = 'consommable';
-UPDATE `modules` SET url = libelle, libelle = 'Module Freebox'WHERE `libelle` = 'freebox';
-UPDATE `modules` SET url = libelle, libelle = 'Tableau virtuel &#40;notes&#41;'WHERE `libelle` = 'notes';
-UPDATE `modules` SET url = libelle, libelle = 'Module Iphone'WHERE `libelle` = 'iphone';
-UPDATE `modules` SET url = libelle, libelle = 'Module Android'WHERE `libelle` = 'android';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL'WHERE `libelle` = 'conso_eau';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es luminosit&eacute;' WHERE `libelle` = 'luminosite';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL' WHERE `libelle` = 'owl';
+UPDATE `modules` SET url = libelle, libelle = 'Etat des batteries' WHERE `libelle` = 'batterie';
+UPDATE `modules` SET url = libelle, libelle = 'Plan - Bientot obsolete' WHERE `libelle` = 'plan';
+UPDATE `modules` SET url = libelle, libelle = 'Bilan des actionneurs' WHERE `libelle` = 'actionneurs';
+UPDATE `modules` SET url = libelle, libelle = 'Module thermostat' WHERE `libelle` = 'thermostat';
+UPDATE `modules` SET url = libelle, libelle = 'Module calendrier' WHERE `libelle` = 'calendrier';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es an&eacute;mom&eacute;trie' WHERE `libelle` = 'vent';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso pellet' WHERE `libelle` = 'pellet';
+UPDATE `modules` SET url = libelle, libelle = 'Accueil - Bientot obsolete' WHERE `libelle` = 'accueil';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es pluviom&eacute;trie' WHERE `libelle` = 'pluie';
+UPDATE `modules` SET url = libelle, libelle = 'Affichage des cam&eacute;ras' WHERE `libelle` = 'video';
+UPDATE `modules` SET url = libelle, libelle = 'Gestion des consommables' WHERE `libelle` = 'consommable';
+UPDATE `modules` SET url = libelle, libelle = 'Module Freebox' WHERE `libelle` = 'freebox';
+UPDATE `modules` SET url = libelle, libelle = 'Tableau virtuel &#40;notes&#41;' WHERE `libelle` = 'notes';
+UPDATE `modules` SET url = libelle, libelle = 'Module Iphone' WHERE `libelle` = 'iphone';
+UPDATE `modules` SET url = libelle, libelle = 'Module Android' WHERE `libelle` = 'android';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL' WHERE `libelle` = 'conso_eau';
 
 
 --
