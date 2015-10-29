@@ -3,9 +3,6 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
   
   include('./lib/mac_address.php');
   
-  echo "Adresse : '" . $ipAddress . "' <br>";
-  echo "Mac : '" . $macAddr . "' <br>";
-    
   // Auto connect
   if(isset($_GET['supp-auto'])) {
     $query = "DELETE FROM `auto-logon` WHERE `id`='".$_GET['supp-auto']."'";

@@ -79,7 +79,7 @@ if ($_GET['page']!="administration") {   // désactive le refresh dans la partie
   while ($data = mysql_fetch_assoc($req))
   {
     ?>
-    <script type="text/javascript"> 
+    <script type="text/javascript">
       var nbreMillisec = <?echo ($data['value'] * 60000)?>;
       gEnableAutoRefresh = true;
       

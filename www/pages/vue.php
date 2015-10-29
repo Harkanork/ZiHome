@@ -130,44 +130,7 @@ if (isset($_GET['vue'])) {
 			$soleil = "jour";
 		}
 
-		// METEO
-		$meteoIcon = $weather->cc->icon;
-		// default values
-		$meteoIconShow = true;
-		$meteoIconFolder = "colorful";
-		$meteoIconLeft = 10;
-		$meteoIconTop = 10;
-		$meteoIconWidth = 50;
-		$meteoIconHeight = 50;
-		// Read values from the database
-		$query = "SELECT * FROM paramettres WHERE id >= 11 and id <= 16";
-		$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-		while ($data = mysql_fetch_assoc($req)) {
-			switch ($data['id']) {
-	    		case 11:
-	    			if ($data['value'] == "true") {
-	        			$meteoIconShow = true;
-					} else {
-	    				$meteoIconShow = false;
-	    			}
-	    			break;
-				case 12:
-	      			$meteoIconFolder = $data['value'];
-	    			break;
-	    		case 13:
-	    			$meteoIconWidth = $data['value']; 
-	    			break;
-	    		case 14:
-	    			$meteoIconHeight = $data['value'];
-	    			break;
-	    		case 15:
-	      			$meteoIconLeft = $data['value'];
-	      			break;
-	    		case 16:
-					$meteoIconTop = $data['value'];
-	    			break;
-	    	}
-		}
+		
 
 		
 
@@ -251,7 +214,8 @@ if (isset($_GET['vue'])) {
 		?>
 
 	<!-- <div id="plan" style="position: relative;padding: 15px;margin: auto;height: <? echo $height; ?>px;width: <? echo $width; ?>px;background-color: #ffffff;background-Position: center center;background:url(<? echo $image_fond; ?>);"> -->
-	    <?     
+	    <? 
+	    // Affichage des cadres si nécessaires dans cette vue    
 	    $query = "SELECT * FROM `vues_elements` WHERE `type`='cadre' AND `vue_id` ='".$id."';";
 	    $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 	    while ($data = mysql_fetch_assoc($req)) {
@@ -266,7 +230,9 @@ if (isset($_GET['vue'])) {
 		        if ($showAllNames and $data['show-libelle']) {
 		            echo '<div style="line-height: '. $data['line-height'] . 'px;">'.$data['libelle'].'</div>';
 		        }
-		        echo '</div>';    
+		        echo '</div>';  
+
+		        // il faudrait que l'id du cadre enregistré dans vues_elements corresponde à l'ancien id du plan = plan.id -> vues_elements
 
 				// ----- Capteur
 		            $query4 = "SELECT * FROM peripheriques WHERE periph = 'capteur' AND id_plan = '".$data['id']."' AND icone ='1'";
@@ -620,24 +586,27 @@ if (isset($_GET['vue'])) {
 	        <? 
 		}
 
-		// METEO
+		// -------------------------------------------------------------- fin plan ----------------------------------------------
+
 		
-	    
-	    if ($meteoIconShow) {
-	        echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
-	        if ($meteoIconHeight)
-	        {
-	          echo 'height:' . $meteoIconHeight . 'px;';
-	        }
-	        if ($meteoIconWidth)
-	        {
-	          echo 'width:' . $meteoIconWidth . 'px;';
-	        }
+		// Affichage icone(s) METEO si nécessaire dans cette vue
+		$meteoIcon = $weather->cc->icon;
+		$query= "SELECT * FROM `vues_elements` WHERE `type`='meteo' AND `vue_id`=".$id;
+	    $req=mysql_query($query, $link);
+	    while ($met = mysql_fetch_assoc($req)) {
+	    	$meteoIconFolder = $met['fichier'];
+			$meteoIconLeft = $met['left'];
+			$meteoIconTop = $met['top'];
+			$meteoIconWidth = $met['width'];
+			$meteoIconHeight = $met['height'];
+	    	echo '<img src="./img/meteo/' . $meteoIconFolder . '/' . $meteoIcon . '.png" style="position:absolute;top:' . $meteoIconTop . 'px;left:' . $meteoIconLeft . 'px;';
+	        if ($meteoIconHeight) { echo 'height:' . $meteoIconHeight . 'px;'; }
+	        if ($meteoIconWidth) {echo 'width:' . $meteoIconWidth . 'px;'; }
 	        echo 'z-index:300"/>';
 	    }
 
 
-	    // POLLUTION
+	    // Affichage icone(s) pollution si nécessaire dans cette vue
 	    $query= "SELECT * FROM `vues_elements` WHERE `type`='pollution' AND `vue_id`=".$id;
 	    $req=mysql_query($query, $link);
 	    while ($poll = mysql_fetch_assoc($req)) {
@@ -645,7 +614,6 @@ if (isset($_GET['vue'])) {
 			$pollutionIconTop = $poll['top'];
 			$pollutionIconWidth = $poll['width'];
 			$pollutionIconHeight = $poll['height'];
-
 			$query = "SELECT * FROM pollution order by date DESC limit 1";
 			$res_query = mysql_query($query, $link);
 			if (mysql_numrows($res_query) > 0) {
@@ -661,7 +629,7 @@ if (isset($_GET['vue'])) {
 		}
 	   
 
-		// -------------------------------------------------------------- fin plan ----------------------------------------------
+
 		?>
 	</div>
 
