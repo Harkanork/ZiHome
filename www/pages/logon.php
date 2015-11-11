@@ -30,7 +30,17 @@ if(isset($_SESSION['auth']))
   }
   else
   {
-    echo "<a href='./index.php?logout=logout'>D&eacute;connexion</a>";
+  ?>
+    D&eacute;connexion
+    <script>
+      // on ajoute un événement sur le bouton administration
+      $(document).on('click','#div_logon', function () 
+      {
+        window.location.href = "./index.php?logout=logout";
+      });
+      $('#div_logon').css('cursor', 'pointer');
+    </script>
+  <?
   }
 }
 else

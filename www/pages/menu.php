@@ -47,14 +47,22 @@
   </div>
 </div>
 <div id="sous-menu-zihome">
-  <div><? include("./pages/logon.php"); ?></div>
+  <div id="div_logon"><? include("./pages/logon.php"); ?></div>
   <?
     if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
     {
       ?>
-      <div><A HREF="./index.php?page=administration">Administration</a></div>
-      <div id="mode_edition">Mode Edition</div>
+      <div id="bouton_administration">Administration</div>
+      <div id="mode_edition">Edition du menu</div>
       <?
     }
     ?>
 </div>
+<script>
+  // on ajoute un événement sur le bouton administration
+  $(document).on('click','#bouton_administration', function () 
+  {
+    window.location.href = "./index.php?page=administration";
+  });
+</script>
+

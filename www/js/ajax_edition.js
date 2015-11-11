@@ -183,9 +183,8 @@ $(document).on('click','#menu_ajouter', function() {
 // fonction qui déroule/rentre le sous-bandeau du menu zihome (onnexion/admin/édition)
 function affiche_sousbandeau(booleen) {
   if (booleen==true) {
-    $('#sous-menu-zihome').slideDown(200, function() {
-      $('#bouton_menu').addClass('active');
-    });
+    $('#bouton_menu').addClass('active');
+    $('#sous-menu-zihome').slideDown(200);
   } else if ($('#sous-menu-zihome').is(':visible')) {
     $('#sous-menu-zihome').slideUp(200, function() {
       $('#bouton_menu').removeClass('active');

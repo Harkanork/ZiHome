@@ -101,7 +101,6 @@ div.bandeau>div>div.plan{
 div.bandeau>div>div>a>span, div.bandeau>ul>li>span{
     display: block;
     text-align: center;
-    width: 85px;
     height: 30px;
     color: white;
     font-size: 12px;
@@ -117,6 +116,11 @@ div.bandeau>div>div>a>span.temp{
 div.bandeau>div>div.menu-configuration{
     overflow:visible;
     width:auto;
+}
+
+#bouton_administration
+{
+    cursor: pointer;
 }
 
 #mode_edition {
