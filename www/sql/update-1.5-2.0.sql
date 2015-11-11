@@ -118,7 +118,7 @@ UPDATE `menu` SET `type`='vue', `module_id`=(SELECT `id` FROM `vues` WHERE `libe
 -- On attribue tout ce qu'on a récupérer sur page_accueil à cette nouvelle vue, et on y ajoute également les textes dynamiques et stickers qui étaient destinés à la page d'accueil
 --
 UPDATE `vues_elements` SET `vue_id`=(SELECT `id` FROM `vues` WHERE `libelle`='accueil') WHERE 1=1;
-INSERT INTO `vues_elements`(`type`, `libelle`, `font`, `color`, `size`, `bold`, `italic`, `left`, `top`, `condition`, `vue_id`) SELECT 'textdyn', `dynatext`.`libelle`, `dynatext`.`font`, `dynatext`.`color`, `dynatext`.`size`, `dynatext`.`bold`, `dynatext`.`italic`, `dynatext`.`left`, `dynatext`.`top`, `dynatext`.`condition`, `vues`.`id` FROM `dynatext`, `vues` WHERE `dynatext`.`page`='accueil' AND `vues`.`libelle`='accueil';
+INSERT INTO `vues_elements`(`type`, `libelle`, `font`, `color`, `size`, `bold`, `italic`, `left`, `top`, `condition`, `vue_id`) SELECT 'textdyn', `dynaText`.`libelle`, `dynaText`.`font`, `dynaText`.`color`, `dynaText`.`size`, `dynaText`.`bold`, `dynaText`.`italic`, `dynaText`.`left`, `dynaText`.`top`, `dynaText`.`condition`, `vues`.`id` FROM `dynaText`, `vues` WHERE `dynaText`.`page`='accueil' AND `vues`.`libelle`='accueil';
 INSERT INTO `vues_elements`(`type`, `libelle`, `left`, `top`, `width`, `height`, `condition`, `url`, `vue_id`) SELECT 'sticker', `stickers`.`libelle`, `stickers`.`left`, `stickers`.`top`, `stickers`.`width`, `stickers`.`height`, `stickers`.`condition`, `stickers`.`fichier`, `vues`.`id` FROM `stickers`, `vues` WHERE `stickers`.`page`='accueil' AND `vues`.`libelle`='accueil';
 
 
@@ -127,7 +127,7 @@ INSERT INTO `vues_elements`(`type`, `libelle`, `left`, `top`, `width`, `height`,
 --
 INSERT INTO `vues`(`libelle`) VALUES ('plan');
 UPDATE `menu` SET `type`='vue', `module_id`=(SELECT `id` FROM `vues` WHERE `libelle`='plan') WHERE `libelle`='Plan';
-INSERT INTO `vues_elements`(`type`, `libelle`, `font`, `color`, `size`, `bold`, `italic`, `left`, `top`, `condition`, `vue_id`) SELECT 'textdyn', `dynatext`.`libelle`, `dynatext`.`font`, `dynatext`.`color`, `dynatext`.`size`, `dynatext`.`bold`, `dynatext`.`italic`, `dynatext`.`left`, `dynatext`.`top`, `dynatext`.`condition`, `vues`.`id` FROM `dynatext`, `vues` WHERE `dynatext`.`page`='plan' AND `vues`.`libelle`='plan';
+INSERT INTO `vues_elements`(`type`, `libelle`, `font`, `color`, `size`, `bold`, `italic`, `left`, `top`, `condition`, `vue_id`) SELECT 'textdyn', `dynaText`.`libelle`, `dynaText`.`font`, `dynaText`.`color`, `dynaText`.`size`, `dynaText`.`bold`, `dynaText`.`italic`, `dynaText`.`left`, `dynaText`.`top`, `dynaText`.`condition`, `vues`.`id` FROM `dynaText`, `vues` WHERE `dynaText`.`page`='plan' AND `vues`.`libelle`='plan';
 INSERT INTO `vues_elements`(`type`, `libelle`, `left`, `top`, `width`, `height`, `condition`, `url`, `vue_id`) SELECT 'sticker', `stickers`.`libelle`, `stickers`.`left`, `stickers`.`top`, `stickers`.`width`, `stickers`.`height`, `stickers`.`condition`, `stickers`.`fichier`, `vues`.`id` FROM `stickers`, `vues` WHERE `stickers`.`page`='plan' AND `vues`.`libelle`='plan';
 
 --
