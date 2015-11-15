@@ -47,7 +47,7 @@ div.bandeau>div{
 div.bandeau>div>div{
     background-color: black;
     border:none;
-    width : 85px;
+    width : 75px;
     height : 75px;
     margin: 0;
     margin-top:5px;
@@ -67,24 +67,32 @@ div.bandeau>div>div.ui-sortable-helper {
 }
 
 div.bandeau>div>div.fantome{
-    border:1px dashed #8B8BED;
 }
 
 div.bandeau>div>div.menu_active {
-    border-right:1px dotted #8B8BED;
-    border-left:1px dotted #8B8BED;
 }
 
 div.bandeau>div>div.menu_active>a {
-    cursor: url('../img/cursor/edition.cur'), pointer;
+    cursor: default;
+}
+
+.edit_item_menu {
+    cursor: pointer;
+}
+
+.delete_item_menu {
+    cursor: pointer;
+}
+
+.move_item_menu {
+    cursor: move;
 }
 
 div.bandeau>div>div#menu_ajouter{
     background-color: black;
-    border:1px dashed #8B8BED;
     display:none;
     text-align: center;
-    width:70px;
+    width:75px;
     height : 75px;
     position:relative;
 }
@@ -137,7 +145,6 @@ div.bandeau>div>div.menu-configuration{
 }
 
 #mode_edition.active {
-    border:2px inset #8B8BED;
     background-color: #2B3762;
     color:#fff;
 }
@@ -274,7 +281,7 @@ div.bandeau>.scroll_bar>span{
     background-color: #000;
     border: medium none;
     position: relative;
-    width: 85px;
+    width: 75px;
     height: 85px;
     margin: 0px;
     padding-top:5px;
@@ -283,6 +290,7 @@ div.bandeau>.scroll_bar>span{
     text-align: center;
     cursor: pointer;
 }
+
 #bouton_menu.active {
     background-color: #4E4E4E;
     border-top-right-radius: 5px;

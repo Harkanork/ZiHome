@@ -37,8 +37,8 @@
         }
       }
       if ($afficher) {
-        echo '<div id="menu_'.$data['id'].'" class="menu_editable"><A HREF="'.$page.'"><img src = "./img/'.$data['icone'].'"/><span>'.$data['libelle'].'</span></a></div>';
-      }   
+        echo '<div id="menu_'.$data['id'].'" class="menu_editable" style="position:relative;left:0px;"><A HREF="'.$page.'"><img src = "./img/'.$data['icone'].'"/><span>'.$data['libelle'].'</span></a></div>';
+      }
     }
     if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
       echo '<div id="menu_ajouter" class="menu_editable"><a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a></div>';

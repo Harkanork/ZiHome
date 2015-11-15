@@ -8,16 +8,18 @@ var nb_init = 0; // cas particulier du premier clic sur le mode édition
 $(document).on('click','#mode_edition', function () {  // on ajoute un événement sur le bouton mode_edition
   if (mode_edition===false) {  // cas où on n'était pas encore en mode édition
     mode_edition = true; // on passe en mode edition
+    gEnableAutoRefresh = false;
     $("#mode_edition").addClass('active'); // on modifie l'aspect du bouton pour signaler l'activation du mode édition
     $("#mode_edition").appendTo('#bouton_menu');// on déplace le bouton pour masquer le sous-menu
     affiche_sousbandeau(false); // on masque le sous-bandeau pour permettre d'accéder à toute la page
     nb_init ++;
   } else {
     mode_edition = false; // on sort du mode edition
+    gEnableAutoRefresh = true;
     $("#mode_edition").removeClass('active'); // on modifie l'aspect du bouton pour signaler la désactivation du mode édition
     $("#mode_edition").appendTo('#sous-menu-zihome');// on remet le bouton dans le sous-bandeau
   }
-  menu_edition(mode_edition,nb_init); // on active ou désactive le mode édition du menu
+  menu_edition(mode_edition, nb_init); // on active ou désactive le mode édition du menu
 });
 
 
@@ -27,8 +29,8 @@ $(document).on('click','#mode_edition', function () {  // on ajoute un événeme
 
 
 // fonction qui active ou désactive le mode édition du menu
-function menu_edition(activ, nb_init) {
-  if (activ==true) { // si on doit l'activer
+function menu_edition(actif, nb_init) {
+  if (actif==true) { // si on doit l'activer
     if (nb_init<2) { // première activation seulement
       $("#list-menu").sortable({ // on rend les item du menu déplaçables
         placeholder: 'fantome',     // style appliqué à la case vide quand on bouge une élément
@@ -39,10 +41,24 @@ function menu_edition(activ, nb_init) {
       });
       $("#list-menu").disableSelection();  // évite de sélectionner le contenu pendant le glissé
     }
+    
+    // On rajoute les boutons Edit/Delete/Move
+    $("#list-menu").children().each(function(n) {
+      if ($(this).attr("id") != "menu_ajouter") {
+        $(this).append('<div style="position:absolute;top:0px;left:10px;" class="edit_item_menu"> <img width="26" height="26" src = "./img/edit3.png"/></div>');
+        $(this).append('<div style="position:absolute;top:0px;right:10px;" class="delete_item_menu"> <img width="26" height="26" src = "./img/delete3.png"/></div>');
+        $(this).append('<div style="position:absolute;bottom:0px;left:4px" class="move_item_menu"> <img width="67" height="14" src = "./img/tirette3.png"/></div>');
+      }
+    });
+    
     $("#list-menu").sortable('enable'); // on réactive le glissé si on était précédemment sorti du mode édition (je n'ai pas réussi à le mettre dans les options précédentes, ça ne marchait pas)
     $('.menu_editable').removeClass('menu_editable').addClass('menu_active'); // on modifie l'aspect des item du menu pour signaler qu'ils sont déplaçables
+    
     if (nb_init<2) { // première activation seulement
-      $(document).on('click', ".menu_active > a", function (event) { // on rend les item modifiables au click
+      $(document).on('click', ".menu_active > a", function (event) { // on rend les item insensible au click
+      event.preventDefault();
+      });
+      $(document).on('click', ".edit_item_menu", function (event) { // on rend les item modifiables au click
         event.preventDefault();
         var id = $(this).parents('div').attr('id').replace('menu_','');
         $.ajax({
@@ -223,9 +239,3 @@ $(document).ready(function() {
     });
   }
 });
-
-
-
-
-
-
