@@ -22,7 +22,11 @@ $(function()
     width:400,
     autoOpen: false,
     modal: true,
-    zIndex: 300,
+    closeText: "",
+    open: function (event, ui) {
+      $('.ui-dialog').css('z-index',999999);
+      $('.ui-widget-overlay').css('z-index',999998);
+    },
     buttons: 
     {
       "Oui": function() 
@@ -46,5 +50,5 @@ $(function()
 });
 </script>
 <div id="dialog-confirm" title="Confirmation" style="display:none;">
-Confirmez-vous la suppression?
+Confirmez-vous la suppression ?
 </div>
