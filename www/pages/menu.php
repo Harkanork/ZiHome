@@ -1,3 +1,13 @@
+
+<link rel="stylesheet" href="./js/themes/jquery.ui.core.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.theme.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.datepicker.min.css">
+<link rel="stylesheet" href="./js/themes/jquery.ui.dialog.min.css">
+
+<?
+include("./fonctions/dialogue_confirmation.php");
+?>
+
 <script src="./js/ajax_edition.js"></script>
 <div class="bandeau">
       <div class="menu-configuration">

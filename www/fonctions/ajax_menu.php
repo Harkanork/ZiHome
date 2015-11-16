@@ -161,7 +161,7 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
 			</select></p>
 			<input type=hidden id="menu_id_modif" value="<? echo $id ?>">
 
-		<input type=submit value="Modifier" id="form_menu_modifier"/> ou <input type=submit value="Supprimer" id="form_menu_supprimer"/>
+			<input type=submit value="Modifier" id="form_menu_modifier"/> <input type=submit value="Annuler" id="form_menu_annuler"/>
 		</div>
 		<?
 		break;

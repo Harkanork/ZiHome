@@ -30,36 +30,53 @@ $(document).on('click','#mode_edition', function () {  // on ajoute un événeme
 
 // fonction qui active ou désactive le mode édition du menu
 function menu_edition(actif, nb_init) {
-  if (actif==true) { // si on doit l'activer
-    if (nb_init<2) { // première activation seulement
+  if (actif == true) { // si on doit l'activer
+    if (nb_init < 2) { // première activation seulement
       $("#list-menu").sortable({ // on rend les item du menu déplaçables
         placeholder: 'fantome',     // style appliqué à la case vide quand on bouge une élément
-          update: function () {     // quand on déplace en élément, on enregistre les positions par ajax
-            var ordre = $('#list-menu').sortable('serialize');  //  récupération des données à mémoriser
-            $.post('./fonctions/ajax_menu.php?requete=ordre', ordre);  // appel du fichier qui enregistre dans la base
+        update: function () {     // quand on déplace en élément, on enregistre les positions par ajax
+          var ordre = $('#list-menu').sortable('serialize');  //  récupération des données à mémoriser
+          $.post('./fonctions/ajax_menu.php?requete=ordre', ordre);  // appel du fichier qui enregistre dans la base
         }
       });
       $("#list-menu").disableSelection();  // évite de sélectionner le contenu pendant le glissé
     }
     
-    // On rajoute les boutons Edit/Delete/Move
+    // On rajoute les boutons Edit/Delete
     $("#list-menu").children().each(function(n) {
       if ($(this).attr("id") != "menu_ajouter") {
-        $(this).append('<div style="position:absolute;top:0px;left:10px;" class="edit_item_menu"> <img width="26" height="26" src = "./img/edit3.png"/></div>');
-        $(this).append('<div style="position:absolute;top:0px;right:10px;" class="delete_item_menu"> <img width="26" height="26" src = "./img/delete3.png"/></div>');
-        $(this).append('<div style="position:absolute;bottom:0px;left:4px" class="move_item_menu"> <img width="67" height="14" src = "./img/tirette3.png"/></div>');
+        $(this).append('<div style="position:absolute;top:-8px;left:8px;" class="edit_item_menu"> <img width="26" height="26" src = "./img/edit3.png"/></div>');
+        $(this).append('<div style="position:absolute;top:-8px;right:8px;" class="delete_item_menu"> <img width="26" height="26" src = "./img/delete3.png"/></div>');
       }
     });
     
     $("#list-menu").sortable('enable'); // on réactive le glissé si on était précédemment sorti du mode édition (je n'ai pas réussi à le mettre dans les options précédentes, ça ne marchait pas)
     $('.menu_editable').removeClass('menu_editable').addClass('menu_active'); // on modifie l'aspect des item du menu pour signaler qu'ils sont déplaçables
     
-    if (nb_init<2) { // première activation seulement
-      $(document).on('click', ".menu_active > a", function (event) { // on rend les item insensible au click
-      event.preventDefault();
-      });
-      $(document).on('click', ".edit_item_menu", function (event) { // on rend les item modifiables au click
+    if (nb_init < 2) { // première activation seulement
+      
+      // on rend les item insensible au click
+      $(document).on('click', ".menu_active > a", function (event) {
         event.preventDefault();
+      });
+      
+      // Gestion du bouton delete
+      $(document).on('click', ".delete_item_menu", function (event) {
+        var id = $(this).parents('div').attr('id').replace('menu_','');
+        askConfirmDeletion2(function() {
+          $.ajax({
+            type: "POST",
+            url: "./fonctions/ajax_menu.php?requete=del",
+            data: {id_menu:id},
+            success : function(contenu){
+              location.reload();
+            }
+          });
+        });
+      });
+      
+      // Gestion du bouton edit
+      $(document).on('click', ".edit_item_menu", function (event) { // on rend les item modifiables au click
         var id = $(this).parents('div').attr('id').replace('menu_','');
         $.ajax({
           type: "POST",
@@ -113,16 +130,8 @@ function menu_edition(actif, nb_init) {
                 }
               });
             });
-            $(document).on('click','#form_menu_supprimer', function () { // lorsqu'on clique sur le bouton supprimer
-              var form_menu_id=$('#menu_id_modif').val();
-              $.ajax({
-                type: "POST",
-                url: "./fonctions/ajax_menu.php?requete=del", // on récupère le code html (généré par php pour les menus déroulants) du formulaire
-                data: {id_menu:form_menu_id},
-                success : function(contenu){
-                  location.reload();
-                }
-              });
+            $(document).on('click','#form_menu_annuler', function () { // lorsqu'on clique sur le bouton annuler
+              //$( this ).dialog( "close" );
             });
           }
         });
