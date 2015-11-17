@@ -109,58 +109,97 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
         $menu_auth=$menu['auth'];
       }
       ?>
-      <div id="fond_popup"></div>
-      <div id="popup_menu_modifier" class="popup_menu">
-        <div id="popup_menu_fermer">X</div>
-        <h1>Modifier un élément de menu (<? echo $libelle; ?>)</h1>
-        <p>Type de lien : <select id="form_menu_type" name="menu_type_select">
-          <option value="module" <? if ($type=="module") { echo " selected";}; ?>>Module ZiHome</option>
-          <option value="vue" <? if ($type=="vue") { echo " selected";}; ?>>Vue personnalisée</option>
-          <option value="interne" <? if ($type=="interne") { echo " selected";}; ?>>Page interne</option>
-          <option value="iframe" <? if ($type=="iframe") { echo " selected";}; ?>>Page externe</option>
-        </select>&nbsp;
-        <span id="iframe_select" style="display:none"> Emplacement : <input type=text id="form_menu_iframe" value="<? if ($type=="iframe") { echo $url; } else { echo "http://"; } ?>"></span>
-        <span id="interne_select" style="display:none"> Emplacement : <input type=text id="form_menu_interne" value="<? if ($type=="interne") { echo $url; } else { echo "./pages/fichier.php"; } ?>"></span>
-        <span id="module_id_select"> Module : <select id="form_menu_module">
-          <?
-          $query1 = 'SELECT id,libelle FROM modules WHERE actif=1 ORDER BY libelle ASC';
-          $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($module = mysql_fetch_assoc($req1)) {
-            $selected="";
-            if ($module_id==$module['id']) { $selected=" selected" ; };
-            echo '<option value='.$module['id'].$selected.'>'.$module['libelle'].'</option>';
-          }
-          ?>
-        </select></span>
-        <span id="vues_select" style="display:none"> Vue : <select id="form_menu_vue">
-          <?
-          $query2 = 'SELECT id,libelle FROM vues';
-          $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($vue = mysql_fetch_assoc($req2)) {
-            $selected="";
-            if ($module_id==$vue['id']) { $selected=" selected" ; };
-            echo '<option value='.$vue['id'].$selected.'>'.$vue['libelle'].'</option>';
-          }
-          ?>
-        </select></span></p>
-        <p>Libellé : <input type=text id="form_menu_libelle" value="<? echo $libelle ?>">
-        <p>Icone : <select id="form_menu_icone">
-          <?
-          $icones = preg_grep("/^(icon)+?.+(\.png)$/", scandir('../img/'));// on récupère tous les fichiers png dont le nom commence par icon
-          foreach($icones as $icone){
-            $selected="";
-            if ($icon==$icone) { $selected=" selected" ; };
-            echo "<option value='" . $icone ."'".$selected.">".$icone."</option>";
-          }
-          ?>
-        </select></p>
-        <p>Afficher pour : <select id="form_menu_auth" name="auth">
-          <option value=0 <? if ($menu_auth==0) echo " selected" ?>>Tout le monde</option>
-          <option value=1 <? if ($menu_auth==1) echo " selected" ?>>Enregistrés uniquement</option>
-        </select></p>
-        <input type=hidden id="menu_id_modif" value="<? echo $id ?>">
-        <input type=submit value="Modifier" id="form_menu_modifier"/> <input type=submit value="Annuler" id="form_menu_annuler"/>
-      </div>
+      <CENTER>
+        <br>
+        <TABLE border=0 width="90%">
+          <TR class="contenu">
+            <TD width="140px">Type de lien</TD>
+            <TD>
+              <select id="form_menu_type" name="menu_type_select">
+                <option value="module" <? if ($type=="module") { echo " selected";}; ?>>Module ZiHome</option>
+                <option value="vue" <? if ($type=="vue") { echo " selected";}; ?>>Vue personnalisée</option>
+                <option value="interne" <? if ($type=="interne") { echo " selected";}; ?>>Page interne</option>
+                <option value="iframe" <? if ($type=="iframe") { echo " selected";}; ?>>Page externe</option>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu" id="iframe_select" style="display:none">
+            <TD>Emplacement</TD>
+            <TD>
+              <input type=text id="form_menu_iframe" value="<? if ($type=="iframe") { echo $url; } else { echo "http://"; } ?>">
+            </TD>
+          </TR>
+          <TR class="contenu" id="interne_select" style="display:none">
+            <TD>Emplacement</TD>
+            <TD>
+              <input type=text id="form_menu_interne" value="<? if ($type=="interne") { echo $url; } else { echo "./pages/fichier.php"; } ?>">
+            </TD>
+          </TR>
+          <TR class="contenu" id="module_id_select">
+            <TD>Module</TD>
+            <TD>
+              <select id="form_menu_module">
+                <?
+                $query1 = 'SELECT id,libelle FROM modules WHERE actif=1 ORDER BY libelle ASC';
+                $req1 = mysql_query($query1, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while ($module = mysql_fetch_assoc($req1)) {
+                  $selected="";
+                  if ($module_id==$module['id']) { $selected=" selected" ; };
+                  echo '<option value='.$module['id'].$selected.'>'.$module['libelle'].'</option>';
+                }
+                ?>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu" id="vues_select" style="display:none">
+            <TD>Vue</TD>
+            <TD>
+              <select id="form_menu_vue">
+              <?
+                $query2 = 'SELECT id,libelle FROM vues';
+                $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while ($vue = mysql_fetch_assoc($req2)) {
+                  $selected="";
+                  if ($module_id==$vue['id']) { $selected=" selected" ; };
+                  echo '<option value='.$vue['id'].$selected.'>'.$vue['libelle'].'</option>';
+                }
+                ?>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Libellé</TD>
+            <TD>
+              <input type=text id="form_menu_libelle" value="<? echo $libelle ?>">
+            </TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Icone</TD>
+            <TD>
+              <select id="form_menu_icone">
+                <?
+                $icones = preg_grep("/^(icon)+?.+(\.png)$/", scandir('../img/'));// on récupère tous les fichiers png dont le nom commence par icon
+                foreach($icones as $icone){
+                  $selected="";
+                  if ($icon==$icone) { $selected=" selected" ; };
+                  echo "<option value='" . $icone ."'".$selected.">".$icone."</option>";
+                }
+                ?>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Visible par</TD>
+            <TD>
+              <select id="form_menu_auth" name="auth">
+                <option value=0 <? if ($menu_auth==0) echo " selected" ?>>Tout le monde</option>
+                <option value=1 <? if ($menu_auth==1) echo " selected" ?>>Enregistrés uniquement</option>
+              </select>
+            </TD>
+          </TR>
+        </TABLE>
+      </CENTER>
+      <input type=hidden id="menu_id_modif" value="<? echo $id ?>">
       <?
       break;
     
