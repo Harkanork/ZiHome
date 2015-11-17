@@ -34,6 +34,7 @@ function menu_edition(actif, nb_init) {
     if (nb_init < 2) { // première activation seulement
       $("#list-menu").sortable({ // on rend les item du menu déplaçables
         placeholder: 'fantome',     // style appliqué à la case vide quand on bouge une élément
+        cancel: "#menu_ajouter",
         update: function () {     // quand on déplace en élément, on enregistre les positions par ajax
           var ordre = $('#list-menu').sortable('serialize');  //  récupération des données à mémoriser
           $.post('./fonctions/ajax_menu.php?requete=ordre', ordre);  // appel du fichier qui enregistre dans la base
@@ -138,7 +139,9 @@ function menu_edition(actif, nb_init) {
       });
     }
     $('#menu_ajouter').css('display','inline-block'); // on montre le bouton permettant d'ajouter des item
-  } else {
+  }
+  else
+  {
     $("#list-menu").sortable('disable'); // on désactive le glissé
     $('.menu_active').removeClass('menu_active').addClass('menu_editable'); // on remet le style normal des item du menu
     $('#menu_ajouter').hide(); // on cache le bouton permettant d'ajouter des éléments de menu
