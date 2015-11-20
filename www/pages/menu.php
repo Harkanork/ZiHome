@@ -17,6 +17,13 @@ include("./fonctions/dialogue_confirmation.php");
     </div>
   <div id="list-menu">
     <?
+    if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
+      echo '<div id="menu_ajouter" class="menu_editable"><a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a></div>';
+    }
+    ?>
+  </div>
+  <script>
+    <?
     $query = "SELECT * FROM menu ORDER BY ordre";
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data = mysql_fetch_assoc($req))
@@ -47,14 +54,11 @@ include("./fonctions/dialogue_confirmation.php");
         }
       }
       if ($afficher) {
-        echo '<div id="menu_'.$data['id'].'" class="menu_editable" style="position:relative;left:0px;"><A HREF="'.$page.'"><img src = "./img/'.$data['icone'].'"/><span>'.$data['libelle'].'</span></a></div>';
+        echo 'insere_element_menu("' . $data['id'] . '", "' . $page . '", "' . $data['icone']. '", "' . $data['libelle'] . '"); ';
       }
     }
-    if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
-      echo '<div id="menu_ajouter" class="menu_editable"><a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a></div>';
-    }
     ?>
-  </div>
+  </script>
 </div>
 <div id="sous-menu-zihome">
   <div id="div_logon"><? include("./pages/logon.php"); ?></div>
@@ -69,8 +73,8 @@ include("./fonctions/dialogue_confirmation.php");
     ?>
 </div>
 
-<div id="dialog_menu_modifier" title="Modification" style="display:none;">
-</div>
+<div id="dialog_menu_modifier" title="Modification" style="display:none;"></div>
+<div id="dialog_menu_ajouter" title="Ajout" style="display:none;"></div>
 
 <script>
   $(function() 
@@ -91,6 +95,7 @@ include("./fonctions/dialogue_confirmation.php");
       {
         "Valider": function() 
         {
+          var bouton = $( this );
           var form_menu_id=$('#menu_id_modif').val();
           var form_menu_type=$('#form_menu_type').val();
           var form_menu_iframe=$('#form_menu_iframe').val();
@@ -105,12 +110,66 @@ include("./fonctions/dialogue_confirmation.php");
             url: "./fonctions/ajax_menu.php?requete=maj", // on sauvegarde les modifications
             data: {id_menu:form_menu_id, type:form_menu_type, iframe:form_menu_iframe, interne:form_menu_interne, module:form_menu_module, vue:form_menu_vue, libelle:form_menu_libelle, icone:form_menu_icone, auth:form_menu_auth},
             success : function(contenu){
-              location.reload();
+              var reponse = $.parseJSON( contenu );
+              rempli_element_menu(reponse.id, reponse.page, form_menu_icone, form_menu_libelle);
+              ajoute_edition_controles($("#menu_" + reponse.id));
+              // Fermeture de la boite de la dialogue
+              bouton.dialog( "close" );
             }
           });
         },
         "Annuler": function() 
         {
+          // Fermeture de la boite de la dialogue
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+  
+  $(function() 
+  {
+    $( "#dialog_menu_ajouter" ).dialog(
+    {
+      resizable: false,
+      height:360,
+      width:500,
+      autoOpen: false,
+      modal: true,
+      closeText: "",
+      open: function (event, ui) {
+        $('.ui-dialog').css('z-index',999999);
+        $('.ui-widget-overlay').css('z-index',999998);
+      },
+      buttons: 
+      {
+        "Valider": function() 
+        {
+          var bouton = $( this );
+          var form_menu_type=$('#form_menu_type').val();
+          var form_menu_iframe=$('#form_menu_iframe').val();
+          var form_menu_interne=$('#form_menu_interne').val();
+          var form_menu_module=$('#form_menu_module').val();
+          var form_menu_vue=$('#form_menu_vue').val();
+          var form_menu_libelle=$('#form_menu_libelle').val();
+          var form_menu_icone=$('#form_menu_icone').val();
+          var form_menu_auth=$('#form_menu_auth').val();
+          $.ajax({
+            type: "POST",
+            url: "./fonctions/ajax_menu.php?requete=ajout", // on met à jour la base de données
+            data: {type:form_menu_type, iframe:form_menu_iframe, interne:form_menu_interne, module:form_menu_module, vue:form_menu_vue, libelle:form_menu_libelle, icone:form_menu_icone, auth:form_menu_auth},
+            success : function(contenu){
+              var reponse = $.parseJSON( contenu );
+              insere_element_menu(reponse.id, reponse.page, form_menu_icone, form_menu_libelle);
+              ajoute_edition_controles($("#menu_" + reponse.id));
+              // Fermeture de la boite de la dialogue
+              bouton.dialog( "close" );
+            }
+          });
+        },
+        "Annuler": function() 
+        {
+          // Fermeture de la boite de la dialogue
           $( this ).dialog( "close" );
         }
       }

@@ -23,51 +23,84 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
     
     case 'formulaire': // requete qui demande de générer le formulaire popup pour un nouvel élément de menu
       ?>
-      <div id="fond_popup"></div>
-      <div id="popup_menu_ajouter" class="popup_menu">
-        <div id="popup_menu_fermer">X</div>
-        <h1>Ajouter un élément de menu</h1>
-        <p>Type de lien : <select id="form_menu_type" name="menu_type_select">
-          <option value="module">Module ZiHome</option>
-          <option value="vue">Vue personnalisée</option>
-          <option value="interne">Page interne</option>
-          <option value="iframe">Page externe</option>
-        </select>&nbsp;
-        <span id="iframe_select" style="display:none"> Emplacement : <input type=text id="form_menu_iframe" value="http://"></span>
-        <span id="interne_select" style="display:none"> Emplacement : <input type=text id="form_menu_interne" value="./pages/fichier.php"></span>
-        <span id="module_id_select"> Module : <select id="form_menu_module">
-          <?
-          $query = 'SELECT id,libelle FROM modules WHERE actif=1 ORDER BY libelle ASC';
-          $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($module = mysql_fetch_assoc($req)) {
-            echo '<option value='.$module['id'].'>'.$module['libelle'].'</option>';
-          }
-          ?>
-        </select></span>
-        <span id="vues_select" style="display:none"> Vue : <select id="form_menu_vue">
-          <?
-          $query2 = 'SELECT id,libelle FROM vues';
-          $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-          while ($vue = mysql_fetch_assoc($req2)) {
-            echo '<option value='.$vue['id'].'>'.$vue['libelle'].'</option>';
-          }
-          ?>
-        </select></span></p>
-        <p>Libellé : <input type=text id="form_menu_libelle">
-        <p>Icone : <select id="form_menu_icone">
-          <?
-          $icones = preg_grep("/^(icon)+?.+(\.png)$/", scandir('../img/'));// on récupère tous les fichiers png dont le nom commence par icon
-          foreach($icones as $icone){
-            echo "<option value='" . $icone . "'>".$icone."</option>";
-          }
-          ?>
-        </select></p>
-        <p>Afficher pour : <select id="form_menu_auth" name="auth">
-          <option value=0>Tout le monde</option>
-          <option value=1>Enregistrés uniquement</option>
-        </select></p>
-      <input type=submit value="Ajouter" id="form_menu_valider"/>
-      </div>
+        <CENTER>
+        <br>
+        <TABLE border=0 width="90%">
+          <TR class="contenu">
+            <TD width="140px">Type de lien</TD>
+            <TD>
+              <select id="form_menu_type" name="menu_type_select">
+                <option value="module">Module ZiHome</option>
+                <option value="vue">Vue personnalisée</option>
+                <option value="interne">Page interne</option>
+                <option value="iframe">Page externe</option>
+              </select></TD>
+          </TR>
+          <TR class="contenu" id="iframe_select" style="display:none">
+            <TD>Emplacement :</TD>
+            <TD><input type=text id="form_menu_iframe" value="http://"></TD>
+          </TR>
+          <TR class="contenu" id="interne_select" style="display:none">
+            <TD>Emplacement :</TD>
+            <TD><input type=text id="form_menu_interne" value="./pages/fichier.php"></TD>
+          </TR>
+          <TR class="contenu" id="module_id_select">
+            <TD>Module :</TD>
+            <TD>
+              <select id="form_menu_module">
+                <?
+                $query = 'SELECT id,libelle FROM modules WHERE actif=1 ORDER BY libelle ASC';
+                $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while ($module = mysql_fetch_assoc($req)) {
+                  echo '<option value='.$module['id'].'>'.$module['libelle'].'</option>';
+                }
+                ?>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu" id="vues_select" style="display:none">
+            <TD>Vue :</TD>
+            <TD>
+              <select id="form_menu_vue">
+                <?
+                $query2 = 'SELECT id,libelle FROM vues';
+                $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+                while ($vue = mysql_fetch_assoc($req2)) {
+                  echo '<option value='.$vue['id'].'>'.$vue['libelle'].'</option>';
+                }
+                ?>
+              </select></TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Libellé :</TD>
+            <TD>
+              <input type=text id="form_menu_libelle">
+            </TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Icone :</TD>
+            <TD>
+              <select id="form_menu_icone">
+                <?
+                $icones = preg_grep("/^(icon)+?.+(\.png)$/", scandir('../img/'));// on récupère tous les fichiers png dont le nom commence par icon
+                foreach($icones as $icone){
+                  echo "<option value='" . $icone . "'>".$icone."</option>";
+                }
+                ?>
+              </select>
+            </TD>
+          </TR>
+          <TR class="contenu">
+            <TD>Visible par :</TD>
+            <TD>
+              <select id="form_menu_auth" name="auth">
+                <option value=0>Tout le monde</option>
+                <option value=1>Enregistrés uniquement</option>
+              </select>
+            </TD>
+          </TR>
+        </TABLE>
+      </CENTER>
       <?
       break;
     
@@ -93,6 +126,36 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
       }
       $req="INSERT INTO `menu` (`type`, `module_id`, `libelle`, `icone`, `auth`, `ordre`, `url`) VALUES ('".$type."', '".$module."', '".$libelle."', '".$icone."', '".$auth."', '99', '".$url."');";
       mysql_query($req);
+      
+      // Renvoie les informations du nouvel élément
+      $reponse = array();
+      $reponse['id'] = mysql_insert_id($link);
+      
+      // Détermine l'adresse de la page
+      $page  = "";
+      switch($type) {
+        case "module" :
+          $query2 = 'SELECT * FROM modules WHERE id=' . $module;
+          $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+          while ($module = mysql_fetch_assoc($req2)) {
+            $page = "./index.php?page=" . $module['url'];
+          }
+          break;
+        case "iframe":
+          $page = "./index.php?iframe=" . $reponse['id'];
+          break;
+        case "interne":
+          $page = "./index.php?interne=" . $reponse['id'];
+          break;
+        case "vue" :
+          $page = "./index.php?vue=" . $module;
+          break;
+      }
+      $reponse['page'] = $page;
+      
+      // Encode l'information en json
+      echo json_encode($reponse);
+      
       break;
     
     case 'modifier' : // si le script est appelé pour générer le formulaire de modification/suppression    
@@ -226,6 +289,36 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
       $auth=$_POST['auth'];
       $req="UPDATE `menu` SET `type`='".$type."', `module_id`='".$module."',`url`='".$url."',`libelle`='".$libelle."',`icone`='".$icone."',`auth`='".$auth."' WHERE `id`='".$id."';";
       mysql_query($req);
+      
+      // Renvoie les informations du nouvel élément
+      $reponse = array();
+      $reponse['id'] = $id;
+      
+      // Détermine l'adresse de la page
+      $page  = "";
+      switch($type) {
+        case "module" :
+          $query2 = 'SELECT * FROM modules WHERE id=' . $module;
+          $req2 = mysql_query($query2, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+          while ($module = mysql_fetch_assoc($req2)) {
+            $page = "./index.php?page=" . $module['url'];
+          }
+          break;
+        case "iframe":
+          $page = "./index.php?iframe=" . $id;
+          break;
+        case "interne":
+          $page = "./index.php?interne=" . $id;
+          break;
+        case "vue" :
+          $page = "./index.php?vue=" . $module;
+          break;
+      }
+      $reponse['page'] = $page;
+      
+      // Encode l'information en json
+      echo json_encode($reponse);
+      
       break;
     
     case 'del' : // si le script est appelé pour supprimer un élément de menu  

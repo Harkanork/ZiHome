@@ -9,15 +9,12 @@ $(document).on('click','#mode_edition', function () {  // on ajoute un événeme
   if (mode_edition===false) {  // cas où on n'était pas encore en mode édition
     mode_edition = true; // on passe en mode edition
     gEnableAutoRefresh = false;
-    $("#mode_edition").addClass('active'); // on modifie l'aspect du bouton pour signaler l'activation du mode édition
-    $("#mode_edition").appendTo('#bouton_menu');// on déplace le bouton pour masquer le sous-menu
     affiche_sousbandeau(false); // on masque le sous-bandeau pour permettre d'accéder à toute la page
+    sousbandeau=false;
     nb_init ++;
   } else {
     mode_edition = false; // on sort du mode edition
     gEnableAutoRefresh = true;
-    $("#mode_edition").removeClass('active'); // on modifie l'aspect du bouton pour signaler la désactivation du mode édition
-    $("#mode_edition").appendTo('#sous-menu-zihome');// on remet le bouton dans le sous-bandeau
   }
   menu_edition(mode_edition, nb_init); // on active ou désactive le mode édition du menu
 });
@@ -27,6 +24,11 @@ $(document).on('click','#mode_edition', function () {  // on ajoute un événeme
 // Mode Edition du MENU ///////////////////////////////////
 ///////////////////////////////////////////////////////////
 
+function ajoute_edition_controles(elt)
+{
+  elt.append('<div style="position:absolute;top:-8px;left:8px;" class="edit_item_menu controle_edit_menu"> <img width="26" height="26" src = "./img/edit3.png"/></div>');
+  elt.append('<div style="position:absolute;top:-8px;right:8px;" class="delete_item_menu controle_edit_menu"> <img width="26" height="26" src = "./img/delete3.png"/></div>');
+}
 
 // fonction qui active ou désactive le mode édition du menu
 function menu_edition(actif, nb_init) {
@@ -46,8 +48,7 @@ function menu_edition(actif, nb_init) {
     // On rajoute les boutons Edit/Delete
     $("#list-menu").children().each(function(n) {
       if ($(this).attr("id") != "menu_ajouter") {
-        $(this).append('<div style="position:absolute;top:-8px;left:8px;" class="edit_item_menu"> <img width="26" height="26" src = "./img/edit3.png"/></div>');
-        $(this).append('<div style="position:absolute;top:-8px;right:8px;" class="delete_item_menu"> <img width="26" height="26" src = "./img/delete3.png"/></div>');
+        ajoute_edition_controles($(this));
       }
     });
     
@@ -70,8 +71,8 @@ function menu_edition(actif, nb_init) {
             url: "./fonctions/ajax_menu.php?requete=del",
             data: {id_menu:id},
             success : function(contenu){
+              // On fait disparaitre l'élément du menu
               $("#menu_" + id).remove();
-              $( this ).dialog( "close" );
             }
           });
         });
@@ -87,9 +88,6 @@ function menu_edition(actif, nb_init) {
           success : function(contenu,etat){
             $('#dialog_menu_modifier').html(contenu); // on ajoute le formulaire à notre page
             
-            $(document).on('click','#popup_menu_fermer', function () { // bouton fermer du popup
-              location.reload();
-            });
             $(document).on('change', "select[name='menu_type_select']", function() { // mettra à jour le formulaire à chaque modification du menu déroulant
               if (this.value=='module') {
                 $('#interne_select').hide();
@@ -114,6 +112,8 @@ function menu_edition(actif, nb_init) {
               }
             });
             $("select[name='menu_type_select']").trigger("change"); // met à jour le formulaire en fonction du choix du menu déroulant
+            
+            // Affiche la boite de dialogue
             $("#dialog_menu_modifier").dialog("open");
           }
         });
@@ -126,6 +126,9 @@ function menu_edition(actif, nb_init) {
     $("#list-menu").sortable('disable'); // on désactive le glissé
     $('.menu_active').removeClass('menu_active').addClass('menu_editable'); // on remet le style normal des item du menu
     $('#menu_ajouter').hide(); // on cache le bouton permettant d'ajouter des éléments de menu
+    
+    // On supprime les boutons Edit/Delete
+    $(".controle_edit_menu").remove();
   }
 }
 
@@ -134,11 +137,9 @@ $(document).on('click','#menu_ajouter', function() {
   $.ajax({
     type: "POST",
     url: "./fonctions/ajax_menu.php?requete=formulaire", // on récupère le code html (généré par php pour les menus déroulants) du formulaire
-    success : function(contenu,etat){
-      $('body').append(contenu); // on ajoute le formulaire à notre page
-      $(document).on('click','#popup_menu_fermer', function () { // bouton fermer du popup
-        location.reload();
-      });
+    success : function(contenu, etat){
+      $('#dialog_menu_ajouter').html(contenu); // on ajoute le formulaire à notre page
+      
       $(document).on('change', "select[name='menu_type_select']", function() {
         if (this.value=='module') {
           $('#interne_select').hide();
@@ -162,28 +163,25 @@ $(document).on('click','#menu_ajouter', function() {
           $('#interne_select').show();
         }
       });
-      $(document).on('click','#form_menu_valider', function () { // lorsqu'on clique sur le bouton valider
-        var form_menu_type=$('#form_menu_type').val();
-        var form_menu_iframe=$('#form_menu_iframe').val();
-        var form_menu_interne=$('#form_menu_interne').val();
-        var form_menu_module=$('#form_menu_module').val();
-        var form_menu_vue=$('#form_menu_vue').val();
-        var form_menu_libelle=$('#form_menu_libelle').val();
-        var form_menu_icone=$('#form_menu_icone').val();
-        var form_menu_auth=$('#form_menu_auth').val();
-        $.ajax({
-          type: "POST",
-          url: "./fonctions/ajax_menu.php?requete=ajout", // on récupère le code html (généré par php pour les menus déroulants) du formulaire
-          data: {type:form_menu_type, iframe:form_menu_iframe, interne:form_menu_interne, module:form_menu_module, vue:form_menu_vue, libelle:form_menu_libelle, icone:form_menu_icone, auth:form_menu_auth},
-          success : function(contenu){
-            location.reload();
-          }
-        });
-      });
+      
+      // Affiche la boite de dialogue
+      $("#dialog_menu_ajouter").dialog("open");
     }
   }); 
 });
 
+// Fonction qui permet d'insérer un nouvel element dans le menu
+function insere_element_menu(id, page, icone, libelle)
+{
+  $('<div id="menu_' + id + '" class="menu_editable" style="position:relative;left:0px;"></div>').insertBefore( "#menu_ajouter" );
+  rempli_element_menu(id, page, icone, libelle);
+}
+
+// Fonction qui permet d'insérer un nouvel element dans le menu
+function rempli_element_menu(id, page, icone, libelle)
+{
+  $("#menu_" + id).html('<A HREF="' + page + '"><img src = "./img/' + icone + '"/><span>' + libelle + '</span></a>');
+}
 
 //////////////////////////
 // Gestion de l'affichage dynamique
@@ -210,12 +208,23 @@ $(document).ready(function() {  // se lance une fois que toute la page est charg
 
   // change l'affichage du sous-bandeau au clic sur le bouton
   $(document).on('click','#bouton_menu', function() {
-    if (sousbandeau == true) {  // s'il était affiché, on le masque
-      affiche_sousbandeau(false);
-      sousbandeau=false;
-    } else {  // s'il était masqué, on l'affiche
-      affiche_sousbandeau(true);
-      sousbandeau=true;
+    
+    if (mode_edition)
+    {
+      // on sort du mode edition
+      mode_edition = false;
+      gEnableAutoRefresh = true;
+      menu_edition(mode_edition, nb_init); // on active ou désactive le mode édition du menu
+    }
+    else
+    {
+      if (sousbandeau == true) {  // s'il était affiché, on le masque
+        affiche_sousbandeau(false);
+        sousbandeau=false;
+      } else {  // s'il était masqué, on l'affiche
+        affiche_sousbandeau(true);
+        sousbandeau=true;
+      }
     }
   })
 });
