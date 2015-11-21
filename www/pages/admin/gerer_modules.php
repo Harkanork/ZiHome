@@ -8,7 +8,7 @@ if(isset($_SESSION['auth']))
   <center>
     <table border="0">
       <tr class="title" bgcolor="#6a6a6a">
-        <TH>
+        <TH width="260px">
         Nom
         </TH>
         <TH>
