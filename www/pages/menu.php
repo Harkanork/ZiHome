@@ -16,11 +16,13 @@ include("./fonctions/dialogue_confirmation.php");
       </div>
     </div>
   <div id="list-menu">
-    <?
-    if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
-      echo '<div id="menu_ajouter" class="menu_editable"><a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a></div>';
-    }
-    ?>
+    <div id="menu_ajouter" class="menu_editable">
+      <?
+      if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
+        echo '<a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a>';
+      }
+      ?>
+    </div>
   </div>
   <script>
     <?
