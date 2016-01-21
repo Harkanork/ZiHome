@@ -1,31 +1,15 @@
 <?
-function generateDynInfo($page, $parentDiv, $soleil)
+function generateDynInfo($vue, $parentDiv, $soleil)
 {
   global $link;
   global $zibase;
-  
-  if ($soleil == "")
-  {
-    $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
-    $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
-    $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
-    $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
-    if($now<$soleil_nuit && $now>$soleil_jour) 
-    { 
-      $soleil = "jour"; 
-    } 
-    else 
-    { 
-      $soleil = "nuit"; 
-    }
-  }
-  
+
 ?>
   <script>
     <?
-    if (is_numeric($page)) {  // Nouvelle version utilisant les "vues"
-      $queryStickers = "SELECT * FROM vues_elements where vue_id=".$page." AND type='sticker'";
-      $queryDynaTexts = "SELECT * FROM vues_elements where vue_id=".$page." AND type='textdyn'";
+    if (is_numeric($vue)) {  // Nouvelle version utilisant les "vues" 
+      $queryStickers = "SELECT * FROM vues_elements where vue_id=".$vue." AND type='sticker'";
+      $queryDynaTexts = "SELECT * FROM vues_elements where vue_id=".$vue." AND type='textdyn'";
       $reqStickers = mysql_query($queryStickers, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
       $reqDynaTexts = mysql_query($queryDynaTexts, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     
@@ -73,7 +57,7 @@ function generateDynInfo($page, $parentDiv, $soleil)
         ?>
       
         <?
-        // Construction des tableaux issues des capteurs de temperature
+        // Construction des tableaux issus des capteurs de temperature
         $query = "SELECT * FROM peripheriques WHERE periph = 'temperature'";
         $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
         while ($periph = mysql_fetch_assoc($req))
@@ -175,54 +159,17 @@ function generateDynInfo($page, $parentDiv, $soleil)
           echo 'gVariable[' . $i . '] = ' . $zibase->getVariable($i) . ';';
         }
       
-        // Creation des stickers
-        while ($sticker = mysql_fetch_assoc($reqStickers)) {
-          if ($sticker['condition'] != "")
-          {
-            echo 'if ('.$sticker['condition'].')';
-          }
-          echo ' { $( "' . $parentDiv . '" ).append( "';
-          echo '<img src=\"./img/stickers/' . $sticker['url'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;';
-          if ($sticker['height'])
-          {
-            echo 'height:' . $sticker['height'] . 'px;';
-          }
-          if ( $sticker['width'])
-          {
-            echo 'width:' . $sticker['width'] . 'px;';
-          }
-          echo 'z-index:' . (100 + $sticker['id']) . '\"/>';
-          echo '");}';
-        }
+
       
-        // Creation des textes dynamiques
-        while ($dynaText = mysql_fetch_assoc($reqDynaTexts)) {
-          if ($dynaText['condition'] != "")
-          {
-            echo 'if ('.$dynaText['condition'].')';
-          }
-          echo ' { $( "' . $parentDiv . '" ).append( "';
-          echo '<div style=\"position:absolute;top:' . $dynaText['top'] . 'px;left:' . $dynaText['left'] . 'px;z-index:' . (200 + $dynaText['id']) . '\">';
-          echo '<span style=\"color:' . $dynaText['color'] . ';font:';
-          if ($dynaText['bold'])
-            echo 'bold ';
-          if ($dynaText['italic'])
-            echo 'italic ';
-          echo $dynaText['size'] . "px ";
-          $font = split(',', $dynaText['font']);
-          echo $font[1] . ", " . $font[2] . " ";
-          echo '\">' . $dynaText['libelle'] . '</span>';
-          echo '</div>';
-          echo '");}';
-        }
+        
       }
       ?>
       </script>
       <?
 
     } else { // ancienne version de la fonction, mode plan
-        $queryStickers = "SELECT * FROM stickers where page='".$page."'";
-        $queryDynaTexts = "SELECT * FROM dynaText where page='".$page."'";
+        $queryStickers = "SELECT * FROM stickers where page='".$vue."'";
+        $queryDynaTexts = "SELECT * FROM dynaText where page='".$vue."'";
     
     $reqStickers = mysql_query($queryStickers, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
     $reqDynaTexts = mysql_query($queryDynaTexts, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -424,51 +371,8 @@ function generateDynInfo($page, $parentDiv, $soleil)
       {
         echo 'gVariable[' . $i . '] = ' . $zibase->getVariable($i) . ';';
       }
-      ?>
-      
-      <?
-      // Creation des stickers
-      while ($sticker = mysql_fetch_assoc($reqStickers)) {
-        if ($sticker['condition'] != "")
-        {
-          echo 'if ('.$sticker['condition'].')';
-        }
-        echo ' { $( "' . $parentDiv . '" ).append( "';
-        echo '<img src=\"./img/stickers/' . $sticker['fichier'] . '\" style=\"position:absolute;top:' . $sticker['top'] . 'px;left:' . $sticker['left'] . 'px;';
-        if ($sticker['height'])
-        {
-          echo 'height:' . $sticker['height'] . 'px;';
-        }
-        if ( $sticker['width'])
-        {
-          echo 'width:' . $sticker['width'] . 'px;';
-        }
-        echo 'z-index:' . (100 + $sticker['id']) . '\"/>';
-        echo '");}';
-      }
-      ?>
-      
-      <?
-      // Creation des textes dynamiques
-      while ($dynaText = mysql_fetch_assoc($reqDynaTexts)) {
-        if ($dynaText['condition'] != "")
-        {
-          echo 'if ('.$dynaText['condition'].')';
-        }
-        echo ' { $( "' . $parentDiv . '" ).append( "';
-        echo '<div style=\"position:absolute;top:' . $dynaText['top'] . 'px;left:' . $dynaText['left'] . 'px;z-index:' . (200 + $dynaText['id']) . '\">';
-        echo '<span style=\"color:' . $dynaText['color'] . ';font:';
-        if ($dynaText['bold'])
-          echo 'bold ';
-        if ($dynaText['italic'])
-          echo 'italic ';
-        echo $dynaText['size'] . "px ";
-        $font = split(',', $dynaText['font']);
-        echo $font[1] . ", " . $font[2] . " ";
-        echo '\">' . $dynaText['libelle'] . '</span>';
-        echo '</div>';
-        echo '");}';
-      }
+
+
     }
     ?>
   </script>

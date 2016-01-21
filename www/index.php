@@ -24,6 +24,7 @@ if(!(file_exists("./config/conf_zibase.php"))) {
 	} else if (isset($_GET['vue'])) {
 		include("./pages/vue.php");
 	} else {
+		/* Pour l'instant rien, il faudra voir comment on défini la vue par défaut
 		if(isset($_SESSION['auth'])) {
 			$query = "SELECT * FROM users WHERE pseudo = '".$_SESSION['auth']."'";
 			$req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -43,6 +44,7 @@ if(!(file_exists("./config/conf_zibase.php"))) {
 			echo '<script>sousbandeau = true ;</script>';
 		}
 		include("./pages/".$accueil.".php");
+		*/
 	}
 	echo '</div>';
 }

@@ -1,11 +1,6 @@
 <title>Actionneurs</title>
 <?php
-function duree($time) {
-if($time < 60) { return $time."s"; }
-else if($time < 3600) { return intval($time/60)."m ".($time - (intval($time/60) * 60))."s"; }
-else if($time < 86400) { return intval($time/3600)."h ".intval(($time - (intval($time/3600) * 3600))/60)."m ".($time - (intval($time/60) * 60))."s"; }
-else { return intval($time/86400)."j ".intval(($time - (intval($time/86400) * 86400))/3600)."h ".intval(($time - (intval($time/3600) * 3600))/60)."m ".($time - (intval($time/60) * 60))."s"; }
-}
+
 include("./lib/zibase.php");
 $zibase = new ZiBase($ipzibase);
 echo "<br>";

@@ -318,7 +318,6 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
       
       // Encode l'information en json
       echo json_encode($reponse);
-      
       break;
     
     case 'del' : // si le script est appelé pour supprimer un élément de menu  

@@ -82,6 +82,213 @@ div.bandeau>div>div.menu_active>a {
 }
 
 .delete_item_menu {
+<<<<<<< OURS
+    cursor: pointer;
+}
+
+.edit_item_elements {
+    cursor: pointer;
+    position:absolute;
+    top:-8px;
+    left:-5px;
+}
+
+.delete_item_elements {
+    cursor: pointer;
+    position:absolute;
+    top:-8px;
+    right:0px;
+}
+.vues_elements_editables {
+    background: rgba(200, 200, 255, 0.5);
+    cursor: move;
+}
+.vues_elements_grey {
+    height:100%;
+    width:100%;
+    background-color:#eeeeee;
+    vertical-align: middle;
+    text-align: center;
+}
+.bouton_scenario {
+    color: #FFF;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    font-size: 12px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #2b665e;
+    background-color:#101010;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #566963;
+    -moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    -webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    box-shadow:inset 0px 1px 3px 0px #91b8b3;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #101010), color-stop(1, #000));
+    background:-moz-linear-gradient(top, #101010 5%, #000 100%);
+    background:-webkit-linear-gradient(top, #101010 5%, #000 100%);
+    background:-o-linear-gradient(top, #101010 5%, #000 100%);
+    background:-ms-linear-gradient(top, #101010 5%, #000 100%);
+    background:linear-gradient(to bottom, #101010 5%, #000 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#101010', endColorstr='#6c7c7c',GradientType=0);
+    vertical-align: middle;
+    text-align: center;
+}
+.bouton_scenario:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #101010));
+    background:-moz-linear-gradient(top, #6c7c7c 5%, #101010 100%);
+    background:-webkit-linear-gradient(top, #6c7c7c 5%, #101010 100%);
+    background:-o-linear-gradient(top, #6c7c7c 5%, #101010 100%);
+    background:-ms-linear-gradient(top, #6c7c7c 5%, #101010 100%);
+    background:linear-gradient(to bottom, #6c7c7c 5%, #101010 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#101010',GradientType=0);
+    background-color:#6c7c7c;
+}
+.bouton_scenario.vues_elements_editables {
+    cursor:move;
+}
+.bouton_ON {
+    background: transparent -moz-linear-gradient(center top , #AAD44F 0%, #74B931 90%, #6AAD2D 95%, #609D29 100%) repeat scroll 0% 0%;
+    border: 1px solid #5B8821;
+    padding: 5px 36px;
+    width: 138px;
+    height: 33px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 33px;
+    color: #FFF;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset, 0px 1px 2px rgba(0, 0, 0, 0.3);
+    cursor:pointer;
+}
+.bouton_OFF {
+    background: transparent -moz-linear-gradient(center top , #F87288 0%, #F34755 90%, #E1414D 95%, #CE3B46 100%) repeat scroll 0% 0%;
+    border: 1px solid #B0333E;
+    padding: 5px 36px;
+    width: 138px;
+    height: 33px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 33px;
+    color: #FFF;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset, 0px 1px 2px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.ui-resizable-se {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    cursor: se-resize;
+}
+.ui-resizable-s {
+    position: absolute;
+    bottom: 0px;
+    cursor: s-resize;
+    width:100%;
+    left:0px;
+    height:2px;
+}
+.ui-resizable-e {
+    position: absolute;
+    right: 0px;
+    cursor: e-resize;
+    height:100%;
+    top:0px;
+    width:2px;
+}
+.ui-resizable-w {
+    position: absolute;
+    left: 0px;
+    cursor: w-resize;
+    height:100%;
+    top:0px;
+    width:2px;
+}
+.ui-resizable-n {
+    position: absolute;
+    top: 0px;
+    cursor: n-resize;
+    width:100%;
+    left:0px;
+    height:2px;
+}
+
+#global {
+    position:relative;
+    padding: 15px;
+    margin: 15px;
+    min-height:200px;
+}
+.vues_elements.icone {
+    text-align:center;
+}
+.vues_elements.icone span {
+    vertical-align:middle;
+    display : table-cell;
+}
+.elements_form_table {
+    border:1px #111;
+    width:100%;
+}
+.elements_form_TR {
+    font-size:12px;
+}
+.elements_form_TR td input[type="number"] {
+    width:50px;
+}
+#list_icone {
+    text-align: center;
+    overflow:scroll;
+}
+.list_icone {
+    height:50px;
+    vertical-align: middle;
+}
+#elements_ajouter {
+    float: right;
+    background-color: black;
+    z-index:999999;
+    position:relative;
+}
+.grayscale {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+}
+#waiting {
+    display:    none;
+    position:   fixed;
+    z-index:    1000000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/waiting.gif') 
+                50% 50% 
+                no-repeat;
+}
+div.bandeau>div>div#vues_ajouter{
+    background-color: black;
+    display:none;
+    text-align: center;
+    width:75px;
+    height : 75px;
+    position:relative;
+    cursor: pointer;
+}
+div.bandeau>div>div#vues_ajouter>a {
+=======
+>>>>>>> THEIRS
     cursor: pointer;
 }
 

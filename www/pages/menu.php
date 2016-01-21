@@ -19,7 +19,14 @@ include("./fonctions/dialogue_confirmation.php");
     <div id="menu_ajouter" class="menu_editable">
       <?
       if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
-        echo '<a><img src = "./img/icon_ajout.png"/><span>Ajouter</span></a>';
+        echo '<a><img src = "./img/icon_ajout.png"/><span>Ajouter menu</span></a>';
+      }
+      ?>
+    </div>
+    <div id="vues_ajouter" class="menu_editable">
+      <?
+      if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin') {
+        echo '<a><img src = "./img/icon_ajout.png"/><span>Créer vue personnalisée</span></a>';
       }
       ?>
     </div>
@@ -69,7 +76,7 @@ include("./fonctions/dialogue_confirmation.php");
     {
       ?>
       <div id="bouton_administration">Administration</div>
-      <div id="mode_edition">Edition du menu</div>
+      <div id="mode_edition">Mode édition</div>
       <?
     }
     ?>

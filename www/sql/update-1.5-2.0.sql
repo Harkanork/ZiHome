@@ -79,7 +79,7 @@ UPDATE `modules` SET url = libelle, libelle = 'Module Freebox' WHERE `libelle` =
 UPDATE `modules` SET url = libelle, libelle = 'Tableau virtuel &#40;notes&#41;' WHERE `libelle` = 'notes';
 UPDATE `modules` SET url = libelle, libelle = 'Module Iphone' WHERE `libelle` = 'iphone';
 UPDATE `modules` SET url = libelle, libelle = 'Module Android' WHERE `libelle` = 'android';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso eau' WHERE `libelle` = 'conso_eau';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL' WHERE `libelle` = 'conso_eau';
 
 
 --
@@ -105,8 +105,11 @@ ALTER TABLE `vues_elements` ADD `italic` INT( 1 ) NOT NULL AFTER `bold` ;
 ALTER TABLE `vues_elements` ADD `fichier` VARCHAR( 255 ) NOT NULL AFTER `italic` ;
 ALTER TABLE `vues_elements` ADD `condition` VARCHAR( 1024 ) NOT NULL AFTER `fichier` ;
 ALTER TABLE `vues_elements` ADD `type` VARCHAR(50) NOT NULL;
+ALTER TABLE `vues_elements` CHANGE `border` `border` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE `vues_elements` ADD `affich_libelle` INT( 1 ) NOT NULL DEFAULT '0' AFTER `border` ;
+ALTER TABLE `vues_elements` ADD `zindex` INT( 1 ) NOT NULL DEFAULT '0' AFTER `border` ;
 UPDATE `vues_elements` SET `type`='fonction' WHERE 1=1;
+UPDATE `vues_elements` SET `type`='scenario', `url`='' WHERE `type`='fonction' AND `url`='scenario';
 
 --
 -- On créé la vue accueil pour remplacer le module accueil en toute transparence, et on met à jour le menu pour renvoyer vers cette vue plutôt que le module accueil
@@ -123,6 +126,66 @@ INSERT INTO `vues_elements`(`type`, `libelle`, `left`, `top`, `width`, `height`,
 
 
 --
+-- On corrige le nom des fichiers pour les anciennes fonctions affichées en page d'accueil, qui sont désormais des modules avec un nom plus explicite
+UPDATE `vues_elements` SET `url`= 'Actionneurs - individuel' WHERE `type`='fonction' AND `url`='actioneur';
+UPDATE `vues_elements` SET `url`= 'Actionneurs - Graphique_annuel' WHERE `type`='fonction' AND `url`='actionneur_graph_annee';
+UPDATE `vues_elements` SET `url`= 'Actionneurs - Graphique_mensuel' WHERE `type`='fonction' AND `url`='actionneur_graph_mois';
+UPDATE `vues_elements` SET `url`= 'Actionneurs - Tableau_periph' WHERE `type`='fonction' AND `url`='actionneur_tableau_periph';
+UPDATE `vues_elements` SET `url`= 'Actionneurs - Tableau_global' WHERE `type`='fonction' AND `url`='actionneurs_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Batteries_global' WHERE `type`='fonction' AND `url`='batterie';
+UPDATE `vues_elements` SET `url`= 'Capteurs - Tableau_global' WHERE `type`='fonction' AND `url`='capteurs_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Conso - Electricite tableau global' WHERE `type`='fonction' AND `url`='conso_elec_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Conso - Electricite tableau individuel' WHERE `type`='fonction' AND `url`='conso_elec_tableau_periph';
+UPDATE `vues_elements` SET `url`= 'Conso - Electricite Graphique mensuel' WHERE `type`='fonction' AND `url`='conso_elec_graph_conso_cout';
+UPDATE `vues_elements` SET `url`= 'Conso - Electricite Graphique puissance' WHERE `type`='fonction' AND `url`='conso_elec_graph_puissance';
+UPDATE `vues_elements` SET `url`= 'OWL global' WHERE `type`='fonction' AND `url`='owl_global';
+UPDATE `vues_elements` SET `url`= 'OWL Tableau global' WHERE `type`='fonction' AND `url`='owl_tableau_global';
+UPDATE `vues_elements` SET `url`= 'OWL Mensuel global' WHERE `type`='fonction' AND `url`='owl_global_month';
+UPDATE `vues_elements` SET `url`= 'OWL Graphique des phases_global' WHERE `type`='fonction' AND `url`='owl_phases_graph';
+UPDATE `vues_elements` SET `url`= 'OWL Batteries global' WHERE `type`='fonction' AND `url`='owl_batterie';
+UPDATE `vues_elements` SET `url`= 'Temperature - Tableau global' WHERE `type`='fonction' AND `url`='temperature_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Temperature - Graphique journalier' WHERE `type`='fonction' AND `url`='temperature_graph_jour';
+UPDATE `vues_elements` SET `url`= 'Temperature - Graphique mensuel' WHERE `type`='fonction' AND `url`='temperature_graph_mois';
+UPDATE `vues_elements` SET `url`= 'Temperature - Graphique annuel' WHERE `type`='fonction' AND `url`='temperature_graph_annee';
+UPDATE `vues_elements` SET `url`= 'Pluie - Graphique annuel' WHERE `type`='fonction' AND `url`='pluie_graph_annee';
+UPDATE `vues_elements` SET `url`= 'Pluie - Graphique journalier' WHERE `type`='fonction' AND `url`='pluie_graph_journee';
+UPDATE `vues_elements` SET `url`= 'Pluie - Graphique mensuel' WHERE `type`='fonction' AND `url`='pluie_graph_mois';
+UPDATE `vues_elements` SET `url`= 'Pluie - Graphique global' WHERE `type`='fonction' AND `url`='pluie_graph_global';
+UPDATE `vues_elements` SET `url`= 'Pluie - Tableau global' WHERE `type`='fonction' AND `url`='pluie_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Luminosite - Graphique journalier' WHERE `type`='fonction' AND `url`='luminosite_graph_jour';
+UPDATE `vues_elements` SET `url`= 'Luminosite - Tableau global' WHERE `type`='fonction' AND `url`='luminosite_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Luminosite - Graphique mensuel' WHERE `type`='fonction' AND `url`='luminosite_graph_mois';
+UPDATE `vues_elements` SET `url`= 'Luminosite - Graphique annuel' WHERE `type`='fonction' AND `url`='luminosite_graph_annee';
+UPDATE `vues_elements` SET `url`= 'Pellet - Graphiuqe annuel global' WHERE `type`='fonction' AND `url`='pellet_graph_annee';
+UPDATE `vues_elements` SET `url`= 'Pellet - Graphique mensuel global' WHERE `type`='fonction' AND `url`='pellet_grap_mois';
+UPDATE `vues_elements` SET `url`= 'Pellet - Tableau global' WHERE `type`='fonction' AND `url`='pellet_tableau_periph';
+UPDATE `vues_elements` SET `url`= 'Freebox - Appels' WHERE `type`='fonction' AND `url`='freebox_call';
+UPDATE `vues_elements` SET `url`= 'Freebox reboot' WHERE `type`='fonction' AND `url`='freebox_reboot';
+UPDATE `vues_elements` SET `url`= 'Freebox wifi off' WHERE `type`='fonction' AND `url`='freebox_wifi_off';
+UPDATE `vues_elements` SET `url`= 'Freebox wifi on' WHERE `type`='fonction' AND `url`='freebox_wifi_on';
+UPDATE `vues_elements` SET `url`= 'Freebox wifi status' WHERE `type`='fonction' AND `url`='freebox_wifi_status';
+UPDATE `vues_elements` SET `url`= 'Freebox firmware' WHERE `type`='fonction' AND `url`='freebox_firmware';
+UPDATE `vues_elements` SET `url`= 'Freebox - Liste peripheriques' WHERE `type`='fonction' AND `url`='freebox_dhcp_baux_dynamique';
+UPDATE `vues_elements` SET `url`= 'Freebox - Statut de connexion' WHERE `type`='fonction' AND `url`='freebox_conn_status';
+UPDATE `vues_elements` SET `url`= 'Freebox uptime' WHERE `type`='fonction' AND `url`='freebox_uptime';
+UPDATE `vues_elements` SET `url`= 'Vent - Tableau global' WHERE `type`='fonction' AND `url`='vent_tableau_global';
+UPDATE `vues_elements` SET `url`= 'Vent - Rose des vents' WHERE `type`='fonction' AND `url`='vent_graph_rosedesvents';
+UPDATE `vues_elements` SET `url`= 'Vent - Graphique journalier' WHERE `type`='fonction' AND `url`='vent_graph_jour';
+
+--
+-- A priori ces quatre fonctions n'étaients pas affichables en page d'accueil mais elles sont dans une base sql à un moment donné donc au cas où on les supprime pour éviter les bug d'affichage
+--
+DELETE FROM `vues_elements` WHERE `type`='fonction' AND `url`='freebox_ring_on' LIMIT 1;
+DELETE FROM `vues_elements` WHERE `type`='fonction' AND `url`='freebox_ring_off' LIMIT 1;
+DELETE FROM `vues_elements` WHERE `type`='fonction' AND `url`='freebox_conn_config' LIMIT 1;
+DELETE FROM `vues_elements` WHERE `type`='fonction' AND `url`='video' LIMIT 1;
+
+--
+-- On formate automatiquement les scénarios sinon problème d'affichage lors de la première edition
+--
+UPDATE `vues_elements` SET `size`='12', `color`='#ffffff' WHERE `type`='scenario';
+
+--
 -- On créé la vue plan pour remplacer le module plan en toute transparence, on met à jour le menu, et on y ajouter les textes dynamiques et stickers correspondant
 --
 INSERT INTO `vues`(`libelle`) VALUES ('plan');
@@ -135,6 +198,12 @@ INSERT INTO `vues_elements`(`type`, `libelle`, `left`, `top`, `width`, `height`,
 --
 INSERT INTO `vues_elements`(`type`, `vue_id`) SELECT 'pollution', v.`id` FROM `paramettres` p, `vues` v WHERE p.`id`='18' AND p.`value`='true' AND v.`libelle`='plan';
 UPDATE `vues_elements` SET `width`=(SELECT `value` FROM `paramettres` WHERE `id`='19'), `height`=(SELECT `value` FROM `paramettres` WHERE `id`='20'), `left`=(SELECT `value` FROM `paramettres` WHERE `id`='21'), `top`=(SELECT `value` FROM `paramettres` WHERE `id`='22') WHERE `type`='pollution';
+
+--
+-- On récupère, si activé dans les paramètres, l'icone meteo pour la positionner comme un élément de cette vue
+--
+INSERT INTO `vues_elements`(`type`, `vue_id`) SELECT 'meteo', v.`id` FROM `paramettres` p, `vues` v WHERE p.`id`='11' AND p.`value`='true' AND v.`libelle`='plan';
+UPDATE `vues_elements` SET `width`=(SELECT `value` FROM `paramettres` WHERE `id`='13'), `height`=(SELECT `value` FROM `paramettres` WHERE `id`='14'), `left`=(SELECT `value` FROM `paramettres` WHERE `id`='15'), `top`=(SELECT `value` FROM `paramettres` WHERE `id`='16'), `url`=(SELECT `value` FROM `paramettres` WHERE `id`='12')  WHERE `type`='meteo';
 
 --
 -- On ajoute à cette vue les autres éléments qui y étaient affichés : des cadres correspondant aux pièces avec leur fond d'écran, les actionneurs et les capteurs (le reste ne peut actuellement pas être affiché sur le plan, on le récupère après pour les rapports) 
@@ -222,6 +291,16 @@ INSERT INTO `rapports_elements` (`id_onglet`, `libelle`, `type`, `periph`) SELEC
 
 
 
--- supprimer paramètres 18 à 22
+-- supprimer paramètres 11 à 16 et 18 à 22 quand c'est ok
 
 
+
+-- système de registre log
+
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `date` DATETIME NOT NULL,
+  `log` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ;
