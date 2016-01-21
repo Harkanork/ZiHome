@@ -159,4 +159,9 @@ function updateProbe($pSensorInfo, $pZibaseInfo, $pLink, $pType)
   }
 }
 
+function Zlog($type, $log, $plink) {
+  $query = "INSERT INTO log (type, date, log) VALUES ('".$type."', NOW(), '".$log."')";
+  mysql_query($query, $plink);
+}
+
 ?>

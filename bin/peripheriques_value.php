@@ -58,12 +58,21 @@ while($data0 = mysql_fetch_assoc($req0)) {
     $info = "";
     $info = $zibase->getSensorInfo($data0['id']);
     if(!($info == "")) {
-      if(strlen($data0['id']) < 6) {
-        $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*10).",".($info[1]*100).")";
+      // on vérifie si la valeur est bien plus récente, sinon on n'enregistre pas et on log l'erreur
+      $last_value_date=$info[0]->format("Y-m-d H:i:s");
+      $query = "SELECT * FROM `conso_".$data0['nom']."` ORDER BY `date` DESC LIMIT 1";
+      $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+      $data = mysql_fetch_assoc($req);
+      if ($last_value_date >= $data['date']) {
+        if(strlen($data0['id']) < 6) {
+          $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$last_value_date."',".($info[2]*10).",".($info[1]*100).")";
+        } else {
+          $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$last_value_date."',".($info[2]*100).",".($info[1]*100).")";
+        }
+        mysql_query($query, $link);
       } else {
-        $query = "INSERT INTO `conso_".$data0['nom']."` (date, conso, conso_total) VALUES ('".$info[0]->format("Y-m-d H:i:s")."',".($info[2]*100).",".($info[1]*100).")";
+        Zlog("Conso","Date anterieure pour ".$data0['nom']." : ".$last_value_date." (".($info[1]*100)." kWh)",$link);
       }
-      mysql_query($query, $link);
     }
   }
   else if($data0['periph'] == 'temperature')

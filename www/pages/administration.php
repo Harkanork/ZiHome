@@ -66,6 +66,7 @@ include("./fonctions/dialogue_confirmation.php");
 <? /*  <A HREF="./index.php?page=administration&detail=gerer_protocol">G&eacute;rer les protocoles</A> */ ?>
   <div><A HREF="./index.php?page=administration&detail=messages">Messages Zibase</A></div>
   <div><A HREF="./index.php?page=administration&detail=variables">Variables</A></div>
+  <div><A HREF="./index.php?page=administration&detail=log">Log</A></div>
   <?
   // Verification des mises a jour
   if ($version_local < $version_server) {
