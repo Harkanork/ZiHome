@@ -12,6 +12,7 @@ include("./fonctions/dialogue_confirmation.php");
 </div>
 <div id="tableau"> 
 </div>
+<div id="waiting"></div>
 
 <!-- Plugin qui gere le tactile -->
 <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>

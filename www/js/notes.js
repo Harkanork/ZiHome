@@ -7,14 +7,18 @@ function updateNoteProp(id)
         cancel: '.editable',
         "zIndex": zIndex,
         "stack" : '.postick',
+        grid:[10,10],
+        containment: "#tableau",
         stop:function(e,ui) {
             var $this = $(this);
-            $.get('fonctions/gestion_notes.php',{
-                action  : 'deplace',
-                y : parseInt($this.position().top),
-                x : parseInt($this.position().left),
-                id : $this.attr('data-key'),
-                z : zIndex
+            $("#waiting").fadeIn();
+            $.ajax({
+                type: "GET",
+                url:'fonctions/gestion_notes.php',
+                data: {action  : 'deplace', y : parseInt($this.position().top), x : parseInt($this.position().left), id : $this.attr('data-key'), z : zIndex },
+                success: function() {
+                    $("#waiting").delay(300).fadeOut();
+                }
             });
             zIndex++;
         }
@@ -27,11 +31,14 @@ function updateNoteProp(id)
         handles: "e, w",
         stop:function(e,ui) {
             var $this = $(this);
-            $.get('fonctions/gestion_notes.php',{
-                action  : 'redim',
-                w : parseInt(ui.size.width),
-                id : $this.attr('data-key'),
-                z : zIndex
+            $("#waiting").fadeIn();
+            $.ajax({
+                type: "GET",
+                url:'fonctions/gestion_notes.php',
+                data: {action  : 'redim', w : parseInt(ui.size.width), id : $this.attr('data-key'), z : zIndex},
+                success: function() {
+                    $("#waiting").delay(300).fadeOut();
+                }
             });
             zIndex++;
         }
@@ -43,22 +50,31 @@ function updateNoteProp(id)
         var $this = $(this);
         askConfirmDeletion2(function ()
         {
-            $.get('fonctions/gestion_notes.php',{
-                  action    : 'suppr',
-                  id    : $this.attr('data-key')
-            });
-            $("[name=postick_" + $this.attr('data-key') + "]").fadeOut('slow', function () {
-                $(this).remove();
+            $("#waiting").fadeIn();
+            $.ajax({
+                type: "GET",
+                url:'fonctions/gestion_notes.php',
+                data : {action    : 'suppr', id    : $this.attr('data-key') },
+                success : function () {
+                    $("[name=postick_" + $this.attr('data-key') + "]").fadeOut('slow', function () {
+                        $(this).remove();
+                    });
+                    $("#waiting").delay(300).fadeOut();
+                }
             });
         });
     });
     
     // Sauvegarde le texte d'un post-it lorsqu'on clique en dehors
     $("[name=editable_" + id + "]").blur( function () {
-        $.get('fonctions/gestion_notes.php',{
-            action  : 'sauv',
-            text : $(this).html(),
-            id : $(this).parent('.postick').attr('data-key')
+        $("#waiting").fadeIn();
+        $.ajax({
+            type: "GET",
+            url:'fonctions/gestion_notes.php',
+            data : {action  : 'sauv', text : $(this).html(), id : $(this).parent('.postick').attr('data-key') },
+            success: function() {
+                $("#waiting").delay(300).fadeOut();
+            }
         });
     });
 }

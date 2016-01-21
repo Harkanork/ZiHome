@@ -87,3 +87,8 @@ input[type="button"]:hover {
 .ui-widget-overlay {
   z-index: 9998;
 }
+
+#tableau {
+	height: 100%;
+	width: 100%;
+}
