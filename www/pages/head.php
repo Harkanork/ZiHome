@@ -73,7 +73,7 @@ else
     echo "<link rel=\"stylesheet\" href=\"./styles/".$data['value'].".css\" type=\"text/css\" media=\"all\">";
   }
 }
-if ($_GET['page']!="administration") {   // désactive le refresh dans la partie admninistration
+if (!(isset($_GET['page'])) OR ((isset($_GET['page'])) AND ($_GET['page']!="administration"))) {   // désactive le refresh dans la partie admninistration
   $query = "SELECT * FROM paramettres WHERE libelle = 'refresh'";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
   while ($data = mysql_fetch_assoc($req))

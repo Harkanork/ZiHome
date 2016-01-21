@@ -61,7 +61,7 @@
        {
            $macAddr=$cols[1];
        }
-       else if ($cols[1] == '(' . $ipAddress . ')')
+       else if ((isset($cols[1])) AND ($cols[1] == '(' . $ipAddress . ')'))
        {
            $macAddr=$cols[3];
        }
