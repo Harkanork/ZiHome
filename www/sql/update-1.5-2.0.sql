@@ -79,7 +79,7 @@ UPDATE `modules` SET url = libelle, libelle = 'Module Freebox' WHERE `libelle` =
 UPDATE `modules` SET url = libelle, libelle = 'Tableau virtuel &#40;notes&#41;' WHERE `libelle` = 'notes';
 UPDATE `modules` SET url = libelle, libelle = 'Module Iphone' WHERE `libelle` = 'iphone';
 UPDATE `modules` SET url = libelle, libelle = 'Module Android' WHERE `libelle` = 'android';
-UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso OWL' WHERE `libelle` = 'conso_eau';
+UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso eau' WHERE `libelle` = 'conso_eau';
 
 
 --
