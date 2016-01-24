@@ -1,7 +1,6 @@
 /* GENERAL */
 
 body {
-    min-height: 600px;
     font-family: Helvetica,Verdana,sans-serif;
     margin:0 0;
 }
@@ -221,10 +220,19 @@ div.bandeau>div>div.menu_active>a {
 }
 
 #global {
-    position:relative;
-    padding: 15px;
-    margin: 15px;
+    position:absolute;
     min-height:200px;
+    margin:auto;
+    left:10px;
+    right:10px;
+    top:10px;
+    bottom:10px;
+}
+#fond_vue {
+    position:relative;
+    height:100%;
+    width:100%
+    z-index:-1;
 }
 .vues_elements.icone {
     text-align:center;
@@ -511,9 +519,12 @@ div.bandeau>.scroll_bar>span{
 /* CONTENU */
 
 #contenu {
-    margin-top:90px;
     position:absolute;
-    width:100%;
+    margin:auto;
+    left:0px;
+    right:0px;
+    top:90px;
+    bottom:0px;
 }
 
 #affichebouton{

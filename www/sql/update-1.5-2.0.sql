@@ -89,6 +89,7 @@ UPDATE `modules` SET url = libelle, libelle = 'Donn&eacute;es conso eau' WHERE `
 CREATE TABLE IF NOT EXISTS `vues` (
   `id` int(1) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
+  `grid` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ;
 

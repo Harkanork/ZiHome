@@ -18,6 +18,7 @@ include("./fonctions/dialogue_confirmation.php");
   <div><A HREF="./index.php?page=administration&detail=paramettres">Param&egrave;tres</A></div>
   <div><A HREF="./index.php?page=administration&detail=gerer_modules">G&eacute;rer les modules</A></div>
   <div><A HREF="./index.php?page=administration&detail=gerer_users">G&eacute;rer les utilisateurs</A></div>
+  <div><A HREF="./index.php?page=administration&detail=gerer_vues">G&eacute;rer les vues</A></div>
   <div><A HREF="./index.php?page=administration&detail=affecter_sonde">G&eacute;rer les sondes</A></div>
   <div><A HREF="./index.php?page=administration&detail=affecter_actioneur">Affecter un actioneur</A></div>
   <div><A HREF="./index.php?page=administration&detail=affecter_capteur">Affecter un capteur</A></div>
@@ -84,6 +85,7 @@ include("./fonctions/dialogue_confirmation.php");
   </span>
 </div>
 <div id="admin">
+  <div id="waiting"></div>
   <?
   if(isset($_GET['detail'])){
     include("./pages/admin/".$_GET['detail'].".php");

@@ -32,6 +32,7 @@
 <script type="text/javascript" src="./js/modules/exporting.js"></script>
 <script type="text/javascript" src="./js/modernizr.custom.js"></script>
 <script type="text/javascript" src="./js/popup.js"></script>
+<script type="text/javascript" src="./js/ajax_general.js"></script>
 <script>
   $(function() {
     if (!Modernizr.inputtypes['date']) {

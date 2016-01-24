@@ -14,12 +14,26 @@ if (isset($_GET['vue'])) {
     </script>
     <?
     
-    // on va chercher les infos concernant la vue demandée dans la bdd (il n'y a qu'un libellé = nom de la page pour l'instant)
+    // on va chercher les infos concernant la vue demandée dans la bdd (libellé = nom de la page, grid=proprietés d'accrochage)
     $query = 'SELECT * FROM vues WHERE id='.$vue;  
     $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
     while ($data_vue = mysql_fetch_assoc($req)) {
         $libelle=$data_vue['libelle'];
+        $grid=$data_vue['grid'];
     }
+    if ((!(isset($grid)))OR($grid=="")) {
+        $grid="10";
+    }
+    switch ($grid) {
+        case "none" :
+            $grid_array="false";
+            break;
+
+        default:
+            $grid_array="[".$grid.",".$grid."]";
+            break;
+    }
+    echo "<script>var grid_array = ".$grid_array."; var grid_value = ".$grid." </script>";
 
     // Affichage du titre de la page et des scripts nécessaires
     ?> <title><? echo $libelle ?></title>
@@ -34,7 +48,8 @@ if (isset($_GET['vue'])) {
     <?
         
     // Cadre de base de cette partie de la page
-    ?><div id="global"><?
+    ?><div id="global">
+    <div id="fond_vue"></div><?
     $java_insertion="";
     $tableau_elements=array();
         
@@ -159,7 +174,6 @@ if (isset($_GET['vue'])) {
     }
 
     ?>
-    <div id="elements_ajouter" style="display:none;"><img src="./img/icon_ajout.png"></img></div>
 </div>
 
     <div id="dialog_elements_modifier" title="Modification" style="display:none;"></div>

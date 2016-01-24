@@ -319,15 +319,17 @@ function ajoute_edition_controles_elements(elt)
 
 $.drag_edit = $.fn.drag_edit = function() {
   return $(this).draggable({ // on rend les éléments déplaçables
-            grid:[10,10],
+            grid: grid_array,
             containment: "#global",
-            snap: "#global",
+            snap: false,
             start: function () {
-              $(this).zindexmax(".vues_elements");
+              $(this).zindexmax(".vues_elements"); // on le place au premier plan
+
             },
             stop: function () {     // quand on déplace en élément, on enregistre les positions par ajax
-              y = parseInt($(this).position().top);
-              x = parseInt($(this).position().left);
+              y = grid_value*Math.floor(parseInt($(this).position().top)/grid_value); // on l'aligne sur la grille s'il ne l'était pas
+              x = grid_value*Math.floor(parseInt($(this).position().left)/grid_value);
+              $(this).css({top:y+'px', left:x+'px'});
               id = $(this).attr('data-key');
               zindex=$(this).zIndex();
               $("#waiting").fadeIn();
@@ -368,107 +370,7 @@ $.redim_edit = $.fn.redim_edit = function() {
           });
 }
 
-// fonction qui active ou désactive le mode édition des elements
-function elements_edition(actif, nb_init) {
-  if (actif == true) { // si on doit l'activer
-
-    afficher_elements(tableau_elements,false).done(function () {  // on attend que tout soit bien affiché avant de faire la suite
-      
-      // On ajoute les boutons Edit/Delete
-      $("#global .vues_elements").each(function(n) {
-        ajoute_edition_controles_elements($(this));
-      });
-      
-      // on ajoute une classe si on veut ultérieurement modifier l'aspect
-      $("#global .vues_elements").addClass('vues_elements_editables');
-      
-      // on désactive la réaction au clic (sinon on lance les scénarios en cliquant sur le bouton éditer...)
-      retirer_comportement_elements();
-      $("#global").disableSelection();  // évite de sélectionner le contenu pendant le glissé
-
-      // on ajoute la possibilité de déplacer ou redimensionner
-
-        $("#global .vues_elements").each(function(n) {
-          $(this).drag_edit().redim_edit();
-        });
-            
-        // Gestion du bouton delete
-        $(document).on('click', ".delete_item_elements", function (event) {
-          var id = $(this).parents('div').attr('data-key');
-          askConfirmDeletion2(function() {
-            $("#waiting").fadeIn();
-            $.ajax({
-              type: "POST",
-              url: "./fonctions/ajax_vues.php?requete=del",
-              data: {id:id},
-              success : function(contenu){
-                // On fait disparaitre l'élément 
-                $("#elem-" + id).remove();
-                $("#waiting").delay(300).fadeOut();
-              }
-            });
-          });
-        });
-        
-        // Gestion du bouton edit
-        $(document).on('click', ".edit_item_elements", function (event) { // on rend les item modifiables au click
-          var id = $(this).parents('div').attr('data-key');
-          $.ajax({
-            type: "POST",
-            url: "./fonctions/ajax_vues.php?requete=modifier",
-            data: {id:id}, // on récupère le code html (généré par php pour les menus déroulants) du formulaire
-            success : function(contenu,etat){
-              $('#dialog_elements_modifier').html(contenu); // on ajoute le formulaire à notre page
-                    $(document).on('click', "[name='list_icone']", function() {
-                      $.ajax({
-                        type: "POST",
-                        url: "./fonctions/ajax_vues.php?requete=icones",
-                        success: function(contenu,etat) {
-                          $("#list_icone").html(contenu);
-                          $(".list_icone").on('click', function() {
-                            var url=$(this).attr('data-key').replace(icone+'c_','');
-                            $("[name='list_icone']").attr('src','./img/icones/'+icone+'c_'+url);
-                            $("[id=url]").val(url);
-                            $("#list_icone").dialog("close");
-                          });
-                          $("#list_icone").dialog("open");
-                        }
-                      });
-                    });
-              // Affiche la boite de dialogue
-              $("#dialog_elements_modifier").dialog("open");
-            }
-          });
-        });
-      
-      $('#elements_ajouter').css('display','inline-block'); // on montre le bouton permettant d'ajouter des item
-
-    }); // délai pour s'assurer que tout est affiché avant poursuite du code (pas très propre, à améliorer)
-
-    
-  }  else  { // si on sort du mode édition
-
-    $("#global .vues_elements").draggable('destroy').resizable('destroy'); // on désactive le glissé 
-    $("#global .vues_elements").removeClass('vues_elements_editables').removeClass('ui-state-disabled'); // on remet le style normal des elements
-    $('#elements_ajouter').hide(); // on cache le bouton permettant d'ajouter des éléments
-
-    // on réactive le comportement des éléments au clic
-    ajouter_comportement_elements();
-    
-    // On supprime les boutons Edit/Delete
-    $(document).off('click', ".delete_item_elements");
-    $(document).off('click', ".edit_item_elements");
-    $(".controle_edit_elements").remove();
-
-    // on rafraichit l'affichage en prenant en compte la condition
-    afficher_elements(tableau_elements,true); 
-  }
-}
-
-
-
-// événement sur le bouton ajouter des éléments = on affiche le formulaire d'ajout
-$(document).on('click','#elements_ajouter', function() {
+function activation_ajout() {
   $.ajax({
     type: "POST",
     url: "./fonctions/ajax_vues.php?requete=formulaire", // on récupère le code html (généré par php pour les menus déroulants) du formulaire
@@ -701,7 +603,117 @@ $(document).on('click','#elements_ajouter', function() {
       $("#dialog_elements_ajouter").dialog("open");
     }
   }); 
-});
+}
+
+// fonction qui active ou désactive le mode édition des elements
+function elements_edition(actif, nb_init) {
+  if (actif == true) { // si on doit l'activer
+
+    afficher_elements(tableau_elements,false).done(function () {  // on attend que tout soit bien affiché avant de faire la suite
+      
+      // On ajoute les boutons Edit/Delete
+      $("#global .vues_elements").each(function(n) {
+        ajoute_edition_controles_elements($(this));
+      });
+      
+      // on ajoute une classe si on veut ultérieurement modifier l'aspect
+      $("#global .vues_elements").addClass('vues_elements_editables');
+      
+      // on désactive la réaction au clic (sinon on lance les scénarios en cliquant sur le bouton éditer...)
+      retirer_comportement_elements();
+      $("#global").disableSelection();  // évite de sélectionner le contenu pendant le glissé
+
+      // on ajoute la possibilité de déplacer ou redimensionner 
+        $("#global .vues_elements").each(function(n) {
+          $(this).drag_edit().redim_edit();
+        });
+
+        // Possibilité d'ajouter des éléments en cliquant sur le fond
+        $(document).on('click','#fond_vue', function() {
+          activation_ajout();
+        });
+        $("#fond_vue").css('cursor', 'crosshair');
+        $("#fond_vue").css('background-image','linear-gradient(transparent '+(grid_value-1)+'px, rgba(220,220,200,.6) '+grid_value+'px, transparent '+grid_value+'px), linear-gradient(90deg, transparent '+(grid_value-1)+'px, rgba(220,220,200,.6) '+grid_value+'px, transparent '+grid_value+'px)');
+        $("#fond_vue").css('background-size','100% '+grid_value+'px, '+grid_value+'px 100%');
+            
+        // Gestion du bouton delete
+        $(document).on('click', ".delete_item_elements", function (event) {
+          var id = $(this).parents('div').attr('data-key');
+          askConfirmDeletion2(function() {
+            $("#waiting").fadeIn();
+            $.ajax({
+              type: "POST",
+              url: "./fonctions/ajax_vues.php?requete=del",
+              data: {id:id},
+              success : function(contenu){
+                // On fait disparaitre l'élément 
+                $("#elem-" + id).remove();
+                $("#waiting").delay(300).fadeOut();
+              }
+            });
+          });
+        });
+        
+        // Gestion du bouton edit
+        $(document).on('click', ".edit_item_elements", function (event) { // on rend les item modifiables au click
+          var id = $(this).parents('div').attr('data-key');
+          $.ajax({
+            type: "POST",
+            url: "./fonctions/ajax_vues.php?requete=modifier",
+            data: {id:id}, // on récupère le code html (généré par php pour les menus déroulants) du formulaire
+            success : function(contenu,etat){
+              $('#dialog_elements_modifier').html(contenu); // on ajoute le formulaire à notre page
+                    $(document).on('click', "[name='list_icone']", function() {
+                      $.ajax({
+                        type: "POST",
+                        url: "./fonctions/ajax_vues.php?requete=icones",
+                        success: function(contenu,etat) {
+                          $("#list_icone").html(contenu);
+                          $(".list_icone").on('click', function() {
+                            var url=$(this).attr('data-key').replace(icone+'c_','');
+                            $("[name='list_icone']").attr('src','./img/icones/'+icone+'c_'+url);
+                            $("[id=url]").val(url);
+                            $("#list_icone").dialog("close");
+                          });
+                          $("#list_icone").dialog("open");
+                        }
+                      });
+                    });
+              // Affiche la boite de dialogue
+              $("#dialog_elements_modifier").dialog("open");
+            }
+          });
+        });
+
+    }); 
+
+    
+  }  else  { // si on sort du mode édition
+
+    $("#global .vues_elements").draggable('destroy').resizable('destroy'); // on désactive le glissé 
+    $("#global .vues_elements").removeClass('vues_elements_editables').removeClass('ui-state-disabled'); // on remet le style normal des elements
+    $(document).off('click','#fond_vue'); // on désactive l'ajout au clic sur le fond
+    $("#fond_vue").css('cursor', 'pointer');
+    $("#fond_vue").css('background-image','none');
+
+    // on réactive le comportement des éléments au clic
+    ajouter_comportement_elements();
+    
+    // On supprime les boutons Edit/Delete
+    $(document).off('click', ".delete_item_elements");
+    $(document).off('click', ".edit_item_elements");
+    $(".controle_edit_elements").remove();
+
+    // on rafraichit l'affichage en prenant en compte les conditions d'affichage
+    afficher_elements(tableau_elements,true); 
+  }
+}
+
+
+
+
+
+
 
 // fonction qui permet de générer le formulaire de modification des éléments
 $(function() {
