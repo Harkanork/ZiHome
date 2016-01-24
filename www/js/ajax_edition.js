@@ -324,12 +324,17 @@ $.drag_edit = $.fn.drag_edit = function() {
             snap: false,
             start: function () {
               $(this).zindexmax(".vues_elements"); // on le place au premier plan
-
             },
             stop: function () {     // quand on déplace en élément, on enregistre les positions par ajax
-              y = grid_value*Math.floor(parseInt($(this).position().top)/grid_value); // on l'aligne sur la grille s'il ne l'était pas
-              x = grid_value*Math.floor(parseInt($(this).position().left)/grid_value);
-              $(this).css({top:y+'px', left:x+'px'});
+              if (grid_array!=false) {// on l'aligne sur la grille s'il ne l'était pas (si option d'accrochage)
+                y = grid_value*Math.floor(parseInt($(this).position().top)/grid_value); 
+                x = grid_value*Math.floor(parseInt($(this).position().left)/grid_value);
+                $(this).css({top:y+'px', left:x+'px'});
+              } else {
+                y = parseInt($(this).position().top); 
+                x = parseInt($(this).position().left);
+              }
+              
               id = $(this).attr('data-key');
               zindex=$(this).zIndex();
               $("#waiting").fadeIn();

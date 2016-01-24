@@ -25,15 +25,17 @@ if (isset($_GET['vue'])) {
         $grid="10";
     }
     switch ($grid) {
-        case "none" :
+        case "false" :
             $grid_array="false";
+            $grid_value=0;
             break;
 
         default:
             $grid_array="[".$grid.",".$grid."]";
+            $grid_value=$grid;
             break;
     }
-    echo "<script>var grid_array = ".$grid_array."; var grid_value = ".$grid." </script>";
+    echo "<script>var grid_array = ".$grid_array."; var grid_value = ".$grid_value." </script>";
 
     // Affichage du titre de la page et des scripts nécessaires
     ?> <title><? echo $libelle ?></title>
