@@ -15,7 +15,7 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
 <div id="action-tableau">
 <CENTER>
 <br>
-<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Id</TH><TH>Libelle</TH><TH>Accrochage</TH><TH>Supprimer</TH></TR>
+<TABLE border=0><TR class="title" bgcolor="#6a6a6a"><TH>Id</TH><TH>Nom</TH><TH>Accrochage</TH><TH>Supprimer</TH></TR>
 <?
   $query = "SELECT * FROM vues";
   $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
@@ -40,21 +40,33 @@ if(isset($_SESSION['auth']) && $_SESSION['niveau'] == 'admin')
   }
 ?>
 </TABLE></CENTER>
-<br/><br/>
-<h2>Ajouter une vue : </h2>
-<form method=POST action="./index.php?page=administration&detail=gerer_vues&Ajouter=1">
-  <p>Libellé de la vue : <input type=text name="libelle"></p>
-  <p>Options d'accrochage : 
-    <select name="grid">
-      <option value="false">Libre</option>
-      <option value="5">5x5</option>
-      <option value="10">10x10</option>
-      <option value="20">20x20</option>
-      <option value="30">30x30</option>
-      <option value="50">50x50</option>
-    </select>
-  <input type=submit value="Ajouter">
-  </form>
+<P align=center>
+<TABLE class=panneau_table >
+  <TR class=panneau_titre>
+    <TH>Nouvelle vue</TH>
+  </TR>
+  <TR>
+    <TD class=panneau_centre>
+      <CENTER>
+      <TABLE>
+      <form method=POST action="./index.php?page=administration&detail=gerer_vues&Ajouter=1">
+        <TR><TD class=panneau_libelle>Nom</TD><TD><input type=text name="libelle"></INPUT></TD></TR>
+        <TR><TD class=panneau_libelle>Accrochage</TD><TD> 
+          <select name="grid">
+            <option value="false">Libre</option>
+            <option value="5">5x5</option>
+            <option value="10">10x10</option>
+            <option value="20">20x20</option>
+            <option value="30">30x30</option>
+            <option value="50">50x50</option>
+          </select></TD></TR>
+        <TR><TD colspan=2 class=panneau_boutons><INPUT type=submit name="Ajouter" value="Ajouter"></TD></TR>
+      </FORM>
+      </TABLE>
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
 </div>
 
 
