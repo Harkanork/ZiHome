@@ -81,7 +81,6 @@ div.bandeau>div>div.menu_active>a {
 }
 
 .delete_item_menu {
-<<<<<<< OURS
     cursor: pointer;
 }
 
@@ -295,11 +294,8 @@ div.bandeau>div>div#vues_ajouter{
     cursor: pointer;
 }
 div.bandeau>div>div#vues_ajouter>a {
-=======
->>>>>>> THEIRS
     cursor: pointer;
 }
-
 
 div.bandeau>div>div#menu_ajouter{
     background-color: black;
