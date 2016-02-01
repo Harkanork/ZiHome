@@ -70,35 +70,35 @@ if (isset($_GET['vue'])) {
     $query = "SELECT * FROM paramettres WHERE libelle = 'largeur icones'";
     $res_query = mysql_query($query, $link);
     if (mysql_numrows($res_query) > 0) {
-            $data = mysql_fetch_assoc($res_query);
-            $widthIcones = $data['value'];
-            $labelOffsetLeft = max($widthIcones - 30, $widthIcones / 2);
+        $data = mysql_fetch_assoc($res_query);
+        $widthIcones = $data['value'];
+        $labelOffsetLeft = max($widthIcones - 30, $widthIcones / 2);
     } else {
-            $widthIcones = 60;
-            $labelOffsetLeft = 30;
+        $widthIcones = 60;
+        $labelOffsetLeft = 30;
     }
 
     // Recuperation de la hauteur des icones
     $query = "SELECT * FROM paramettres WHERE libelle = 'hauteur icones'";
     $res_query = mysql_query($query, $link);
     if (mysql_numrows($res_query) > 0) {
-            $data = mysql_fetch_assoc($res_query);
-            $heightIcones = $data['value'];
+        $data = mysql_fetch_assoc($res_query);
+        $heightIcones = $data['value'];
     } else {
-            $heightIcones = 60;
+        $heightIcones = 60;
     }
     if ($heightIcones < 40) {
-            $labelWidth = 30;
-            $labelOffsetTop = $heightIcones - 13;
-            $labelFontSize = 8;
-            $labelFontOffsetTop = 1;
-            $labelFontOffsetLeft = 3; 
+        $labelWidth = 30;
+        $labelOffsetTop = $heightIcones - 13;
+        $labelFontSize = 8;
+        $labelFontOffsetTop = 1;
+        $labelFontOffsetLeft = 3; 
     } else {
-            $labelWidth = 50;
-            $labelOffsetTop = $heightIcones - 22; 
-            $labelFontSize = 12;
-            $labelFontOffsetTop = 3;
-            $labelFontOffsetLeft = 6;
+        $labelWidth = 50;
+        $labelOffsetTop = $heightIcones - 22; 
+        $labelFontSize = 12;
+        $labelFontOffsetTop = 3;
+        $labelFontOffsetLeft = 6;
     }
 
     // Recuperation de la hauteur des icones
@@ -107,29 +107,23 @@ if (isset($_GET['vue'])) {
     $data = mysql_fetch_assoc($res_query);
     $showAllNames = false;
     if ($data['value'] == 'true') {
-            $showAllNames = true;
+        $showAllNames = true;
     }
-    $image_fond = "";
-    if(file_exists("img/plan/jour.png")) {
-      $image_fond = "img/plan/jour.png";
-    }
-        // infos meteo
-        $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
-        if(file_exists("img/plan/nuit.png")) {
-              $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
-              $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
-              $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
-              if($now<$soleil_nuit && $now>$soleil_jour) { 
-              $soleil = "jour"; 
-              $image_fond = "img/plan/jour.png"; 
+
+    // infos meteo
+    $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
+    if(file_exists("img/plan/nuit.png")) {
+        $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
+        $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
+        $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
+        if ($now < $soleil_nuit && $now > $soleil_jour) { 
+            $soleil = "jour";  
         } else { 
-              $soleil = "nuit"; 
-              $image_fond = "img/plan/nuit.png"; 
-              }
-        } else {
-              $soleil = "jour";
+            $soleil = "nuit";  
         }
-    
+    } else {
+        $soleil = "jour";
+    }
 
     // affichage des stickers et textes dynamiques
     include("./fonctions/dynaInfo.php");
