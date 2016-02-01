@@ -50,7 +50,7 @@ if (isset($_GET['vue'])) {
     <?
         
     // Cadre de base de cette partie de la page
-    ?><div id="global">
+    ?><div id="global" class="vue">
     <div id="fond_vue"></div><?
     $java_insertion="";
     $tableau_elements=array();
