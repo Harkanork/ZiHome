@@ -112,17 +112,13 @@ if (isset($_GET['vue'])) {
 
     // infos meteo
     $weather = simplexml_load_file("http://wxdata.weather.com/wxdata/weather/local/".$meteo_ville."?cc=*&unit=m");
-    if(file_exists("img/plan/nuit.png")) {
-        $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
-        $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
-        $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
-        if ($now < $soleil_nuit && $now > $soleil_jour) { 
-            $soleil = "jour";  
-        } else { 
-            $soleil = "nuit";  
-        }
-    } else {
-        $soleil = "jour";
+    $soleil_jour = date_create_from_format('h:i a Y-m-d', $weather->loc->sunr." ".date('Y-m-d'));
+    $soleil_nuit = date_create_from_format('h:i a Y-m-d', $weather->loc->suns." ".date('Y-m-d'));
+    $now = date_create_from_format('h:i a Y-m-d', date('h:i a Y-m-d'));
+    if ($now < $soleil_nuit && $now >= $soleil_jour) { 
+        $soleil = "jour";  
+    } else { 
+        $soleil = "nuit";  
     }
 
     // affichage des stickers et textes dynamiques
