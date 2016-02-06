@@ -446,7 +446,7 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
         switch ($peripheriques['periph']) {
 
           case 'actioneur':
-          case 'capteur':                     
+          case 'capteur':
             ($peripheriques['protocol'] == 6)?$protocol=true:$protocol = false;
             if($protocol == true) {
               $value = $zibase->getState(substr($peripheriques['id'], 1), $protocol);
@@ -456,11 +456,11 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
             if($value <> "1") { $status =false;} 
             break;
 
-          case 'conso' :                    
+          case 'conso' :
             $query0 = "SELECT * FROM `conso_".$peripheriques['nom']."` ORDER BY `date` DESC LIMIT 1";
             $req0 = mysql_query($query0, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
             if ($req0 && mysql_numrows($req0) > 0) {
-              $data0 = mysql_fetch_assoc($req0);            
+              $data0 = mysql_fetch_assoc($req0);
               $valeur1=$data0['conso'];
               $unite1="W";
             }
@@ -472,13 +472,16 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
             if ($req0 && mysql_numrows($req0) > 0) {
               $data0 = mysql_fetch_assoc($req0);
               $valeur1=$data0['temp'];
-              $valeur2=$data0['hygro'];
               $unite1="&deg;";
-              $unite2="%"; 
-            }       
+              if ($peripheriques['show_value2'])
+              {
+                  $valeur2=$data0['hygro'];
+                  $unite2="%";
+              }
+            }
             break;
 
-          case 'eau' :                 
+          case 'eau' :
             // lacune !
             break;
 
@@ -489,7 +492,7 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
               $data0 = mysql_fetch_assoc($req0);
               $valeur1=$data0['vitesse']/10;
               $unite1="m/s";
-            } 
+            }
             break;
 
           case 'pluie':
@@ -499,7 +502,7 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
                 $data0 = mysql_fetch_assoc($req0);
                 $valeur1=$data0['pluie'];
                 $unite1="mm";
-            } 
+            }
             break;
 
           case 'luminosite':
@@ -509,8 +512,8 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
                   $data0 = mysql_fetch_assoc($req0);
                   $valeur1=$data0['lum'];
                   $unite1="";
-              }  
-              break;               
+              }
+              break;
         }
       }
       $nom="";
@@ -523,9 +526,7 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
       }
       $batterie=$peripheriques['batterie'];
       $erreur=$peripheriques['erreur'];
-
-
-
+      
       if ($status) {
         echo "<img src=\"./img/icones/".$icone."c_".$_POST['logo']."\"";
       } else {
@@ -533,16 +534,16 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
           echo "<img src=\"./img/icones/".$icone."g_".$_POST['logo']."\"";
         } else {
           echo "<img src=\"./img/icones/".$icone."c_".$_POST['logo']."\" class=\"grayscale\"";
-        }       
+        }
       }
       echo " style=\"width:".$widthIcones."px;height:".$heightIcones."px\"></img>";
-      if ($valeur1<>"") {
+      if ($valeur1 <> "") {
         echo "<img src=\"./img/icones/".$icone."AndroidNumberYellow.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:0px;left:".$labelOffsetLeft."px;border-style:none;\">";
-        echo "<span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur1." ".$unite1."</span>";
+        echo "<span style=\"position:absolute;top:".$labelFontOffsetTop."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur1.$unite1."</span>";
       }
-      if ($valeur2 <>"") {
+      if ($valeur2 <> "") {
         echo "<img src=\"./img/icones/".$icone."AndroidNumberOther.png\" width=\"".$labelWidth."\" style=\"position:absolute;top:".$labelOffsetTop."px;left:".$labelOffsetLeft."px;border-style:none;\">";
-        echo "<span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur2." ".$unite2."</span>";
+        echo "<span style=\"position:absolute;top:".($labelOffsetTop + $labelFontOffsetTop)."px;left:".($labelOffsetLeft + $labelFontOffsetLeft)."px;color: black;font-size:".$labelFontSize."px;font-weight:bold;border-style:none;\">".$valeur2.$unite2."</span>";
       }
       if ($batterie) {
         echo "<img src='./img/batterie_ko_highlight.png' height='".($heightIcones / 2)."px' style=\"position:absolute;top:".($heightIcones / 2)."px;left:0px;\"/>";
