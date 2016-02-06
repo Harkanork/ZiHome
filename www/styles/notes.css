@@ -20,7 +20,11 @@ h1 {
 }
 
 input[type="button"] {
-	padding:10px;
+	font-family: Helvetica,Verdana,sans-serif;
+	padding:5px;
+	margin: 2px;
+	font-size:10px;
+	line-height: 20px;
 	color:grey;
 	font-weight:bold;
 	background:white;
@@ -28,7 +32,7 @@ input[type="button"] {
 	-moz-border-radius:5px;
 	border-radius:5px;
 	float:left;
-	margin:5px 10px 0 0;
+	margin:2px;
 }
 
 input[type="button"]:hover {
