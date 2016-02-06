@@ -323,7 +323,7 @@ $.drag_edit = $.fn.drag_edit = function() {
             containment: "#global",
             snap: false,
             start: function () {
-              $(this).zindexmax(".vues_elements"); // on le place au premier plan
+//              $(this).zindexmax(".vues_elements"); // on le place au premier plan
             },
             stop: function () {     // quand on déplace en élément, on enregistre les positions par ajax
               if (grid_array!=false) {// on l'aligne sur la grille s'il ne l'était pas (si option d'accrochage)
@@ -614,7 +614,7 @@ function activation_ajout() {
 function elements_edition(actif, nb_init) {
   if (actif == true) { // si on doit l'activer
 
-    afficher_elements(tableau_elements,false).done(function () {  // on attend que tout soit bien affiché avant de faire la suite
+    afficher_elements(tableau_elements, false).done(function () {  // on attend que tout soit bien affiché avant de faire la suite
       
       // On ajoute les boutons Edit/Delete
       $("#global .vues_elements").each(function(n) {
