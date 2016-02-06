@@ -383,23 +383,28 @@ function activation_ajout() {
       $('#dialog_elements_ajouter').html(contenu); // on ajoute le formulaire à notre page
       
       $("select[name='elements_type']").on('change', function() {  // on modifie le formulaire en fonction du type d'élement choisi
+        
+        $('*[data-display="list_scenarios"]').remove();
+        $('*[data-display="list_stickers"]').remove();
+        $('*[data-display="list_peri"]').remove();
+        $('*[data-display="list_modules"]').remove();
+        $('*[data-display="list_meteo"]').remove();
+        
         var type = $("select[name='elements_type']").val();
         switch(type) {
           case "fonction":
             $('#width').val(500);
             $('#height').val(200);
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_stickers"]').remove();
-            $('*[data-display="list_meteo"]').remove();
-            $('*[data-display="list_peri"]').remove();
+            $('*[data-display="condition"]').fadeOut();
             $('*[data-display="icone"]').fadeOut();
             $('*[data-display="etiquette"]').fadeOut();
+            $('*[data-display="style_avance"]').fadeOut();
             $.ajax({
               type: "POST",
               url: "./fonctions/ajax_db.php?requete=select_modules",
               success : function(contenu, etat) {
                 // si la requete a renvoyé une liste, on ajoute le menu déroulant des modules à la suite
-                $("select[name='elements_type']").after(contenu); 
+                $("tr[name='ligne_elements_type']").after(contenu); 
                 // on récupère le choix du module (celui affiché par défaut ou à chaque changement) pour le mettre dans le champ masqué "element_url"
                 $("input[name='element_url']").val($("select[id='list_modules']").val()); 
                 $("select[id='list_modules']").on('change', function() { 
@@ -443,18 +448,16 @@ function activation_ajout() {
           case "luminosite":
             $('#width').val(50);
             $('#height').val(50);
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_stickers"]').remove();
-            $('*[data-display="list_meteo"]').remove();
             $('*[data-display="icone"]').fadeIn();
             $('*[data-display="etiquette"]').fadeIn();
+            $('*[data-display="style_avance"]').fadeIn();
+            $('*[data-display="condition"]').fadeOut();
             $.ajax({   // on ajoute la liste déroulante des périphériques et l'action quand on y touche - à améliorer par la suite pour ne retenir que les périphériques pertinents selon les modules
               type: "POST",
               url: "./fonctions/ajax_db.php?requete=select_peri",
               success : function(contenu, etat) {
                 // si la requete a renvoyé une liste, on ajoute le menu déroulant des modules à la suite
-                $("select[name='elements_type']").after(contenu); 
+                $("tr[name='ligne_elements_type']").after(contenu); 
                 // on récupère le choix du peri (celui affiché par défaut ou à chaque changement) pour le mettre dans le champ masqué "peripheriques"
                 $("input[id='peripherique']").val($("select[id='list_peri']").val()); 
                 $("select[id='list_peri']").on('change', function() {  
@@ -485,17 +488,15 @@ function activation_ajout() {
             $('#height').val(30);
             $('*[data-display="icone"]').fadeOut();
             $('*[data-display="etiquette"]').fadeIn();
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_peri"]').remove();
-            $('*[data-display="list_stickers"]').remove();
-            $('*[data-display="list_meteo"]').remove();
+            $('*[data-display="style_avance"]').fadeIn();
+            $('*[data-display="condition"]').fadeOut();
             $('#color').val('#ffffff');
             $.ajax({
               type: "POST",
               url: "./fonctions/ajax_db.php?requete=select_scenarios",
               success : function(contenu, etat) {
                 // si la requete a renvoyé une liste, on ajoute le menu déroulant des modules à la suite
-                $("select[name='elements_type']").after(contenu); 
+                $("tr[name='ligne_elements_type']").after(contenu); 
                 // on récupère le choix du scénario (celui affiché par défaut ou à chaque changement) pour le mettre dans le champ masqué "peripherique" et en libelle par défaut
                 $("input[id='peripherique']").val($("select[id='list_scenarios']").val()); 
                 $("input[id='libelle']").val($("select[id='list_scenarios']").val()); 
@@ -512,30 +513,24 @@ function activation_ajout() {
             $('#width').val(150);
             $('#height').val(30);
             $('*[data-display="etiquette"]').fadeIn();
+            $('*[data-display="condition"]').fadeIn();
             $('*[data-display="icone"]').fadeOut();
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_peri"]').remove();
-            $('*[data-display="list_stickers"]').remove();
-            $('*[data-display="list_meteo"]').remove();
+            $('*[data-display="style_avance"]').fadeIn();
             break;
 
           case "sticker":
             $('#width').val(50);
             $('#height').val(50);
+            $('*[data-display="condition"]').fadeIn();
             $('*[data-display="icone"]').fadeOut();
             $('*[data-display="etiquette"]').fadeOut();
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_peri"]').remove();
-            $('*[data-display="list_meteo"]').remove();
             $('*[data-display="style_avance"]').fadeOut();
             $.ajax({
               type: "POST",
               url: "./fonctions/ajax_db.php?requete=select_stickers",
               success : function(contenu, etat) {
                 // si la requete a renvoyé une liste, on ajoute le menu déroulant des modules à la suite
-                $("select[name='elements_type']").after(contenu); 
+                $("tr[name='ligne_elements_type']").after(contenu); 
                 // on récupère le choix du sticker (celui affiché par défaut ou à chaque changement) pour le mettre dans le champ masqué "url"
                 $("input[name='element_url']").val($("select[id='list_stickers']").val()); 
                 $("select[id='list_stickers']").on('change', function() {  
@@ -549,18 +544,15 @@ function activation_ajout() {
             $('#width').val(50);
             $('#height').val(50);
             $('*[data-display="icone"]').fadeOut();
+            $('*[data-display="condition"]').fadeOut();
             $('*[data-display="etiquette"]').fadeOut();
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_peri"]').remove();
-            $('*[data-display="list_stickers"]').remove();
             $('*[data-display="style_avance"]').fadeOut();
             $.ajax({
               type: "POST",
               url: "./fonctions/ajax_db.php?requete=select_meteo",
               success : function(contenu, etat) {
                 // si la requete a renvoyé une liste, on ajoute le menu déroulant des modules à la suite
-                $("select[name='elements_type']").after(contenu); 
+                $("tr[name='ligne_elements_type']").after(contenu); 
                 // on récupère le choix du sticker (celui affiché par défaut ou à chaque changement) pour le mettre dans le champ masqué "url"
                 $("input[name='element_url']").val($("select[id='list_meteo']").val()); 
                 $("select[id='list_meteo']").on('change', function() {  
@@ -573,17 +565,11 @@ function activation_ajout() {
             $('#width').val(50);
             $('#height').val(50);
             $('*[data-display="icone"]').fadeOut();
+            $('*[data-display="condition"]').fadeOut();
             $('*[data-display="etiquette"]').fadeOut();
-            $('*[data-display="list_modules"]').remove();
-            $('*[data-display="list_scenarios"]').remove();
-            $('*[data-display="list_peri"]').remove();
-            $('*[data-display="list_stickers"]').remove();
-            $('*[data-display="list_meteo"]').remove();
             $('*[data-display="style_avance"]').fadeOut();
             break;
         }
-        $('*[data-display="style_avance"]').fadeIn();
-
       });
       
       $("select[name='elements_type']").trigger('change',"scenario"); // première initialisation avec mode module par défaut
@@ -593,13 +579,13 @@ function activation_ajout() {
           $('*[data-display="position"]').fadeIn();
                 $('*[data-display="police"]').fadeIn();
                 $('*[data-display="css"]').fadeIn();
-                $('*[data-display="condition"]').fadeIn();
+                //$('*[data-display="condition"]').fadeIn();
                  //$('*[data-display="visible"]').fadeIn();
           } else {
                 $('*[data-display="position"]').fadeOut();
                 $('*[data-display="police"]').fadeOut();
                 $('*[data-display="css"]').fadeOut();
-                $('*[data-display="condition"]').fadeOut();
+                //$('*[data-display="condition"]').fadeOut();
                  //$('*[data-display="visible"]').fadeIn();
           }
         });

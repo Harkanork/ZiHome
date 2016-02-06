@@ -283,9 +283,12 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
       <CENTER>
         <br>
         <TABLE class="elements_form_table">
-          <TR class="elements_form_TR" data-key="list_types" >
-            <TD colspan="2">
-              Type d'élément : <select id="type" name="elements_type">
+          <TR class="elements_form_TR" data-key="list_types" name="ligne_elements_type">
+            <TD width="120px">
+              Type d'élément
+            </TD>
+            <TD colspan="0">
+              <select id="type" name="elements_type">
                 <option value='scenario'>Bouton scénario</option>
                 <option value='fonction'>Module</option>
                 <option value='textdyn'>Texte</option>
@@ -304,71 +307,92 @@ if (isset($_GET['requete'])) { // si le script est bien appelé par ajax en prec
             </TD>
           </TR>
           <TR class="elements_form_TR" data-display="etiquette" style="display:none">
-            <TD>Etiquette :<input type=text id="libelle"></TD>
-            <TD><input type=checkbox id="affich_libelle">Afficher l'étiquette ?</TD>
+            <TD>Etiquette</TD>
+            <TD><input type=text id="libelle">
+            <input type=checkbox id="affich_libelle">Afficher ?</TD>
           </TR>
           
           <TR class="elements_form_TR" data-display="icone" style="display:none">
-            <TD>Icone :</TD>
-            <TD>
+            <TD>Icone</TD>
+            <TD colspan="0">
               <img src="./img/icones/1g_logotype_LampesPlafond.png" height="25px" name="list_icone"></img>
             </TD>
           </TR>
           <input type=hidden id="url" name="element_url" value="">
           <input type=hidden id="peripherique" name="element_peri" value="">
-            <TR class="elements_form_TR" data-display="scenario" style="display:none">
-              <TD>Scénario :</TD>
-              <TD><select id="peripherique">
-                <option value=""></option>
-                <?
-                $query = 'SELECT * FROM `scenarios` WHERE 1=1';
-                $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-                while ($scenarios = mysql_fetch_assoc($req)) {
-                  if ($scenarios['libelle']<>'') {
-                    $libelle=$scenarios['libelle'];
-                  } else {
-                    $libelle=$scenarios['nom'];
-                  }
-                  echo "<option value=\"".$scenarios['nom']."\">".$libelle."</option>";
+          <TR class="elements_form_TR" data-display="scenario" style="display:none">
+            <TD>Scénario</TD>
+            <TD colspan="0"><select id="peripherique">
+              <option value=""></option>
+              <?
+              $query = 'SELECT * FROM `scenarios` WHERE 1=1';
+              $req = mysql_query($query, $link) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+              while ($scenarios = mysql_fetch_assoc($req)) {
+                if ($scenarios['libelle']<>'') {
+                  $libelle=$scenarios['libelle'];
+                } else {
+                  $libelle=$scenarios['nom'];
                 }
-                ?>
-                </select></TD>
-            </TR>
-          <TR class="elements_form_TR" data-display="style_avance" style="display:none">
-            <TD>Styles avancés :</TD>
-            <TD><input type=checkbox id="style_avance"></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="police" style="display:none">
-            <TD>Police</TD>
-            <TD><select id="font">
-              <option value="Arial, Helvetica, sans-serif">Arial</option>
-              <option value="Comic Sans MS, cursive, sans-serif">Comic Sans MS</option>
-              <option value="Times New Roman, Times, serif">Times New Roman</option>
-              <option value="Courier New, Courier, monospace">Courier New</option>
-            </select></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="position" style="display:none">
-            <TD data-display="width">Largeur <input type=number id="width" value="50" min=0></TD>
-            <TD data-display="left">Positionnement gauche <input type=number id="left" value="200" min=0></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="position" style="display:none">
-            <TD data-display="height">Hauteur <input type=number id= "height" value="20" min=0></TD>
-            <TD data-display="top">Positionnement haut <input type=number id="top" value="50" min=0></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="police" style="display:none">
-            <TD>Couleur : <input type=color id="color" value="#000"></TD>
-            <TD>Taille de police : <input type=number id="size" value="10"></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="police" style="display:none">
-            <TD>Gras ? <input type=checkbox id="bold"></TD>
-            <TD>Italique ? <input type=checkbox id="italic"></TD>
-          </TR>
-          <TR class="elements_form_TR" data-display="css" style="display:none">
-            <TD>Bordure <input type=text id="border"></TD><TD>Options css complémentaires <input type=text id="option"></TD>
+                echo "<option value=\"".$scenarios['nom']."\">".$libelle."</option>";
+              }
+              ?>
+              </select>
+            </TD>
           </TR>
           <TR class="elements_form_TR" data-display="condition" style="display:none">
             <TD>Condition</TD>
             <TD><input type=text id="condition"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="style_avance" style="display:none">
+            <TD>Styles avancés</TD>
+            <TD colspan="0"><input type=checkbox id="style_avance"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="police" style="display:none">
+            <TD>Police</TD>
+            <TD colspan="0">
+              <select id="font">
+                <option value="Arial, Helvetica, sans-serif">Arial</option>
+                <option value="Comic Sans MS, cursive, sans-serif">Comic Sans MS</option>
+                <option value="Times New Roman, Times, serif">Times New Roman</option>
+                <option value="Courier New, Courier, monospace">Courier New</option>
+              </select>
+            </TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="position" style="display:none">
+            <TD data-display="width">Largeur</TD><TD><input type=number id="width" value="50" min=0></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="position" style="display:none">
+            <TD data-display="left" colspan="0">Positionnement gauche</TD><TD><input type=number id="left" value="200" min=0></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="position" style="display:none">
+            <TD data-display="height">Hauteur</TD><TD><input type=number id= "height" value="20" min=0></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="position" style="display:none">
+            <TD data-display="top" colspan="0">Positionnement haut</TD><TD><input type=number id="top" value="50" min=0></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="police" style="display:none">
+            <TD>Couleur</TD>
+            <TD><input type=color id="color" value="#000000"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="police" style="display:none">
+            <TD>Taille de police</TD>
+            <TD><input type=number id="size" value="10"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="police" style="display:none">
+            <TD>Gras</TD>
+            <TD><input type=checkbox id="bold"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="police" style="display:none">
+            <TD>Italique</TD>
+            <TD><input type=checkbox id="italic"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="css" style="display:none">
+            <TD>Bordure</TD>
+            <TD><input type=text id="border"></TD>
+          </TR>
+          <TR class="elements_form_TR" data-display="css" style="display:none">
+            <TD>Options css complémentaires</TD>
+            <TD><input type=text id="option"></TD>
           </TR>
           <TR class="elements_form_TR" data-display="visible" style="display:none">
             <TD>Visible par</TD>
